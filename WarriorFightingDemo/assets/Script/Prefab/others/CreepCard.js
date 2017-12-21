@@ -56,7 +56,8 @@ cc.Class({
         if(self.cardScript.cardType === 0){
             this.cScript = self.node.getComponent('M' + self.cardScript.cardID);
         }else{
-            this.cScript = self.node.getComponent('C' + self.cardScript.cardID);
+            // this.cScript = self.node.getComponent('C' + self.cardScript.cardID);
+            this.cScript = self.node.getComponent('CreaturePosition');
         }
 
         this.startListen();
