@@ -2,6 +2,7 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
+        storeNode:cc.Node,
         // foo: {
         //    default: null,      // The default value will be used only when the component attaching
         //                           to a node for the first time
@@ -31,7 +32,7 @@ cc.Class({
                 case cc.KEY.e:
                 case cc.KEY.space:
                     this.inDoor = false;
-                    this.battleScene();
+                    this.storeNode.active = true;
                     break;
             }
         }

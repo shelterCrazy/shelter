@@ -30,7 +30,7 @@ cc.Class({
             }
         }else if(this.magicCardScript.magicType === type.DirectionTarget){
             this.useCard = function(id,angel,speed,area,x,y){
-                var eventsend = new cc.Event.EventCustom('magicCreate',true);
+                var eventsend = new cc.Event.EventCustom('chantCreate',true);
                 eventsend.setUserData({
                     name:this.cardScript.cName,
                     round:1,
@@ -43,7 +43,20 @@ cc.Class({
                     id:this.cardScript.cardID
                 });
                 this.node.dispatchEvent(eventsend);
-
+                for(var i = 0;i < (360/10);i++) {
+                            var eventsend = new cc.Event.EventCustom('chantCreate', true);
+                            eventsend.setUserData({
+                                name:this.cardScript.cName,
+                                round:15,
+                                position: x,
+                                y: y,
+                                angel: angel + 10*i,
+                                id: this.cardScript.cardID,
+                                speed: speed,
+                                team: this.cardScript.team
+                            });
+                            this.node.dispatchEvent(eventsend);
+                }
                 this.cardScript.heroScirpt.drawCard(1);
                 this.cardScript.drawCardScript.deleteCard(this.node);
             }

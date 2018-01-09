@@ -77,7 +77,7 @@ cc.Class({
                 event.detail.object.node.removeFromParent();
             }
             function getInDeck(event){
-                this.cardList.mode = 2;
+                this.cardList.modeChange2();
                 Global.deckView = event.detail.object.num;
 
                 this.mainScript.myMDeck = Global.totalDeckData[Global.deckView].magicDeck;
@@ -91,7 +91,7 @@ cc.Class({
 
     },
     getOutDeck:function(event) {
-        this.cardList.mode = 0;
+        this.cardList.modeChange0();
         //Global.totalDeckData.deckView = event.detail.object.num;
         Global.totalDeckData[Global.deckView].magicDeck = this.mainScript.myMDeck;
         Global.totalDeckData[Global.deckView].creatureDeck = this.mainScript.myCDeck;
@@ -103,17 +103,17 @@ cc.Class({
         this.cardList.renewDeckView();
     },
     addDeck:function(){
-        var deckDatas = {
+        var deckData = {
             name:"new deck",
             //deckView:0,
             num:0,
             magicDeck:{
                 default: [],
-                type: cc.Integer,
+                type: cc.Integer
             },
             creatureDeck:{
                 default:[],
-                type: cc.Integer,
+                type: cc.Integer
             },
             //?????
             type: {
@@ -123,17 +123,18 @@ cc.Class({
                     Science: 0,
                     Fantasy: 1,
                     //??
-                    Chaos: 2,
+                    Chaos: 2
                 }),
-                default: 0,
+                default: 0
             },
-            usable:false,
-        }
-        this.cardList.mode = 2;
-        deckDatas.num = Global.totalDeckData.length;
-        deckDatas.magicDeck = [0,0];
-        deckDatas.creatureDeck = [0];
-        Global.totalDeckData.push(deckDatas);
+            usable:false
+        };
+
+        this.cardList.modeChange2();
+        deckData.num = Global.totalDeckData.length;
+        deckData.magicDeck = [0,0];
+        deckData.creatureDeck = [0,0];
+        Global.totalDeckData.push(deckData);
         Global.deckView = Global.totalDeckData.length - 1;
         this.mainScript.myMDeck = Global.totalDeckData[Global.deckView].magicDeck;
         this.mainScript.myCDeck = Global.totalDeckData[Global.deckView].creatureDeck;
@@ -153,5 +154,5 @@ cc.Class({
                 this.deckNum.string = Global.totalDeckData.length + '/' + 9;
             }
         }
-    },
+    }
 });

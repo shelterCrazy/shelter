@@ -26,33 +26,14 @@ cc.Class({
             default: null,
             type: cc.Node,
         },
+        cardListNode:cc.Node,
     },
-
-    // use this for initialization
-
-    /*heroInfLayout: function () {
-        this.choiceHeroBoard.zIndex = 2;
-        this.choiceHeroBoard.zIndex = 1;
-        //cc.director.loadScene("HeroInfScene.fire");
-    },
-    
-    openCardLayout: function(){
-        this.choiceOpenBoard.zIndex = 2;
-        this.choiceOpenBoard.zIndex = 1;
-        //cc.director.loadScene("OpenCardScene.fire");
-    },
-    
-    cardGroupLayout: function(){
-        this.choiceCardBoard.zIndex = 2;
-        this.choiceCardBoard.zIndex = 1;
-        //cc.director.loadScene("CardGroupScene.fire");
-    },*/
     
     onLoad:function(){
-        this.node.active = false;
         this.choiceHeroBoard.active = false;
         this.choiceOpenBoard.active = false;
         this.choiceCardBoard.active = true;
+        this.cardListScript = this.cardListNode.getComponent("CardList");
     },
     //Ó¢ÐÛ
     heroInfLayout: function () {
@@ -73,6 +54,7 @@ cc.Class({
     //¿¨×é
     cardGroupLayout: function(){
         this.layoutSwitch(this.choiceCardBoard,this.cardGroupButton);
+        this.cardListScript.renewShowCardGroup();
         this.choiceHeroBoard.active = false;
         this.choiceOpenBoard.active = false;
         this.choiceCardBoard.active = true;

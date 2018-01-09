@@ -1,30 +1,31 @@
+//æœ¬è„šæœ¬ç”¨äºä½¿ç”¨ä»£ç æ‰¹é‡è°ƒæ•´å¡ç‰Œç‰Œé¢å¸ƒå±€
 cc.Class({
     extends: cc.Component,
 
     properties: {
-
+        //æ˜¯å¦æ˜¯ç”Ÿç‰©ç‰Œ
         creatureCard:true,
-        //¿¨ÅÆÊıÖµ·ÅÖÃ½Úµã£¨²¼¾Ö£©£¬×¼±¸Ò»ÏÂ×ø±ê
+        //å¡ç‰Œæ•°å€¼æ”¾ç½®èŠ‚ç‚¹ï¼ˆå¸ƒå±€ï¼‰ï¼Œå‡†å¤‡ä¸€ä¸‹åæ ‡
         cardNumNode:cc.Node,
-        //¿¨ÅÆÃû³Æ½Úµã
+        //å¡ç‰Œåç§°èŠ‚ç‚¹
         cardNameNode:cc.Node,
-        //¿¨ÅÆÏ¸½Ú£¨ÃèÊö½Úµã£©
+        //å¡ç‰Œç»†èŠ‚ï¼ˆæè¿°èŠ‚ç‚¹ï¼‰
         cardDetailNode:cc.Node,
-        //¿¨ÅÆÏ¸½Ú£¨ÃèÊö½Úµã£©
+        //å¡ç‰Œç»†èŠ‚ï¼ˆæè¿°èŠ‚ç‚¹ï¼‰
         cardDetailLabel:cc.Label,
-        //¿¨ÅÆ³ß´ç½Úµã
+        //å¡ç‰Œå°ºå¯¸èŠ‚ç‚¹
         cardSizeNode:cc.Node,
-        //¿¨ÅÆµÄÍ¼Æ¬ÕÚÕÖ³ß´ç
+        //å¡ç‰Œçš„å›¾ç‰‡é®ç½©å°ºå¯¸
         cardMaskNode:cc.Node,
-        //¿¨ÅÆµÄ·¨Á¦ÏûºÄ½Úµã
+        //å¡ç‰Œçš„æ³•åŠ›æ¶ˆè€—èŠ‚ç‚¹
         cardManaNode:cc.Node,
-        //¿¨ÅÆµÄ·¨Á¦ÏûºÄ½Úµã
+        //å¡ç‰Œçš„æ³•åŠ›æ¶ˆè€—èŠ‚ç‚¹
         cardManaLabel:cc.Label,
 
-        //¾ßÌå¿¨ÅÆ¹¥»÷Á¦ÉúÃüÖµµÈµÈµÄ±êÇ©£¬Ö÷ÒªÓÃÓÚ¸Ä×ÖÌå´óĞ¡
+        //å…·ä½“å¡ç‰Œæ”»å‡»åŠ›ç”Ÿå‘½å€¼ç­‰ç­‰çš„æ ‡ç­¾ï¼Œä¸»è¦ç”¨äºæ”¹å­—ä½“å¤§å°
         cardDatLabel:[cc.Label],
-        //¾ßÌå¿¨ÅÆ¹¥»÷Á¦ÉúÃüÖµµÈµÈµÄ½Úµã
-        cardDatNode:[cc.Node],
+        //å…·ä½“å¡ç‰Œæ”»å‡»åŠ›ç”Ÿå‘½å€¼ç­‰ç­‰çš„èŠ‚ç‚¹
+        cardDatNode:[cc.Node]
         // foo: {
         //    default: null,      // The default value will be used only when the component attaching
         //                           to a node for the first time
@@ -39,23 +40,23 @@ cc.Class({
 
     // use this for initialization
     onLoad: function () {
-        //³õÊ¼»¯¿¨ÅÆµÄ²¼¾Ö£¬ÊµÏÖÖ»ÒªĞŞ¸Ä½Å±¾¾Í¿ÉÒÔÍê³ÉµÄ²Ù×÷
+        //åˆå§‹åŒ–å¡ç‰Œçš„å¸ƒå±€ï¼Œå®ç°åªè¦ä¿®æ”¹è„šæœ¬å°±å¯ä»¥å®Œæˆçš„æ“ä½œ
 
-        //¿¨ÅÆÃû×ÖµÄ½ÚµãÎ»ÖÃ
+        //å¡ç‰Œåå­—çš„èŠ‚ç‚¹ä½ç½®
         this.cardNameNode.x = 0;
         this.cardNameNode.y = 75;
-        //¿¨ÅÆÏ¸½Ú£¨ÃèÊö£©µÄ½ÚµãÎ»ÖÃ
+        //å¡ç‰Œç»†èŠ‚ï¼ˆæè¿°ï¼‰çš„èŠ‚ç‚¹ä½ç½®
         this.cardDetailNode.x = -43;
         this.cardDetailNode.y = -52;
-        //¿¨ÅÆÏ¸½Ú£¨ÃèÊö£©µÄ½ÚµãÎ»ÖÃ
+        //å¡ç‰Œç»†èŠ‚ï¼ˆæè¿°ï¼‰çš„èŠ‚ç‚¹ä½ç½®
         this.cardSizeNode.width = 92;
         this.cardSizeNode.height = 177;
-        //¿¨ÅÆÏûºÄµÄ½ÚµãÎ»ÖÃ
+        //å¡ç‰Œæ¶ˆè€—çš„èŠ‚ç‚¹ä½ç½®
         this.cardManaNode.x = -47;
         this.cardManaNode.y = 87;
         this.cardManaNode.width = 20;
         this.cardManaNode.height = 20;
-        //¿¨ÅÆÕÚÕÖµÄ¿í¶È¸ß¶È£¬ÒÔ¼°½ÚµãµÄY×ø±ê
+        //å¡ç‰Œé®ç½©çš„å®½åº¦é«˜åº¦ï¼Œä»¥åŠèŠ‚ç‚¹çš„Yåæ ‡
         this.cardMaskNode.y = 8;
         this.cardMaskNode.width = 86;
         this.cardMaskNode.height = 109;
@@ -67,16 +68,16 @@ cc.Class({
         this.cardDetailLabel.node.width = 74;
 
         if(this.creatureCard === true) {
-            //¿¨ÅÆÊı¾İ½Úµã£¨²¼¾Ö£©µÄÎ»ÖÃ×ø±ê
+            //å¡ç‰Œæ•°æ®èŠ‚ç‚¹ï¼ˆå¸ƒå±€ï¼‰çš„ä½ç½®åæ ‡
             this.cardNumNode.x = 42;
             this.cardNumNode.y = 10;
-            //¹¥»÷Á¦½Úµã¿í¶È¸ß¶È
+            //æ”»å‡»åŠ›èŠ‚ç‚¹å®½åº¦é«˜åº¦
             this.cardDatNode[0].width = 28;
             this.cardDatNode[0].height = 50;
-            //ÉúÃüÖµ½Úµã¿í¶È¸ß¶È
+            //ç”Ÿå‘½å€¼èŠ‚ç‚¹å®½åº¦é«˜åº¦
             this.cardDatNode[1].width = 28;
             this.cardDatNode[1].height = 32;
-            //ËÙ¶È½Úµã¿í¶È¸ß¶È
+            //é€Ÿåº¦èŠ‚ç‚¹å®½åº¦é«˜åº¦
             this.cardDatNode[2].width = 28;
             this.cardDatNode[2].height = 32;
 

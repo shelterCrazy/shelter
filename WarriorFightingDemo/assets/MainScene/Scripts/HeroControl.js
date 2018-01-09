@@ -80,7 +80,7 @@ cc.Class({
                 break;
             case cc.KEY.w:
             case cc.KEY.up:
-                if ((this.isStand || this.isStandPlatform  || this.isStandWall) && this.touchedLadder === null) {
+                if (this.touchedLadder === null) {//|| this.isStandPlatform//this.isStand   ||(this.isStandWall) &&
                     this.speed.y = this.jumpSpeed;
                     this.isStand = false;
                     this.isStandPlatform = false;

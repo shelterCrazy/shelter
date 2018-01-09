@@ -63,8 +63,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 3,
-      "y": 381
+      "x": 0,
+      "y": 0
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -374,6 +374,7 @@
     },
     "cardType": 1,
     "cardID": 1,
+    "rarity": 0,
     "num": 0,
     "numLabel": {
       "__id__": 6

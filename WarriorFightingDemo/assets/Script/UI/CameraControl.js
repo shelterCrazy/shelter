@@ -44,6 +44,6 @@ cc.Class({
         }
 
         var ratio = targetPos.y / cc.winSize.height;
-        this.camera.zoomRatio = 0.9 + (0.5 - ratio) * 0.5;
+        this.camera.zoomRatio = 1 + (0.5 - ratio) * 0.5;
     },
 });

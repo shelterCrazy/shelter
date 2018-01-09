@@ -29,21 +29,21 @@ cc.Class({
 
         cardBoard: {
             default: null,
-            type: cc.Node,
+            type: cc.Node
         },
 
         infoBoard: {
             default: null,
-            type: cc.Node,
+            type: cc.Node
         },
 
         deck: {
             default: [],
-            type: cc.Node,
+            type: cc.Node
         },
         layout: {
             default: null,
-            type: cc.Layout,
+            type: cc.Layout
         },
 
         mode: {
@@ -55,11 +55,12 @@ cc.Class({
                 //组卡组模式
                 Edit: 2,
                 //全部显示，合成分解模式
-                Total: 3,
+                Total: 3
             }),
-            default: 0,
+            default: 0
         },
-
+        //是否显示全部的卡片
+        allCardEnable:false,
         //卡组里面的OK按钮
         ojbk:cc.Node,
         //卡组里面的改名字框框
@@ -72,11 +73,14 @@ cc.Class({
         deckPrefab:cc.Prefab,
 
         buttons:cc.Node,
+        //调整合成分解卡牌的选项按钮
+        toggles:[cc.Toggle],
+
         mainScence:cc.Node,
         deckNum:0,
         positionX: -1,
         positionY: 1,
-        cardIndex: 0,
+        cardIndex: 0
     },
 
     // use this for initialization
@@ -97,33 +101,46 @@ cc.Class({
         //     this.cardIndex++;
         // }
     },
-/////////
-    modeChange0: function(mode){
+
+    changeAllCardEnable:function(){
+        this.allCardEnable = !this.allCardEnable;
+        this.renewShowCardGroup();
+    },
+    modeChange0: function(){
         this.mode = 0;
+        this.toggles[0].interactable = true;
+        this.toggles[1].interactable = true;
+        this.toggles[1].node.active = true;
         if (this.infoBoard !== null) {
             this.infoBoard.removeFromParent();
         }
         this.buttons.active = false;
-        cc.log(this.mode);
     },
-    modeChange1: function(mode){
+    modeChange1: function(){
         this.mode = 1;
-        cc.log(this.mode);
+        this.toggles[0].interactable = true;
+        this.toggles[1].interactable = true;
+        this.toggles[1].node.active = true;
     },
-    modeChange2: function(mode){
+    modeChange2: function(){
         this.mode = 2;
+        this.toggles[0].interactable = false;
+        this.toggles[1].interactable = false;
+        this.toggles[1].node.active = false;
         if (this.infoBoard !== null) {
             this.infoBoard.removeFromParent();
         }
         this.buttons.active = false;
         cc.log(this.mode);
     },
-    modeChange3: function(mode){
+    modeChange3: function(){
         this.mode = 3;
+        this.toggles[0].interactable = false;
+        this.toggles[1].interactable = false;
+        this.toggles[1].node.active = false;
         if (this.infoBoard !== null) {
             this.infoBoard.removeFromParent();
         }
-        cc.log(this.mode);
     },
 
     dispose: function(){
@@ -157,8 +174,13 @@ cc.Class({
         this.renewShowCardGroup();
     },
 
-
-    //更新一次现在的大的卡组浏览
+    /**
+     * @主要功能 更新一次现在的总卡组浏览
+     * @author C14
+     * @Date 2017/10/21
+     * @parameters
+     * @returns
+     */
     renewDeckView: function(){
         var i = 0;
         this.layout.node.removeAllChildren();
@@ -172,23 +194,24 @@ cc.Class({
                 this.layout.node.addChild(decks);
             }
     },
+
     //更新一次现在的卡片浏览
     renewShowCardGroup: function(){
         this.cardGroup = [];
         //this.cardLayout.removeAllChildren(false);
         for(var i=0;i<this.mainScript.myCCards.length;i++){
-            if(this.mode === 1 && this.mainScript.myCCards[i] === 0){
+            //if(this.mode === 1 && this.mainScript.myCCards[i] === 0){
                 this.showCardGroup(i,this.mainScript.myCCards[i],1);
-            }else if(this.mainScript.myCCards[i] !== 0){
-                this.showCardGroup(i,this.mainScript.myCCards[i],1);
-            }
+            //}else if(this.mainScript.myCCards[i] !== 0){
+            //    this.showCardGroup(i,this.mainScript.myCCards[i],1);
+            //}
         }
         for(var j=0;j<this.mainScript.myMCards.length;j++){
-            if(this.mode === 1 && this.mainScript.myMCards[j] === 0){
+            //if(this.mode === 1 && this.mainScript.myMCards[j] === 0){
                 this.showCardGroup(j,this.mainScript.myMCards[j],0);
-            }else if(this.mainScript.myMCards[j] !== 0){
-                this.showCardGroup(j,this.mainScript.myMCards[j],0);
-            }
+            //}else if(this.mainScript.myMCards[j] !== 0){
+            //    this.showCardGroup(j,this.mainScript.myMCards[j],0);
+            //}
         }
         this.cardGroup = this.sortShowCardGroup();
         this.sortCardGroupLayout();
@@ -246,9 +269,13 @@ cc.Class({
         }
         var script = newCard.getComponent('MiniCard');
         script.num = num;
-        script.label = 'x'+num;
+        script.label = 'x' + num;
         if(num === 0){
-            newCard.opacity = 100;
+            if(this.allCardEnable === true) {
+                newCard.opacity = 100;
+            }else{
+                return;
+            }
         }
         newCard.x = 0;
         newCard.y = 0;
@@ -312,6 +339,7 @@ cc.Class({
            //var deckScript = null;
            //var i = 0;
            //script.addViewCard(event.detail);
+
            if (this.mode === 2) {
                if (this.mainScript.maxDeckNum > this.deckNum) {
                    if (event.detail.typeId === 1) {

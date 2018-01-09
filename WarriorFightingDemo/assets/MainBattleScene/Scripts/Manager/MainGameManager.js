@@ -99,7 +99,7 @@ var MainGameManager = cc.Class({
             }
         }
         //播放音效
-        cc.audioEngine.playEffect(event.detail.effect,false,event.detail.volume * volume);
+        //cc.audioEngine.playEffect(event.detail.effect,false,event.detail.volume * volume);
     },
 
     heroDeath:function(event){
