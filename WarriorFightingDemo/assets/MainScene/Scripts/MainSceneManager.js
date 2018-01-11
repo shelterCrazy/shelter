@@ -82,7 +82,7 @@ cc.Class({
         //var deckDatas = Global.deckData;
         //deckDatas.magicDeck = [1,2,3];
         var deckDatas = {
-            name:"我的卡组",
+            name:"我的卡组?",
             num:0,
             magicDeck:{
                 default: [],
@@ -104,7 +104,7 @@ cc.Class({
                 }),
                 default: 0,
             },
-            usable:true,
+            usable:false
         }
 
         this.cardListScript = this.cardList.getComponent('CardList');
@@ -113,6 +113,13 @@ cc.Class({
         Global.totalDeckData[Global.deckUsage].creatureDeck = this.myCDeck;
 
     },
+
+    changeMyTeamA:function(){
+        Global.nowTeam = -1;
+    },
+    changeMyTeamB:function(){
+        Global.nowTeam = 1;
+    }
 
     // called every frame, uncomment this function to activate update callback
     // update: function (dt) {

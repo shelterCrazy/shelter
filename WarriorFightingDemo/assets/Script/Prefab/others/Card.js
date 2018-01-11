@@ -44,6 +44,9 @@ cc.Class({
         //用于读取英雄的节点
         hero: cc.Node,
 
+        cameraControl:cc.Node,
+        cameraControlScript:cc.Node,
+        mainGameManager:cc.Node,
         //使用了卡牌播放音效或者没有使用，收回的音效
         startCardEffect:cc.AudioClip,
         endCardEffect:cc.AudioClip,
@@ -53,6 +56,7 @@ cc.Class({
     onLoad: function () {
         var self = this;
         self.heroScirpt = self.hero.getComponent("Player");
+        self.cameraControlScript = this.cameraControl.getComponent("CameraControl");
         // this.cardHand = require("CardHand");
         // this.cardUsing = require("CardUsing");
 
@@ -195,6 +199,13 @@ cc.Class({
 
         event.stopPropagation();
     },
+
+    //mouseLeaveEvent: function(){
+    //    var sender = new cc.Event.EventCustom('cardOut', true);
+    //    sender.setUserData({card:this.node});
+    //    this.node.dispatchEvent(sender);
+    //    event.stopPropagation();
+    //}
 
     // called every frame, uncomment this function to activate update callback
     // update: function (dt) {

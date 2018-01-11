@@ -8,6 +8,11 @@ module.exports = {
 
     //卡牌使用的Y坐标上界（到了此坐标后卡片虚化）
     cardUseLine:100,
+    //手牌最大张数
+    handMaxNum:9,
+    //魔法卡到了这个边缘就会移动场景的镜头
+    magicMoveEdge:200,
+
     //单位时间，单位长度，单位速度
     unitTime:8,
     unitLength:200,
@@ -20,7 +25,8 @@ module.exports = {
 
     //小地图的长度（像素）
     smallMapLength:440,
-    //少有的全局变量，相机坐标
+
+    //全局变量，相机坐标
     cameraOffset:0,
 
     //生物状态的枚举

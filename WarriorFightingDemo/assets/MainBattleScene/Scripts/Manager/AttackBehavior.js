@@ -24,8 +24,9 @@ var attackBehavior = cc.Class({
             return ;
         }
 
+        //申请脚本
         var script = null,attackScript = null;
-        
+        //被攻击节点类型不同
     	if(nodeType === 1){
     	    script = Node.getComponent('Player');
     	}else if(nodeType === 0){
@@ -33,6 +34,7 @@ var attackBehavior = cc.Class({
     	}else{
             script = Node.getComponent('Base');
         }
+        //获取发起攻击者的脚本
     	attackScript = attcNode.getComponent('Creature');
         
     	//1伤害计算
@@ -43,8 +45,5 @@ var attackBehavior = cc.Class({
     	if(deadFlag != null && deadFlag == 1){
             script.releaseTarget();
         }
-
-    },
-    
-
+    }
 });

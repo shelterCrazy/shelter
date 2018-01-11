@@ -12,7 +12,12 @@ cc.Class({
         targets: {
             default: [],
             type: [cc.Node],
-        }
+        },
+        //相机移动范围限制
+        areaLeft:0,
+        areaRight:0,
+
+        mainScene:false,
         // foo: {
         //    default: null,      // The default value will be used only when the component attaching
         //                           to a node for the first time
@@ -28,6 +33,9 @@ cc.Class({
     // use this for initialization
     onLoad: function () {
         this.camera = this.getComponent(cc.Camera);
+        if(this.mainScene === false){
+            this.areaRight = globalConstant.sceneWidth;
+        }
     },
 
     // called every frame, uncomment this function to activate update callback
@@ -35,8 +43,8 @@ cc.Class({
         var targetPos = this.target.convertToWorldSpaceAR(cc.Vec2.ZERO);
         var position = this.node.parent.convertToNodeSpaceAR(targetPos);
 
-        if(position.x > cc.director.getWinSize().width * (globalConstant.sceneWidth - globalConstant.sceneEdge)){
-            this.node.x = cc.director.getWinSize().width * (globalConstant.sceneWidth - globalConstant.sceneEdge);
+        if(position.x > cc.director.getWinSize().width * (this.areaRight - globalConstant.sceneEdge)){
+            this.node.x = cc.director.getWinSize().width * (this.areaRight - globalConstant.sceneEdge);
         }else if(position.x < cc.director.getWinSize().width * globalConstant.sceneEdge){
             this.node.x = cc.director.getWinSize().width * globalConstant.sceneEdge;
         }else {

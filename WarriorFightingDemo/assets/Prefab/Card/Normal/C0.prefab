@@ -1338,7 +1338,7 @@
       "__id__": 1
     },
     "_enabled": true,
-    "manaConsume": 10,
+    "manaConsume": 3,
     "manaConsumeLabel": {
       "__id__": 11
     },
@@ -1380,7 +1380,7 @@
     "attackLabel": {
       "__id__": 24
     },
-    "health": 335,
+    "health": 40,
     "healthLabel": {
       "__id__": 30
     },
@@ -1398,6 +1398,7 @@
       "__id__": 1
     },
     "_enabled": true,
+    "creatureCard": true,
     "cardNumNode": {
       "__id__": 21
     },

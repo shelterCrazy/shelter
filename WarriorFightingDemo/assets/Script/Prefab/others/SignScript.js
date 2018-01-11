@@ -48,7 +48,11 @@ cc.Class({
     },
     fnRenewSign:function(){
         this.node.x = this.creature.x / (cc.director.getWinSize().width * 3) * globalConstant.smallMapLength;
-        this.attack.string = this.script.attack;
+        if(this.nodeType === 0) {
+            this.attack.string = this.script.attack;
+        }else{
+            this.attack.string = "";
+        }
         this.health.string = this.script.health;
         for(var i = 0;i < this.signNode.length;i++){
             if(this.signState === i){

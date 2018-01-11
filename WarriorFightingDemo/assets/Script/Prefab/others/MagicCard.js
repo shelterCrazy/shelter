@@ -1,5 +1,11 @@
 var globalConstant = require("Constant");
-
+/**
+ * @主要功能 用于处理魔法牌类型的逻辑
+ * @author 老黄，C14
+ * @Date 2017/
+ * @parameters
+ * @returns
+ */
 cc.Class({
     extends: cc.Component,
 
@@ -32,7 +38,12 @@ cc.Class({
 
         prepareCardEffect:cc.AudioClip,
         useCardEffect:cc.AudioClip,
+        //摄像头移动标记
+        cameraMoveFlag:0,
 
+        arraw:cc.Node,
+        rangeLNode:cc.Node,
+        rangeRNode:cc.Node,
     },
 
     // use this for initialization
@@ -47,8 +58,8 @@ cc.Class({
         this.startListen();
         //是否移动到上面准备使用了，初始值，否
         this.preUse = false;
-        this.backRollScript = this.backRoll.getComponent("BackRoll");
-        self.cardScript = self.node.getComponent('Card');
+        //this.backRollScript = this.backRoll.getComponent("BackRoll");
+        this.cardScript = self.node.getComponent('Card');
         this.heroScirpt = this.cardScript.hero.getComponent('Player');
 
         //这个的最深层代码JS的获取
@@ -89,6 +100,8 @@ cc.Class({
      */
     AreaTargetMagicStartListen: function (event) {
         //向主控制脚本传递信息，播放开始的音效
+        this.cardScript.cameraControlScript.targets[1].x  =
+            this.cardScript.cameraControlScript.targets[0].x;
     },
     /**
      *
@@ -127,6 +140,7 @@ cc.Class({
      */
     AreaTargetMagicMoveListen: function (event) {
          //console.log("AreaTargetMagicMoveListen");
+        var self = this;
         if(this.node.y > globalConstant.cardUseLine){
             if(this.preUse === false){
                 this.node.opacity = 0;
@@ -140,7 +154,31 @@ cc.Class({
             this.rangeAnimeNode.x = this.node.x;
             this.rangeLNode.x = this.node.x - this.area * globalConstant.unitLength / 2;
             this.rangeRNode.x = this.node.x + this.area * globalConstant.unitLength / 2;
+
+            if(this.node.x + cc.director.getWinSize().width/2 > cc.director.getWinSize().width - globalConstant.magicMoveEdge){
+                if(this.cameraMoveFlag !== 8){
+                    this.cameraMoveFlag = 8;
+                    this.cardScript.cameraControlScript.target =
+                        this.cardScript.cameraControlScript.targets[1];
+                    this.unschedule(this.cameraMove);
+                    this.schedule(this.cameraMove,0.01);
+                }
+            }else if(this.node.x + cc.director.getWinSize().width/2 < globalConstant.magicMoveEdge){
+                this.cardScript.cameraControlScript.target =
+                    this.cardScript.cameraControlScript.targets[1];
+                if(this.cameraMoveFlag !== -8){
+                    this.cameraMoveFlag = -8;
+                    this.cardScript.cameraControlScript.target =
+                        this.cardScript.cameraControlScript.targets[1];
+                    this.unschedule(this.cameraMove);
+                    this.schedule(this.cameraMove,0.01);
+                }
+            }else{
+                this.cameraMoveFlag = 0;
+                this.unschedule(this.cameraMove);
+            }
         }
+
 
 
         if(this.node.y <= globalConstant.cardUseLine && this.preUse === true){
@@ -149,10 +187,33 @@ cc.Class({
             this.rangeLNode.active = false;
             this.rangeRNode.active = false;
             this.rangeAnimeNode.active = false;
+
+            this.unschedule(this.cameraMove);
             //停止准备用的音乐
             cc.audioEngine.stopEffect(this.currentEffect);
         }
     },
+    /**
+     * @主要功能 相机移动，用于范围法术移动时的相机移动
+     * @author C14
+     * @Date 2018/1/11
+     * @parameters
+     * @returns
+     */
+    cameraMove:function(){
+        var self = this;
+        self.cardScript.cameraControlScript.targets[1].x += self.cameraMoveFlag;
+        if(this.cardScript.cameraControlScript.target !==
+                this.cardScript.cameraControlScript.targets[1]){
+            this.cardScript.cameraControlScript.target = this.cardScript.cameraControlScript.targets[1];
+        }
+    },
+    // called every frame, uncomment this function to activate update callback
+    //update: function (dt) {
+    //    if(this.cameraMoveFlag !== 0)
+    //        this.cardScript.cameraControlScript.targets[1].x += this.cameraMoveFlag;
+    //},
+
     /**
      *
      * @param event
@@ -208,10 +269,10 @@ cc.Class({
      * @constructor
      */
     AreaTargetMagicEndListen: function (event) {
-
+        console.log(" AreaTargetMagicEndListen");
         //停止准备用的音乐
         this.stopEffect();
-
+        this.cameraMoveFlag = 0;
         if(this.preUse === true) {
             this.rangeLNode.active = false;
             this.rangeRNode.active = false;
@@ -251,6 +312,26 @@ cc.Class({
         }
     },
 
+    /**
+     * @主要功能 魔法划出了鼠标后的结果是这样子的
+     * @author C14
+     * @Date 2018/1/11
+     * @parameters
+     * @returns
+     */
+    //MagicLeaveListen:function(){
+    //    this.node.opacity = 1000;
+    //    this.preUse = false;
+    //    if(this.arrow !== null)this.arrow.active = false;
+    //    if(this.rangeLNode !== null)this.rangeLNode.active = false;
+    //    if(this.rangeRNode !== null)this.rangeRNode.active = false;
+    //    //停止准备用的音乐
+    //    this.stopEffect();
+    //
+    //    var sender = new cc.Event.EventCustom('cardOut', true);
+    //    sender.setUserData({card: this.node});//, posX: event.getLocationX(), posY: event.getLocationY()
+    //    this.node.dispatchEvent(sender);
+    //},
 
     /**
      * @主要功能 向上级节点传递消息，使之播放音效
@@ -277,6 +358,7 @@ cc.Class({
         });
         this.node.dispatchEvent(eventsend);
     },
+
     /**
      * @主要功能 停止当前播放的音效
      * @author C14
@@ -335,8 +417,5 @@ cc.Class({
         }
     },
 
-    // called every frame, uncomment this function to activate update callback
-    // update: function (dt) {
 
-    // },
 });

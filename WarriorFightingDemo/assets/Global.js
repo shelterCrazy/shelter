@@ -10,6 +10,8 @@ module.exports = {
     bagNum:10,
     //现在正在浏览的卡组
     deckView:0,
+    //本次作战的队伍是
+    nowTeam:-1,
 
     //卡组的类型
     type: {

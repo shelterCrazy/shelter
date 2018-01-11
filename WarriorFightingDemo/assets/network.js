@@ -3,12 +3,20 @@ cc.Class({
 
     properties: {
         label:cc.Label,
-        editBox:cc.Node,
+        //editBox:cc.Node,
         url:"http://39.106.67.112:3000",
         socket:null,
         token:1,
         userName:"kenan",
         password:"123456",
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä±ï¿½ï¿½ï¿½
+        sign:0,
+
+        manager:cc.Script,
+
+        editBoxNode:cc.Node,
+
+        messageLabel:cc.Label,
         // foo: {
         //    default: null,      // The default value will be used only when the component attaching
         //                           to a node for the first time
@@ -25,22 +33,24 @@ cc.Class({
     onLoad: function () {
 
 
-        this.edit = this.editBox.getComponent(cc.EditBox);
+        //this.edit = this.editBoxNode.getComponent(cc.EditBox);
+        this.manager = this.node.getComponent("MainGameManager");
+        cc.log(this.manager);
 
-        //³õÊ¼»¯Ò³Ãæ  µÇÂ½·ÃÎÊ   ²âÊÔÕË»§ kenan : 123456
+        //ï¿½ï¿½Ê¼ï¿½ï¿½Ò³ï¿½ï¿½  ï¿½ï¿½Â½ï¿½ï¿½ï¿½ï¿½   ï¿½ï¿½ï¿½ï¿½ï¿½Ë»ï¿½ kenan : 123456
         this.login = function(){
             this.socket.emit('login', {'userName':this.userName,'password':this.password});
         };
-        //Ä¬ÈÏ¿Õ¼ä  Ä¬ÈÏroom  ÆÕÍ¨ÏûÏ¢²âÊÔ
+        //Ä¬ï¿½Ï¿Õ¼ï¿½  Ä¬ï¿½ï¿½room  ï¿½ï¿½Í¨ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½
         this.broadcastMsg = function(msg){
             this.socket.emit('broadcastMsg', {'msg': msg, 'token':this.token});
         };
-        //roomÁÄÌìÊÒÁÄÌì
+        //roomï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         this.roomMsg = function(room, msg){
             this.socket.emit('room', {'room':room, 'msg':msg, 'token':this.token});
             cc.log("send message");
         };
-        //ÆÕÍ¨ÏûÏ¢²âÊÔ
+        //ï¿½ï¿½Í¨ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½
         this.msg = function(msg,id){
             this.socket.emit('msg', {'msg': msg, 'id':id, 'token':this.token});
         };
@@ -51,39 +61,55 @@ cc.Class({
             this.socket = io.connect(this.url+"/index");
             var token = this.token;
             var self = this;
-            //µÇÂ½½á¹û´¦Àí
+            //ï¿½ï¿½Â½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             this.socket.on('loginResult', function(data){
                 console.log('loginResult:' + data.msg + " results:" + data.results);
                 token = data.results;
                 self.roomMsg('roomChat','  do you like me?');
             });
-            //´íÎó´¦Àí
+            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             this.socket.on('error', function(error){
                 console.log('error:' + error);
             });
-            //Á´½ÓÒÑ¹Ø±Õ
+            //ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¹Ø±ï¿½
             this.socket.on('disconnect', function(){
+                if (self.userName != null && self.userName.length > 0) {
+                    login();
+                    //self.roomMsg('roomChat','  do you like me?');
+                }
                 console.log('disconnect');
             });
-            //ÖØÐÂÁ´½Ó
+            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             this.socket.on('reconnect', function () {
                 log('reconnect');
                 if (this.userName != null && this.userName.length > 0) {
                     self.login();
                 }
             });
-            //ÖØÁ¬´íÎó
+            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             this.socket.on('reconnect_error', function () {
                 log('reconnect_error');
             });
-            //¹ã²¥ÏûÏ¢²âÊÔ
+            //ï¿½ã²¥ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½
             this.socket.on('msg', function(data){
                 console.log('msg' + data.msg);
             });
-            //roomÁÄÌì
+            //roomï¿½ï¿½ï¿½ï¿½
             this.socket.on('roomChat', function(data){
-                self.label.string = data.msg;
-                console.log('msg' + data.msg);
+                cc.log(data.msg.name);
+                if(data.msg.name === "creatureCreate"){
+                    self.manager.creatureCreateNetwork(data.msg.detail);
+                }else if(data.msg.name === "magicCreate"){
+                    self.manager.magicCreateNetwork(data.msg.detail);
+                }else if(data.msg.name === "chantCreate"){
+                    self.manager.chantCreateNetwork(data.msg.detail);
+                }else if(data.msg.name === "heroDeath"){
+                    //self.manager.heroDeathDetail(data.msg.detail);
+                }else if(data.msg.name === "enemyMove"){
+                    self.manager.changeEnemyMove(data.msg.detail);
+                }else if(data.msg.name === "message"){
+                    self.messageLabel.string = data.msg.detail;
+                }
             });
         };
 
@@ -93,15 +119,15 @@ cc.Class({
 
     },
 
-    sendMessage:function() {
-        //roomÁÄÌìÊÒÁÄÌì
-        var socket = this.socket;
-        var roomMsg = function (room, msg) {
-            socket.emit('room', {'room': room, 'msg': msg, 'token': 1});
-        };
-
-        roomMsg('roomChat', this.edit.string);
-    }
+     //sendMessage:function() {
+     //    //roomï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+     //    var socket = this.socket;
+     //    var roomMsg = function (room, msg) {
+     //        socket.emit('room', {'room': room, 'msg': msg, 'token': 1});
+     //    };
+     //
+     //    roomMsg('roomChat', {name:"message",detail:this.edit.string});
+     //}
     // called every frame, uncomment this function to activate update callback
     // update: function (dt) {
 
@@ -116,20 +142,20 @@ cc.Class({
     //
     //    this.edit = this.editBox.getComponent(cc.EditBox);
     //
-    //    //³õÊ¼»¯Ò³Ãæ  µÇÂ½·ÃÎÊ   ²âÊÔÕË»§ kenan : 123456
+    //    //ï¿½ï¿½Ê¼ï¿½ï¿½Ò³ï¿½ï¿½  ï¿½ï¿½Â½ï¿½ï¿½ï¿½ï¿½   ï¿½ï¿½ï¿½ï¿½ï¿½Ë»ï¿½ kenan : 123456
     //    this.login = function(){
     //        socket.emit('login', {'userName':userName,'password':password});
     //    };
-    //    //Ä¬ÈÏ¿Õ¼ä  Ä¬ÈÏroom  ÆÕÍ¨ÏûÏ¢²âÊÔ
+    //    //Ä¬ï¿½Ï¿Õ¼ï¿½  Ä¬ï¿½ï¿½room  ï¿½ï¿½Í¨ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½
     //    this.broadcastMsg = function(msg){
     //        socket.emit('broadcastMsg', {'msg': msg, 'token':token});
     //    };
-    //    //roomÁÄÌìÊÒÁÄÌì
+    //    //roomï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     //    this.roomMsg = function(room, msg){
     //        socket.emit('room', {'room':room, 'msg':msg, 'token':token});
     //        cc.log("send message");
     //    };
-    //    //ÆÕÍ¨ÏûÏ¢²âÊÔ
+    //    //ï¿½ï¿½Í¨ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½
     //    this.msg = function(msg,id){
     //        socket.emit('msg', {'msg': msg, 'id':id, 'token':token});
     //    };
@@ -139,36 +165,36 @@ cc.Class({
     //    this.start = function(){
     //        socket = io.connect(url+"/index");
     //        cc.log("start");
-    //        //µÇÂ½½á¹û´¦Àí
+    //        //ï¿½ï¿½Â½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     //        socket.on('loginResult', function(data){
     //            console.log('loginResult:' + data.msg + " results:" + data.results);
     //            token = data.results;
     //            roomMsg('roomChat','  do you like me?');
     //        });
-    //        //´íÎó´¦Àí
+    //        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     //        socket.on('error', function(error){
     //            console.log('error:' + error);
     //        });
-    //        //Á´½ÓÒÑ¹Ø±Õ
+    //        //ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¹Ø±ï¿½
     //        socket.on('disconnect', function(){
     //            console.log('disconnect');
     //        });
-    //        //ÖØÐÂÁ´½Ó
+    //        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     //        socket.on('reconnect', function () {
     //            log('reconnect');
     //            if (userName != null && userName.length > 0) {
     //                login();
     //            }
     //        });
-    //        //ÖØÁ¬´íÎó
+    //        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     //        socket.on('reconnect_error', function () {
     //            log('reconnect_error');
     //        });
-    //        //¹ã²¥ÏûÏ¢²âÊÔ
+    //        //ï¿½ã²¥ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½
     //        socket.on('msg', function(data){
     //            console.log('msg' + data.msg);
     //        });
-    //        //roomÁÄÌì
+    //        //roomï¿½ï¿½ï¿½ï¿½
     //        socket.on('roomChat', function(data){
     //            label.string = data.msg;
     //            console.log('msg' + data.msg);

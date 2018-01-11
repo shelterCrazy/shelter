@@ -148,9 +148,11 @@ cc.Class({
      */
     NoTargetMagicEndListen: function (event) {
         //console.log("NoTargetMagicEndListen");
-        if(this.preUse === true) {
+        if(this.preUse === true && this.cScript.getUseState() === true) {
             this.heroScirpt.mana -= this.cardScript.manaConsume;
             this.cScript.useCard();
+        }else{
+            this.node.opacity = 1000;
         }
     },
     /**

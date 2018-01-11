@@ -29,9 +29,11 @@ cc.Class({
         // 卡牌选择与退出的监听
         this.node.on("cardSelect", this.cardSelectEvent, this);
         this.node.on("cardExit", this.cardExitEvent, this);
+
+        //监听错误提示，无法使用牌的情况
         this.node.on("errorTips", this.catchTips, this);
         
-        this.cardHandScript = this.cardHand.getComponent("DrawCard");
+        //this.cardHandScript = this.cardHand.getComponent("DrawCard");
         //
         // this.node.on(cc.Node.EventType.MOUSE_DOWN,this.downMouseEvent,this);
         // this.node.on(cc.Node.EventType.MOUSE_UP,this.upMouseEvent,this);

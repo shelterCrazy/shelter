@@ -25,7 +25,8 @@ cc.Class({
         var eventsend = new cc.Event.EventCustom('creatureCreate',true);
         var position = this.node.x + globalConstant.cameraOffset + cc.director.getWinSize().width * globalConstant.sceneEdge;
             eventsend.setUserData({
-                X:0,
+                X:cc.director.getWinSize().width * globalConstant.sceneWidth / 2 *
+                (1 + this.cardScript.team/Math.abs(this.cardScript.team)),
                 Y:null,
                 attack:this.creepScript.attack,
                 health:this.creepScript.health,

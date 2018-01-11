@@ -12,19 +12,59 @@ cc.Class({
         var self = this;
         self.creepScript = this.node.getComponent('CreepCard');
         self.cardScript = self.node.getComponent('Card');
+        self.mainGameManagerScript = self.cardScript.mainGameManager.getComponent("MainGameManager");
     },
 
     
     getUseState: function(){
         var state;
         var self = this;
-        if(self.cardScript.hero.x - 200 < this.node.x + this.node.parent.x - this.roll.x &&
-           self.cardScript.hero.x + 200 > this.node.x + this.node.parent.x - this.roll.x ){
-               state = true;
-           }else{
-               state = false;
-           }
-        return state;
+        if(self.cardScript.team < 0) {
+
+            return this.getMaxX() >
+                this.node.x + globalConstant.cameraOffset +
+                cc.director.getWinSize().width * globalConstant.sceneEdge;
+
+        }else if(self.cardScript.team > 0){
+            return this.getMaxX() <
+                this.node.x + globalConstant.cameraOffset +
+                cc.director.getWinSize().width * globalConstant.sceneEdge;
+
+        }
+    },
+
+    getMaxX:function()
+    {
+        var self = this;
+        var max = 0;
+        var i = 0;
+        var script;
+        var creature = self.mainGameManagerScript.creatureLayer.getChildren();
+        if(self.cardScript.team < 0) {
+            max = 0;
+            for (; i < creature.length; i++) {
+                script = creature[i].getComponent("Creature");
+                if (max < creature[i].x && script.team === self.cardScript.team) {
+                    max = creature[i].x;
+                }
+            }
+            if(max < self.mainGameManagerScript.heros[0].x){
+                max = self.mainGameManagerScript.heros[0].x;
+            }
+
+        }else if(self.cardScript.team > 0) {
+            max = 10000;
+            for (; i < creature.length; i++) {
+                script = creature[i].getComponent("Creature");
+                if (max > creature[i].x && script.team === self.cardScript.team) {
+                    max = creature[i].x;
+                }
+            }
+            if(max > self.mainGameManagerScript.heros[0].x){
+                max = self.mainGameManagerScript.heros[0].x;
+            }
+        }
+        return max;
     },
     
     useCard: function(){

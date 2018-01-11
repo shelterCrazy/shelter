@@ -137,7 +137,6 @@ cc.Class({
             case cc.KEY.e:
             case cc.KEY.space:
                 if(this.inDoor === true) {
-                    cc.log(Global.deckUsage);
                     Global.totalDeckData[Global.deckUsage].magicDeck = this.mainScript.myMDeck;
                     Global.totalDeckData[Global.deckUsage].creatureDeck = this.mainScript.myCDeck;
                     this.battleScene();
@@ -146,7 +145,10 @@ cc.Class({
         }
     },
     battleScene: function(){
-        cc.director.loadScene("game");
+        cc.director.preloadScene('game', function () {
+            cc.log('Next scene preloaded');
+            cc.director.loadScene('game');
+        });
     },
 
     onCollisionEnter: function (other, self) {

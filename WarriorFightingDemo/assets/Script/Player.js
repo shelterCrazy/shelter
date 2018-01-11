@@ -34,20 +34,27 @@ cc.Class({
 
         //自我
         self:true,
+        //是否使AI
         ai:false,
+        //能否移动
         movable:true,
 
+        mainGameManager:cc.Node,
         gameManager:cc.Node,
         cameraControl:cc.Node,
 
         drawCardNode:cc.Node,
         //英雄的手牌
         handCard:[cc.Node],
+        //英雄队伍颜色的调整
+        teamColorNode:[cc.Node],
     },
     // use this for initialization
     onLoad: function () {
 
         this.drawCardScript = this.drawCardNode.getComponent("DrawCard");
+
+        this.networkScript = this.mainGameManager.getComponent("network");
         // 初始化跳跃动作
         this.jumpAction = this.setJumpAction();
         //this.node.runAction(this.jumpAction);
@@ -94,13 +101,9 @@ cc.Class({
         } else if (this.accLeft === true) {
                 this.body.scaleX = -1;
             this.xSpeed = -this.maxMoveSpeed;//向左
-            if(this.self === true)
-            this.cameraControlScript.target = this.cameraControlScript.targets[0];
         } else if (this.accRight === true) {
                 this.body.scaleX = 1;
             this.xSpeed = this.maxMoveSpeed;//向右
-            if(this.self === true)
-            this.cameraControlScript.target = this.cameraControlScript.targets[0];
         }
         if(0 > this.node.x){
             this.node.x = 0;
@@ -162,11 +165,42 @@ cc.Class({
     },
     //复活英雄
     relive:function(){
+        //Y坐标为 -85
+        this.node.y = -85;
+        //透明度
+        this.node.opacity = 1000;
         this.health = this.maxHealth;
         this.death = false;
     },
-
-
+    init:function(data){
+        this.team = data.team;
+        this.node.x = globalConstant.sceneWidth * cc.director.getWinSize().width / 2
+            * (1 + this.team / Math.abs(this.team));
+        this.changeOutLook();
+    },
+    changeOutLook:function(){
+        if(this.team < 0) {
+            this.teamColorNode[0].active = true;
+            this.teamColorNode[1].active = false;
+            this.teamColorNode[2].active = false;
+        }else if(this.team > 0){
+            this.teamColorNode[0].active = false;
+            this.teamColorNode[1].active = false;
+            this.teamColorNode[2].active = true;
+        }
+    },
+    sendMoveMessage:function(){
+        var self = this;
+        self.networkScript.roomMsg('roomChat', {
+            name: "enemyMove",
+            detail: {
+                accLeft: self.accLeft,
+                accRight: self.accRight,
+                health:self.health,
+                x:self.node.x
+            }
+        })
+    },
     setInputControl: function () {
         var self = this;
         // 添加键盘事件监听
@@ -177,14 +211,17 @@ cc.Class({
                 switch(keyCode) {
                     case cc.KEY.a:
                     case cc.KEY.left:
-                        //cc.log(self.death);
+                        if(self.accLeft === false){
                             self.accLeft = true;
-                        // self.accRight = false;
+                            self.sendMoveMessage();
+                        }
                         break;
                     case cc.KEY.d:
                     case cc.KEY.right:
-                            // self.accLeft = false;
+                        if(self.accRight === false) {
                             self.accRight = true;
+                            self.sendMoveMessage();
+                        }
                         break;
                     case cc.KEY.w:
                     case cc.KEY.up:
@@ -200,6 +237,10 @@ cc.Class({
                             self.generateNode();
                         }
                         break;
+                    case cc.KEY.e:
+                        self.cameraControlScript.target = self.cameraControlScript.targets[0];
+                        self.cameraControlScript.targets[1].x = self.cameraControlScript.targets[0].x;
+                        break;
                 }
             },
             // 松开按键时，停止向该方向的加速
@@ -208,10 +249,12 @@ cc.Class({
                     case cc.KEY.a:
                     case cc.KEY.left:
                         self.accLeft = false;
+                        self.sendMoveMessage();
                         break;
                     case cc.KEY.d:
                     case cc.KEY.right:
                         self.accRight = false;
+                        self.sendMoveMessage();
                         break;
                 }
             }
@@ -250,8 +293,10 @@ cc.Class({
     
     removeNode: function (sender, monster) {
         this._pool.put(monster);
-    }
+    },
 
     // called every frame, uncomment this function to activate update callback
-
+    //update: function (dt) {
+    //
+    //},
 });
