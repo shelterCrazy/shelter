@@ -9,7 +9,7 @@ cc.Class({
         token:1,
         userName:"kenan",
         password:"123456",
-        //���������˳������ı���
+        //????????????????????
         sign:0,
 
         manager:cc.Script,
@@ -37,20 +37,20 @@ cc.Class({
         this.manager = this.node.getComponent("MainGameManager");
         cc.log(this.manager);
 
-        //��ʼ��ҳ��  ��½����   �����˻� kenan : 123456
+        //????????  ???????   ??????? kenan : 123456
         this.login = function(){
             this.socket.emit('login', {'userName':this.userName,'password':this.password});
         };
-        //Ĭ�Ͽռ�  Ĭ��room  ��ͨ��Ϣ����
+        //?????  ???room  ??????????
         this.broadcastMsg = function(msg){
             this.socket.emit('broadcastMsg', {'msg': msg, 'token':this.token});
         };
-        //room����������
+        //room??????????
         this.roomMsg = function(room, msg){
             this.socket.emit('room', {'room':room, 'msg':msg, 'token':this.token});
             cc.log("send message");
         };
-        //��ͨ��Ϣ����
+        //??????????
         this.msg = function(msg,id){
             this.socket.emit('msg', {'msg': msg, 'id':id, 'token':this.token});
         };
@@ -61,17 +61,17 @@ cc.Class({
             this.socket = io.connect(this.url+"/index");
             var token = this.token;
             var self = this;
-            //��½��������
+            //???????????
             this.socket.on('loginResult', function(data){
                 console.log('loginResult:' + data.msg + " results:" + data.results);
                 token = data.results;
                 self.roomMsg('roomChat','  do you like me?');
             });
-            //��������
+            //????????
             this.socket.on('error', function(error){
                 console.log('error:' + error);
             });
-            //�����ѹر�
+            //????????
             this.socket.on('disconnect', function(){
                 if (self.userName != null && self.userName.length > 0) {
                     login();
@@ -79,22 +79,22 @@ cc.Class({
                 }
                 console.log('disconnect');
             });
-            //��������
+            //????????
             this.socket.on('reconnect', function () {
                 log('reconnect');
                 if (this.userName != null && this.userName.length > 0) {
                     self.login();
                 }
             });
-            //��������
+            //????????
             this.socket.on('reconnect_error', function () {
                 log('reconnect_error');
             });
-            //�㲥��Ϣ����
+            //?????????
             this.socket.on('msg', function(data){
                 console.log('msg' + data.msg);
             });
-            //room����
+            //room????
             this.socket.on('roomChat', function(data){
                 cc.log(data.msg.name);
                 if(data.msg.name === "creatureCreate"){
@@ -107,6 +107,8 @@ cc.Class({
                     //self.manager.heroDeathDetail(data.msg.detail);
                 }else if(data.msg.name === "enemyMove"){
                     self.manager.changeEnemyMove(data.msg.detail);
+                }else if(data.msg.name === "enemyJump"){
+                    self.manager.changeEnemyJump(data.msg.detail);
                 }else if(data.msg.name === "message"){
                     self.messageLabel.string = data.msg.detail;
                 }
@@ -120,7 +122,7 @@ cc.Class({
     },
 
      //sendMessage:function() {
-     //    //room����������
+     //    //room??????????
      //    var socket = this.socket;
      //    var roomMsg = function (room, msg) {
      //        socket.emit('room', {'room': room, 'msg': msg, 'token': 1});
@@ -142,20 +144,20 @@ cc.Class({
     //
     //    this.edit = this.editBox.getComponent(cc.EditBox);
     //
-    //    //��ʼ��ҳ��  ��½����   �����˻� kenan : 123456
+    //    //????????  ???????   ??????? kenan : 123456
     //    this.login = function(){
     //        socket.emit('login', {'userName':userName,'password':password});
     //    };
-    //    //Ĭ�Ͽռ�  Ĭ��room  ��ͨ��Ϣ����
+    //    //?????  ???room  ??????????
     //    this.broadcastMsg = function(msg){
     //        socket.emit('broadcastMsg', {'msg': msg, 'token':token});
     //    };
-    //    //room����������
+    //    //room??????????
     //    this.roomMsg = function(room, msg){
     //        socket.emit('room', {'room':room, 'msg':msg, 'token':token});
     //        cc.log("send message");
     //    };
-    //    //��ͨ��Ϣ����
+    //    //??????????
     //    this.msg = function(msg,id){
     //        socket.emit('msg', {'msg': msg, 'id':id, 'token':token});
     //    };
@@ -165,36 +167,36 @@ cc.Class({
     //    this.start = function(){
     //        socket = io.connect(url+"/index");
     //        cc.log("start");
-    //        //��½��������
+    //        //???????????
     //        socket.on('loginResult', function(data){
     //            console.log('loginResult:' + data.msg + " results:" + data.results);
     //            token = data.results;
     //            roomMsg('roomChat','  do you like me?');
     //        });
-    //        //��������
+    //        //????????
     //        socket.on('error', function(error){
     //            console.log('error:' + error);
     //        });
-    //        //�����ѹر�
+    //        //????????
     //        socket.on('disconnect', function(){
     //            console.log('disconnect');
     //        });
-    //        //��������
+    //        //????????
     //        socket.on('reconnect', function () {
     //            log('reconnect');
     //            if (userName != null && userName.length > 0) {
     //                login();
     //            }
     //        });
-    //        //��������
+    //        //????????
     //        socket.on('reconnect_error', function () {
     //            log('reconnect_error');
     //        });
-    //        //�㲥��Ϣ����
+    //        //?????????
     //        socket.on('msg', function(data){
     //            console.log('msg' + data.msg);
     //        });
-    //        //room����
+    //        //room????
     //        socket.on('roomChat', function(data){
     //            label.string = data.msg;
     //            console.log('msg' + data.msg);

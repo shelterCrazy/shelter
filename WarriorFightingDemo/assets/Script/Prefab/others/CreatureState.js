@@ -134,12 +134,19 @@ cc.Class({
         if(this.state[globalConstant.stateEnum.speedDown] === true){
             this.creatureScript.speed --;
         }
+        if(this.state[globalConstant.stateEnum.healthAreAtk] === true){
+            var k = this.creatureScript.health;
+            this.creatureScript.health = this.creatureScript.attack;
+            this.creatureScript.attack = k;
+        }
     },
     // use this for initialization
     onLoad: function () {
         this.creatureScript = this.node.parent.getComponent("Creature");
+        this.removeAllState();
         this.schedule(function() {
             var change = 0;
+            cc.log(this.stateParam2[globalConstant.stateEnum.burn]);
             if(this.state[globalConstant.stateEnum.burn] === true) {
                 change += -this.stateParam2[globalConstant.stateEnum.burn];
                 if (-- this.stateParam2[globalConstant.stateEnum.burn] === 0) {
@@ -148,6 +155,11 @@ cc.Class({
             }
             if(this.state[globalConstant.stateEnum.heal] === true) {
                 change += this.stateParam2[globalConstant.stateEnum.heal];
+            }
+            if(this.state[globalConstant.stateEnum.healthAreAtk] === true){
+                var k = this.creatureScript.health;
+                this.creatureScript.health = this.creatureScript.attack;
+                this.creatureScript.attack = k;
             }
             this.creatureScript.changeHealth(change);
             this.adjustLogic();

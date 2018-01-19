@@ -16,6 +16,9 @@ cc.Class({
         //    readonly: false,    // optional, default is false
         // },
         // ...
+        skillNode:cc.Node,
+
+        GameManager:cc.Component
     },
 
     // use this for initialization
@@ -54,6 +57,7 @@ cc.Class({
                     area:this.area,
                     team:this.team,
                     id:0,
+                    network:false,
                 });
                 this.node.dispatchEvent(eventsend);
                 this.node.removeFromParent();
@@ -73,6 +77,7 @@ cc.Class({
         }
         //�����Ӵ��ж�
         if (other.node.group === "Creature") {
+            this.magicSkill.releaseFunction(2);
             var script = other.node.getComponent('Creature');
             if(script.team !== this.team){
                 //传递播放音效的事件
@@ -87,33 +92,35 @@ cc.Class({
                     area:this.area,
                     team:this.team,
                     id:0,
+                    network:false,
                 });
                 this.node.dispatchEvent(eventsend);
 
                 this.node.removeFromParent();
             }
         }
-        if (other.node.group === "Base") {
-            var script2 = other.node.getComponent('Base');
-            if(script2.team !== this.team){
-                //传递播放音效的事件
-                if(this.hitEffect !== null)
-                    this.sendEvent(this.hitEffect);
-                //script.changeHealth(-10);
-
-                var eventsend2 = new cc.Event.EventCustom('magicCreate',true);
-                eventsend2.setUserData({
-                    position:this.node.x,
-                    y:null,
-                    area:this.area,
-                    team:this.team,
-                    id:0,
-                });
-                this.node.dispatchEvent(eventsend2);
-
-                this.node.removeFromParent();
-            }
-        }
+        //if (other.node.group === "Base") {
+        //    var script2 = other.node.getComponent('Base');
+        //    if(script2.team !== this.team){
+        //        //传递播放音效的事件
+        //        if(this.hitEffect !== null)
+        //            this.sendEvent(this.hitEffect);
+        //        //script.changeHealth(-10);
+        //
+        //        var eventsend2 = new cc.Event.EventCustom('magicCreate',true);
+        //        eventsend2.setUserData({
+        //            position:this.node.x,
+        //            y:null,
+        //            area:this.area,
+        //            team:this.team,
+        //            id:0,
+        //            network:false,
+        //        });
+        //        this.node.dispatchEvent(eventsend2);
+        //
+        //        this.node.removeFromParent();
+        //    }
+        //}
         if (other.node.group === "Hero") {
             var script3 = other.node.getComponent('Player');
             if(script3.team !== this.team){
@@ -129,6 +136,7 @@ cc.Class({
                     area:this.area,
                     team:this.team,
                     id:0,
+                    network:false,
                 });
                 this.node.dispatchEvent(eventsend3);
 
@@ -153,6 +161,7 @@ cc.Class({
     initMagic:function(detail){
         this.team = detail.team;
         this.area = detail.area;
+        this.magicSkill = this.skillNode.getComponent("Skill");
         this.speed.x = Math.sin((detail.angel + 90)*Math.PI/180)*detail.speed;
         this.speed.y = Math.cos((detail.angel + 90)*Math.PI/180)*detail.speed;
     },
@@ -186,6 +195,13 @@ cc.Class({
             target:this.node,
         });
         this.node.dispatchEvent(eventsend);
+    },
+    /**
+     * @主要功能:   初始化注入管理类
+     * @parameters Manager
+     */
+    fnGetManager:function(Manager){
+        this.GameManager = Manager;
     },
 });
 

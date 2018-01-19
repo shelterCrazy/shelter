@@ -3,10 +3,14 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        //é­”æ³•åˆ›å»ºæˆåŠŸçš„éŸ³ä¹
+        //Ä§·¨´´½¨³É¹¦µÄÒôÀÖ
         loadEffect:cc.AudioClip,
-        //å‘½ä¸­æ—¶çš„éŸ³ä¹
+        //ÃüÖĞÊ±µÄÒôÀÖ
         hitEffect:cc.AudioClip,
+
+        skillNode:cc.Node,
+
+        GameManager:cc.Component,
 
     },
 
@@ -16,9 +20,9 @@ cc.Class({
         var animation = this.node.getComponent(cc.Animation);
         this.team = 0;
 
-        //ä¼ é€’åˆ›å»ºæ³•æœ¯æˆåŠŸæ—¶éŸ³æ•ˆçš„äº‹ä»¶
+        //´«µİ´´½¨·¨Êõ³É¹¦Ê±ÒôĞ§µÄÊÂ¼ş
         if(this.loadEffect !== null)
-        this.sendEvent(this.loadEffect);
+            this.sendEvent(this.loadEffect);
 
         animation.on('finished',  this.onFinished,    this);
 
@@ -28,51 +32,46 @@ cc.Class({
     },
 
     onCollisionEnter: function (other, self) {
-        //ï¿½ï¿½ï¿½ï¿½ï¿½Ó´ï¿½ï¿½Ğ¶ï¿½
+
         if (other.node.group === "Ground") {
 
         }
 
-        //ï¿½ï¿½ï¿½ï¿½ï¿½Ó´ï¿½ï¿½Ğ¶ï¿½
         if (other.node.group === "Creature") {
             var script1 = other.node.getComponent('Creature');
             var stateScript = script1.stateNode.getComponent('CreatureState');
-            cc.log("ç°åœ¨çš„é˜Ÿä¼æ˜¯" + script1.team);
-            if(script1.team !== this.team){
 
-                //ä¼ é€’æ’­æ”¾éŸ³æ•ˆçš„äº‹ä»¶
-                if(this.hitEffect !== null)
-                this.sendEvent(this.hitEffect);
+            if(script1.team === this.team){
 
-                //stateScript.addState(globalConstant.stateEnum.heal,3,40);
-
-                //ä¼ é€’æ’­æ”¾éŸ³æ•ˆçš„äº‹ä»¶
-                script1.changeHealth(-10);
-                //script.cleanTarget();
+                this.magicSkill.releaseFunction(2,script1);
+                ////´«µİ²¥·ÅÒôĞ§µÄÊÂ¼ş
+                //if(this.hitEffect !== null)
+                //    this.sendEvent(this.hitEffect);
+            }else{
+                this.magicSkill.releaseFunction(3,script1);
             }
-
         }
+
         if (other.node.group === "Hero") {
             var script2 = other.node.getComponent('Player');
-            if(script2.team !== this.team){
-                //ä¼ é€’æ’­æ”¾éŸ³æ•ˆçš„äº‹ä»¶
-                if(this.hitEffect !== null)
-                    this.sendEvent(this.hitEffect);
-                //script.changeHealth(-10);
-
-                var deadFlag = script2.changeHealth(-10);
-                if(deadFlag != null && deadFlag == 1){
-                    script2.releaseTarget();
-                }
+            if(script2.team === this.team){
+                //´«µİ²¥·ÅÒôĞ§µÄÊÂ¼ş
+                //if(this.hitEffect !== null)
+                //    this.sendEvent(this.hitEffect);
+                this.magicSkill.releaseFunction(4,script2);
+            }else{
+                this.magicSkill.releaseFunction(5,script2);
             }
         }
         if (other.node.group === "Base") {
             var script3 = other.node.getComponent('Base');
             if(script3.team !== this.team){
-                //ä¼ é€’æ’­æ”¾éŸ³æ•ˆçš„äº‹ä»¶
-                if(this.hitEffect !== null)
-                    this.sendEvent(this.hitEffect);
-                script3.changeHealth(-10);
+                //´«µİ²¥·ÅÒôĞ§µÄÊÂ¼ş
+                //if(this.hitEffect !== null)
+                //    this.sendEvent(this.hitEffect);
+                this.magicSkill.releaseFunction(6,script3);
+            }else{
+                this.magicSkill.releaseFunction(7,script3);
             }
         }
     },
@@ -87,16 +86,20 @@ cc.Class({
         }
     },
     onFinished: function(){
+        this.magicSkill.releaseFunction(1);
         this.node.removeFromParent();
     },
     initMagic:function(detail){
         var box = this.node.getComponent(cc.BoxCollider);
         box.size.width = detail.area;
+        this.magicSkill = this.skillNode.getComponent("Skill");
         this.team = detail.team;
         this.node.width = detail.area;
+
+        this.magicSkill.releaseFunction(0);
     },
     /**
-     * @ä¸»è¦åŠŸèƒ½ å‘ä¸Šçº§èŠ‚ç‚¹ä¼ é€’æ¶ˆæ¯ï¼Œä½¿ä¹‹æ’­æ”¾éŸ³æ•ˆ
+     * @Ö÷Òª¹¦ÄÜ ÏòÉÏ¼¶½Úµã´«µİÏûÏ¢£¬Ê¹Ö®²¥·ÅÒôĞ§
      * @author C14
      * @Date 2017/12/12
      * @parameters audioChip volume
@@ -119,6 +122,14 @@ cc.Class({
             target:this.node,
         });
         this.node.dispatchEvent(eventsend);
+    },
+
+    /**
+     * @Ö÷Òª¹¦ÄÜ:   ³õÊ¼»¯×¢Èë¹ÜÀíÀà
+     * @parameters Manager
+     */
+    fnGetManager:function(Manager){
+        this.GameManager = Manager;
     },
     // called every frame, uncomment this function to activate update callback
     //update: function (dt) {

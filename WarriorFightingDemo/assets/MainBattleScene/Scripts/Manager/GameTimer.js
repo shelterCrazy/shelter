@@ -1,5 +1,5 @@
 /**
- * @Ö÷Òª¹¦ÄÜ ÓÎÏ·Ê±¼ä¼Ç£¬ÊµÏÖ×Ô¶¯×ªÈ¦ÊÍ·Å·¨ÊõµÈ¹¦ÄÜ
+ * @ä¸»è¦åŠŸèƒ½ æ¸¸æˆæ—¶é—´è®°ï¼Œå®ç°è‡ªåŠ¨è½¬åœˆé‡Šæ”¾æ³•æœ¯ç­‰åŠŸèƒ½
  * @author C14
  * @Date 2017/12/3
  * @parameters
@@ -14,52 +14,52 @@ cc.Class({
 
     // use this for initialization
     onLoad: function () {
-        //»ñÈ¡¸Ã½ÚµãÏÂµÄ½ø¶ÈÌõ
+        //è·å–è¯¥èŠ‚ç‚¹ä¸‹çš„è¿›åº¦æ¡
         this.processBar = this.node.getComponent(cc.ProgressBar);
-        //ÏÖÔÚµÄÊ±¼äµãÎª0
+        //ç°åœ¨çš„æ—¶é—´ç‚¹ä¸º0
         this.timer = 0;
-        //×ªÒ»È¦µÄÊ±¼äµãÎª800
+        //è½¬ä¸€åœˆçš„æ—¶é—´ç‚¹ä¸º800
         this.maxTimer = 800;
 
-        //½ø¶ÈÌõµÄ½ø¶ÈÎª this.timer/this.maxTimer
+        //è¿›åº¦æ¡çš„è¿›åº¦ä¸º this.timer/this.maxTimer
         this.processBar.progress = this.timer/this.maxTimer;
 
-        //¿ªÆôÒ»¸ö¶¨Ê±Æ÷£¬ÎŞÏŞÑ­»·
+        //å¼€å¯ä¸€ä¸ªå®šæ—¶å™¨ï¼Œæ— é™å¾ªç¯
         this.schedule(function() {
-            //Ê±¼ä¼ÓÒ»
+            //æ—¶é—´åŠ ä¸€
             this.timer++;
 
-            //ÏÖÔÚµÄÊ±¼ä¼ÇÂ¼´óÓÚ×î´óÖµ£¬ÇåÁã
+            //ç°åœ¨çš„æ—¶é—´è®°å½•å¤§äºæœ€å¤§å€¼ï¼Œæ¸…é›¶
             if(this.timer > this.maxTimer){
                 this.timer = 0;
-                //»ñÈ¡Ê±¼ä¼ÇµÄËùÓĞ×Ó½Úµã£¨Ó½³ª¼ÇÂ¼Æ÷£©
+                //è·å–æ—¶é—´è®°çš„æ‰€æœ‰å­èŠ‚ç‚¹ï¼ˆå’å”±è®°å½•å™¨ï¼‰
                 var allChild = this.node.getChildren();
                     for(var i = 0;i < allChild.length;i++){
-                        //»ñÈ¡Ó½³ª¼ÇÂ¼Æ÷µÄ½Å±¾
+                        //è·å–å’å”±è®°å½•å™¨çš„è„šæœ¬
                         var chantScript = allChild[i].getComponent("Chant");
                         if(chantScript != null) {
-                            //½«ÆäflagÖÃÎªfalse£¬¼´£¬ÏÂÒ»´Î¿ÉÒÔ´¥·¢ÁË
+                            //å°†å…¶flagç½®ä¸ºfalseï¼Œå³ï¼Œä¸‹ä¸€æ¬¡å¯ä»¥è§¦å‘äº†
                             chantScript.flag = false;
                         }
                     }
             }
 
-            //»ñÈ¡Ê±¼ä¼ÇµÄËùÓĞ×Ó½Úµã£¨Ó½³ª¼ÇÂ¼Æ÷£©
+            //è·å–æ—¶é—´è®°çš„æ‰€æœ‰å­èŠ‚ç‚¹ï¼ˆå’å”±è®°å½•å™¨ï¼‰
             var allChild1 = this.node.getChildren();
             for(var j = 0;j < allChild1.length;j++){
-                //»ñÈ¡Ó½³ª¼ÇÂ¼Æ÷µÄ½Å±¾
+                //è·å–å’å”±è®°å½•å™¨çš„è„šæœ¬
                 var chantScript1 = allChild1[j].getComponent("Chant");
                 if(chantScript1 != null) {
-                    //Èç¹û´ïµ½ÁËËùÕ¼µÄ°Ù·Ö±È£¬¶øÇÒÒÑ¾­ÊÇ¿É´¥·¢µÄ×´Ì¬
+                    //å¦‚æœè¾¾åˆ°äº†æ‰€å çš„ç™¾åˆ†æ¯”ï¼Œè€Œä¸”å·²ç»æ˜¯å¯è§¦å‘çš„çŠ¶æ€
                     if(chantScript1.percent <= this.timer/this.maxTimer && chantScript1.flag === false){
-                        //ÏÖÔÚ²»¿É´¥·¢ÁË
+                        //ç°åœ¨ä¸å¯è§¦å‘äº†
                         chantScript1.flag = true;
-                        //»ØºÏÊı¼õÒ»
+                        //å›åˆæ•°å‡ä¸€
                         chantScript1.fnChangeRound(-1);
                     }
                 }
             }
-            //¸üĞÂ½ø¶ÈÌõµÄ½ø¶È
+            //æ›´æ–°è¿›åº¦æ¡çš„è¿›åº¦
             this.processBar.progress = this.timer/this.maxTimer;
         },0.01);
     },

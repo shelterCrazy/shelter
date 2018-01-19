@@ -32,6 +32,10 @@ cc.Class({
         velocityLabel: cc.Label,
 
         backRoll:cc.Node,
+        //是否能够放置的指示器
+        indicator:cc.Prefab,
+
+        usableNode:cc.Node,
 
     },
 
@@ -44,20 +48,24 @@ cc.Class({
             DirectionTarget: 2,
         });
 
+        if(self.magicType === self.magicTypeEnum.AreaTarget && self.indicator !== null) {
+            self.indicatorNode = cc.instantiate(self.indicator);
+            self.indicatorScript = self.indicatorNode.getComponent("CreatureIndicator");
+            self.indicatorNode.active = false;
+            self.indicatorNode.x = this.node.x;
+            self.indicatorNode.y = globalConstant.heroY;
+            self.node.parent.parent.addChild(self.indicatorNode);
+        }
+
         self.cardScript = self.node.getComponent('Card');
         this.heroScirpt = this.cardScript.hero.getComponent('Player');
+        this.usableScript = this.usableNode.getComponent(cc.Component);
 
         this.preUse = false;
 
         self.attackLabel.string = self.attack;
         self.healthLabel.string = self.health;
         self.velocityLabel.string = self.velocity;
-        //this.cScript = null;
-        if(self.cardScript.cardType === 0){
-            this.cScript = self.node.getComponent('M' + self.cardScript.cardID);
-        }else{
-            this.cScript = self.node.getComponent('C' + self.cardScript.cardID);
-        }
 
         this.startListen();
         // 这个添加监听为测试用
@@ -88,9 +96,12 @@ cc.Class({
      * @constructor
      */
     NoTargetMagicStartListen: function (event) {
+        var self = this;
         if (event.getButton() === cc.Event.EventMouse.BUTTON_LEFT)
         {
             console.log("NoTargetMagicStartListen" + event.getLocationX().toFixed(0));
+            self.node.on(cc.Node.EventType.MOUSE_MOVE, self.NoTargetMagicMoveListen, self);
+            self.node.on(cc.Node.EventType.MOUSE_UP, self.NoTargetMagicEndListen, self);
         }
     },
     /**
@@ -100,6 +111,7 @@ cc.Class({
      */
     AreaTargetMagicStartListen: function (event) {
         //console.log("AreaTargetMagicStartListen");
+
     },
     /**
      *
@@ -115,7 +127,9 @@ cc.Class({
      * @constructor
      */
     NoTargetMagicMoveListen: function (event) {
+        //console.log("NoTargetCreatureMoveListen" + event.getLocationX().toFixed(0));
         if(this.node.y > globalConstant.cardUseLine && this.preUse === false){
+
             this.node.opacity = 200;
             this.preUse = true;
         }
@@ -132,6 +146,20 @@ cc.Class({
      */
     AreaTargetMagicMoveListen: function (event) {
         //console.log("AreaTargetMagicMoveListen");
+        if(this.preUse === true){
+            this.indicatorNode.x = this.node.x;
+            this.indicatorScript.changeUsable(this.usableScript.getUseState());
+        }
+        if(this.node.y > globalConstant.cardUseLine && this.preUse === false){
+            this.indicatorNode.active = true;
+            this.node.opacity = 200;
+            this.preUse = true;
+        }
+        if(this.node.y <= globalConstant.cardUseLine && this.preUse === true){
+            this.indicatorNode.active = false;
+            this.node.opacity = 1000;
+            this.preUse = false;
+        }
     },
     /**
      *
@@ -147,13 +175,16 @@ cc.Class({
      * @constructor
      */
     NoTargetMagicEndListen: function (event) {
-        //console.log("NoTargetMagicEndListen");
-        if(this.preUse === true && this.cScript.getUseState() === true) {
+        var self = this;
+        if(this.preUse === true && this.usableScript.getUseState() === true) {
             this.heroScirpt.mana -= this.cardScript.manaConsume;
-            this.cScript.useCard();
+            this.useCard();
         }else{
             this.node.opacity = 1000;
+            this.preUse = false;
         }
+        self.node.off(cc.Node.EventType.MOUSE_MOVE, self.NoTargetMagicMoveListen, self);
+        self.node.off(cc.Node.EventType.MOUSE_UP, self.NoTargetMagicEndListen, self);
     },
     /**
      *
@@ -163,6 +194,15 @@ cc.Class({
     AreaTargetMagicEndListen: function (event) {
         //console.log("AreaTargetMagicEndListen");
         // this.node.removeFromParent();
+        if(this.preUse === true && this.usableScript.getUseState() === true) {
+            this.heroScirpt.mana -= this.cardScript.manaConsume;
+            this.indicatorNode.active = false;
+            this.useCard();
+        }else{
+            this.indicatorNode.active = false;
+            this.node.opacity = 1000;
+            this.preUse = false;
+        }
     },
     /**
      *
@@ -173,6 +213,31 @@ cc.Class({
         //console.log("DirectionTargetMagicEndListen");
     },
 
+    useCard: function(){
+        var eventsend = new cc.Event.EventCustom('creatureCreate',true);
+        var position = 0;
+        if(this.magicType === 0){
+            position = cc.director.getWinSize().width * globalConstant.sceneWidth / 2 *
+                (1 + this.cardScript.team/Math.abs(this.cardScript.team))
+        }else if(this.magicType === 1){
+            position = this.node.x + globalConstant.cameraOffset +
+                cc.director.getWinSize().width * globalConstant.sceneEdge;
+        }
+
+        eventsend.setUserData({
+            X:position,
+            Y:null,
+            attack:this.attack,
+            health:this.health,
+            team:this.cardScript.team,
+            id:this.cardScript.cardID,
+            velocity:this.velocity,
+            battleCry:true
+        });
+        this.node.dispatchEvent(eventsend);
+
+        this.cardScript.drawCardScript.deleteCard(this.node);
+    },
 
     // 开启监听的位置，不过嘛，后面还得改，这里先搭个模子，至少保证功能正常
     startListen: function () {

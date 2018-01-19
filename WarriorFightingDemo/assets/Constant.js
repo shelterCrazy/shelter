@@ -18,6 +18,7 @@ module.exports = {
     unitLength:200,
     unitVelocity:1,
 
+    heroY:-76,
     //生物召唤的默认Y坐标
     summonY:-130,
     //法术的默认Y坐标
@@ -37,7 +38,9 @@ module.exports = {
         burn:3,
         weak:4,
         speedDown:5,
-        heal:6
+        heal:6,
+        //互换生命值与攻击力
+        healthAreAtk:7
     }),
     //故事模式所需的的金币
     storyModeNeedMoney:500,

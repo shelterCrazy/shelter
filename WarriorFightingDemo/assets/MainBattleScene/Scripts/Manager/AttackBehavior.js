@@ -36,14 +36,14 @@ var attackBehavior = cc.Class({
         }
         //获取发起攻击者的脚本
     	attackScript = attcNode.getComponent('Creature');
-        
     	//1伤害计算
       	// var hitValue = hitTransform(attackScript.attack, attcNode.atkType, node.defValue);     //atk攻击力   攻击类型   node该类型防御值
 
         //2伤害反馈给node   kenan  如果被攻击对象已死亡 清空攻击对象的目标
-    	var deadFlag = script.changeHealth(- attackScript.attack,this.node.parent);
-    	if(deadFlag != null && deadFlag == 1){
-            script.releaseTarget();
-        }
+        //var deadFlag =
+        return script.changeHealth(- attackScript.attack,this.node.parent);
+        //if(deadFlag != null && deadFlag == 1){
+        //    script.releaseTarget();
+        //}
     }
 });

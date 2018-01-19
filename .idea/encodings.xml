@@ -4,6 +4,11 @@
     <file url="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Constant.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Global.js" charset="UTF-16" />
     <file url="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainBattleScene/Scripts/CardLayout.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainBattleScene/Scripts/Manager/GameTimer.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/Store/StoreManager.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/Chant Magic/Chant.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Skill（法术生物技能）/Common/DirectionMagic.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Skill（法术生物技能）/Module/交换攻击力生命值.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/WarriorFightingDemo/assets/network.js" charset="UTF-8" />
   </component>
 </project>

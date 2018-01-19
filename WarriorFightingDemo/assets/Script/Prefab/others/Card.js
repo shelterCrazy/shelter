@@ -26,6 +26,8 @@ cc.Class({
             }),
             default: 0,
         },
+        //这张牌对应的法术或者是生物实体
+        Prefab:cc.Prefab,
         //卡片ID
         cardID: 0,
         //卡片名称
@@ -147,24 +149,29 @@ cc.Class({
         // 判断魔法值
         if (self.heroScirpt.checkMana(self.manaConsume)) {
             //开始监听鼠标移动事件
+            if(!self.heroScirpt.death || self.cardType !== 0) {
+                var cardObject = this.node;
+                var sender = new cc.Event.EventCustom('cardSelect', true);
+                sender.setUserData({card: this.node, posX: event.getLocationX(), posY: event.getLocationY()});
+                this.node.dispatchEvent(sender);
+                //console.log("downMouse!");
 
-            var cardObject = this.node;
-            var sender = new cc.Event.EventCustom('cardSelect', true);
-            sender.setUserData({card: this.node, posX: event.getLocationX(), posY: event.getLocationY()});
-            this.node.dispatchEvent(sender);
-            //console.log("downMouse!");
+                this.node.x = event.getLocationX() - cc.director.getWinSize().width / 2;
+                this.node.y = event.getLocationY() - (cc.director.getWinSize().height / 2 - 220);
 
-            this.node.x = event.getLocationX() - cc.director.getWinSize().width / 2;
-            this.node.y = event.getLocationY() - (cc.director.getWinSize().height / 2 - 220);
-
-            // 开启移动监听
-            cardObject.on(cc.Node.EventType.TOUCH_MOVE, this.moveMouseEvent, this);
-            cardObject.on(cc.Node.EventType.TOUCH_END,this.upMouseEvent,this);
+                // 开启移动监听
+                cardObject.on(cc.Node.EventType.TOUCH_MOVE, this.moveMouseEvent, this);
+                cardObject.on(cc.Node.EventType.TOUCH_END, this.upMouseEvent, this);
+            }else{
+                var sender1 = new cc.Event.EventCustom('errorTips', true);
+                sender1.setUserData({text: "Hero is dead!"});
+                this.node.dispatchEvent(sender1);
+            }
         } else {
 
-            var sender1 = new cc.Event.EventCustom('errorTips', true);
-            sender1.setUserData({text: "No enough mana!"});
-            this.node.dispatchEvent(sender1);
+            var sender2 = new cc.Event.EventCustom('errorTips', true);
+            sender2.setUserData({text: "No enough mana!"});
+            this.node.dispatchEvent(sender2);
 
         }
 
