@@ -87,8 +87,8 @@ cc.Class({
         //将卡组数据推入到全局的总卡组数据中
         Global.totalDeckData.push(deckDatas);
         //初始化卡组的卡片构成
-        Global.totalDeckData[Global.deckUsage].magicDeck = [10,10];
-        Global.totalDeckData[Global.deckUsage].creatureDeck = [10,10,10,10,10,0];
+        Global.totalDeckData[Global.deckUsage].magicDeck = [30,30];
+        Global.totalDeckData[Global.deckUsage].creatureDeck = [30,30];
         //卡组使用第0号卡组
         Global.deckUsage = 0;
         //this.cardListScript = this.cardList.getComponent('CardList');
@@ -177,35 +177,7 @@ cc.Class({
             this.myMDeck.splice(rand, 1);
         }
     },
-    /**
-     * @主要功能 丢弃一张牌
-     * @author C14
-     * @Date 2018/1/16
-     * @parameters
-     * @returns
-     */
-    throwCard:function() {
-        if(this.heroScript.handCard.length > 0){
-            var rand = Math.floor(Math.random() * (this.heroScript.handCard.length - 1));
-            for(var i = 0;i < this.node.children.length;i++){
-                if(this.heroScript.handCard[rand] === this.node.children[i]){
-                    this.node.children[i].removeFromParent(true);
-                    break;
-                }
-            }
-            this.heroScript.handCard.splice(rand,1);
-        }
-    },
-    getCertainCard:function(cardType,cardId) {
-        if(this.heroScript.handCard.length < globalConstant.handMaxNum) {
-            if (cardType === 0) {
-                //按照预制为手牌添加生物牌
-                this.creatNewCard(this.myMDeck[cardId]);
-            } else {
-                this.creatNewCard(this.myCDeck[cardId]);
-            }
-        }
-    },
+
     /**
      * @主要功能 给予预制，将其添加到手牌中
      * @author 天际/C14
@@ -264,6 +236,7 @@ cc.Class({
                 this.heroScript.handCard.splice(index, 1);
             }
         }
+        cc.log(this.heroScript.handCard.length);
         card.removeFromParent(true);
     },
 

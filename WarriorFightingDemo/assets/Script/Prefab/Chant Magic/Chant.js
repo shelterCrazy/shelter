@@ -2,23 +2,23 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        //å‰©ä½™çš„å›åˆæ•°æ ‡ç­¾
+        //Ê£ÓàµÄ»ØºÏÊı±êÇ©
         roundLabel:cc.Label,
-        //å‰©ä½™çš„å›åˆæ•°
+        //Ê£ÓàµÄ»ØºÏÊı
         round:0,
-        //åŸå”±é­”æ³•çš„åå­—
+        //Ò÷³ªÄ§·¨µÄÃû×Ö
         chantName:cc.Label,
-        //æ³•æœ¯çš„åºå·
+        //·¨ÊõµÄĞòºÅ
         id:0,
-        //è¯¥æ³•æœ¯çš„ç™¾åˆ†æ¯”
+        //¸Ã·¨ÊõµÄ°Ù·Ö±È
         percent:0,
-        //é˜Ÿä¼
+        //¶ÓÎé
         team:0,
-        //èŒƒå›´
+        //·¶Î§
         area:0,
-        //è§’åº¦
+        //½Ç¶È
         angel:0,
-        //é€Ÿåº¦
+        //ËÙ¶È
         speed:0,
 
         // foo: {
@@ -37,7 +37,7 @@ cc.Class({
         this.round = detail.round;
         this.roundLabel.string = this.round;
         this.team = detail.team;
-        //è¿™é‡Œçš„position yæ˜¯æŒ‡å‘åŠ¨åçš„é­”æ³•åº”è¯¥çš„ä½ç½®
+        //ÕâÀïµÄposition yÊÇÖ¸·¢¶¯ºóµÄÄ§·¨Ó¦¸ÃµÄÎ»ÖÃ
         this.position = detail.position != null ? detail.position : 0;
         this.y = detail.y !== null ? detail.y : null;
         this.angel = detail.angel != null ? detail.angel : 0;

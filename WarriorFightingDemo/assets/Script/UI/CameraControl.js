@@ -32,12 +32,7 @@ cc.Class({
 
     // use this for initialization
     onLoad: function () {
-        this.camera = this.node.getComponent(cc.Camera);
-
-        cc.director.getCollisionManager().enabledDebugDraw = true;
-        cc.director.getPhysicsManager().attachDebugDrawToCamera(this.camera);
-        cc.director.getCollisionManager().attachDebugDrawToCamera(this.camera);
-
+        this.camera = this.getComponent(cc.Camera);
         if(this.mainScene === false){
             this.areaRight = globalConstant.sceneWidth;
         }

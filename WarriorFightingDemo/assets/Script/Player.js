@@ -94,23 +94,6 @@ cc.Class({
             this.drawCardScript.creatCardType();
         }
     },
-    //丢弃X张牌
-    throwCard:function(x){
-        //弃牌循环
-        for(var i = 0;i < x;i++) {
-            this.drawCardScript.throwCard();
-        }
-    },
-    //获得确定的牌
-    getCertainCard:function(cardType,cardId,cardPrefab){
-        if(cardPrefab === undefined) {
-            this.drawCardScript.getCertainCard(cardType, cardId);
-        }else{
-            if(this.handCard.length < globalConstant.handMaxNum){
-                this.drawCardScript.creatNewCard(cardPrefab);
-            }
-        }
-    },
     update: function (dt) {
         //处理X轴的速度
         if (this.accLeft === this.accRight) {//左右键同时按或不按，则不动
@@ -166,9 +149,7 @@ cc.Class({
 		    this.health = this.health + value;
 	    }else if(this.death === false){
             this.health = 0;
-
             this.death = true;
-            this.releaseTarget();
 	    }
         return this.death;
     },
@@ -184,8 +165,8 @@ cc.Class({
     },
     //复活英雄
     relive:function(){
-        //Y坐标为 -76
-        this.node.y = globalConstant.heroY;
+        //Y坐标为 -85
+        this.node.y = -85;
         //透明度
         this.node.opacity = 1000;
         this.health = this.maxHealth;
@@ -220,15 +201,6 @@ cc.Class({
             }
         })
     },
-    sendJumpMessage:function(){
-        var self = this;
-        self.networkScript.roomMsg('roomChat', {
-            name: "enemyJump",
-            detail: {
-
-            }
-        })
-    },
     setInputControl: function () {
         var self = this;
         // 添加键盘事件监听
@@ -253,10 +225,9 @@ cc.Class({
                         break;
                     case cc.KEY.w:
                     case cc.KEY.up:
-                        if (self.death === false && self.isCanJump){
+                        if (self.isCanJump){
                             self.isCanJump = false;
                             self.onceJumpAciton();
-                            self.sendJumpMessage();
                         }
                         break;
                     case cc.KEY.j:
@@ -266,25 +237,9 @@ cc.Class({
                             self.generateNode();
                         }
                         break;
-                    case cc.KEY.space:
+                    case cc.KEY.e:
                         self.cameraControlScript.target = self.cameraControlScript.targets[0];
                         self.cameraControlScript.targets[1].x = self.cameraControlScript.targets[0].x;
-                        break;
-                    case cc.KEY.e:
-                        if(self.checkMana(2)){
-                            self.mana -= 2;
-                            var eventsend = new cc.Event.EventCustom('magicCreate',true);
-                            eventsend.setUserData({
-                                position:self.node.x,
-                                y:self.node.y,
-                                angel:90*(1 + self.team),
-                                speed:1200,
-                                area:300,
-                                team:self.team,
-                                id:1
-                            });
-                            self.node.dispatchEvent(eventsend);
-                        }
                         break;
                 }
             },

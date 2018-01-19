@@ -71,7 +71,7 @@ cc.Class({
         this.node.dispatchEvent(eventsend);
         cc.log('MouseLeaveTheMiniCard');
     },
-    addCardtoDeck:function(event){
+    addCardtoDeck:function(){
         var eventsend = new cc.Event.EventCustom('whenMouseUpTheMiniCard',true);
         eventsend.setUserData({
             id:this.cardID,
@@ -79,8 +79,7 @@ cc.Class({
             cName:this.cName,
             manaConsume:this.manaConsume,
             num:this.num,
-            cardScript:this,
-            button:event.getButton()
+            cardScript:this
         });
         cc.log('MouseUpTheMiniCard');
         this.node.dispatchEvent(eventsend);

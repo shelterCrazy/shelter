@@ -115,14 +115,12 @@ cc.Class({
             this.infoBoard.removeFromParent();
         }
         this.buttons.active = false;
-        cc.log(this.mode);
     },
     modeChange1: function(){
         this.mode = 1;
         this.toggles[0].interactable = true;
         this.toggles[1].interactable = true;
         this.toggles[1].node.active = true;
-        cc.log(this.mode);
     },
     modeChange2: function(){
         this.mode = 2;
@@ -315,21 +313,21 @@ cc.Class({
                this.buttons.active = false;
            }
            if(this.mode === 2) {
-               //if (event.detail.typeId === 1) {
-               //    this.infoBoard = cc.instantiate(this.mainScript.showCPrefab[event.detail.id]);
-               //} else {
-               //    this.infoBoard = cc.instantiate(this.mainScript.showMPrefab[event.detail.id]);
-               //}
-               //this.infoBoard.x = 300;
-               //this.infoBoard.y = 200;
-               //this.infoBoardScript = event.detail.cardScript;
-               //this.node.addChild(this.infoBoard);
+               if (event.detail.typeId === 1) {
+                   this.infoBoard = cc.instantiate(this.mainScript.showCPrefab[event.detail.id]);
+               } else {
+                   this.infoBoard = cc.instantiate(this.mainScript.showMPrefab[event.detail.id]);
+               }
+               this.infoBoard.x = 300;
+               this.infoBoard.y = 200;
+               this.infoBoardScript = event.detail.cardScript;
+               this.node.addChild(this.infoBoard);
            }
         }
        function mouseLeaveMiniCard(event){
            if(this.mode === 2) {
                if (this.infoBoard !== null) {
-                   //this.infoBoard.removeFromParent();
+                   this.infoBoard.removeFromParent();
                }
            }
         }
@@ -341,29 +339,24 @@ cc.Class({
            //var deckScript = null;
            //var i = 0;
            //script.addViewCard(event.detail);
-           if (event.detail.button === cc.Event.EventMouse.BUTTON_LEFT) {
-               cc.log("按下了左键");
-               if (this.mode === 2) {
-                   if (this.mainScript.maxDeckNum > this.deckNum) {
-                       if (event.detail.typeId === 1) {
-                           if (this.mainScript.myCDeck[event.detail.id] < event.detail.num) {
-                               this.mainScript.myCDeck[event.detail.id]++;
-                               this.deckNum++;
-                               this.cardDeckInit();
-                           }
-                       } else {
-                           if (this.mainScript.myMDeck[event.detail.id] < event.detail.num) {
-                               this.mainScript.myMDeck[event.detail.id]++;
-                               this.deckNum++;
-                               this.cardDeckInit();
-                           }
+
+           if (this.mode === 2) {
+               if (this.mainScript.maxDeckNum > this.deckNum) {
+                   if (event.detail.typeId === 1) {
+                       if (this.mainScript.myCDeck[event.detail.id] < event.detail.num) {
+                           this.mainScript.myCDeck[event.detail.id]++;
+                           this.deckNum++;
+                           this.cardDeckInit();
+                       }
+                   } else {
+                       if (this.mainScript.myMDeck[event.detail.id] < event.detail.num) {
+                           this.mainScript.myMDeck[event.detail.id]++;
+                           this.deckNum++;
+                           this.cardDeckInit();
                        }
                    }
-               } else if (this.mode === 1) {
-
                }
-           }else{
-               cc.log("按下了右键");
+           }else if(this.mode === 1){
                if (this.infoBoard !== null) {
                    this.infoBoard.removeFromParent();
                }
@@ -376,7 +369,7 @@ cc.Class({
                this.infoBoard.y = 200;
                this.infoBoardScript = event.detail.cardScript;
                this.node.addChild(this.infoBoard);
-               if (this.mode === 1)
+
                this.buttons.active = true;
            }
        }

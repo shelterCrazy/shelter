@@ -46,7 +46,6 @@ cc.Class({
         this.health += value;
         this.healthLabel.string = this.health;
         if(this.health <= 0){
-            this.releaseTarget();
             return 1;
         }
     },

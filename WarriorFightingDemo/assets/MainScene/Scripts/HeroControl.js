@@ -145,12 +145,10 @@ cc.Class({
         }
     },
     battleScene: function(){
-        //cc.sys.garbageCollect();
-        cc.director.loadScene('game');
-        //cc.director.preloadScene('game', function () {
-        //    cc.log('Next scene preloaded');
-        //
-        //});
+        cc.director.preloadScene('game', function () {
+            cc.log('Next scene preloaded');
+            cc.director.loadScene('game');
+        });
     },
 
     onCollisionEnter: function (other, self) {
