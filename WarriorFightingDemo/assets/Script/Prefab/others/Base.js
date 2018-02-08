@@ -5,11 +5,14 @@ cc.Class({
     properties: {
         team:0,
         health:0,
+        death:false,
         element:[cc.Node],
 
         healthLabel:cc.Label,
 
         audioSource: cc.AudioClip,
+
+        progressBarNode:cc.Node,
 
         // foo: {
         //    default: null,      // The default value will be used only when the component attaching
@@ -25,8 +28,23 @@ cc.Class({
 
     // use this for initialization
     onLoad: function () {
-        this.health = 200;
+        this.health = globalConstant.totalBaseHealth;
         this.healthLabel.string = this.health;
+        this.progressBar = this.progressBarNode.getComponent(cc.ProgressBar);
+        this.animationClip = this.node.getComponent(cc.Animation);
+    },
+    playEndAnimation:function(){
+        var anim1 = this.animationClip.play("BaseBoom");
+        var self = this;
+        anim1.on('finished',function(){
+
+            var eventsend = new cc.Event.EventCustom('callWinLosePanel',true);
+            eventsend.setUserData({
+                loseTeam: this.team,
+            });
+            self.node.dispatchEvent(eventsend);
+
+        },this);
     },
     init:function(element,offset,team){
         this.team = team;
@@ -44,8 +62,11 @@ cc.Class({
 
     changeHealth:function(value){
         this.health += value;
+        this.progressBar.progress = this.health / globalConstant.totalBaseHealth;
         this.healthLabel.string = this.health;
         if(this.health <= 0){
+            this.death = true;
+            this.releaseTarget();
             return 1;
         }
     },
@@ -54,13 +75,11 @@ cc.Class({
 
         var eventsend = new cc.Event.EventCustom('isWin',true);
 
-
-        if(this.team === this.hero.team){
-            eventsend.setUserData({win:0});
-        }else{
-            cc.log("you win!!!!!!!!!!!!!!!");
-            eventsend.setUserData({win:1});
-        }
+        eventsend.setUserData({
+            //win: this.team / Math.abs(this.team),
+            position: this.node.x,
+            baseScript: this
+        });
 
         this.node.dispatchEvent(eventsend);
     }

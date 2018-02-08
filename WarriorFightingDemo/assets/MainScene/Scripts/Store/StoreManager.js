@@ -5,6 +5,7 @@ cc.Class({
 
     properties: {
 
+        purchaseNode:[cc.Node],
         purchaseButton:[cc.Node],
         purchaseNumLabel:cc.EditBox,
         //显示用的所需金币
@@ -28,7 +29,9 @@ cc.Class({
         //故事购买项目
         storyItem:cc.Node,
         //氪金购买项目
-        moneyItem:cc.Node
+        moneyItem:cc.Node,
+        //细节的文字提前说明
+        detailLabel:cc.Label
     },
 
     // use this for initialization
@@ -38,18 +41,34 @@ cc.Class({
     purchaseIdChange:function(event){
         this.purchaseId = event.detail.id;
         this.nowMoney = event.detail.script.money;
+        var self = this;
+
+        var labelAction = cc.sequence(
+            cc.fadeOut(0.5),
+            cc.callFunc(function(){
+                var position = 1 -  Math.floor(self.purchaseId % 4 / 2);
+                    self.detailLabel.node.x = position * 400 - 350;
+                    this.detailLabel.string = event.detail.text;
+            },this),
+            cc.fadeIn(0.7)
+        );
+
+        //var moveAction = cc.sequence(cc.moveBy(0,15),cc.moveBy(0,-15));
+            this.detailLabel.node.runAction(labelAction);
+        //this.detailLabel.node.runAction(moveAction);
 
         if(event.detail.script.type === 0){
             this.purchaseNumChange();
         }else if(event.detail.script.type === 1){
             this.changeStoryMode();
         }
-        this.purchaseButton[0].runAction(cc.moveTo(0.5,200 * this.purchaseId + -300,this.purchaseButton[0].y).easing(
+        this.purchaseNode[0].runAction(cc.moveTo(0.5,200 * this.purchaseId + -300,this.purchaseNode[0].y).easing(
             cc.easeCircleActionInOut()
         ));
-        this.purchaseButton[1].runAction(cc.moveTo(0.5,200 * this.purchaseId + -300,this.purchaseButton[1].y).easing(
+        this.purchaseNode[1].runAction(cc.moveTo(0.5,200 * this.purchaseId + -300,this.purchaseNode[1].y).easing(
             cc.easeCircleActionInOut()
         ));
+        this.changeStoryMode();
     },
     /**
      * @主要功能 提供购买数量更新的操作
@@ -71,9 +90,19 @@ cc.Class({
      * @returns
      */
     changeStoryMode:function(){
-        this.needMoney = 1 * this.nowMoney;
-        this.needMoneyStoryLabel.string =  this.needMoney;
+        var button;
+        if(global.storyEnable[this.purchaseId] === false) {
+            this.needMoney = 1 * this.nowMoney;
+            this.needMoneyStoryLabel.string = this.needMoney;
+            button = this.purchaseButton[1].getComponent(cc.Button);
+            button.interactable = true;
+        }else{
+            this.needMoneyStoryLabel.string = "售罄";
+            button = this.purchaseButton[1].getComponent(cc.Button);
+            button.interactable = false;
+        }
     },
+
     /**
      * @主要功能 购买卡包X个
      * @author C14
@@ -84,6 +113,7 @@ cc.Class({
     purchaseCardBag:function(){
         if(global.money >= this.needMoney){
             global.money -= this.needMoney;
+            global.bagNum[this.purchaseId] += Math.floor(this.purchaseNumLabel.string);
             this.purchaseNumLabel.string = 0;
             this.purchaseNumChange();
         }else{
@@ -93,15 +123,17 @@ cc.Class({
         }
     },
     /**
-     * @主要功能 购买卡包X个
+     * @主要功能 购买故事模式
      * @author C14
      * @Date 2018/1/2
      * @parameters
      * @returns
      */
     purchaseStoryMode:function(){
+
         if(global.money >= globalConstant.storyModeNeedMoney){
             global.money -= globalConstant.storyModeNeedMoney;
+            global.storyEnable[this.purchaseId] = true;
             this.purchaseNumLabel.string = 0;
             this.purchaseNumChange();
         }else{
@@ -109,6 +141,7 @@ cc.Class({
             var action = cc.sequence(cc.fadeIn(1).easing(cc.easeSineOut()),cc.fadeOut(1).easing(cc.easeSineIn()));
             this.massageNode.runAction(action);
         }
+        this.changeStoryMode();
     },
     /**
      * @主要功能
@@ -119,17 +152,17 @@ cc.Class({
      */
     pageTurning:function(string){
         this.pageId = parseInt(string);
-
+        var script;
         var bagItem = this.bagItem.children;
         var storyItem = this.storyItem.children;
-
+        this.detailLabel.string = "";
         for(var i = 0;i < bagItem.length;i++){
-            var script = bagItem[i].getComponent("Item");
+            script = bagItem[i].getComponent("Item");
             bagItem[i].scale = 1;
             script.init();
         }
         for(i = 0;i < storyItem.length;i++){
-            var script = storyItem[i].getComponent("Item");
+            script = storyItem[i].getComponent("Item");
             storyItem[i].scale = 1;
             script.init();
         }

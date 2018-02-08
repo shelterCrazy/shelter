@@ -13,7 +13,7 @@ cc.Class({
             default: [],
             type: [cc.Node],
         },
-        //Ïà»úÒÆ¶¯·¶Î§ÏŞÖÆ
+        //ç›¸æœºç§»åŠ¨èŒƒå›´é™åˆ¶
         areaLeft:0,
         areaRight:0,
 
@@ -32,7 +32,15 @@ cc.Class({
 
     // use this for initialization
     onLoad: function () {
-        this.camera = this.getComponent(cc.Camera);
+        this.camera = this.node.getComponent(cc.Camera);
+
+        //ç»˜åˆ¶ç¢°æ’æ¡†
+        if(globalConstant.collisionDebugDraw)
+        cc.director.getCollisionManager().enabledDebugDraw = true;
+
+        cc.director.getPhysicsManager().attachDebugDrawToCamera(this.camera);
+        cc.director.getCollisionManager().attachDebugDrawToCamera(this.camera);
+
         if(this.mainScene === false){
             this.areaRight = globalConstant.sceneWidth;
         }
@@ -53,5 +61,5 @@ cc.Class({
 
         var ratio = targetPos.y / cc.winSize.height;
         this.camera.zoomRatio = 1 + (0.5 - ratio) * 0.5;
-    },
+    }
 });

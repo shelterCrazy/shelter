@@ -16,10 +16,10 @@ cc.Class({
         
         
         //生物卡片预览用的预制
-        miniCreaturePrefab: [cc.Prefab],
+        miniCreaturePrefab: cc.Prefab,
         
         //魔法卡片预览用的预制
-        miniMagicPrefab: [cc.Prefab],
+        miniMagicPrefab: cc.Prefab,
         
         //玩家现在拥有的卡
         myCCards: [cc.Integer],
@@ -42,15 +42,9 @@ cc.Class({
         },
         
         
-        showMPrefab:{
-            default: [],
-            type: cc.Prefab,
-        },
+        showMagicPrefab:cc.Prefab,
         
-        showCPrefab:{
-            default: [],
-            type: cc.Prefab,
-        },
+        showCreaturePrefab:cc.Prefab,
 
         //筛选类型，三种，分别是 正营，稀有度，法力消耗
         filterType:{
@@ -61,17 +55,15 @@ cc.Class({
         maxDeckNum:0,
 
         cardList:cc.Node,
-        // foo: {
-        //    default: null,      // The default value will be used only when the component attaching
-        //                           to a node for the first time
-        //    url: cc.Texture2D,  // optional, default is typeof default
-        //    serializable: true, // optional, default is true
-        //    visible: true,      // optional, default is true
-        //    displayName: 'Foo', // optional
-        //    readonly: false,    // optional, default is false
-        // },
-        // ...
+
     },
+    /**
+     * @主要功能 选择筛选类型
+     * @author
+     * @Date 2018/2/2
+     * @parameters
+     * @returns
+     */
     filterTypeSelect:function(event, customEventData) {
         this.filterType[customEventData[0] - '0'] = customEventData[1] - '0';
         this.cardListScript.renewShowCardGroup();
@@ -81,39 +73,68 @@ cc.Class({
     onLoad: function () {
         //var deckDatas = Global.deckData;
         //deckDatas.magicDeck = [1,2,3];
-        var deckDatas = {
-            name:"我的卡组?",
-            num:0,
-            magicDeck:{
-                default: [],
-                type: cc.Integer,
-            },
-            creatureDeck:{
-                default:[],
-                type: cc.Integer,
-            },
-            //卡组的类型
-            type: {
-                type: cc.Enum({
-                    //幻想
-                    //科学
-                    Science: 0,
-                    Fantasy: 1,
-                    //混沌
-                    Chaos: 2,
-                }),
-                default: 0,
-            },
-            usable:false
-        }
+        //此处用于初始化全部的全局变量
+
+
+        Global.bagNum = [0,0,0,0];
+        Global.storyEnable = [false ,false ,false ,false];
 
         this.cardListScript = this.cardList.getComponent('CardList');
-        Global.totalDeckData.push(deckDatas);
-        Global.totalDeckData[Global.deckUsage].magicDeck = this.myMDeck;
-        Global.totalDeckData[Global.deckUsage].creatureDeck = this.myCDeck;
+        this.cardListScript.mainScript = this;
+        //动态加载牌库资源
+        this.cardListScript.initPrefab();
+        for(var i = 0 ;i < 9 ;i++) {
+            var deckDatas = {
+                name:"默认卡组",
+                num:0,
+                magicDeck:{
+                    default: [],
+                    type: cc.Integer
+                },
+                creatureDeck:{
+                    default:[],
+                    type: cc.Integer
+                },
+                //卡组的类型
+                type: {
+                    type: cc.Enum({
+                        //幻想
+                        //科学
+                        Science: 0,
+                        Fantasy: 1,
+                        //混沌
+                        Chaos: 2
+                    }),
+                    default: 0
+                },
+                usable:true
+            };
+            deckDatas.num = i;
+            deckDatas.name = "卡组" + i;
+            Global.totalDeckData.push(deckDatas);
+            Global.totalDeckData[i].magicDeck = [];
+            for(var n = 0; n < 100; n++)Global.totalDeckData[i].magicDeck[n] = 0;
+            Global.totalDeckData[i].magicDeck[0] = 40;
+            Global.totalDeckData[i].creatureDeck = [];
+            for(n = 0; n < 100; n++)Global.totalDeckData[i].creatureDeck[n] = 0;
+        }
 
     },
 
+    /**
+     * @主要功能 开启PVP模式
+     * @author C14
+     * @Date 2018/2/3
+     * @parameters
+     * @returns
+     */
+    pvp:function(){
+        this.battleScene();
+    },
+    battleScene: function(){
+        Global.mainStart = true;
+        cc.director.loadScene('game');
+    },
     changeMyTeamA:function(){
         Global.nowTeam = -1;
     },

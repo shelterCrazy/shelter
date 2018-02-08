@@ -26,7 +26,7 @@ cc.Class({
                     position:position,
                     area:area,
                     team:this.cardScript.team,
-                    id:this.cardScript.cardID
+                    id:this.cardScript.cardId
                 });
                 this.node.dispatchEvent(eventsend);
                 this.cardScript.drawCardScript.deleteCard(this.node);
@@ -56,7 +56,7 @@ cc.Class({
     //        position:position,
     //        area:area,
     //        team:this.cardScript.team,
-    //        id:this.cardScript.cardID
+    //        id:this.cardScript.cardId
     //    });
     //    this.node.dispatchEvent(eventsend);
     //    this.cardScript.drawCardScript.deleteCard(this.node);

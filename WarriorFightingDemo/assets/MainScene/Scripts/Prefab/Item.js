@@ -12,6 +12,10 @@ cc.Class({
         //名称的标签
         iNameLabel:cc.Label,
 
+        detail:{
+            multiline:true,
+            default:""
+        },
         //描述
         detailLabel:cc.Label,
         //所需的金币
@@ -67,6 +71,7 @@ cc.Class({
     },
     clickBag:function(){
         if(this.clickable === true) {
+            //this.clickable = false;
             var children = this.node.parent.children;
             var finished = cc.callFunc(function () {
                 this.folded = false;
@@ -85,12 +90,12 @@ cc.Class({
                     var action = cc.spawn(cc.scaleTo(0.7, 0.3), cc.moveTo(0.7, 0, -100));
                     children[i].runAction(action.easing(cc.easeCircleActionInOut()));
                     children[i].getComponent("Item").folded = true;
-                    children[i].getComponent("Item").clickable = false;
                 }
+                children[i].getComponent("Item").clickable = false;
             }
 
             var eventsend = new cc.Event.EventCustom('purchaseId', true);
-            eventsend.setUserData({id: this.id, script: this});
+            eventsend.setUserData({id: this.id, script: this,text:this.detail});
             this.node.dispatchEvent(eventsend);
         }
     }

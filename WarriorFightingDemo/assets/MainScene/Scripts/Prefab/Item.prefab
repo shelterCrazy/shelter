@@ -57,7 +57,7 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 300,
+      "x": -100,
       "y": 0
     },
     "_skewX": 0,
@@ -190,16 +190,17 @@
     "_enabled": true,
     "purchaseButton": null,
     "folded": false,
-    "id": 3,
-    "iName": "气走模式",
+    "id": 1,
+    "iName": "白学家",
     "iNameLabel": {
       "__id__": 3
     },
+    "detail": "我觉得糟糕\n这是什么情况啊",
     "detailLabel": null,
-    "money": 1000,
+    "money": 100,
     "moneyLabel": null,
     "clickable": true,
-    "type": 1
+    "type": 0
   },
   {
     "__type__": "cc.PrefabInfo",

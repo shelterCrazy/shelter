@@ -2,6 +2,8 @@
  * @主要功能:   怪物史莱克
  * @type {Function}
  */
+var globalConstant = require("Constant");
+
 var monsterShrek = cc.Class({
     extends: cc.Component,
 
@@ -10,6 +12,8 @@ var monsterShrek = cc.Class({
         GameManager:cc.Component,
         //攻击行为组件
         AttackBehavior:cc.Component,
+        //生物技能的组件
+        CreatureSkill:cc.Component,
         //锁定的目标
         focusTarget:cc.Node,
         //目标数组
@@ -38,9 +42,29 @@ var monsterShrek = cc.Class({
         attackArea:0,
         //速度
         velocity:0,
+        //稀有度
+        rarity:{
+            type: cc.Enum({
+                N: 0,
+                R: 1,
+                SR: 2,
+                SSR: 3
+            }),
+            default: 0
+        },
+        race:{
+            type: cc.Enum({
+                none: 0,
+                human: 1,
+                dragon: 2,
+                sprite: 3
+            }),
+            default: 0
+        },
+
+
         //可移动标记
         move: true,
-        //
 
         //所属的队伍
         team:0,
@@ -85,7 +109,7 @@ var monsterShrek = cc.Class({
         /*for(i = 0;i < 3;i ++){
             this.healthNode[i].active = false;
         }*/
-
+        //
 
         this.initAction();
     },
@@ -112,7 +136,9 @@ var monsterShrek = cc.Class({
             }
         }, 0.5, cc.macro.REPEAT_FOREVER);
 
-
+        this.schedule(function(){
+            this.CreatureSkill.releaseFunction(1);
+        }, globalConstant.unitTime, cc.macro.REPEAT_FOREVER);
 
         //开启敌对目标轮询侦测      0.5执行一次   直到销毁       不监听
         //this.schedule(function(){
@@ -130,7 +156,9 @@ var monsterShrek = cc.Class({
         self.delay ++;
         self.healthLabel.string = self.health.toFixed(0);
         self.attackLabel.string = self.attack.toFixed(0);
-
+        if(self.death === false) {
+            this.CreatureSkill.releaseFunction(3);
+        }
         //自身移动判定  存在目标+非攻击+可以移动标记+自己没死
         if(!self.ATKActionFlag && self.move === true && self.death === false && this.moveFreeze === false){
 
@@ -204,11 +232,15 @@ var monsterShrek = cc.Class({
 
         //延时后调用攻击行为
         //setTimeout(function(){
-    	    if(this.attackArea === 0){
-    		    this.AttackBehavior.attack(this.node, this.target[0], this.targetType[0]);
-    	    }else{
-    		    this.AttackBehavior.areaAttack(this.node);
-    	    }
+        if(this.attackArea === 0){
+            if(this.AttackBehavior.attack(this.node, this.target[0], this.targetType[0])){
+                this.CreatureSkill.releaseFunction(6);
+            }
+        }else{
+            this.AttackBehavior.areaAttack(this.node);
+        }
+
+        this.CreatureSkill.releaseFunction(5);
    
         //}.bind(this),500);
         //单体或者范围攻击    调用伤害发生器
@@ -229,18 +261,33 @@ var monsterShrek = cc.Class({
         if(this.death === false) {
             if (this.health + value > 0) {
                 this.health = this.health + value * add;
+                this.CreatureSkill.releaseFunction(2);
+                return false;
             } else {
                 //死亡
                 this.death = true;
+                this.CreatureSkill.releaseFunction(4);
                 if (this.death === true) {
                     this.release();
+                    return true;
+                }else{
+                    return false;
                 }
             }
-            //if(target !== undefined)target.x += -this.team * 200;
         }
-	    return this.death; //返回自己是否已经阵亡
+        return true;
     },
-
+    /**
+     * @主要功能 直接杀死生物本身
+     * @author
+     * @Date 2018/1/17
+     * @parameters
+     * @returns
+     */
+    killCreature:function(){
+        this.death = true;
+        this.release();
+    },
     /**
      * @主要功能 改变生物的队伍，并且更新他们
      * @author C14
@@ -276,6 +323,7 @@ var monsterShrek = cc.Class({
         this.target.splice(num,1);
         this.targetType.splice(num,1);
     },
+
     /**
      * @主要功能:   释放敌人目标
      * @author kenan
@@ -306,17 +354,30 @@ var monsterShrek = cc.Class({
      * @parameters data
      */
     fnCreateCreature:function(data){
-        this.node.x = data.X;
+        this.saveVelocity = 0;
+
+            this.node.x = data.X;
         this.node.y = data.Y;
+        if(data.attack !== undefined)
         this.attack = data.attack;
+        if(data.health !== undefined)
         this.health = data.health;
+        if(data.rarity !== undefined)
+            this.rarity = data.rarity;
+
+        if(data.velocity === undefined)
+            this.saveVelocity = this.velocity;
+        else this.saveVelocity = data.velocity;
+
+
+
         this.velocity = 0;
         this.team = data.team;
 
         
         this.AttackBehavior = this.AttackBehavior.getComponent("AttackBehavior");
+        this.CreatureSkill = this.CreatureSkill.getComponent("Skill");
         this.animationClip = this.node.getComponent(cc.Animation);
-        
         this.animationClip.play(this.id + " " + "appear");
         this.summon = true;
 
@@ -325,13 +386,14 @@ var monsterShrek = cc.Class({
         anim1.on('finished',function(){
             this.sendEvent(this.summonEndEffect);
             this.animationClip.play(this.id + " " + "walk");
-            this.velocity = data.velocity;
+
+            this.velocity = this.saveVelocity;
             this.summon = false;
         },this);
 
 
         this.fnTeamRenew();
-        cc.log(this.team);
+
     },
 
 

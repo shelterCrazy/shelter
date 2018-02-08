@@ -22,21 +22,33 @@ cc.Class({
                 N: 0,
                 R: 1,
                 SR: 2,
-                SSR: 3,
+                SSR: 3
             }),
-            default: 0,
+            default: 0
         },
+        //这张牌对应的法术或者是生物实体
+        Prefab:cc.Prefab,
         //卡片ID
-        cardID: 0,
+        cardId: 0,
         //卡片名称
         cName: cc.String,
         //卡片名称的标签
         cNameLabel: cc.Label,
         /*//描述
         describe: cc.String,*/
-        describe: cc.String,
+        describe: {
+            multiline:true,
+            default:""
+        },
         //描述的标签
         describeLabel: cc.Label,
+
+        //详细的故事，描述什么的
+        storyDescribe: {
+            multiline:true,
+            default:""
+        },
+
         //手牌的2个位置
         cardHand: cc.Node,
         cardUsing: cc.Node,
@@ -91,9 +103,9 @@ cc.Class({
         // var self = this;
         // var script = null;
         // if(self.cardType === 0){
-        //     script = self.node.getComponent('M' + self.cardID);
+        //     script = self.node.getComponent('M' + self.cardId);
         // }else{
-        //     script = self.node.getComponent('C' + self.cardID);
+        //     script = self.node.getComponent('C' + self.cardId);
         // }
         // var state = script.getUseState();
         // return state;
@@ -111,9 +123,9 @@ cc.Class({
         // var self = this;
         // var script = null;
         // if(self.cardType === 0){
-        //     script = self.node.getComponent('M' + self.cardID);
+        //     script = self.node.getComponent('M' + self.cardId);
         // }else{
-        //     script = self.node.getComponent('C' + self.cardID);
+        //     script = self.node.getComponent('C' + self.cardId);
         // }
         // script.useCard();
         if (this.getUseState()) {
@@ -147,24 +159,29 @@ cc.Class({
         // 判断魔法值
         if (self.heroScirpt.checkMana(self.manaConsume)) {
             //开始监听鼠标移动事件
+            if(!self.heroScirpt.death || self.cardType !== 0) {
+                var cardObject = this.node;
+                var sender = new cc.Event.EventCustom('cardSelect', true);
+                sender.setUserData({card: this.node, posX: event.getLocationX(), posY: event.getLocationY()});
+                this.node.dispatchEvent(sender);
+                //console.log("downMouse!");
 
-            var cardObject = this.node;
-            var sender = new cc.Event.EventCustom('cardSelect', true);
-            sender.setUserData({card: this.node, posX: event.getLocationX(), posY: event.getLocationY()});
-            this.node.dispatchEvent(sender);
-            //console.log("downMouse!");
+                this.node.x = event.getLocationX() - cc.director.getWinSize().width / 2;
+                this.node.y = event.getLocationY() - (cc.director.getWinSize().height / 2 - 220);
 
-            this.node.x = event.getLocationX() - cc.director.getWinSize().width / 2;
-            this.node.y = event.getLocationY() - (cc.director.getWinSize().height / 2 - 220);
-
-            // 开启移动监听
-            cardObject.on(cc.Node.EventType.TOUCH_MOVE, this.moveMouseEvent, this);
-            cardObject.on(cc.Node.EventType.TOUCH_END,this.upMouseEvent,this);
+                // 开启移动监听
+                cardObject.on(cc.Node.EventType.TOUCH_MOVE, this.moveMouseEvent, this);
+                cardObject.on(cc.Node.EventType.TOUCH_END, this.upMouseEvent, this);
+            }else{
+                var sender1 = new cc.Event.EventCustom('errorTips', true);
+                sender1.setUserData({text: "Hero is dead!"});
+                this.node.dispatchEvent(sender1);
+            }
         } else {
 
-            var sender1 = new cc.Event.EventCustom('errorTips', true);
-            sender1.setUserData({text: "No enough mana!"});
-            this.node.dispatchEvent(sender1);
+            var sender2 = new cc.Event.EventCustom('errorTips', true);
+            sender2.setUserData({text: "No enough mana!"});
+            this.node.dispatchEvent(sender2);
 
         }
 

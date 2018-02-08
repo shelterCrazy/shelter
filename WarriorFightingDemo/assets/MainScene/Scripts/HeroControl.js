@@ -137,19 +137,12 @@ cc.Class({
             case cc.KEY.e:
             case cc.KEY.space:
                 if(this.inDoor === true) {
-                    Global.totalDeckData[Global.deckUsage].magicDeck = this.mainScript.myMDeck;
-                    Global.totalDeckData[Global.deckUsage].creatureDeck = this.mainScript.myCDeck;
-                    this.battleScene();
+
                 }
                 break;
         }
     },
-    battleScene: function(){
-        cc.director.preloadScene('game', function () {
-            cc.log('Next scene preloaded');
-            cc.director.loadScene('game');
-        });
-    },
+
 
     onCollisionEnter: function (other, self) {
         //地面接触判断

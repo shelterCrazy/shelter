@@ -40,7 +40,7 @@ cc.Class({
                     speed:speed,
                     area:area,
                     team:this.cardScript.team,
-                    id:this.cardScript.cardID
+                    id:this.cardScript.cardId
                 });
                 this.node.dispatchEvent(eventsend);
                 this.cardScript.heroScirpt.drawCard(1);
@@ -70,7 +70,7 @@ cc.Class({
     //        angel:angel,
     //        speed:speed,
     //        team:this.cardScript.team,
-    //        id:this.cardScript.cardID
+    //        id:this.cardScript.cardId
     //    });
     //    this.node.dispatchEvent(eventsend);
     //    this.cardScript.heroScirpt.drawCard(2);
@@ -82,7 +82,7 @@ cc.Class({
     //    //        position: x,
     //    //        y: y,
     //    //        angel: angel + 3*i,
-    //    //        id: this.cardScript.cardID,
+    //    //        id: this.cardScript.cardId,
     //    //        speed: speed,
     //    //        team: this.cardScript.team
     //    //    });

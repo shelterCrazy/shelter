@@ -1,6 +1,6 @@
 var globalConstant = require("Constant");
 /**
- * @主要功能 用于处理魔法牌类型的逻辑
+ * @主要功能 用于处理魔法牌的逻辑
  * @author 老黄，C14
  * @Date 2017/
  * @parameters
@@ -11,7 +11,9 @@ cc.Class({
 
     properties: {
 
-        cardID: 0,
+
+
+        cardId: 0,
 
         cardType: 0,
         // 这个是枚举，相当的好用啊，以后都用这个好了
@@ -35,6 +37,12 @@ cc.Class({
         rangeAnimationNode: cc.Prefab,
         arrowNode: cc.Prefab,
 
+        //是否分支
+        isBranch:false,
+        //分支数
+        branchNum:1,
+        //夹角
+        branchAngle:0,
 
         prepareCardEffect:cc.AudioClip,
         useCardEffect:cc.AudioClip,
@@ -44,6 +52,12 @@ cc.Class({
         arraw:cc.Node,
         rangeLNode:cc.Node,
         rangeRNode:cc.Node,
+        //是否是咏唱法术，几个回合
+        isChantMagic:false,
+        chantRound:0,
+        //可否使用的节点
+        usableNode:cc.Node,
+
     },
 
     // use this for initialization
@@ -62,14 +76,9 @@ cc.Class({
         this.cardScript = self.node.getComponent('Card');
         this.heroScirpt = this.cardScript.hero.getComponent('Player');
 
-        //这个的最深层代码JS的获取
-         this.mScript = null;
-         if(self.cardType === 0){
-             this.mScript = self.node.getComponent('M' + self.cardID);
-         }else{
-             this.mScript = self.node.getComponent('C' + self.cardID);
-        }
 
+        this.usableScript = this.usableNode.getComponent(cc.Component);
+        cc.log("可用性测试" + this.usableScript);
         this.currentEffect = false;
         //为该层添加范围法术，投掷法术的参数
         this.mAngle = 0;
@@ -100,8 +109,10 @@ cc.Class({
      */
     AreaTargetMagicStartListen: function (event) {
         //向主控制脚本传递信息，播放开始的音效
-        this.cardScript.cameraControlScript.targets[1].x  =
-            this.cardScript.cameraControlScript.targets[0].x;
+        if(this.cardScript.cameraControlScript.target === this.cardScript.cameraControlScript.targets[0]) {
+            this.cardScript.cameraControlScript.targets[1].x =
+                this.cardScript.cameraControlScript.targets[0].x;
+        }
     },
     /**
      *
@@ -181,7 +192,7 @@ cc.Class({
 
 
 
-        if(this.node.y <= globalConstant.cardUseLine && this.preUse === true){
+        if((this.node.y <= globalConstant.cardUseLine && this.preUse === true) || this.heroScirpt.death === true){
             this.node.opacity = 1000;
             this.preUse = false;
             this.rangeLNode.active = false;
@@ -231,20 +242,32 @@ cc.Class({
                 this.currentEffect = cc.audioEngine.playEffect(this.prepareCardEffect, true, 1);
             }
             var targetPos = this.arrow.convertToWorldSpaceAR(cc.Vec2.ZERO);
+            //if (globalConstant.cameraOffset === 0) {
+            //    this.arrow.rotation = 360 - Math.atan2(event.getLocationY() - targetPos.y,
+            //            event.getLocationX() - this.hero.x) * 180 / Math.PI;
+            //}else if(this.hero.x > cc.director.getWinSize().width * (globalConstant.sceneWidth - globalConstant.sceneEdge)) {
+            //    this.arrow.rotation = 360 - Math.atan2(event.getLocationY() - cc.director.getWinSize().height / 2 - (this.arrow.y + this.arrow.parent.y),
+            //            event.getLocationX() - this.hero.x + cc.director.getWinSize().width * (globalConstant.sceneWidth - globalConstant.sceneEdge * 2)) * 180 / Math.PI;
+            //} else {
+            //    this.arrow.rotation = 360 - Math.atan2(event.getLocationY() - cc.director.getWinSize().height / 2 - (this.arrow.y + this.arrow.parent.y),
+            //            event.getLocationX() - cc.director.getWinSize().width * globalConstant.sceneEdge) * 180 / Math.PI;
+            //}
             if (globalConstant.cameraOffset === 0) {
                 this.arrow.rotation = 360 - Math.atan2(event.getLocationY() - targetPos.y,
                         event.getLocationX() - this.hero.x) * 180 / Math.PI;
             }else if(this.hero.x > cc.director.getWinSize().width * (globalConstant.sceneWidth - globalConstant.sceneEdge)) {
-                this.arrow.rotation = 360 - Math.atan2(event.getLocationY() - cc.director.getWinSize().height / 2 - (this.arrow.y + this.arrow.parent.y),
+                this.arrow.rotation = 360 - Math.atan2(event.getLocationY() - targetPos.y,
                         event.getLocationX() - this.hero.x + cc.director.getWinSize().width * (globalConstant.sceneWidth - globalConstant.sceneEdge * 2)) * 180 / Math.PI;
             } else {
-                this.arrow.rotation = 360 - Math.atan2(event.getLocationY() - cc.director.getWinSize().height / 2 - (this.arrow.y + this.arrow.parent.y),
-                        event.getLocationX() - cc.director.getWinSize().width * globalConstant.sceneEdge) * 180 / Math.PI;
+                this.arrow.rotation = 360 - Math.atan2(
+                        event.getLocationY() - targetPos.y,
+                        event.getLocationX() + globalConstant.cameraOffset - this.hero.x
+                    ) * 180 / Math.PI;
             }
         }
 
 
-        if(this.node.y <= globalConstant.cardUseLine && this.preUse === true){
+        if((this.node.y <= globalConstant.cardUseLine && this.preUse === true) || this.heroScirpt.death === true){
             this.node.opacity = 1000;
             this.preUse = false;
             this.arrow.active = false;
@@ -261,7 +284,13 @@ cc.Class({
     NoTargetMagicEndListen: function (event) {
         //停止准备用的音乐
         this.stopEffect();
-        this.sendEvent(this.useCardEffect,true);
+        if(this.preUse === true && this.heroScirpt.death === false && this.usableScript.getUseState() === true) {
+            this.sendEvent(this.useCardEffect, true);
+            this.useCardA();
+        }else{
+            this.node.opacity = 1000;
+            cc.audioEngine.stopEffect(this.currentEffect);
+        }
     },
     /**
      *
@@ -273,7 +302,7 @@ cc.Class({
         //停止准备用的音乐
         this.stopEffect();
         this.cameraMoveFlag = 0;
-        if(this.preUse === true) {
+        if(this.preUse === true && this.heroScirpt.death === false && this.usableScript.getUseState() === true) {
             this.rangeLNode.active = false;
             this.rangeRNode.active = false;
             this.rangeAnimeNode.active = false;
@@ -281,7 +310,17 @@ cc.Class({
             this.heroScirpt.mana -= this.cardScript.manaConsume;
 
             this.sendEvent(this.useCardEffect,true);
-            this.mScript.useCard(event.getLocationX() + globalConstant.cameraOffset, this.area * globalConstant.unitLength);
+            this.useCardB(event.getLocationX() + globalConstant.cameraOffset, this.area * globalConstant.unitLength);
+        }else{
+            this.node.opacity = 1000;
+            this.preUse = false;
+            this.rangeLNode.active = false;
+            this.rangeRNode.active = false;
+            this.rangeAnimeNode.active = false;
+
+            this.unschedule(this.cameraMove);
+            //停止准备用的音乐
+            cc.audioEngine.stopEffect(this.currentEffect);
         }
     },
     /**
@@ -292,46 +331,123 @@ cc.Class({
     DirectionTargetMagicEndListen: function (event) {
         // console.log("DirectionTargetMagicEndListen");
         //停止准备用的音乐
+        var targetPos = this.arrow.convertToWorldSpaceAR(cc.Vec2.ZERO);
         this.stopEffect();
-        if(this.preUse === true) {
+        if(this.preUse === true && this.heroScirpt.death === false && this.usableScript.getUseState() === true) {
             this.arrow.active = false;
             this.heroScirpt.mana -= this.cardScript.manaConsume;
             this.sendEvent(this.useCardEffect,true);
+
             if (globalConstant.cameraOffset === 0) {
-                this.mAngle = 360 - Math.atan2(event.getLocationY() - cc.director.getWinSize().height / 2 - (this.arrow.y + this.arrow.parent.y),
+                this.mAngle = 360 - Math.atan2(event.getLocationY() - targetPos.y,
                         event.getLocationX() - this.hero.x) * 180 / Math.PI;
             }else if(this.hero.x > cc.director.getWinSize().width * (globalConstant.sceneWidth - globalConstant.sceneEdge)) {
-                this.mAngle = 360 - Math.atan2(event.getLocationY() - cc.director.getWinSize().height / 2 - (this.arrow.y + this.arrow.parent.y),
+                this.mAngle = 360 - Math.atan2(event.getLocationY() - targetPos.y,
                         event.getLocationX() - this.hero.x + cc.director.getWinSize().width * (globalConstant.sceneWidth - globalConstant.sceneEdge * 2)) * 180 / Math.PI;
             } else {
-                this.mAngle = 360 - Math.atan2(event.getLocationY() - cc.director.getWinSize().height / 2 - (this.arrow.y + this.arrow.parent.y),
-                        event.getLocationX() - cc.director.getWinSize().width * globalConstant.sceneEdge) * 180 / Math.PI;
+                this.mAngle = 360 - Math.atan2(
+                        event.getLocationY() - targetPos.y,
+                        event.getLocationX() + globalConstant.cameraOffset - this.hero.x
+                    ) * 180 / Math.PI;
             }
 
-            this.mScript.useCard(this.cardID, this.mAngle, this.speed, this.area * globalConstant.unitLength, this.hero.x, this.arrow.y + this.hero.y);
+            this.useCardC(this.cardId, this.mAngle, this.speed, this.area * globalConstant.unitLength, this.hero.x, this.arrow.y + this.hero.y);
+        }else{
+            this.node.opacity = 1000;
+            this.preUse = false;
+            this.arrow.active = false;
+            //停止准备用的音乐
+            cc.audioEngine.stopEffect(this.currentEffect);
         }
     },
 
-    /**
-     * @主要功能 魔法划出了鼠标后的结果是这样子的
-     * @author C14
-     * @Date 2018/1/11
-     * @parameters
-     * @returns
-     */
-    //MagicLeaveListen:function(){
-    //    this.node.opacity = 1000;
-    //    this.preUse = false;
-    //    if(this.arrow !== null)this.arrow.active = false;
-    //    if(this.rangeLNode !== null)this.rangeLNode.active = false;
-    //    if(this.rangeRNode !== null)this.rangeRNode.active = false;
-    //    //停止准备用的音乐
-    //    this.stopEffect();
-    //
-    //    var sender = new cc.Event.EventCustom('cardOut', true);
-    //    sender.setUserData({card: this.node});//, posX: event.getLocationX(), posY: event.getLocationY()
-    //    this.node.dispatchEvent(sender);
-    //},
+    //无范围的法术使用，范围法术使用，方向法术使用
+    useCardA:function(){
+        var eventsend;
+        if(this.isChantMagic === true){
+            eventsend = new cc.Event.EventCustom('chantCreate',true);
+        }else{
+            eventsend = new cc.Event.EventCustom('magicCreate',true);
+        }
+        eventsend.setUserData({
+            name:this.cardScript.cName,
+            round:this.chantRound,
+            y:null,
+            team:this.cardScript.team,
+            id:this.cardScript.cardId
+        });
+        this.node.dispatchEvent(eventsend);
+        this.cardScript.drawCardScript.deleteCard(this.node);
+    },
+    useCardB:function(position,area){
+        var eventsend;
+        if(this.isChantMagic === true){
+            eventsend = new cc.Event.EventCustom('chantCreate',true);
+        }else{
+            eventsend = new cc.Event.EventCustom('magicCreate',true);
+        }
+        eventsend.setUserData({
+            name:this.cardScript.cName,
+            round:this.chantRound,
+            y:null,
+            position:position,
+            area:area,
+            team:this.cardScript.team,
+            id:this.cardScript.cardId
+        });
+        this.node.dispatchEvent(eventsend);
+        this.cardScript.drawCardScript.deleteCard(this.node);
+    },
+    useCardC:function(id,angle,speed,area,x,y){
+        var eventsend;
+
+        if(this.isBranch === true) {
+            var startAngel;
+            if(this.branchNum % 2 === 0){
+                startAngel = angle - (this.branchNum / 2 - 0.5) * this.branchAngle;
+            }else{
+                startAngel = angle - (this.branchNum - 1) / 2 * this.branchAngle;
+            }
+            for (var i = 0; i < this.branchNum; i++) {
+                if (this.isChantMagic === true) {
+                    eventsend = new cc.Event.EventCustom('chantCreate', true);
+                } else {
+                    eventsend = new cc.Event.EventCustom('magicCreate', true);
+                }
+                eventsend.setUserData({
+                    name: this.cardScript.cName,
+                    round: this.chantRound,
+                    position: x,
+                    y: y,
+                    angel: startAngel + this.branchAngle * i,
+                    speed: speed,
+                    area: area,
+                    team: this.cardScript.team,
+                    id: this.cardScript.cardId
+                });
+                this.node.dispatchEvent(eventsend);
+            }
+        }else{
+            if (this.isChantMagic === true) {
+                eventsend = new cc.Event.EventCustom('chantCreate', true);
+            } else {
+                eventsend = new cc.Event.EventCustom('magicCreate', true);
+            }
+            eventsend.setUserData({
+                name: this.cardScript.cName,
+                round: this.chantRound,
+                position: x,
+                y: y,
+                angel: angle,
+                speed: speed,
+                area: area,
+                team: this.cardScript.team,
+                id: this.cardScript.cardId
+            });
+            this.node.dispatchEvent(eventsend);
+        }
+        this.cardScript.drawCardScript.deleteCard(this.node);
+    },
 
     /**
      * @主要功能 向上级节点传递消息，使之播放音效

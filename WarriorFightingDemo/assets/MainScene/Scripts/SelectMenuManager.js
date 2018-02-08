@@ -88,7 +88,7 @@ cc.Class({
         //    this.selectMenuList.active = false;
         //}
     hideSelectMenuList: function(selectBoard){
-        selectBoard.on(cc.Node.EventType.MOUSE_LEAVE,hideSelectBoard, this);
+        selectBoard.on(cc.Node.EventType.MOUSE_UP,hideSelectBoard, this);
         function hideSelectBoard(){
             selectBoard.active = false;
         }

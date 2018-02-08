@@ -1,21 +1,23 @@
+var Global = require("Global");
+var globalConstant = require("Constant");
 cc.Class({
     extends: cc.Component,
 
     properties: {
         num:0,
-        //¿¨×éµÄÀàĞÍ
+        //å¡ç»„çš„ç±»å‹
         type: {
             type: cc.Enum({
-                //¿ÆÑ§
+                //ç§‘å­¦
                 Science: 0,
-                //»ÃÏë
+                //å¹»æƒ³
                 Fantasy: 1,
-                //»ìãç
+                //æ··æ²Œ
                 Chaos: 2,
                 }),
             default: 0,
         },
-        //ÊÇ·ñ¿ÉÒÔÊ¹ÓÃ£¬³õÊ¼Îª·ñ
+        //æ˜¯å¦å¯ä»¥ä½¿ç”¨ï¼Œåˆå§‹ä¸ºå¦
         usable:true,
 
         nameLabel:cc.Label,
@@ -36,18 +38,50 @@ cc.Class({
         this.initMouseEvent();
     },
     initMouseEvent:function(){
+        var self = this;
+
         this.node.on(cc.Node.EventType.MOUSE_DOWN,removeCard, this);
+
 
         function removeCard(){
             var eventsend = new cc.Event.EventCustom('mouseDownTheDeck',true);
             eventsend.setUserData({object:this});
-            this.node.dispatchEvent(eventsend);
+            self.node.dispatchEvent(eventsend);
         }
     },
     removeThisDeck:function(){
-    var eventsend = new cc.Event.EventCustom('removeTheDeck',true);
-    eventsend.setUserData({object:this});
-    this.node.dispatchEvent(eventsend);
+        var eventsend = new cc.Event.EventCustom('removeTheDeck',true);
+        eventsend.setUserData({object:this});
+        this.node.dispatchEvent(eventsend);
+    },
+
+    /**
+     * @ä¸»è¦åŠŸèƒ½ åˆ¤æ–­å¯ä½¿ç”¨æ€§å¹¶ä¸”è°ƒæ•´è‡ªèº«é€æ˜åº¦
+     * @author
+     * @Date 2018/2/5
+     * @parameters
+     * @returns
+     */
+    judgeUsable:function(){
+        var i;
+        var total = 0;
+        for(i = 0;i < Global.totalDeckData[this.num].magicDeck.length;i++)
+            total += Global.totalDeckData[this.num].magicDeck[i];
+        for(i = 0;i < Global.totalDeckData[this.num].creatureDeck.length;i++)
+            total += Global.totalDeckData[this.num].creatureDeck[i];
+
+        if(total === globalConstant.maxDeckCardNum)
+        {
+            this.usable = true;
+            Global.totalDeckData[this.num].usable = true;
+            this.node.opacity = 255;
+            return true;
+        }else{
+            this.usable = false;
+            Global.totalDeckData[this.num].usable = false;
+            this.node.opacity = 30;
+            return false;
+        }
     },
     changeType:function(type){
         this.type = type;

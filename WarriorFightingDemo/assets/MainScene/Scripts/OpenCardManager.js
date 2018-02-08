@@ -26,7 +26,7 @@ cc.Class({
         this.renewBags();
     },
     /**
-     * @Ö÷Òª¹¦ÄÜ ´ò¿ªÒ»¸ö¿¨°ü
+     * @ä¸»è¦åŠŸèƒ½ æ‰“å¼€ä¸€ä¸ªå¡åŒ…
      * @author C14
      * @Date 2017/12/21
      * @parameters
@@ -37,8 +37,8 @@ cc.Class({
         var card = null;
         var dat = 0;
         this.cardOutLayout.removeAllChildren();
-        if(this.mainSceneScript.bags > 0){
-            this.mainSceneScript.bags --;
+        if(Global.bagNum[0] > 0){
+            Global.bagNum[0] --;
             this.renewBags();
             for(var i = 0;i < 5;i++){
                 rand = this.randomCard();
@@ -49,7 +49,6 @@ cc.Class({
                 }else{
 
                     dat = rand - this.mainSceneScript.miniMagicPrefab.length;
-                    cc.log(dat);
                     this.mainSceneScript.myCCards[dat] ++;
                     var card2 = cc.instantiate(this.mainSceneScript.miniCreaturePrefab[dat]);
                     this.cardOutLayout.addChild(card2);
@@ -59,7 +58,7 @@ cc.Class({
     },
 
     /**
-     * @Ö÷Òª¹¦ÄÜ ´´½¨Ò»¸öËæ»úÊý
+     * @ä¸»è¦åŠŸèƒ½ åˆ›å»ºä¸€ä¸ªéšæœºæ•°
      * @author C14
      * @Date 2017/12/21
      * @parameters
@@ -72,18 +71,18 @@ cc.Class({
         return num;
     },
     /**
-     * @Ö÷Òª¹¦ÄÜ Ìí¼Ó10°ü¿¨
+     * @ä¸»è¦åŠŸèƒ½ æ·»åŠ 10åŒ…å¡
      * @author C14
      * @Date 2017/12/21
      * @parameters
      * @returns
      */
     addBags:function(){
-        this.mainSceneScript.bags += 10;
+        Global.bagNum[0] += 10;
         this.renewBags();
     },
     renewBags:function(){
-        this.cardBagNumLabel.string = 'bags:' + this.mainSceneScript.bags;
+        this.cardBagNumLabel.string = 'å°±ç¬¬ä¸€ç§åŒ…ï¼Œæ•°é‡æ˜¯:' + Global.bagNum[0];
     }
     // called every frame, uncomment this function to activate update callback
     // update: function (dt) {

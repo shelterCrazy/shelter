@@ -1,4 +1,5 @@
 var Global = require('Global');
+var globalConstant = require("Constant");
 
 cc.Class({
     extends: cc.Component,
@@ -95,7 +96,7 @@ cc.Class({
         //Global.totalDeckData.deckView = event.detail.object.num;
         Global.totalDeckData[Global.deckView].magicDeck = this.mainScript.myMDeck;
         Global.totalDeckData[Global.deckView].creatureDeck = this.mainScript.myCDeck;
-        if(this.cardList.deckNum === 30)Global.totalDeckData[Global.deckView].usable = true;
+        if(this.cardList.deckNum === globalConstant.maxDeckCardNum)Global.totalDeckData[Global.deckView].usable = true;
         else Global.totalDeckData[Global.deckView].usable = false;
         this.deckAddScript.interactable = true;
         this.cardList.ojbk.active = false;
@@ -132,8 +133,8 @@ cc.Class({
 
         this.cardList.modeChange2();
         deckData.num = Global.totalDeckData.length;
-        deckData.magicDeck = [0,0];
-        deckData.creatureDeck = [0,0];
+        deckData.magicDeck = [0,0,0,0];
+        deckData.creatureDeck = [0,0,0,0];
         Global.totalDeckData.push(deckData);
         Global.deckView = Global.totalDeckData.length - 1;
         this.mainScript.myMDeck = Global.totalDeckData[Global.deckView].magicDeck;
@@ -149,7 +150,7 @@ cc.Class({
         if(this.delay >= 6){
             this.delay = 0;
             if(this.cardList.mode === 2) {
-                this.deckNum.string = this.cardList.deckNum + '/' + this.mainScript.maxDeckNum;
+                this.deckNum.string = this.cardList.deckNum + '/' + globalConstant.maxDeckCardNum;
             }else{
                 this.deckNum.string = Global.totalDeckData.length + '/' + 9;
             }
