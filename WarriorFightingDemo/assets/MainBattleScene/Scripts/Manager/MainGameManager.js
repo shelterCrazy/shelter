@@ -97,8 +97,8 @@ var MainGameManager = cc.Class({
         //this.schedule(function() {
         //    var eventsend = new cc.Event.EventCustom('creatureCreate',true);
         //    var eventsend2 = new cc.Event.EventCustom('creatureCreate',true);
-        //    eventsend.setUserData({X:(cc.director.getWinSize().width * globalConstant.sceneWidth),Y:null,attack:2,health:10,team:1,velocity:3,id:1});
-        //    eventsend2.setUserData({X:0,Y:null,attack:2,health:10,team:-1,velocity:3,id:1});
+        //    eventsend.setUserData({X:(cc.director.getWinSize().width * globalConstant.sceneWidth),Y:null,attack:1,health:5,team:1,velocity:10,id:1});
+        //    eventsend2.setUserData({X:0,Y:null,attack:1,health:5,team:-1,velocity:10,id:1});
         //
         //    data = ~data;
         //    if(data) {

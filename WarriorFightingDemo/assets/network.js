@@ -1,3 +1,5 @@
+var Global = require("Global");
+
 cc.Class({
     extends: cc.Component,
 

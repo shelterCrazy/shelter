@@ -1,6 +1,9 @@
-// Global.js, now the filename matters
+﻿// Global.js, now the filename matters
 
 module.exports = {
+
+    userName:"kenan",
+    password:"123456",
 
     //玩家持有的金币
     money:10000,

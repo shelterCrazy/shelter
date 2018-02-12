@@ -4710,7 +4710,8 @@
     ],
     "areaLeft": 0,
     "areaRight": 0,
-    "mainScene": false
+    "mainScene": false,
+    "yFollow": false
   },
   {
     "__type__": "cc.Node",

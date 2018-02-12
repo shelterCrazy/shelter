@@ -18,6 +18,8 @@ cc.Class({
         areaRight:0,
 
         mainScene:false,
+        //y坐标跟随
+        yFollow:false
         // foo: {
         //    default: null,      // The default value will be used only when the component attaching
         //                           to a node for the first time
@@ -28,6 +30,24 @@ cc.Class({
         //    readonly: false,    // optional, default is false
         // },
         // ...
+    },
+    /**
+     * @主要功能 将目前的target缓慢移动到另外一个target上，最后切换target
+     * @author C14
+     * @Date 2018/2/11
+     * @parameters targetNum time
+     * @returns
+     */
+    moveTarget:function(targetNum,time){
+        var self = this;
+        self.targets[1].position = this.target.position;
+        self.target = self.targets[1];
+        self.target.runAction(cc.sequence(
+            cc.moveTo(time,self.targets[targetNum].position).easing(cc.easeQuadraticActionInOut()),
+            cc.callFunc(function(){
+                self.target = self.targets[targetNum];
+            },this)
+        ));
     },
 
     // use this for initialization
@@ -58,8 +78,12 @@ cc.Class({
         }else {
             this.node.x = position.x;
         }
-
+        if(this.mainScene) this.node.y = position.y + cc.winSize.height * 0.4;
         var ratio = targetPos.y / cc.winSize.height;
-        this.camera.zoomRatio = 1 + (0.5 - ratio) * 0.5;
+        if(!this.yFollow)
+            this.camera.zoomRatio = 1 + (0.5 - ratio) * 0.5;
+        else{
+            this.camera.zoomRatio = 1 + (0.5 - ratio) * 0.1;
+        }
     }
 });

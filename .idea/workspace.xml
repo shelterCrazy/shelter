@@ -1,152 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d7deefbc-bec3-4e47-9fff-39a5b6a39477" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/Base/基地.prefab" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/Base/基地.prefab.meta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/Card/Mini/C0mini.prefab" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/Card/Mini/C0mini.prefab.meta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/Card/Mini/C1mini.prefab" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/Card/Mini/C1mini.prefab.meta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/Card/Mini/M0mini.prefab" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/Card/Mini/M0mini.prefab.meta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/Card/Mini/M1mini.prefab" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/Card/Mini/M1mini.prefab.meta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/Card/Show/C0show.prefab" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/Card/Show/C0show.prefab.meta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/Card/Show/C1show.prefab" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/Card/Show/C1show.prefab.meta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/Card/Show/M0show.prefab" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/Card/Show/M0show.prefab.meta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/Card/Show/M1show.prefab" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/Card/Show/M1show.prefab.meta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/Creature.meta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/Creature/Creature0.prefab" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/Creature/Creature0.prefab.meta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/Creature/Creature1.prefab" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/Creature/Creature1.prefab.meta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/Magic/fire.prefab" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/Magic/fire.prefab.meta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/Cards/C0.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/Cards/C0.js.meta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/Cards/C1.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/Cards/C1.js.meta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/Cards/C2.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/Cards/C2.js.meta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/Magic.meta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/Magic/Magic0.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/Magic/Magic0.js.meta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/Magic/Magic1.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/Magic/Magic1.js.meta" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/others/CreatureState.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/others/CreatureState.js.meta" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Constant.js" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/Constant.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Global.js" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/Global.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainBattleScene.meta" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainBattleScene.meta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainBattleScene/Scenes.meta" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainBattleScene/Scenes.meta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainBattleScene/Scenes/game.fire" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainBattleScene/Scenes/game.fire" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainBattleScene/Scenes/game.fire.meta" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainBattleScene/Scenes/game.fire.meta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainBattleScene/Scripts.meta" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainBattleScene/Scripts.meta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainBattleScene/Scripts/Class.meta" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainBattleScene/Scripts/Class.meta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainBattleScene/Scripts/Manager.meta" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainBattleScene/Scripts/Manager.meta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainBattleScene/Scripts/Manager/AttackBehavior.js" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainBattleScene/Scripts/Manager/AttackBehavior.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainBattleScene/Scripts/Manager/DrawCard.js" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainBattleScene/Scripts/Manager/DrawCard.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainBattleScene/Scripts/Manager/GameTimer.js" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainBattleScene/Scripts/Manager/GameTimer.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainBattleScene/Scripts/Manager/MainGameManager.js" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainBattleScene/Scripts/Manager/MainGameManager.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene.meta" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene.meta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scenes.meta" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scenes.meta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scenes/MainScene.fire" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scenes/MainScene.fire" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scenes/MainScene.fire.meta" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scenes/MainScene.fire.meta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts.meta" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts.meta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/CardList.js" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/CardList.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/Deck.js" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/Deck.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/HeroControl.js" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/HeroControl.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/MainSceneManager.js" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/MainSceneManager.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/MiniCard.js" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/MiniCard.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/MiniCard.js.meta" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/MiniCard.js.meta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/OpenCardManager.js" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/OpenCardManager.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/OpenCardManager.js.meta" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/OpenCardManager.js.meta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/Prefab.meta" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/Prefab.meta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/Prefab/Item.js" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/Prefab/Item.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/Prefab/Item.js.meta" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/Prefab/Item.js.meta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/Prefab/Item.prefab" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/Prefab/Item.prefab" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/Prefab/Item.prefab.meta" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/Prefab/Item.prefab.meta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/Prefab/ViewDeck.js" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/Prefab/ViewDeck.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/SelectMenuManager.js" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/SelectMenuManager.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/Store.meta" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/Store.meta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/Store/StoreButton.js.meta" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/Store/StoreButton.js.meta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/Store/StoreCloseButton.js.meta" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/Store/StoreCloseButton.js.meta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/Store/StoreManager.js" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/Store/StoreManager.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/Store/StoreManager.js.meta" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/Store/StoreManager.js.meta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Textures.meta" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Textures.meta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab.meta" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab.meta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/Base.meta" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/Base.meta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/Card.meta" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/Card.meta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/Card/Mini.meta" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/Card/Mini.meta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/Card/Normal.meta" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/Card/Normal.meta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/Card/Normal/C0.prefab" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/Card/Normal/C0.prefab" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/Card/Normal/C1.prefab" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/Card/Normal/C1.prefab" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/Card/Normal/C2.prefab" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/Card/Normal/C2.prefab" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/Card/Normal/C2.prefab.meta" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/Card/Normal/C2.prefab.meta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/Card/Normal/M0.prefab" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/Card/Normal/M0.prefab" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/Card/Normal/M1.prefab" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/Card/Normal/M1.prefab" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/Card/Preview.meta" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/Card/Preview.meta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/Card/Preview/ViewDeck.prefab" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/Card/Preview/ViewDeck.prefab" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/Card/Show.meta" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/Card/Show.meta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/Card/Show/InfoBoard.js" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/Card/Show/InfoBoard.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/Magic.meta" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/Magic.meta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/Magic/ChantMagic.meta" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/Magic/ChantMagic.meta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/Magic/ChantMagic/chantMagic.prefab" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/Magic/ChantMagic/chantMagic.prefab" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/Magic/Magic0.prefab" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/Magic/Magic0.prefab" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/Magic/Magic1.prefab" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/Magic/Magic1.prefab" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/Others.meta" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/Others.meta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/投掷魔法预制组.meta" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/投掷魔法预制组.meta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/范围魔法释放前的预制组.meta" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/范围魔法释放前的预制组.meta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Script.meta" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/Script.meta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Player.js" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Player.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab.meta" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab.meta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/Cards.meta" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/Cards.meta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/Cards/M0.js" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/Cards/M0.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/Cards/M1.js" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/Cards/M1.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/Chant Magic.meta" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/Chant Magic.meta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/Chant Magic/Chant.js" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/Chant Magic/Chant.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/others.meta" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/others.meta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/others/Base.js" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/others/Base.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/others/Card.js" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/others/Card.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/others/Creature.js" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/others/Creature.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/others/CreepCard.js" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/others/CreepCard.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/others/CreepCard.js.meta" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/others/CreepCard.js.meta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/others/MagicCard.js" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/others/MagicCard.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Script/UI.meta" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/Script/UI.meta" />
+    <list default="true" id="d7deefbc-bec3-4e47-9fff-39a5b6a39477" name="Default" comment="完成了登录，注册模块&#10;同时试一下使用WebStorm的上传">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/Skill（法术生物技能）/Module/消除生物状态.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/Skill（法术生物技能）/Module/生物攻击力增加生命值的平方.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Script/UI/CameraControl.js" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/Script/UI/CameraControl.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/SoundEffect.meta" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/SoundEffect.meta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Textures.meta" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/Textures.meta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Textures/Base.meta" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/Textures/Base.meta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Textures/CardMini.meta" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/Textures/CardMini.meta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Textures/New AnimationClip.anim" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/Textures/New AnimationClip.anim" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Textures/SIMFANG.TTF.meta" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/Textures/SIMFANG.TTF.meta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Textures/Sign.meta" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/Textures/Sign.meta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Textures/UI.meta" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/Textures/UI.meta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Textures/background.meta" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/Textures/background.meta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Textures/牌面设计.meta" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/Textures/牌面设计.meta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Textures/血量记.meta" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/Textures/血量记.meta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/atlas.meta" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/atlas.meta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/atlas/9003.plist.meta" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/atlas/9003.plist.meta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/atlas/9003.png.meta" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/atlas/9003.png.meta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/atlas/900312.png.meta" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/atlas/900312.png.meta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/atlas/copy.meta" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/atlas/copy.meta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/atlas/copy/9003.png.meta" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/atlas/copy/9003.png.meta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/atlas/copy/9006.png.meta" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/atlas/copy/9006.png.meta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/atlas/copy/array.png.meta" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/atlas/copy/array.png.meta" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/others/CreepCard.js.meta" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/others/CreepCard.js.meta" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Global.js" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/Global.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainBattleScene/Scripts/Manager/MainGameManager.js" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainBattleScene/Scripts/Manager/MainGameManager.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scenes/MainScene.fire.meta" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scenes/MainScene.fire.meta" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scenes/MainScene.fire" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scenes/MainScene.fire" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainBattleScene/Scenes/game.fire.meta" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainBattleScene/Scenes/game.fire.meta" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainBattleScene/Scenes/game.fire" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainBattleScene/Scenes/game.fire" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/network.js" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/network.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/network.js.meta" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/network.js.meta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/socket.io.js" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/socket.io.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/socket.io.js.meta" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/socket.io.js.meta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/settings/builder.json" afterPath="$PROJECT_DIR$/WarriorFightingDemo/settings/builder.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/settings/project.json" afterPath="$PROJECT_DIR$/WarriorFightingDemo/settings/project.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="shelter.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -157,81 +25,41 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
   </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FavoritesManager">
     <favorites_list name="shelter" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Card.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/others/Card.js">
+    <leaf>
+      <file leaf-file-name="MainGameManager.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainBattleScene/Scripts/Manager/MainGameManager.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1843">
-              <caret line="97" column="33" lean-forward="false" selection-start-line="97" selection-start-column="33" selection-end-line="97" selection-end-column="33" />
-              <folding>
-                <marker date="1517965927845" expanded="true" signature="5406:5419" ph="{...}" />
-                <marker date="1517965927845" expanded="true" signature="5406:5459" ph="{...}" />
-                <marker date="1517965927845" expanded="true" signature="5497:6096" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CreepCard.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/others/CreepCard.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-6">
-              <caret line="175" column="7" lean-forward="false" selection-start-line="175" selection-start-column="7" selection-end-line="175" selection-end-column="7" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="129" column="7" selection-start-line="129" selection-start-column="7" selection-end-line="129" selection-end-column="7" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AreaMagic.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Skill（法术生物技能）/Common/AreaMagic.js">
+      <file leaf-file-name="MagicCard.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/others/MagicCard.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding>
-                <marker date="1517820077915" expanded="true" signature="51:3860" ph="{&quot;extends&quot;: cc.Component...}" />
-                <marker date="1517820077915" expanded="true" signature="97:109" ph="{&quot;loadEffect&quot;: cc.AudioClip...}" />
-                <marker date="1517820077915" expanded="true" signature="3626:3661" ph="/** @��Ҫ����:   ��ʼ��ע������� ...*/" />
-                <marker date="1517820077915" expanded="true" signature="3696:3739" ph="{...}" />
-                <marker date="1517820077915" expanded="true" signature="3745:3858" ph="//..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DirectionMagic.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Skill（法术生物技能）/Common/DirectionMagic.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="9" column="26" selection-start-line="9" selection-start-column="26" selection-end-line="9" selection-end-column="26" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Skill.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Skill（法术生物技能）/Common/Skill.js">
+      <file leaf-file-name="CameraControl.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Script/UI/CameraControl.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="304">
-              <caret line="25" column="17" lean-forward="true" selection-start-line="25" selection-start-column="17" selection-end-line="25" selection-end-column="17" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UsingCard.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainBattleScene/Scripts/Manager/UsingCard.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1121">
-              <caret line="59" column="0" lean-forward="false" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.33251232">
+              <caret line="13" column="27" selection-start-line="13" selection-start-column="27" selection-end-line="13" selection-end-column="27" />
               <folding />
             </state>
           </provider>
@@ -240,124 +68,141 @@
       <file leaf-file-name="Global.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Global.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="684">
-              <caret line="58" column="18" lean-forward="false" selection-start-line="58" selection-start-column="18" selection-end-line="58" selection-end-column="18" />
-              <folding>
-                <marker date="1518065548462" expanded="true" signature="57:918" ph="{...}" />
-                <marker date="1518065548462" expanded="true" signature="920:1380" ph="//..." />
-              </folding>
+            <state vertical-scroll-proportion="0.0">
+              <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DrawCard.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainBattleScene/Scripts/Manager/DrawCard.js">
+      <file leaf-file-name="MainSceneManager.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/MainSceneManager.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="760">
-              <caret line="40" column="24" lean-forward="false" selection-start-line="40" selection-start-column="24" selection-end-line="40" selection-end-column="24" />
-              <folding>
-                <marker date="1518065585673" expanded="true" signature="1121:1271" ph="{...}" />
-              </folding>
+            <state vertical-scroll-proportion="0.0">
+              <caret line="15" column="8" selection-start-line="15" selection-start-column="8" selection-end-line="15" selection-end-column="8" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MagicCard.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/others/MagicCard.js">
+      <file leaf-file-name="RegisterManager.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/Register&amp;Login/RegisterManager.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6764">
-              <caret line="490" column="36" lean-forward="false" selection-start-line="490" selection-start-column="36" selection-end-line="490" selection-end-column="36" />
-              <folding>
-                <marker date="1518060816514" expanded="false" signature="16551:16553" ph="//..." />
-                <marker date="1518060816514" expanded="true" signature="16559:16712" ph="/** @主要功能 向上级节点传递消息，使之播放音效 ...*/" />
-                <marker date="1518060816514" expanded="true" signature="17127:17260" ph="{&quot;effect&quot;: audioChip...}" />
-                <marker date="1518060816514" expanded="true" signature="17319:17441" ph="/** @主要功能 停止当前播放的音效 ...*/" />
-              </folding>
+            <state vertical-scroll-proportion="0.0">
+              <caret line="255" column="33" selection-start-line="255" selection-start-column="33" selection-end-line="255" selection-end-column="33" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Player.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Player.js">
+      <file leaf-file-name="LoginManager.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/Register&amp;Login/LoginManager.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5833">
-              <caret line="307" column="25" lean-forward="false" selection-start-line="307" selection-start-column="25" selection-end-line="307" selection-end-column="25" />
-              <folding>
-                <marker date="1517723759526" expanded="true" signature="9684:10307" ph="{&quot;event&quot;: cc.EventListener.KEYBOARD...}" />
-              </folding>
+            <state vertical-scroll-proportion="0.0">
+              <caret line="198" column="43" selection-start-line="198" selection-start-column="43" selection-end-line="198" selection-end-column="43" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LoginRegisterManager.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/Register&amp;Login/LoginRegisterManager.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="69" column="13" selection-start-line="69" selection-start-column="13" selection-end-line="69" selection-end-column="13" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
   </component>
-  <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
   </component>
-  <component name="GradleLocalSettings">
-    <option name="externalProjectsViewState">
-      <projects_view />
+  <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="C14" />
+      </list>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="PUSH_TAGS">
+      <GitPushTagMode />
     </option>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/Cards/C2.js" />
-        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/MiniCard.js" />
-        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/OpenCardManager.js" />
-        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/Deck.js" />
-        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/CardList.js" />
-        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/Cards/M0.js" />
-        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/Cards/M1.js" />
-        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/Door.js" />
-        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/StoreButton.js" />
-        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/StoreCloseButton.js" />
-        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/Prefab/CardBag.js" />
-        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/LayerManager.js" />
-        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/Store/StoreManager.js" />
-        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/Prefab/Item.js" />
-        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/network.js" />
-        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/MainBattleScene/Scripts/CardLayout.js" />
-        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/MainBattleScene/Scripts/Manager/AttackBehavior.js" />
-        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/HeroControl.js" />
-        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/Script/UI/CameraControl.js" />
-        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/others/SignScript.js" />
-        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/MainBattleScene/Scripts/Manager/GameTimer.js" />
-        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/MainBattleScene/Scripts/Manager/MainGameManager.js" />
-        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/MainSceneManager.js" />
-        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/Cards/C0.js" />
-        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/Magic/Magic1.js" />
-        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Player.js" />
-        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/Constant.js" />
-        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/others/MagicCard.js" />
-        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/MainBattleScene/Scripts/Manager/DrawCard.js" />
+        <option value="$PROJECT_DIR$/WarriorFightingDemo - 安卓/library/imports/af/af2a92fd-8655-4b42-aace-1a7c834b181c.js.map" />
+        <option value="$PROJECT_DIR$/WarriorFightingDemo - 安卓/library/imports/d2/d2fdcc05-22e6-4d6b-b7bb-23a9deea5ca4.json" />
+        <option value="$PROJECT_DIR$/WarriorFightingDemo - 安卓/library/imports/dd/ddbde797-22af-44f7-9fb5-c2f4128d4553.json" />
+        <option value="$PROJECT_DIR$/WarriorFightingDemo - 安卓/library/imports/e6/e6fa9cbf-1c96-4d71-90b7-7813c0c57cf3.json" />
+        <option value="$PROJECT_DIR$/WarriorFightingDemo - 安卓/library/imports/ec/eca7b602-5c44-4721-9bb1-827889b7958b.js" />
+        <option value="$PROJECT_DIR$/WarriorFightingDemo - 安卓/library/imports/ec/eca7b602-5c44-4721-9bb1-827889b7958b.js.map" />
+        <option value="$PROJECT_DIR$/WarriorFightingDemo - 安卓/library/imports/f4/f48b60f9-d2e1-483d-bbea-8c4a80c55fca.json" />
+        <option value="$PROJECT_DIR$/WarriorFightingDemo - 安卓/library/imports/f8/f80bafd5-bb1d-4c0c-a370-0fe21c27d622.json" />
+        <option value="$PROJECT_DIR$/WarriorFightingDemo - 安卓/library/imports/fd/fd76abec-ebf9-45e7-ba7c-e9ddfaf3179f.js" />
+        <option value="$PROJECT_DIR$/WarriorFightingDemo - 安卓/library/imports/fd/fd76abec-ebf9-45e7-ba7c-e9ddfaf3179f.js.map" />
+        <option value="$PROJECT_DIR$/WarriorFightingDemo - 安卓/temp/1.5.2/scripts-compile-cache/persistify_677326446" />
+        <option value="$PROJECT_DIR$/WarriorFightingDemo - 安卓/temp/BackupAssets/assets/Prefab/Card/Mini/C0mini.prefab" />
+        <option value="$PROJECT_DIR$/WarriorFightingDemo - 安卓/temp/BackupAssets/assets/Prefab/Card/Mini/C1mini.prefab" />
+        <option value="$PROJECT_DIR$/WarriorFightingDemo - 安卓/temp/BackupAssets/assets/Prefab/Card/Mini/C2mini.prefab" />
+        <option value="$PROJECT_DIR$/WarriorFightingDemo - 安卓/temp/BackupAssets/assets/Prefab/Card/Mini/C3mini.prefab" />
+        <option value="$PROJECT_DIR$/WarriorFightingDemo - 安卓/temp/BackupAssets/assets/Prefab/Card/Mini/M0mini.prefab" />
+        <option value="$PROJECT_DIR$/WarriorFightingDemo - 安卓/temp/BackupAssets/assets/Prefab/Card/Mini/M1mini.prefab" />
+        <option value="$PROJECT_DIR$/WarriorFightingDemo - 安卓/temp/BackupAssets/assets/Prefab/Card/Normal/C0.prefab" />
+        <option value="$PROJECT_DIR$/WarriorFightingDemo - 安卓/temp/BackupAssets/assets/Prefab/Card/Normal/C1.prefab" />
+        <option value="$PROJECT_DIR$/WarriorFightingDemo - 安卓/temp/BackupAssets/assets/Prefab/Card/Normal/C2.prefab" />
+        <option value="$PROJECT_DIR$/WarriorFightingDemo - 安卓/temp/BackupAssets/assets/Prefab/Card/Normal/C3.prefab" />
+        <option value="$PROJECT_DIR$/WarriorFightingDemo - 安卓/temp/BackupAssets/assets/Prefab/Card/Normal/C4.prefab" />
+        <option value="$PROJECT_DIR$/WarriorFightingDemo - 安卓/temp/BackupAssets/assets/Prefab/Card/Normal/C5.prefab" />
+        <option value="$PROJECT_DIR$/WarriorFightingDemo - 安卓/temp/BackupAssets/assets/Prefab/Card/Normal/C6.prefab" />
+        <option value="$PROJECT_DIR$/WarriorFightingDemo - 安卓/temp/BackupAssets/assets/Prefab/Card/Normal/M0.prefab" />
+        <option value="$PROJECT_DIR$/WarriorFightingDemo - 安卓/temp/BackupAssets/assets/Prefab/Card/Normal/M1.prefab" />
+        <option value="$PROJECT_DIR$/WarriorFightingDemo - 安卓/temp/BackupAssets/assets/Prefab/Card/Normal/M2.prefab" />
+        <option value="$PROJECT_DIR$/WarriorFightingDemo - 安卓/temp/quick-scripts/assets/MainBattleScene/Scripts/Manager/DrawCard.js" />
+        <option value="$PROJECT_DIR$/WarriorFightingDemo - 安卓/temp/quick-scripts/assets/MainBattleScene/Scripts/Manager/DrawCard.js.map" />
+        <option value="$PROJECT_DIR$/WarriorFightingDemo - 安卓/temp/quick-scripts/assets/MainScene/Scripts/CardList.js" />
+        <option value="$PROJECT_DIR$/WarriorFightingDemo - 安卓/temp/quick-scripts/assets/MainScene/Scripts/CardList.js.map" />
         <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/others/Card.js" />
-        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/MainBattleScene/Scripts/Manager/UsingCard.js" />
+        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/MiniCard.js" />
+        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/Card/Show/InfoBoard.js" />
+        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/CardList.js" />
+        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/Skill（法术生物技能）/条件/生物召唤条件/放置在战场最前端的后侧才可以.js" />
+        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/others/MagicCard.js" />
+        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/MainSceneManager.js" />
+        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/MainBattleScene/Scripts/Manager/DrawCard.js" />
+        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/others/Base.js" />
+        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/Constant.js" />
         <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/Global.js" />
-        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/Cards/C1.js" />
-        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/others/CreepCard.js" />
-        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/Skill（法术生物技能）/Common/AreaMagic.js" />
+        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/network.js" />
+        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/Login/LoginManager.js" />
+        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/JSAnimation/ShakeNode.js" />
+        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/Script/UI/CameraControl.js" />
+        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/jQuery.js" />
+        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/Register&amp;Login/LoginRegisterManager.js" />
+        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/Register&amp;Login/LoginManager.js" />
+        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/Register&amp;Login/RegisterManager.js" />
+        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/MainBattleScene/Scripts/Manager/MainGameManager.js" />
       </list>
     </option>
   </component>
-  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsFlowSettings">
-    <service-enabled>false</service-enabled>
-    <exe-path />
-    <annotation-enable>false</annotation-enable>
-    <other-services-enabled>false</other-services-enabled>
-    <auto-save>true</auto-save>
-  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" />
   <component name="JsGulpfileManager">
     <detection-done>true</detection-done>
-    <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1382" />
-    <option name="height" value="784" />
+  <component name="NamedScopeManager">
+    <order />
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-4" />
+    <option name="width" value="1378" />
+    <option name="height" value="780" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -366,14 +211,30 @@
           <State>
             <id />
           </State>
+          <State>
+            <id>GeneralJavaScript</id>
+          </State>
+          <State>
+            <id>JavaScript</id>
+          </State>
         </expanded-state>
         <selected-state>
           <State>
-            <id>CoffeeScript</id>
+            <id>JSValidateJSDoc</id>
           </State>
         </selected-state>
       </profile-state>
     </entry>
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -386,51 +247,130 @@
       <autoscrollToSource />
       <autoscrollFromSource />
       <sortByType />
-      <manualOrder />
-      <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="AndroidView" />
       <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
-          <expand>
-            <path>
-              <item name="shelter" type="b2602c69:ProjectViewProjectNode" />
-              <item name="shelter" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="shelter" type="b2602c69:ProjectViewProjectNode" />
-              <item name="shelter" type="462c0819:PsiDirectoryNode" />
-              <item name="WarriorFightingDemo" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="shelter" type="b2602c69:ProjectViewProjectNode" />
-              <item name="shelter" type="462c0819:PsiDirectoryNode" />
-              <item name="WarriorFightingDemo" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="shelter" type="b2602c69:ProjectViewProjectNode" />
-              <item name="shelter" type="462c0819:PsiDirectoryNode" />
-              <item name="WarriorFightingDemo" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
-              <item name="Skill（法术生物技能）" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="shelter" type="b2602c69:ProjectViewProjectNode" />
-              <item name="shelter" type="462c0819:PsiDirectoryNode" />
-              <item name="WarriorFightingDemo" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
-              <item name="Skill（法术生物技能）" type="462c0819:PsiDirectoryNode" />
-              <item name="Common" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="shelter" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="shelter" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="shelter" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WarriorFightingDemo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="shelter" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="shelter" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WarriorFightingDemo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="shelter" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="shelter" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WarriorFightingDemo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MainScene" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="shelter" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="shelter" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WarriorFightingDemo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MainScene" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Scripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="shelter" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="shelter" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WarriorFightingDemo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MainScene" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Scripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Login" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -440,32 +380,17 @@
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="recentsLimit" value="5" />
     <property name="last_opened_file_path" value="D:/build/jsb-default" />
-    <property name="aspect.path.notification.shown" value="true" />
+    <property name="HbShouldOpenHtmlAsHb" value="" />
+    <property name="ChangesBrowser.SHOW_FLATTEN" value="false" />
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\game X WorkSpace\shelter\WarriorFightingDemo\assets\Skill（法术生物技能）\Module" />
+    </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Node.js.MainSceneManager.js">
     <configuration default="false" name="MainSceneManager.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" path-to-js-file="MainSceneManager.js" working-dir="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts">
       <method />
-    </configuration>
-    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
-      <node-interpreter>project</node-interpreter>
-      <node-options />
-      <gulpfile />
-      <tasks />
-      <arguments />
-      <pass-parent-envs>true</pass-parent-envs>
-      <envs />
     </configuration>
     <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
       <method />
@@ -496,10 +421,25 @@
       <option name="filePath" />
       <method />
     </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <pass-parent-envs>true</pass-parent-envs>
+      <envs />
+      <method />
+    </configuration>
+    <list size="1">
+      <item index="0" class="java.lang.String" itemvalue="Node.js.MainSceneManager.js" />
+    </list>
+    <recent_temporary>
+      <list size="1">
+        <item index="0" class="java.lang.String" itemvalue="Node.js.MainSceneManager.js" />
+      </list>
+    </recent_temporary>
   </component>
-  <component name="ShelveChangesManager" show_recycled="false">
-    <option name="remove_strategy" value="false" />
-  </component>
+  <component name="ShelveChangesManager" show_recycled="false" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -508,77 +448,53 @@
       <changelist id="d7deefbc-bec3-4e47-9fff-39a5b6a39477" name="Default" comment="" />
       <created>1513478073356</created>
       <option name="number" value="Default" />
-      <option name="presentableId" value="Default" />
       <updated>1513478073356</updated>
-      <workItem from="1518104237664" duration="404000" />
     </task>
     <servers />
   </component>
-  <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="404000" />
-  </component>
   <component name="ToolWindowManager">
-    <frame x="54" y="-8" width="1320" height="784" extended-state="6" />
-    <editor active="true" />
+    <frame x="-4" y="0" width="1378" height="780" extended-state="0" />
+    <editor active="false" />
     <layout>
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32766616" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23968254" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22395833" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287037" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3287037" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287037" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
-  </component>
-  <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State>
-              <option name="RECENTLY_FILTERED_USER_GROUPS">
-                <collection />
-              </option>
-              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
-                <collection />
-              </option>
-              <option name="COLUMN_ORDER">
-                <list>
-                  <option value="0" />
-                  <option value="1" />
-                  <option value="2" />
-                  <option value="3" />
-                </list>
-              </option>
-            </State>
-          </value>
-        </entry>
-      </map>
-    </option>
+    <layout-to-restore>
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32880846" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2246696" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32935917" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+    </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
     <option name="RECENTLY_FILTERED_USER_GROUPS">
@@ -591,402 +507,391 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="完成了登录，注册模块&#10;同时试一下使用WebStorm的上传" />
+    <option name="LAST_COMMIT_MESSAGE" value="完成了登录，注册模块&#10;同时试一下使用WebStorm的上传" />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Global.js">
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Player.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="10" column="19" lean-forward="false" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainBattleScene/Scripts/Manager/MainGameManager.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="12" column="24" selection-start-line="12" selection-start-column="24" selection-end-line="12" selection-end-column="24" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/others/MagicCard.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="118" column="22" lean-forward="false" selection-start-line="118" selection-start-column="22" selection-end-line="118" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/Cards/C0.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="24" column="72" lean-forward="false" selection-start-line="24" selection-start-column="72" selection-end-line="24" selection-end-column="72" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/Cards/M0.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="29" column="19" lean-forward="false" selection-start-line="29" selection-start-column="19" selection-end-line="29" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/Chant Magic/Chant.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="13" column="18" lean-forward="false" selection-start-line="13" selection-start-column="18" selection-end-line="13" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/Cards/M1.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/Cards/C1.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="24" column="29" lean-forward="false" selection-start-line="24" selection-start-column="29" selection-end-line="24" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/Cards/C2.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="14" column="57" lean-forward="false" selection-start-line="14" selection-start-column="57" selection-end-line="14" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Constant.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="23" column="18" lean-forward="false" selection-start-line="23" selection-start-column="18" selection-end-line="23" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/atlas.meta">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/atlas/1001.plist">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/atlas/1001.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/Chant Magic/Chant.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="13" column="18" lean-forward="false" selection-start-line="13" selection-start-column="18" selection-end-line="13" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/Cards/C2.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="14" column="57" lean-forward="false" selection-start-line="14" selection-start-column="57" selection-end-line="14" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Script/UI/CameraMove.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/CameraFollow.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="11" column="25" lean-forward="false" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/Deck.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="141" column="41" lean-forward="false" selection-start-line="141" selection-start-column="41" selection-end-line="141" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/OpenCardManager.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="83" column="6" lean-forward="false" selection-start-line="83" selection-start-column="6" selection-end-line="83" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/Door.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="11" column="45" lean-forward="false" selection-start-line="11" selection-start-column="45" selection-end-line="11" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/MiniCard.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="59" column="0" lean-forward="false" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/LayerManager.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="34" column="43" lean-forward="false" selection-start-line="34" selection-start-column="43" selection-end-line="34" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/Prefab/Item.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="3" column="17" lean-forward="false" selection-start-line="3" selection-start-column="17" selection-end-line="4" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/network.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="108" column="66" lean-forward="false" selection-start-line="108" selection-start-column="66" selection-end-line="108" selection-end-column="66" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainBattleScene/Scripts/Manager/AttackBehavior.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="24" column="9" lean-forward="false" selection-start-line="24" selection-start-column="9" selection-end-line="24" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainBattleScene/Scripts/Manager/GameTimer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainBattleScene/Scripts/CardLayout.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="31" column="25" lean-forward="false" selection-start-line="31" selection-start-column="25" selection-end-line="31" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/Store/StoreManager.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="67" column="18" lean-forward="false" selection-start-line="67" selection-start-column="18" selection-end-line="67" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/HeroControl.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="149" column="42" lean-forward="false" selection-start-line="149" selection-start-column="42" selection-end-line="149" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/CardList.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="97" column="55" lean-forward="false" selection-start-line="97" selection-start-column="55" selection-end-line="97" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/Cards/C0.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="28" column="74" lean-forward="false" selection-start-line="28" selection-start-column="74" selection-end-line="28" selection-end-column="74" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/MainSceneManager.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="112" column="17" lean-forward="false" selection-start-line="112" selection-start-column="17" selection-end-line="112" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/others/SignScript.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="57" column="37" lean-forward="false" selection-start-line="57" selection-start-column="37" selection-end-line="57" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/Cards/M0.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="21" column="39" lean-forward="false" selection-start-line="21" selection-start-column="39" selection-end-line="21" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/Cards/M1.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="9" column="35" lean-forward="false" selection-start-line="9" selection-start-column="35" selection-end-line="9" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/Magic/Magic1.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="92" column="45" lean-forward="false" selection-start-line="92" selection-start-column="45" selection-end-line="92" selection-end-column="45" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="9" column="26" selection-start-line="9" selection-start-column="26" selection-end-line="9" selection-end-column="26" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainBattleScene/Scripts/Manager/MainGameManager.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1824">
-          <caret line="96" column="0" lean-forward="false" selection-start-line="96" selection-start-column="0" selection-end-line="96" selection-end-column="0" />
-          <folding>
-            <marker date="1518072482522" expanded="true" signature="14103:14182" ph="/** @主要功能: 释放小兵节点 ...*/" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/Magic/Magic0.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="123" column="0" lean-forward="false" selection-start-line="123" selection-start-column="0" selection-end-line="124" selection-end-column="8" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="147" column="49" selection-start-line="147" selection-start-column="49" selection-end-line="147" selection-end-column="49" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Script/UI/CameraControl.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="46" column="55" selection-start-line="46" selection-start-column="55" selection-end-line="46" selection-end-column="55" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Constant.js">
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/network.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="42" column="91" selection-start-line="42" selection-start-column="91" selection-end-line="42" selection-end-column="91" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Global.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/MainSceneManager.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="15" column="8" selection-start-line="15" selection-start-column="8" selection-end-line="15" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/jQuery.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="13" column="55" selection-start-line="13" selection-start-column="55" selection-end-line="13" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Player.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="12" column="24" selection-start-line="12" selection-start-column="24" selection-end-line="12" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/others/MagicCard.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="9" column="26" selection-start-line="9" selection-start-column="26" selection-end-line="9" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainBattleScene/Scripts/Manager/MainGameManager.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="147" column="49" selection-start-line="147" selection-start-column="49" selection-end-line="147" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/network.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Script/UI/CameraControl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="46" column="55" selection-start-line="46" selection-start-column="55" selection-end-line="46" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/MainSceneManager.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="15" column="8" selection-start-line="15" selection-start-column="8" selection-end-line="15" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/others/Base.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="42" column="36" selection-start-line="42" selection-start-column="36" selection-end-line="42" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/others/Creature.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="388" column="0" selection-start-line="388" selection-start-column="0" selection-end-line="388" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainBattleScene/Scripts/Manager/DrawCard.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="91" column="85" selection-start-line="91" selection-start-column="85" selection-end-line="91" selection-end-column="85" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Global.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="54" column="22" selection-start-line="54" selection-start-column="22" selection-end-line="54" selection-end-column="22" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Player.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5833">
-          <caret line="307" column="25" lean-forward="false" selection-start-line="307" selection-start-column="25" selection-end-line="307" selection-end-column="25" />
-          <folding>
-            <marker date="1517723759526" expanded="true" signature="9684:10307" ph="{&quot;event&quot;: cc.EventListener.KEYBOARD...}" />
-          </folding>
+        <state vertical-scroll-proportion="0.0">
+          <caret line="12" column="24" selection-start-line="12" selection-start-column="24" selection-end-line="12" selection-end-column="24" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/others/MagicCard.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6764">
-          <caret line="490" column="36" lean-forward="false" selection-start-line="490" selection-start-column="36" selection-end-line="490" selection-end-column="36" />
-          <folding>
-            <marker date="1518060816514" expanded="false" signature="16551:16553" ph="//..." />
-            <marker date="1518060816514" expanded="true" signature="16559:16712" ph="/** @主要功能 向上级节点传递消息，使之播放音效 ...*/" />
-            <marker date="1518060816514" expanded="true" signature="17127:17260" ph="{&quot;effect&quot;: audioChip...}" />
-            <marker date="1518060816514" expanded="true" signature="17319:17441" ph="/** @主要功能 停止当前播放的音效 ...*/" />
-          </folding>
+        <state vertical-scroll-proportion="0.0">
+          <caret line="9" column="26" selection-start-line="9" selection-start-column="26" selection-end-line="9" selection-end-column="26" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/others/Card.js">
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainBattleScene/Scripts/Manager/MainGameManager.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1843">
-          <caret line="97" column="33" lean-forward="false" selection-start-line="97" selection-start-column="33" selection-end-line="97" selection-end-column="33" />
-          <folding>
-            <marker date="1517965927845" expanded="true" signature="5406:5419" ph="{...}" />
-            <marker date="1517965927845" expanded="true" signature="5406:5459" ph="{...}" />
-            <marker date="1517965927845" expanded="true" signature="5497:6096" ph="{...}" />
-          </folding>
+        <state vertical-scroll-proportion="0.0">
+          <caret line="147" column="49" selection-start-line="147" selection-start-column="49" selection-end-line="147" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/network.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Script/UI/CameraControl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/MainSceneManager.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="135" column="0" selection-start-line="135" selection-start-column="0" selection-end-line="135" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/others/Base.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="42" column="36" selection-start-line="42" selection-start-column="36" selection-end-line="42" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/others/Creature.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="388" column="0" selection-start-line="388" selection-start-column="0" selection-end-line="388" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainBattleScene/Scripts/Manager/DrawCard.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="760">
-          <caret line="40" column="24" lean-forward="false" selection-start-line="40" selection-start-column="24" selection-end-line="40" selection-end-column="24" />
-          <folding>
-            <marker date="1518065585673" expanded="true" signature="1121:1271" ph="{...}" />
-          </folding>
+        <state vertical-scroll-proportion="0.0">
+          <caret line="91" column="85" selection-start-line="91" selection-start-column="85" selection-end-line="91" selection-end-column="85" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainBattleScene/Scripts/Manager/UsingCard.js">
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/Prefab/Item.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1121">
-          <caret line="59" column="0" lean-forward="false" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.44117647">
+          <caret line="15" column="12" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/others/Card.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="73" column="0" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/CardList.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="88" column="0" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Skill（法术生物技能）/条件/生物召唤条件/放置在战场最前端的后侧才可以.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="51" column="75" selection-start-line="51" selection-start-column="75" selection-end-line="51" selection-end-column="75" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/MiniCard.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="8" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/HeroControl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Script/UI/CameraMove.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.6470587">
+          <caret line="18" column="72" selection-start-line="18" selection-start-column="72" selection-end-line="18" selection-end-column="72" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/Card/Show/InfoBoard.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="73" column="46" selection-start-line="73" selection-start-column="46" selection-end-line="73" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Player.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="12" column="24" selection-start-line="12" selection-start-column="24" selection-end-line="12" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainBattleScene/Scripts/Manager/DrawCard.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="91" column="85" selection-start-line="91" selection-start-column="85" selection-end-line="91" selection-end-column="85" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/others/Creature.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="388" column="0" selection-start-line="388" selection-start-column="0" selection-end-line="388" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/others/Base.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="42" column="36" selection-start-line="42" selection-start-column="36" selection-end-line="42" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Constant.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5623053">
+          <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/network.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.27625203">
+          <caret line="9" column="20" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/JSAnimation/ShakeNode.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.46042004">
+          <caret line="15" column="28" selection-start-line="15" selection-start-column="28" selection-end-line="15" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/others/MagicCard.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="9" column="26" selection-start-line="9" selection-start-column="26" selection-end-line="9" selection-end-column="26" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/jQuery.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="20" column="33" selection-start-line="20" selection-start-column="33" selection-end-line="20" selection-end-column="33" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Global.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="684">
-          <caret line="58" column="18" lean-forward="false" selection-start-line="58" selection-start-column="18" selection-end-line="58" selection-end-column="18" />
-          <folding>
-            <marker date="1518065548462" expanded="true" signature="57:918" ph="{...}" />
-            <marker date="1518065548462" expanded="true" signature="920:1380" ph="//..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/Cards/C1.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="57" column="62" lean-forward="false" selection-start-line="57" selection-start-column="62" selection-end-line="57" selection-end-column="62" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/others/CreepCard.js">
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/MainSceneManager.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-6">
-          <caret line="175" column="7" lean-forward="false" selection-start-line="175" selection-start-column="7" selection-end-line="175" selection-end-column="7" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="15" column="8" selection-start-line="15" selection-start-column="8" selection-end-line="15" selection-end-column="8" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Skill（法术生物技能）/Common/AreaMagic.js">
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/Register&amp;Login/LoginRegisterManager.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1517820077915" expanded="true" signature="51:3860" ph="{&quot;extends&quot;: cc.Component...}" />
-            <marker date="1517820077915" expanded="true" signature="97:109" ph="{&quot;loadEffect&quot;: cc.AudioClip...}" />
-            <marker date="1517820077915" expanded="true" signature="3626:3661" ph="/** @��Ҫ����:   ��ʼ��ע������� ...*/" />
-            <marker date="1517820077915" expanded="true" signature="3696:3739" ph="{...}" />
-            <marker date="1517820077915" expanded="true" signature="3745:3858" ph="//..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Skill（法术生物技能）/Common/DirectionMagic.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="69" column="13" selection-start-line="69" selection-start-column="13" selection-end-line="69" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Skill（法术生物技能）/Common/Skill.js">
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/Register&amp;Login/RegisterManager.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="25" column="17" lean-forward="true" selection-start-line="25" selection-start-column="17" selection-end-line="25" selection-end-column="17" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="0.0">
+          <caret line="255" column="33" selection-start-line="255" selection-start-column="33" selection-end-line="255" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/Register&amp;Login/LoginManager.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="198" column="43" selection-start-line="198" selection-start-column="43" selection-end-line="198" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainBattleScene/Scripts/Manager/MainGameManager.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="129" column="7" selection-start-line="129" selection-start-column="7" selection-end-line="129" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Script/UI/CameraControl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33251232">
+          <caret line="13" column="27" selection-start-line="13" selection-start-column="27" selection-end-line="13" selection-end-column="27" />
+          <folding />
         </state>
       </provider>
     </entry>
