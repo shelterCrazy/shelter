@@ -2,8 +2,61 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d7deefbc-bec3-4e47-9fff-39a5b6a39477" name="Default" comment="完成了登录，注册模块&#10;同时试一下使用WebStorm的上传">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/settings/project.json" afterPath="$PROJECT_DIR$/WarriorFightingDemo/settings/project.json" />
+      <change type="DELETED" beforePath="D:\game X WorkSpace\shelter\WarriorFightingDemo\assets\MainScene\Scenes.meta" afterPath="" />
+      <change type="DELETED" beforePath="D:\game X WorkSpace\shelter\WarriorFightingDemo\assets\MainScene\Scenes\MainScene.fire" afterPath="" />
+      <change type="DELETED" beforePath="D:\game X WorkSpace\shelter\WarriorFightingDemo\assets\MainScene\Scenes\MainScene.fire.meta" afterPath="" />
+      <change type="DELETED" beforePath="D:\game X WorkSpace\shelter\WarriorFightingDemo\assets\MainScene\Scripts\OpenCardManager.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\game X WorkSpace\shelter\WarriorFightingDemo\assets\MainScene\Scripts\OpenCardManager.js.meta" afterPath="" />
+      <change type="DELETED" beforePath="D:\game X WorkSpace\shelter\WarriorFightingDemo\assets\MainScene\Scripts\Prefab.meta" afterPath="" />
+      <change type="DELETED" beforePath="D:\game X WorkSpace\shelter\WarriorFightingDemo\assets\MainScene\Scripts\Prefab\Item.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\game X WorkSpace\shelter\WarriorFightingDemo\assets\MainScene\Scripts\Prefab\Item.js.meta" afterPath="" />
+      <change type="DELETED" beforePath="D:\game X WorkSpace\shelter\WarriorFightingDemo\assets\MainScene\Scripts\Prefab\Item.prefab" afterPath="" />
+      <change type="DELETED" beforePath="D:\game X WorkSpace\shelter\WarriorFightingDemo\assets\MainScene\Scripts\Prefab\Item.prefab.meta" afterPath="" />
+      <change type="DELETED" beforePath="D:\game X WorkSpace\shelter\WarriorFightingDemo\assets\MainScene\Scripts\Prefab\ViewCard.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\game X WorkSpace\shelter\WarriorFightingDemo\assets\MainScene\Scripts\Prefab\ViewCard.js.meta" afterPath="" />
+      <change type="DELETED" beforePath="D:\game X WorkSpace\shelter\WarriorFightingDemo\assets\MainScene\Scripts\Prefab\ViewDeck.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\game X WorkSpace\shelter\WarriorFightingDemo\assets\MainScene\Scripts\Prefab\ViewDeck.js.meta" afterPath="" />
+      <change type="DELETED" beforePath="D:\game X WorkSpace\shelter\WarriorFightingDemo\assets\MainScene\Scripts\Prefab\changeDeckName.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\game X WorkSpace\shelter\WarriorFightingDemo\assets\MainScene\Scripts\Prefab\changeDeckName.js.meta" afterPath="" />
+      <change type="DELETED" beforePath="D:\game X WorkSpace\shelter\WarriorFightingDemo\assets\MainScene\Scripts\Prefab\changeDeckName.prefab" afterPath="" />
+      <change type="DELETED" beforePath="D:\game X WorkSpace\shelter\WarriorFightingDemo\assets\MainScene\Scripts\Prefab\changeDeckName.prefab.meta" afterPath="" />
+      <change type="DELETED" beforePath="D:\game X WorkSpace\shelter\WarriorFightingDemo\assets\Skill（法术生物技能）\Module\生物攻击力增加生命值的平方.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\game X WorkSpace\shelter\WarriorFightingDemo\assets\Skill（法术生物技能）\Module\生物攻击力增加生命值的平方.js.meta" afterPath="" />
+      <change type="DELETED" beforePath="D:\game X WorkSpace\shelter\WarriorFightingDemo\assets\Skill（法术生物技能）\条件\usable.js" afterPath="" />
+      <change type="DELETED" beforePath="D:\game X WorkSpace\shelter\WarriorFightingDemo\assets\Skill（法术生物技能）\条件\usable.js.meta" afterPath="" />
+      <change type="DELETED" beforePath="D:\game X WorkSpace\shelter\WarriorFightingDemo\assets\resources\Card\Normal\C9 - 副本 (4).prefab" afterPath="" />
+      <change type="DELETED" beforePath="D:\game X WorkSpace\shelter\WarriorFightingDemo\assets\resources\Card\Normal\C9 - 副本 (4).prefab.meta" afterPath="" />
+      <change type="DELETED" beforePath="D:\game X WorkSpace\shelter\WarriorFightingDemo\assets\resources\Card\Normal\C9 - 副本 (5).prefab" afterPath="" />
+      <change type="DELETED" beforePath="D:\game X WorkSpace\shelter\WarriorFightingDemo\assets\resources\Card\Normal\C9 - 副本 (5).prefab.meta" afterPath="" />
+      <change type="DELETED" beforePath="D:\game X WorkSpace\shelter\WarriorFightingDemo\assets\resources\Card\Normal\C9 - 副本 (6).prefab" afterPath="" />
+      <change type="DELETED" beforePath="D:\game X WorkSpace\shelter\WarriorFightingDemo\assets\resources\Card\Normal\C9 - 副本 (6).prefab.meta" afterPath="" />
+      <change type="DELETED" beforePath="D:\game X WorkSpace\shelter\WarriorFightingDemo\assets\resources\Card\Normal\C9 - 副本 (7).prefab" afterPath="" />
+      <change type="DELETED" beforePath="D:\game X WorkSpace\shelter\WarriorFightingDemo\assets\resources\Card\Normal\C9 - 副本 (7).prefab.meta" afterPath="" />
+      <change type="DELETED" beforePath="D:\game X WorkSpace\shelter\WarriorFightingDemo\assets\resources\Card\Normal\C9 - 副本 (8).prefab" afterPath="" />
+      <change type="DELETED" beforePath="D:\game X WorkSpace\shelter\WarriorFightingDemo\assets\resources\Card\Normal\C9 - 副本 (8).prefab.meta" afterPath="" />
+      <change type="DELETED" beforePath="D:\game X WorkSpace\shelter\WarriorFightingDemo\assets\resources\Card\Normal\C9 - 副本 (9).prefab" afterPath="" />
+      <change type="DELETED" beforePath="D:\game X WorkSpace\shelter\WarriorFightingDemo\assets\resources\Card\Normal\C9 - 副本 (9).prefab.meta" afterPath="" />
+      <change type="DELETED" beforePath="D:\game X WorkSpace\shelter\WarriorFightingDemo\assets\resources\Card\Normal\C9 - 副本.prefab" afterPath="" />
+      <change type="DELETED" beforePath="D:\game X WorkSpace\shelter\WarriorFightingDemo\assets\resources\Card\Normal\C9 - 副本.prefab.meta" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/resources/Card/Normal/C8.prefab" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/resources/Card/Normal/C8.prefab" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/others/Card.js" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/others/Card.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Global.js" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/Global.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/Register&amp;Login/LoginManager.js" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/Register&amp;Login/LoginManager.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/resources/Card/Normal/M0.prefab.meta" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/resources/Card/Normal/M0.prefab.meta" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/resources/Card/Normal/M0.prefab" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/resources/Card/Normal/M0.prefab" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/resources/Card/Normal/M1.prefab.meta" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/resources/Card/Normal/M1.prefab.meta" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/resources/Card/Normal/M1.prefab" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/resources/Card/Normal/M1.prefab" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/MainSceneManager.js" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/MainSceneManager.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Skill（法术生物技能）/Common/Skill.js" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/Skill（法术生物技能）/Common/Skill.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/settings/builder.json" afterPath="$PROJECT_DIR$/WarriorFightingDemo/settings/builder.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/network.js" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/network.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Skill（法术生物技能）/Module/交换攻击力生命值.js" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/Skill（法术生物技能）/Module/交换攻击力生命值.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Skill（法术生物技能）/Module/召唤生物.js" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/Skill（法术生物技能）/Module/召唤生物.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Skill（法术生物技能）/Module/抽牌弃牌.js" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/Skill（法术生物技能）/Module/抽牌弃牌.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Skill（法术生物技能）/Module/添加牌到手牌.js.meta" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/Skill（法术生物技能）/Module/添加牌到手牌.js.meta" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WarriorFightingDemo/assets/Skill（法术生物技能）/Module/添加牌到手牌.js" afterPath="$PROJECT_DIR$/WarriorFightingDemo/assets/Skill（法术生物技能）/Module/添加牌到手牌.js" />
     </list>
     <ignored path="shelter.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -24,91 +77,79 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="MainGameManager.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainBattleScene/Scripts/Manager/MainGameManager.js">
+      <file leaf-file-name="交换攻击力生命值.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Skill（法术生物技能）/Module/交换攻击力生命值.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-19.833334">
+              <caret line="93" column="46" selection-start-line="93" selection-start-column="32" selection-end-line="93" selection-end-column="46" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Skill.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Skill（法术生物技能）/Common/Skill.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="129" column="7" selection-start-line="129" selection-start-column="7" selection-end-line="129" selection-end-column="7" />
+              <caret line="73" column="0" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="M0.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/Cards/M0.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.33764136">
+              <caret line="23" column="28" selection-start-line="23" selection-start-column="28" selection-end-line="23" selection-end-column="28" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MagicCard.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/others/MagicCard.js">
+      <file leaf-file-name="M1.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/Cards/M1.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="9" column="26" selection-start-line="9" selection-start-column="26" selection-end-line="9" selection-end-column="26" />
+              <caret line="38" column="32" selection-start-line="38" selection-start-column="32" selection-end-line="38" selection-end-column="32" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CameraControl.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Script/UI/CameraControl.js">
+      <file leaf-file-name="增减攻击力.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Skill（法术生物技能）/Module/增减攻击力.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="25" column="63" selection-start-line="25" selection-start-column="63" selection-end-line="25" selection-end-column="63" />
-              <folding />
+              <caret line="24" column="16" selection-start-line="24" selection-start-column="16" selection-end-line="24" selection-end-column="16" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="jQuery.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/jQuery.js">
+      <file leaf-file-name="增减生命值.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Skill（法术生物技能）/Module/增减生命值.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.27625203">
-              <caret line="10" column="9" selection-start-line="10" selection-start-column="9" selection-end-line="10" selection-end-column="9" />
-              <folding />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="32" column="16" selection-start-line="32" selection-start-column="16" selection-end-line="32" selection-end-column="16" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Global.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Global.js">
+      <file leaf-file-name="增加生物的状态.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Skill（法术生物技能）/Module/增加生物的状态.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MainSceneManager.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/MainSceneManager.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="15" column="8" selection-start-line="15" selection-start-column="8" selection-end-line="15" selection-end-column="8" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RegisterManager.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/Register&amp;Login/RegisterManager.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="255" column="33" selection-start-line="255" selection-start-column="33" selection-end-line="255" selection-end-column="33" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LoginManager.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/Register&amp;Login/LoginManager.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="198" column="43" selection-start-line="198" selection-start-column="43" selection-end-line="198" selection-end-column="43" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LoginRegisterManager.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/Register&amp;Login/LoginRegisterManager.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="69" column="13" selection-start-line="69" selection-start-column="13" selection-end-line="69" selection-end-column="13" />
+              <caret line="24" column="16" selection-start-line="24" selection-start-column="16" selection-end-line="24" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -137,15 +178,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/WarriorFightingDemo - 安卓/library/imports/af/af2a92fd-8655-4b42-aace-1a7c834b181c.js.map" />
-        <option value="$PROJECT_DIR$/WarriorFightingDemo - 安卓/library/imports/d2/d2fdcc05-22e6-4d6b-b7bb-23a9deea5ca4.json" />
-        <option value="$PROJECT_DIR$/WarriorFightingDemo - 安卓/library/imports/dd/ddbde797-22af-44f7-9fb5-c2f4128d4553.json" />
-        <option value="$PROJECT_DIR$/WarriorFightingDemo - 安卓/library/imports/e6/e6fa9cbf-1c96-4d71-90b7-7813c0c57cf3.json" />
-        <option value="$PROJECT_DIR$/WarriorFightingDemo - 安卓/library/imports/ec/eca7b602-5c44-4721-9bb1-827889b7958b.js" />
-        <option value="$PROJECT_DIR$/WarriorFightingDemo - 安卓/library/imports/ec/eca7b602-5c44-4721-9bb1-827889b7958b.js.map" />
-        <option value="$PROJECT_DIR$/WarriorFightingDemo - 安卓/library/imports/f4/f48b60f9-d2e1-483d-bbea-8c4a80c55fca.json" />
-        <option value="$PROJECT_DIR$/WarriorFightingDemo - 安卓/library/imports/f8/f80bafd5-bb1d-4c0c-a370-0fe21c27d622.json" />
-        <option value="$PROJECT_DIR$/WarriorFightingDemo - 安卓/library/imports/fd/fd76abec-ebf9-45e7-ba7c-e9ddfaf3179f.js" />
         <option value="$PROJECT_DIR$/WarriorFightingDemo - 安卓/library/imports/fd/fd76abec-ebf9-45e7-ba7c-e9ddfaf3179f.js.map" />
         <option value="$PROJECT_DIR$/WarriorFightingDemo - 安卓/temp/1.5.2/scripts-compile-cache/persistify_677326446" />
         <option value="$PROJECT_DIR$/WarriorFightingDemo - 安卓/temp/BackupAssets/assets/Prefab/Card/Mini/C0mini.prefab" />
@@ -168,26 +200,35 @@
         <option value="$PROJECT_DIR$/WarriorFightingDemo - 安卓/temp/quick-scripts/assets/MainBattleScene/Scripts/Manager/DrawCard.js.map" />
         <option value="$PROJECT_DIR$/WarriorFightingDemo - 安卓/temp/quick-scripts/assets/MainScene/Scripts/CardList.js" />
         <option value="$PROJECT_DIR$/WarriorFightingDemo - 安卓/temp/quick-scripts/assets/MainScene/Scripts/CardList.js.map" />
-        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/others/Card.js" />
         <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/MiniCard.js" />
         <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/Card/Show/InfoBoard.js" />
         <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/CardList.js" />
         <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/Skill（法术生物技能）/条件/生物召唤条件/放置在战场最前端的后侧才可以.js" />
         <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/others/MagicCard.js" />
-        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/MainSceneManager.js" />
         <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/MainBattleScene/Scripts/Manager/DrawCard.js" />
         <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/others/Base.js" />
         <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/Constant.js" />
-        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/Global.js" />
-        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/network.js" />
         <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/Login/LoginManager.js" />
         <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/JSAnimation/ShakeNode.js" />
         <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/Script/UI/CameraControl.js" />
         <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/jQuery.js" />
         <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/Register&amp;Login/LoginRegisterManager.js" />
-        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/Register&amp;Login/LoginManager.js" />
-        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/Register&amp;Login/RegisterManager.js" />
         <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/MainBattleScene/Scripts/Manager/MainGameManager.js" />
+        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/Register&amp;Login/RegisterManager.js" />
+        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/PackageUseScene/Prefab/PackageUse.js" />
+        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/others/Card.js" />
+        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/network.js" />
+        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/PackageUseScene/Prefab/Package.js" />
+        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/MainSceneManager.js" />
+        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/Global.js" />
+        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/PackageUseScene/Scripts/OpenCardManager.js" />
+        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/resources/Json/UserLoginData.json" />
+        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/Register&amp;Login/LoginManager.js" />
+        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/Skill（法术生物技能）/Module/交换攻击力生命值.js" />
+        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/Skill（法术生物技能）/Module/抽牌弃牌.js" />
+        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/Skill（法术生物技能）/Module/添加牌到手牌.js" />
+        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/Skill（法术生物技能）/Module/召唤生物.js" />
+        <option value="$PROJECT_DIR$/WarriorFightingDemo/assets/Skill（法术生物技能）/Common/Skill.js" />
       </list>
     </option>
   </component>
@@ -343,6 +384,7 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287037" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287037" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -355,7 +397,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287037" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -399,157 +440,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Player.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="12" column="24" selection-start-line="12" selection-start-column="24" selection-end-line="12" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/others/MagicCard.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="9" column="26" selection-start-line="9" selection-start-column="26" selection-end-line="9" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainBattleScene/Scripts/Manager/MainGameManager.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="147" column="49" selection-start-line="147" selection-start-column="49" selection-end-line="147" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Script/UI/CameraControl.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="46" column="55" selection-start-line="46" selection-start-column="55" selection-end-line="46" selection-end-column="55" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/network.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="42" column="91" selection-start-line="42" selection-start-column="91" selection-end-line="42" selection-end-column="91" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Global.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/MainSceneManager.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="15" column="8" selection-start-line="15" selection-start-column="8" selection-end-line="15" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/jQuery.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="13" column="55" selection-start-line="13" selection-start-column="55" selection-end-line="13" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Player.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="12" column="24" selection-start-line="12" selection-start-column="24" selection-end-line="12" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/others/MagicCard.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="9" column="26" selection-start-line="9" selection-start-column="26" selection-end-line="9" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainBattleScene/Scripts/Manager/MainGameManager.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="147" column="49" selection-start-line="147" selection-start-column="49" selection-end-line="147" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/network.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Script/UI/CameraControl.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="46" column="55" selection-start-line="46" selection-start-column="55" selection-end-line="46" selection-end-column="55" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/MainSceneManager.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="15" column="8" selection-start-line="15" selection-start-column="8" selection-end-line="15" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/others/Base.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="42" column="36" selection-start-line="42" selection-start-column="36" selection-end-line="42" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/others/Creature.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="388" column="0" selection-start-line="388" selection-start-column="0" selection-end-line="388" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainBattleScene/Scripts/Manager/DrawCard.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="91" column="85" selection-start-line="91" selection-start-column="85" selection-end-line="91" selection-end-column="85" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Global.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="54" column="22" selection-start-line="54" selection-start-column="22" selection-end-line="54" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Player.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="12" column="24" selection-start-line="12" selection-start-column="24" selection-end-line="12" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/others/MagicCard.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="9" column="26" selection-start-line="9" selection-start-column="26" selection-end-line="9" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainBattleScene/Scripts/Manager/MainGameManager.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -569,7 +459,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -577,7 +466,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="135" column="0" selection-start-line="135" selection-start-column="0" selection-end-line="135" selection-end-column="38" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -599,27 +487,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="91" column="85" selection-start-line="91" selection-start-column="85" selection-end-line="91" selection-end-column="85" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/Prefab/Item.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.44117647">
-          <caret line="15" column="12" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/others/Card.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="73" column="0" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/CardList.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="88" column="0" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -693,13 +560,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/network.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.27625203">
-          <caret line="9" column="20" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/JSAnimation/ShakeNode.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.46042004">
@@ -707,10 +567,74 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/Register&amp;Login/LoginRegisterManager.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="69" column="13" selection-start-line="69" selection-start-column="13" selection-end-line="69" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/Register&amp;Login/RegisterManager.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="68" column="17" selection-start-line="68" selection-start-column="17" selection-end-line="68" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/others/CreatureIndicator.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.46042004">
+          <caret line="15" column="28" selection-start-line="15" selection-start-column="28" selection-end-line="15" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Script/UI/CameraControl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="25" column="63" selection-start-line="25" selection-start-column="63" selection-end-line="25" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/others/CreepCard.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.8012924">
+          <caret line="15" column="35" selection-start-line="15" selection-start-column="35" selection-end-line="15" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/others/MagicCard.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="9" column="26" selection-start-line="9" selection-start-column="26" selection-end-line="9" selection-end-column="26" />
+          <caret line="243" column="75" selection-start-line="243" selection-start-column="75" selection-end-line="243" selection-end-column="75" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/others/Card.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="71" column="63" selection-start-line="71" selection-start-column="63" selection-end-line="71" selection-end-column="63" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/network.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6930533">
+          <caret line="68" column="42" selection-start-line="68" selection-start-column="42" selection-end-line="68" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/PackageUseScene/Prefab/PackageUse.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="77" column="0" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/PackageUseScene/Prefab/Package.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="56" column="58" selection-start-line="56" selection-start-column="58" selection-end-line="56" selection-end-column="65" />
           <folding />
         </state>
       </provider>
@@ -718,31 +642,7 @@
     <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Global.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/MainSceneManager.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="15" column="8" selection-start-line="15" selection-start-column="8" selection-end-line="15" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/Register&amp;Login/RegisterManager.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="255" column="33" selection-start-line="255" selection-start-column="33" selection-end-line="255" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/Register&amp;Login/LoginManager.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="198" column="43" selection-start-line="198" selection-start-column="43" selection-end-line="198" selection-end-column="43" />
+          <caret line="29" column="27" selection-start-line="29" selection-start-column="27" selection-end-line="29" selection-end-column="27" />
           <folding />
         </state>
       </provider>
@@ -755,26 +655,179 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Script/UI/CameraControl.js">
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/CardList.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="25" column="63" selection-start-line="25" selection-start-column="63" selection-end-line="25" selection-end-column="63" />
+          <caret line="241" column="34" selection-start-line="241" selection-start-column="34" selection-end-line="241" selection-end-column="34" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/Register&amp;Login/LoginRegisterManager.js">
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/PackageUseScene/Scripts/OpenCardManager.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="69" column="13" selection-start-line="69" selection-start-column="13" selection-end-line="69" selection-end-column="13" />
+          <caret line="169" column="56" selection-start-line="169" selection-start-column="56" selection-end-line="169" selection-end-column="56" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/jQuery.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.27625203">
-          <caret line="10" column="9" selection-start-line="10" selection-start-column="9" selection-end-line="10" selection-end-column="9" />
+        <state vertical-scroll-proportion="0.5088853">
+          <caret line="35" column="37" selection-start-line="35" selection-start-column="26" selection-end-line="35" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/MainSceneManager.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="113" column="51" selection-start-line="113" selection-start-column="51" selection-end-line="113" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/Register&amp;Login/LoginManager.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="188" column="46" selection-start-line="188" selection-start-column="46" selection-end-line="188" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Skill（法术生物技能）/Module/添加牌到手牌.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33251232">
+          <caret line="45" column="12" selection-start-line="45" selection-start-column="12" selection-end-line="45" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Skill（法术生物技能）/Module/抽牌弃牌.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="47" column="24" selection-start-line="47" selection-start-column="24" selection-end-line="47" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Skill（法术生物技能）/Common/AreaMagic.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Skill（法术生物技能）/Common/DirectionMagic.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="240" column="23" selection-start-line="240" selection-start-column="23" selection-end-line="240" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Skill（法术生物技能）/Module/增减攻击力.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="24" column="16" selection-start-line="24" selection-start-column="16" selection-end-line="24" selection-end-column="16" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Skill（法术生物技能）/Module/增减生命值.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="32" column="16" selection-start-line="32" selection-start-column="16" selection-end-line="32" selection-end-column="16" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/library/imports/1a/1a1ba2d4-4191-47a5-a112-ef91e4cc7785.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33251232">
+          <caret line="30" column="16" selection-start-line="30" selection-start-column="16" selection-end-line="30" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Skill（法术生物技能）/Module/生物攻击力增加速度的平方.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33251232">
+          <caret line="24" column="16" selection-start-line="24" selection-start-column="16" selection-end-line="24" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Skill（法术生物技能）/Module/消除生物状态.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33251232">
+          <caret line="24" column="16" selection-start-line="24" selection-start-column="16" selection-end-line="24" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Skill（法术生物技能）/Module/消灭生物.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33251232">
+          <caret line="24" column="16" selection-start-line="24" selection-start-column="16" selection-end-line="24" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Skill（法术生物技能）/Module/增加生物的状态.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="24" column="16" selection-start-line="24" selection-start-column="16" selection-end-line="24" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Skill（法术生物技能）/Module/交换攻击力生命值.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-19.833334">
+          <caret line="93" column="46" selection-start-line="93" selection-start-column="32" selection-end-line="93" selection-end-column="46" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Skill（法术生物技能）/Common/Skill.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="73" column="0" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/Cards/M1.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="38" column="32" selection-start-line="38" selection-start-column="32" selection-end-line="38" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Skill（法术生物技能）/Module/召唤生物.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.35541195">
+          <caret line="50" column="22" selection-start-line="50" selection-start-column="22" selection-end-line="50" selection-end-column="22" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Script/Prefab/Cards/M0.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33764136">
+          <caret line="23" column="28" selection-start-line="23" selection-start-column="28" selection-end-line="23" selection-end-column="28" />
           <folding />
         </state>
       </provider>

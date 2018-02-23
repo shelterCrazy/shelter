@@ -27,6 +27,7 @@ module.exports = {
     //普通魔法卡生物牌的预制
     magicCardPrefab:[cc.Prefab],
     creatureCardPrefab:[cc.Prefab],
+    cardPrefab:[cc.Prefab],
 
     //卡组的类型
     type: {
@@ -51,7 +52,7 @@ module.exports = {
 
     //以下是用户设置部分
     //主音量
-    mainVolume:1,
+    mainVolume:0.2,
     //以下是用户设置的主音量
     mainEffectVolume:1,
     //以下是用户设置部分

@@ -5,11 +5,11 @@
     <file url="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Global.js" charset="UTF-16" />
     <file url="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainBattleScene/Scripts/CardLayout.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/Deck.js" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/OpenCardManager.js" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/Prefab/ViewDeck.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/Register&amp;Login/LoginManager.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/Register&amp;Login/LoginRegisterManager.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/WarriorFightingDemo/assets/MainScene/Scripts/Store/StoreManager.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/WarriorFightingDemo/assets/PackageUseScene/Prefab/Package.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/WarriorFightingDemo/assets/PackageUseScene/Prefab/PackageUse.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Prefab/Card/Show/InfoBoard.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Script/UI/CameraControl.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/WarriorFightingDemo/assets/Skill（法术生物技能）/Common/SkillRange.js" charset="UTF-8" />

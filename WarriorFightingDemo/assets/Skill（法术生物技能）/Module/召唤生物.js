@@ -29,7 +29,7 @@ cc.Class({
 
         //召唤生物的ID
         id:0,
-        //在召唤位置上偏移，偏移的像素为(可正可负)
+        //在召唤位置上偏移，偏移的像素为(可正可负),（我方，敌方坐标是对称的，以我方基地为后方，以敌方基地为前方）
         offset:0,
         //需要召唤生物的召唤预制
         //如果使用这种方式，则会忽略之前的召唤ID方法
@@ -45,7 +45,7 @@ cc.Class({
     releaseFunction:function(){
         var script = this.node.parent.getComponent("Skill");
         var creatureScript = null;
-        var selfCreatureScript = script.selfCreatureScript;
+        var selfObjectScript = script.selfObjectScript;
         var i = 0,x;
         var enumDat = cc.Enum({
                 //场景中间
@@ -62,27 +62,27 @@ cc.Class({
         switch (this.position){
             case enumDat.mid:
                 x = cc.director.getWinSize().width * globalConstant.sceneWidth / 2;
-                this.summonCreature(x,selfCreatureScript.team,this.id);
+                this.summonCreature(x,selfObjectScript.team,this.id);
                 break;
             case enumDat.origin:
                 x = cc.director.getWinSize().width * globalConstant.sceneWidth / 2 *
-                    (1 + selfCreatureScript.team/Math.abs(selfCreatureScript.team));
-                this.summonCreature(x,selfCreatureScript.team,this.id);
+                    (1 + selfObjectScript.team/Math.abs(selfObjectScript.team));
+                this.summonCreature(x,selfObjectScript.team,this.id);
                 break;
             case enumDat.now:
-                x = selfCreatureScript.node.x;
-                this.summonCreature(x,selfCreatureScript.team,this.id);
+                x = selfObjectScript.node.x;
+                this.summonCreature(x,selfObjectScript.team,this.id);
                 break;
             case enumDat.selfHero:
                 x = script.hero[0].x;
-                this.summonCreature(x,selfCreatureScript.team,this.id);
+                this.summonCreature(x,selfObjectScript.team,this.id);
                 break;
         }
     },
     summonCreature:function(x,team,id){
         var eventsend = new cc.Event.EventCustom('creatureCreate',true);
         eventsend.setUserData({
-            X:x + this.offset,
+            X:x - this.offset * team / Math.abs(team),
             Y:null,
             team:team,
             id:id,

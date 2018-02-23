@@ -157,9 +157,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "e83a8a16-0c84-4d14-ba56-607b8e5ff626"
+      "__uuid__": "860bdb97-d098-4822-a69f-887d1d0e92c4"
     },
-    "fileId": "c7H/y7JulHpq8HxVka1nLZ",
+    "fileId": "cb7rjalBxBva4MsMxNo+Ju",
     "sync": false
   },
   {
@@ -309,9 +309,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "e83a8a16-0c84-4d14-ba56-607b8e5ff626"
+      "__uuid__": "860bdb97-d098-4822-a69f-887d1d0e92c4"
     },
-    "fileId": "59qYiRWL5NC4tyt37YQpUc",
+    "fileId": "a8003IfB55HhaKmONcYf5PY",
     "sync": false
   },
   {
@@ -365,9 +365,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "e83a8a16-0c84-4d14-ba56-607b8e5ff626"
+      "__uuid__": "860bdb97-d098-4822-a69f-887d1d0e92c4"
     },
-    "fileId": "e6bVJa2qhNEKJXeyH0GxK1",
+    "fileId": "68894xo+ehJy59JXgI5eFsi",
     "sync": false
   },
   {
@@ -510,9 +510,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "e83a8a16-0c84-4d14-ba56-607b8e5ff626"
+      "__uuid__": "860bdb97-d098-4822-a69f-887d1d0e92c4"
     },
-    "fileId": "d5OrLEoM1CcbRhifJvHj/x",
+    "fileId": "d42ddwhrXZPtJ4v6ok+QuqI",
     "sync": false
   },
   {
@@ -547,9 +547,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "e83a8a16-0c84-4d14-ba56-607b8e5ff626"
+      "__uuid__": "860bdb97-d098-4822-a69f-887d1d0e92c4"
     },
-    "fileId": "bfGYJhAk9OTb7TEevXi4sF",
+    "fileId": "80e91gfV+tFO67/k0Sqs+5O",
     "sync": false
   },
   {
@@ -634,9 +634,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "e83a8a16-0c84-4d14-ba56-607b8e5ff626"
+      "__uuid__": "860bdb97-d098-4822-a69f-887d1d0e92c4"
     },
-    "fileId": "c2srVfoRpOy5BxZZWKDExm",
+    "fileId": "a7094YRooBGqqOYeh3NIClm",
     "sync": false
   },
   {
@@ -721,9 +721,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "e83a8a16-0c84-4d14-ba56-607b8e5ff626"
+      "__uuid__": "860bdb97-d098-4822-a69f-887d1d0e92c4"
     },
-    "fileId": "f2UjfRdu9NDLzfsO2U+ZQC",
+    "fileId": "587eetSoupNwp+N2Q+0Uu7S",
     "sync": false
   },
   {
@@ -768,7 +768,7 @@
     "cardType": 0,
     "rarity": 1,
     "Prefab": null,
-    "cardId": 0,
+    "cardId": 10,
     "cName": "不死鸟粉尘",
     "cNameLabel": {
       "__id__": 22
@@ -875,9 +875,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "e83a8a16-0c84-4d14-ba56-607b8e5ff626"
+      "__uuid__": "860bdb97-d098-4822-a69f-887d1d0e92c4"
     },
-    "fileId": "cfKGHoehRAYpNU8FrkCWrh",
+    "fileId": "b071aoILkNHz7JmtRIDq7lz",
     "sync": false
   }
 ]

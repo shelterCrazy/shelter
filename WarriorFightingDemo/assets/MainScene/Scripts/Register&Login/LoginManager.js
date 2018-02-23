@@ -35,12 +35,24 @@ cc.Class({
 
     // use this for initialization
     onLoad: function () {
+        var self = this;
+
         this.userNameEnable = false;
         this.passwordEnable = false;
         this.passwordLengthEnable = false;
         this.verifyCodeEnable = false;
         this.nameReCheckFlag = false;
+
+        this.logSuccessFlag = null;
+        //验证码用的回答
         this.answer = -1;
+
+        var userLoginData = JSON.parse(cc.sys.localStorage.getItem('userLoginData'));
+        if(userLoginData !== null && userLoginData !== undefined && userLoginData.usable === true){
+            self.userNameBox.string = userLoginData.userName;
+            self.password1.string = userLoginData.password;
+            this.login();
+        }
     },
 
     userNameInput:function(){
@@ -166,7 +178,18 @@ cc.Class({
     login:function(){
         var self = this;
         self.sendMessage("登录中...",false);
-
+        setTimeout(function(){
+            if(self.logSuccessFlag === null) {
+                var userLoginData = {
+                    userName: "",
+                    password: "",
+                    usable: false
+                };
+                cc.sys.localStorage.setItem('userLoginData', JSON.stringify(userData));
+                self.sendMessage("登录超时",true);
+            }
+            self.logSuccessFlag = null;
+        },2000);
         $.ajax({
             url: "/login",
             type: "GET",
@@ -178,16 +201,19 @@ cc.Class({
                     Global.userName = self.userNameBox.string;
                     Global.password = self.password1.string;
                     self.wrong2.string = "";
+                    self.logSuccessFlag = true;
                     self.logSuccess();
                 }else{
                     cc.log("登录失败");
                     self.wrong2.string = "请检查用户名与密码是否正确";
+                    self.logSuccessFlag = false;
                     self.sendMessage("登录失败",true);
                 }
             },
             error: function(){
                 cc.log("登录错误");
                 self.sendMessage("登录错误",true);
+                self.logSuccessFlag = false;
                 self.wrong2.string = "请检查用户名与密码是否正确";
             }
         });
@@ -199,9 +225,17 @@ cc.Class({
         this.node.dispatchEvent(eventsend);
     },
     logSuccess:function(){
+
         var eventsend = new cc.Event.EventCustom('logSuccess',true);
         eventsend.setUserData({});
         this.node.dispatchEvent(eventsend);
+
+        var userData = {
+            userName: Global.userName,
+            password: Global.password,
+            usable: true
+        };
+        cc.sys.localStorage.setItem('userLoginData', JSON.stringify(userData));
     }
 });
 

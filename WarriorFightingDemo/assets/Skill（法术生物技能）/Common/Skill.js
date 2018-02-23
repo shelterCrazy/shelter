@@ -64,21 +64,21 @@ cc.Class({
     },
     onLoad:function()
     {
-        this.selfCreature = this.node.parent;
-        this.selfCreatureScript = this.selfCreature.getComponent("Creature");
-        if(this.selfCreatureScript === null) {
-            this.selfCreatureScript = this.selfCreature.getComponent("AreaMagic");
-            if(this.selfCreatureScript === null)
-                this.selfCreatureScript = this.selfCreature.getComponent("DirectionMagic");
+        this.selfObject = this.node.parent;
+        this.selfObjectScript = this.selfObject.getComponent("Creature");
+        if(this.selfObjectScript === null) {
+            this.selfObjectScript = this.selfObject.getComponent("AreaMagic");
+            if(this.selfObjectScript === null)
+                this.selfObjectScript = this.selfObject.getComponent("DirectionMagic");
         }
 
-        this.hero = this.selfCreatureScript.GameManager.heros;
+        this.hero = this.selfObjectScript.GameManager.heros;
         //基地层
-        this.baseLayer = this.selfCreatureScript.GameManager.baseLayer,
+        this.baseLayer = this.selfObjectScript.GameManager.baseLayer;
         //生物层
-        this.creatureLayer = this.selfCreatureScript.GameManager.creatureLayer;
+        this.creatureLayer = this.selfObjectScript.GameManager.creatureLayer;
         //魔法层
-        this.magicLayer = this.selfCreatureScript.GameManager.magicLayer;
+        this.magicLayer = this.selfObjectScript.GameManager.magicLayer;
     },
 
 

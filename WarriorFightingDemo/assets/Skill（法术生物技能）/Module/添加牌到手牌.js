@@ -43,7 +43,7 @@ cc.Class({
         var script = this.node.parent.getComponent("Skill");
         var creatureScript = null,heroScript = null;
         //获取creature的脚本
-        var selfCreatureScript = script.selfCreatureScript;
+        var selfObjectScript = script.selfObjectScript;
         var i = 0,j = 0;
         var enumDat = cc.Enum({
             //英雄
@@ -71,7 +71,7 @@ cc.Class({
             case enumDat.selfHero:
                 for(i = 0;i < script.hero.length;i++) {
                     heroScript = script.hero[i].getComponent("Player");
-                    if(heroScript.team * selfCreatureScript.team > 0) {
+                    if(heroScript.team * selfObjectScript.team > 0) {
                         if(this.card === null||this.card === undefined){
                             for(j = 0;j < this.num;j++)
                             heroScript.getCertainCard(this.cardType.this.cardId);
@@ -85,7 +85,7 @@ cc.Class({
             case enumDat.enemyHero:
                 for(i = 0;i < script.hero.length;i++) {
                     heroScript = script.hero[i].getComponent("Player");
-                    if(heroScript.team * selfCreatureScript.team < 0) {
+                    if(heroScript.team * selfObjectScript.team < 0) {
                         if(this.card === null||this.card === undefined){
                             for(j = 0;j < this.num;j++)
                             heroScript.getCertainCard(this.cardType.this.cardId);

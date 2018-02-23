@@ -75,7 +75,6 @@ cc.Class({
         //deckDatas.magicDeck = [1,2,3];
         //此处用于初始化全部的全局变量
 
-
         Global.bagNum = [0,0,0,0];
         Global.storyEnable = [false ,false ,false ,false];
 
@@ -114,9 +113,12 @@ cc.Class({
             Global.totalDeckData.push(deckDatas);
             Global.totalDeckData[i].magicDeck = [];
             for(var n = 0; n < 100; n++)Global.totalDeckData[i].magicDeck[n] = 0;
-            Global.totalDeckData[i].magicDeck[0] = 40;
+            Global.totalDeckData[i].magicDeck[0] = 10;
+            Global.totalDeckData[i].magicDeck[1] = 10;
             Global.totalDeckData[i].creatureDeck = [];
             for(n = 0; n < 100; n++)Global.totalDeckData[i].creatureDeck[n] = 0;
+            Global.totalDeckData[i].creatureDeck[0] = 10;
+            Global.totalDeckData[i].creatureDeck[1] = 10;
         }
 
     },

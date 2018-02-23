@@ -157,9 +157,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "59710cf4-7b1f-4a5c-8792-973a389f51ce"
+      "__uuid__": "e7caad4d-7014-4d1b-ac78-4f68a1123b10"
     },
-    "fileId": "77TGtJ9/VANbgj1Hhs8zlY",
+    "fileId": "6c6r8+kZ5FZbZ1Da1QVQPC",
     "sync": false
   },
   {
@@ -309,9 +309,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "59710cf4-7b1f-4a5c-8792-973a389f51ce"
+      "__uuid__": "e7caad4d-7014-4d1b-ac78-4f68a1123b10"
     },
-    "fileId": "cb485O4EopLb4LvDx5mN28E",
+    "fileId": "2bJV9pv3ZBW5RQQk5IgGx2",
     "sync": false
   },
   {
@@ -365,9 +365,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "59710cf4-7b1f-4a5c-8792-973a389f51ce"
+      "__uuid__": "e7caad4d-7014-4d1b-ac78-4f68a1123b10"
     },
-    "fileId": "04450ClRaFD7JqcY18lNySz",
+    "fileId": "1bcflm4xVLOLj9t3oAett8",
     "sync": false
   },
   {
@@ -510,9 +510,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "59710cf4-7b1f-4a5c-8792-973a389f51ce"
+      "__uuid__": "e7caad4d-7014-4d1b-ac78-4f68a1123b10"
     },
-    "fileId": "2d9e7ZvLgRPMqy4CImuUDlS",
+    "fileId": "2cOKH+dVtMGL9KtSnkmhpo",
     "sync": false
   },
   {
@@ -547,9 +547,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "59710cf4-7b1f-4a5c-8792-973a389f51ce"
+      "__uuid__": "e7caad4d-7014-4d1b-ac78-4f68a1123b10"
     },
-    "fileId": "94c5aLlNDRO+45IVSoBPHQJ",
+    "fileId": "8dl08G4CJLdrzv2XOnU/cZ",
     "sync": false
   },
   {
@@ -634,9 +634,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "59710cf4-7b1f-4a5c-8792-973a389f51ce"
+      "__uuid__": "e7caad4d-7014-4d1b-ac78-4f68a1123b10"
     },
-    "fileId": "d313coHKlpJH7gcXEQWGszn",
+    "fileId": "d0rK1lIPhGvIgvTSSL8w8g",
     "sync": false
   },
   {
@@ -721,9 +721,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "59710cf4-7b1f-4a5c-8792-973a389f51ce"
+      "__uuid__": "e7caad4d-7014-4d1b-ac78-4f68a1123b10"
     },
-    "fileId": "ca650bwMehOurf+++VvXYe5",
+    "fileId": "a6xTa3RzdMRLQKiF0y2EX+",
     "sync": false
   },
   {
@@ -760,23 +760,24 @@
       "__id__": 1
     },
     "_enabled": true,
-    "manaConsume": 2,
+    "manaConsume": 3,
     "manaConsumeLabel": {
       "__id__": 14
     },
     "team": 0,
     "cardType": 0,
-    "rarity": 0,
+    "rarity": 1,
     "Prefab": null,
     "cardId": 1,
-    "cName": "火球术",
+    "cName": "不死鸟粉尘",
     "cNameLabel": {
       "__id__": 22
     },
-    "describe": "投掷：碰到敌人后创建一个范围法术，造成10点伤害",
+    "describe": "对单位2范围内的敌方生物造成10点伤害",
     "describeLabel": {
       "__id__": 19
     },
+    "storyDescribe": "",
     "cardHand": null,
     "cardUsing": null,
     "hero": null,
@@ -792,46 +793,47 @@
       "__id__": 1
     },
     "_enabled": true,
-    "cardId": 1,
+    "cardId": 0,
     "cardType": 0,
-    "magicType": 2,
+    "magicType": 1,
     "area": 2,
-    "speed": 500,
+    "speed": 0,
     "hero": null,
     "backRoll": null,
-    "rangeNode": null,
-    "rangeAnimationNode": null,
-    "arrowNode": {
-      "__uuid__": "95ef17b2-c702-4b7e-8bb3-546daceaf418"
+    "rangeNode": {
+      "__uuid__": "19cae09a-b852-44c1-aeaf-a155cefd98c6"
     },
+    "rangeAnimationNode": {
+      "__uuid__": "4f7a8eae-5f96-4fa7-9449-a9e1ff3d4b03"
+    },
+    "arrowNode": null,
     "isBranch": false,
-    "branchNum": 5,
-    "branchAngle": 18,
+    "branchNum": 1,
+    "branchAngle": 0,
     "prepareCardEffect": {
       "__uuid__": "6a04f9d3-0c56-4780-9b06-9572573eb673"
     },
     "useCardEffect": {
-      "__uuid__": "bdcf33ae-f7ae-4df4-bddb-8c3efe29b3af"
+      "__uuid__": "7c874d9a-d510-4053-8208-b24ce24b5e00"
     },
     "cameraMoveFlag": 0,
     "arraw": null,
     "rangeLNode": null,
     "rangeRNode": null,
     "isChantMagic": false,
-    "chantRound": 2,
+    "chantRound": 3,
     "usableNode": {
       "__id__": 2
     }
   },
   {
-    "__type__": "76ff78XbdRKKbU6/018iIZh",
+    "__type__": "587156He0pGd5Ik0V6mqx22",
     "_name": "",
     "_objFlags": 0,
     "node": {
       "__id__": 1
     },
-    "_enabled": true,
-    "magicType": 0
+    "_enabled": true
   },
   {
     "__type__": "dba69YUGJhHLbIuqnFV8thV",
@@ -873,9 +875,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "59710cf4-7b1f-4a5c-8792-973a389f51ce"
+      "__uuid__": "e7caad4d-7014-4d1b-ac78-4f68a1123b10"
     },
-    "fileId": "579ffT6FaNH+YGE/foYoSVN",
+    "fileId": "62vVhnlkxOzbze63peNOQt",
     "sync": false
   }
 ]

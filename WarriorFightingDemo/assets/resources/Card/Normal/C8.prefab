@@ -1429,6 +1429,7 @@
     "describeLabel": {
       "__id__": 19
     },
+    "storyDescribe": "",
     "cardHand": null,
     "cardUsing": null,
     "hero": null,

@@ -61,41 +61,44 @@ cc.Class({
         mainGameManager:cc.Node,
         //使用了卡牌播放音效或者没有使用，收回的音效
         startCardEffect:cc.AudioClip,
-        endCardEffect:cc.AudioClip,
+        endCardEffect:cc.AudioClip
     },
 
     // use this for initialization
     onLoad: function () {
         var self = this;
-        self.heroScirpt = self.hero.getComponent("Player");
-        self.cameraControlScript = this.cameraControl.getComponent("CameraControl");
-        // this.cardHand = require("CardHand");
-        // this.cardUsing = require("CardUsing");
+        //如果这两个变量未初始化，则作为展示用的卡牌
+        if(self.hero !== null || self.cameraControl !== null) {
+            self.heroScirpt = self.hero.getComponent("Player");
+            self.cameraControlScript = this.cameraControl.getComponent("CameraControl");
+            // this.cardHand = require("CardHand");
+            // this.cardUsing = require("CardUsing");
 
-        switch (self.cardType) {
-            case 0:
-                self.typeComponent = self.node.getComponent("MagicCard");
-                if (self.typeComponent) {
-                    //console.log("This is a MagicCard!");
-                }
-                break;
-            case 1:
-                self.typeComponent = self.node.getComponent("CreepCard");
-                if (self.typeComponent) {
-                    //console.log("This is a CreepCard!");
-                }
-                break;
-            default:
-                break;
+            switch (self.cardType) {
+                case 0:
+                    self.typeComponent = self.node.getComponent("MagicCard");
+                    if (self.typeComponent) {
+                        //console.log("This is a MagicCard!");
+                    }
+                    break;
+                case 1:
+                    self.typeComponent = self.node.getComponent("CreepCard");
+                    if (self.typeComponent) {
+                        //console.log("This is a CreepCard!");
+                    }
+                    break;
+                default:
+                    break;
+            }
+
+            var cardObject = this.node;
+            cardObject.on(cc.Node.EventType.MOUSE_ENTER, this.enterMouseEvent, this);
+            cardObject.on(cc.Node.EventType.MOUSE_LEAVE, this.leaveMouseEvent, this);
+
+            self.manaConsumeLabel.string = self.manaConsume;
+            self.cNameLabel.string = self.cName;
+            self.describeLabel.string = self.describe;
         }
-
-        var cardObject = this.node;
-        cardObject.on(cc.Node.EventType.MOUSE_ENTER, this.enterMouseEvent, this);
-        cardObject.on(cc.Node.EventType.MOUSE_LEAVE, this.leaveMouseEvent, this);
-
-        self.manaConsumeLabel.string = self.manaConsume;
-        self.cNameLabel.string = self.cName;
-        self.describeLabel.string = self.describe;
     },
 
     //获得使用情况 false 无法使用；true可以使用

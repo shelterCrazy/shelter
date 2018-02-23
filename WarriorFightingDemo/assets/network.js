@@ -46,12 +46,12 @@ cc.Class({
         this.broadcastMsg = function(msg){
             this.socket.emit('broadcastMsg', {'msg': msg, 'token':this.token});
         };
-        //room??????????
+        //room聊天  可以先用joinMsg 申请一个房间   然后再用roomMsg发送消息
         this.roomMsg = function(room, msg){
             this.socket.emit('room', {'room':room, 'msg':msg, 'token':this.token});
             cc.log("send message");
         };
-        //??????????
+        //普通消息测试  私聊
         this.msg = function(msg,id){
             this.socket.emit('msg', {'msg': msg, 'id':id, 'token':this.token});
         };
@@ -60,12 +60,13 @@ cc.Class({
 
         this.start = function(){
             this.socket = io.connect(this.url+"/index");
-            var token = this.token;
+            //var token = this.token;
             var self = this;
             //???????????
             this.socket.on('loginResult', function(data){
                 console.log('loginResult:' + data.msg + " results:" + data.results);
-                token = data.results;
+                cc.log(data.results);
+                self.token = data.results;
                 self.roomMsg('roomChat','  do you like me?');
             });
             //????????
@@ -76,7 +77,7 @@ cc.Class({
             this.socket.on('disconnect', function(){
                 if (self.userName != null && self.userName.length > 0) {
                     login();
-                    //self.roomMsg('roomChat','  do you like me?');
+                    self.roomMsg('roomChat','  do you like me?');
                 }
                 console.log('disconnect');
             });
@@ -120,7 +121,7 @@ cc.Class({
         this.start();
         this.login();
 
-    },
+    }
 
      //sendMessage:function() {
      //    //room??????????

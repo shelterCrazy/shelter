@@ -22,7 +22,7 @@ cc.Class({
                 //敌方生物
                 enemyCreature:2,
                 //此生物
-                selfCreature:3
+                selfObject:3
             }),
             default:0
         },
@@ -36,7 +36,7 @@ cc.Class({
     releaseFunction:function(target){
         var script = this.node.parent.getComponent("Skill");
         var creatureScript = null;
-        var selfCreatureScript = script.selfCreatureScript;
+        var selfObjectScript = script.selfObjectScript;
 
         var effectAbleScript = this.node.getComponent("usable");
 
@@ -49,7 +49,7 @@ cc.Class({
             //敌方生物
             enemyCreature:2,
             //此生物
-            selfCreature:3
+            selfObject:3
         });
         //处理target
         if(target !== undefined && target !== null){
@@ -64,7 +64,7 @@ cc.Class({
                 for(i = 0;i < script.creatureLayer.children.length;i++) {
                     creatureScript = script.creatureLayer.children[i].getComponent("Creature");
                     if(effectAbleScript === null || effectAbleScript.isEffectEnable(creatureScript)) {
-                        if(creatureScript !== selfCreatureScript) {
+                        if(creatureScript !== selfObjectScript) {
                             k = creatureScript.attack;
                             creatureScript.attack = creatureScript.health;
                             creatureScript.health = k;
@@ -75,9 +75,9 @@ cc.Class({
             case enumDat.myCreature:
                 for(i = 0;i < script.creatureLayer.children.length;i++) {
                     creatureScript = script.creatureLayer.children[i].getComponent("Creature");
-                    if(creatureScript.team * selfCreatureScript.team > 0) {
+                    if(creatureScript.team * selfObjectScript.team > 0) {
                         if(effectAbleScript === null || effectAbleScript.isEffectEnable(creatureScript)) {
-                            if(creatureScript !== selfCreatureScript) {
+                            if(creatureScript !== selfObjectScript) {
                                 k = creatureScript.attack;
                                 creatureScript.attack = creatureScript.health;
                                 creatureScript.health = k;
@@ -89,7 +89,7 @@ cc.Class({
             case enumDat.enemyCreature:
                 for(i = 0;i < script.creatureLayer.children.length;i++) {
                     creatureScript = script.creatureLayer.children[i].getComponent("Creature");
-                    if(creatureScript.team * selfCreatureScript.team < 0) {
+                    if(creatureScript.team * selfObjectScript.team < 0) {
                         if(effectAbleScript === null || effectAbleScript.isEffectEnable(creatureScript)) {
                             k = creatureScript.attack;
                             creatureScript.attack = creatureScript.health;
@@ -98,11 +98,11 @@ cc.Class({
                     }
                 }
                 break;
-            case enumDat.selfCreature:
-                if(effectAbleScript === null || effectAbleScript.isEffectEnable(selfCreatureScript)) {
-                    k = selfCreatureScript.attack;
-                    selfCreatureScript.attack = selfCreatureScript.health;
-                    selfCreatureScript.health = k;
+            case enumDat.selfObject:
+                if(effectAbleScript === null || effectAbleScript.isEffectEnable(selfObjectScript)) {
+                    k = selfObjectScript.attack;
+                    selfObjectScript.attack = selfObjectScript.health;
+                    selfObjectScript.health = k;
                 }
                 break;
         }
