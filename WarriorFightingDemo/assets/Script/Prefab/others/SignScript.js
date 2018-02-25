@@ -37,7 +37,8 @@ cc.Class({
     },
     fnGiveNode: function(node){
         this.creature = node;
-        this.node.x = this.creature.x / (cc.director.getWinSize().width * 3) * globalConstant.smallMapLength;
+        this.node.x = this.creature.x / (cc.director.getWinSize().width * globalConstant.sceneWidth)
+            * globalConstant.smallMapLength;
         if(this.nodeType === 0){
             this.script = this.creature.getComponent('Creature');
         }else if(this.nodeType === 1){
@@ -47,7 +48,8 @@ cc.Class({
         }
     },
     fnRenewSign:function(){
-        this.node.x = this.creature.x / (cc.director.getWinSize().width * 3) * globalConstant.smallMapLength;
+        this.node.x = this.creature.x / (cc.director.getWinSize().width * globalConstant.sceneWidth)
+            * globalConstant.smallMapLength;
         if(this.nodeType === 0) {
             this.attack.string = this.script.attack;
         }else{

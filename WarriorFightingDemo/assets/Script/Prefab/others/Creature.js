@@ -316,7 +316,7 @@ var monsterShrek = cc.Class({
      * @主要功能 清除一个攻击目标
      * @author C14
      * @Date 2017/12/10
-     * @param null
+     * @param num
      * @returns null
      */
     removeTarget:function(num){
@@ -356,7 +356,7 @@ var monsterShrek = cc.Class({
     fnCreateCreature:function(data){
         this.saveVelocity = 0;
 
-            this.node.x = data.X;
+        this.node.x = data.X;
         this.node.y = data.Y;
         if(data.attack !== undefined)
         this.attack = data.attack;

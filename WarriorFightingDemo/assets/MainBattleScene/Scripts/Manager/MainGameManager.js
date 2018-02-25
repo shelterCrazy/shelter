@@ -27,6 +27,8 @@ var MainGameManager = cc.Class({
         creatureLayer: cc.Node,
         //魔法层
         magicLayer: cc.Node,
+        //战争迷雾层
+        fogLayer:cc.Node,
 
         //小地图节点
         mapLayer: cc.Node,
@@ -38,6 +40,8 @@ var MainGameManager = cc.Class({
         cameraFollow:cc.Node,
 
         audioSource: cc.AudioSource,
+        //战争迷雾预制
+        fogPrefab:cc.Prefab,
 
         //基地预制
         base: cc.Prefab,
@@ -80,6 +84,17 @@ var MainGameManager = cc.Class({
         script1.hero.init({team:Global.nowTeam});
         script2.hero.init({team:- Global.nowTeam});
 
+        for(var i = globalConstant.fogStart;i < globalConstant.fogEnd;i += globalConstant.fogOffset) {
+            var fogNode = cc.instantiate(this.fogPrefab);
+            this.fogLayer.addChild(fogNode);
+            cc.log((globalConstant.sceneWidth * cc.director.getWinSize().width) *
+                (1 + Global.team / Math.abs(script1.hero.team)) / 2 -
+                Global.team / Math.abs(script1.hero.team) * i);
+            fogNode.x = (globalConstant.sceneWidth * cc.director.getWinSize().width) *
+                (1 + script1.hero.team / Math.abs(script1.hero.team)) / 2 -
+                script1.hero.team / Math.abs(script1.hero.team) * i;
+
+        }
         //碰撞系统打开
         cc.director.getCollisionManager().enabled = true;
 

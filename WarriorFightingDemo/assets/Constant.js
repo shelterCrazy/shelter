@@ -2,7 +2,7 @@
 
 module.exports = {
     //全场景宽度（单位个数 * 屏幕宽 为 场景宽度）
-    sceneWidth: 3,
+    sceneWidth: 4,
     //场景边界的单位个数
     sceneEdge:0.5,
 
@@ -49,6 +49,19 @@ module.exports = {
     storyModeNeedMoney:500,
     //卡组的最大卡片数量
     maxDeckCardNum:40,
+
+    fogOpen:true,
+    //烟雾开始坐标
+    fogStart:1366,
+    //烟雾间隔
+    fogOffset:50,
+    //烟雾结束坐标
+    fogEnd:5364,
+
+    fogClearTime:1,
+    fogRestoreTime:1,
+
+    fogColliderWidth:100,
 
     //碰撞框绘制调试模式
     collisionDebugDraw:false,
