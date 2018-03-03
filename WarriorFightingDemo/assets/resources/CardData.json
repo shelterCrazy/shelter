@@ -1,0 +1,144 @@
+{
+  "cardData": [
+    {
+      "id": 1,
+      "card_name": "被遗忘的仆从",
+      "card_type": 1,
+      "memo": "",
+      "detail": [
+        "即时付出再多弱小的力量，也无法得到混沌之王的关注，只能被遗忘在无间之地。",
+        "你知道这些沧桑的历史吗",
+        "故事"
+      ],
+      "rarity": 0,
+      "mana": 1,
+      "releaseType": 1,
+      "usableType": 1,
+      "attack": 1,
+      "speed": 1,
+      "health": 16,
+      "race": 1,
+      "version": 1
+    },
+    {
+      "id": 2,
+      "card_name": "被献祭者",
+      "card_type": 1,
+      "memo": "亡语：对周围的敌方单位造成2点伤害",
+      "detail": [
+        "通过牺牲自己生命的方式为混沌之主贡献一份力量。",
+        "",
+        ""
+      ],
+      "rarity": 1,
+      "mana": 2,
+      "releaseType": 0,
+      "usableType": 0,
+      "attack": 2,
+      "speed": 3,
+      "health": 18,
+      "race": 1,
+      "version": 1
+    },
+    {
+      "id": 3,
+      "card_name": "祭坛法师",
+      "card_type": 1,
+      "memo": "",
+      "detail": [
+        "活用初级的混沌之力，召唤并支配着小批信徒来贡献他们的力量。",
+        "",
+        ""
+      ],
+      "rarity": 0,
+      "mana": 2,
+      "releaseType": 0,
+      "usableType": 0,
+      "attack": 2,
+      "speed": 2,
+      "health": 20,
+      "race": 1,
+      "version": 1
+    },
+    {
+      "id": 4,
+      "card_name": "意识收割者",
+      "card_type": 1,
+      "memo": "被动：每击杀一个单位，获得2点攻击力",
+      "detail": [
+        "通过不断夺取他人的意识，来获得力量的混沌幽灵。",
+        "",
+        ""
+      ],
+      "rarity": 1,
+      "mana": 3,
+      "releaseType": 0,
+      "usableType": 0,
+      "attack": 2,
+      "speed": 2,
+      "health": 26,
+      "race": 2,
+      "version": 1
+    },
+    {
+      "id": 5,
+      "card_name": "混沌管家",
+      "card_type": 1,
+      "memo": "",
+      "detail": [
+        "在混沌之主的领地中侍奉着各种混沌将领。",
+        "",
+        ""
+      ],
+      "rarity": 1,
+      "mana": 4,
+      "releaseType": 0,
+      "usableType": 0,
+      "attack": 4,
+      "speed": 2,
+      "health": 12,
+      "race": 1,
+      "version": 1
+    },
+    {
+      "id": 6,
+      "card_name": "大召唤术士",
+      "card_type": 1,
+      "memo": "被动：击杀一名敌方单位后，召唤一名“被遗忘的仆从”。",
+      "detail": [
+        "拥有强大的法力，能通过毁灭作为代价召唤生物。",
+        "",
+        ""
+      ],
+      "rarity": 0,
+      "mana": 3,
+      "releaseType": 0,
+      "usableType": 0,
+      "attack": 2,
+      "speed": 1,
+      "health": 55,
+      "race": 1,
+      "version": 1
+    },
+    {
+      "id": 7,
+      "card_name": "老练召唤师",
+      "card_type": 1,
+      "memo": "被动：每过1个时间单位，召唤1个“被献祭者”和1个“被遗忘的仆从”。",
+      "detail": [
+        "经过混沌之主的洗礼以及经年累月的磨练，掌握了大召唤之力，可以从虚无中直接进行生物召唤。",
+        "",
+        ""
+      ],
+      "rarity": 3,
+      "mana": 4,
+      "releaseType": 0,
+      "usableType": 0,
+      "attack": 2,
+      "speed": 2,
+      "health": 35,
+      "race": 1,
+      "version": 1
+    }
+  ]
+}

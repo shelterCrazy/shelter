@@ -51,24 +51,33 @@ cc.Class({
             default: 0
         },
         //迷你展示牌的节点
-        miniMagicNode:{
+        miniCardNode:{
             default: [],
             type: cc.Node
         },
-        miniCreatureNode:{
-            default: [],
-            type: cc.Node
-        },
+        //miniMagicNode:{
+        //    default: [],
+        //    type: cc.Node
+        //},
+        //miniCreatureNode:{
+        //    default: [],
+        //    type: cc.Node
+        //},
         //右侧展示牌的节点
-        showMagicNode:{
+        showCardNode:{
             default: [],
             type: cc.Node
         },
-        showCreatureNode:{
-            default: [],
-            type: cc.Node
-        },
-
+        //showMagicNode:{
+        //    default: [],
+        //    type: cc.Node
+        //},
+        //showCreatureNode:{
+        //    default: [],
+        //    type: cc.Node
+        //},
+        originMagicCardPrefab:cc.Prefab,
+        originCreatureCardPrefab:cc.Prefab,
 
         //是否显示全部的卡片
         allCardEnable:false,
@@ -127,53 +136,98 @@ cc.Class({
      */
     initPrefab:function(){
         var self = this;
-        cc.loader.loadResDir("Card/Normal/", cc.Prefab, function (err, prefab) {
-            for(var i = 0;i < prefab.length;i++) {
-                var newNode = cc.instantiate(prefab[i]);
-                var loadScript = newNode.getComponent("Card");
+        var url = "CardData";
 
-                var originNode,originShowCard;
-
-                if(loadScript.cardType === 0) {
-                    originNode = cc.instantiate(self.mainScript.miniMagicPrefab);
-                    //展示板所用的预制
-                    originShowCard = cc.instantiate(self.mainScript.showMagicPrefab);
-                    Global.magicCardPrefab[loadScript.cardId] = cc.instantiate(prefab[i]);
-                    self.miniMagicNode[loadScript.cardId] = originNode;
-                    self.showMagicNode[loadScript.cardId] = originShowCard;
-                }else{
-                    var loadCreepCardScript = newNode.getComponent("CreepCard");
-
-                    originNode = cc.instantiate(self.mainScript.miniCreaturePrefab);
-                    //展示板所用的预制
-                    originShowCard = cc.instantiate(self.mainScript.showCreaturePrefab);
-                    Global.creatureCardPrefab[loadScript.cardId] = cc.instantiate(prefab[i]);
-                    self.miniCreatureNode[loadScript.cardId] = originNode;
-                    self.showCreatureNode[loadScript.cardId] = originShowCard;
+        //for(var i = 0;i < 20;i++) {
+        //    self.miniCardNode[i] = null;
+        //    self.showCardNode[i] = null;
+        //}
+            cc.loader.loadRes(url, function (err, results) {
+                if(err){
+                    cc.error("失败了%s","CardData.json");
+                    return;
                 }
-                var script = originNode.getComponent("MiniCard");
-                var script2 = originShowCard.getComponent("InfoBoard");
+                cc.log(results);
 
-                script.manaConsume = loadScript.manaConsume;
-                script.rarity = loadScript.rarity;
-                script.cName = loadScript.cName;
-                script.cardId = loadScript.cardId;
-                script.cardType = loadScript.cardType;
+                for(var i = 0;i < results.cardData.length;i++) {
 
-                script2.manaConsume = loadScript.manaConsume;
-                script2.rarity = loadScript.rarity;
-                script2.cName = loadScript.cName;
-                script2.describe = loadScript.describe;
-                script2.storyDescribe = loadScript.storyDescribe;
-                script2.cardId = loadScript.cardId;
-                script2.cardType = loadScript.cardType;
-                if(loadScript.cardType === 1) {
-                    script2.attack = loadCreepCardScript.attack;
-                    script2.health = loadCreepCardScript.health;
-                    script2.velocity = loadCreepCardScript.velocity;
+                    if(results.cardData[i].card_type === 0){
+                        var newNode = cc.instantiate(self.originMagicCardPrefab);
+                        var cardDetailScript = newNode.getComponent("MagicCard");
+
+                        cardDetailScript.magicType = results.cardData[i].releaseType;
+                        cardDetailScript.cardId = results.cardData[i].id;
+                        cardDetailScript.cardType = 0;
+                    }else{
+                        newNode = cc.instantiate(self.originCreatureCardPrefab);
+                        cardDetailScript = newNode.getComponent("CreepCard");
+
+                        cardDetailScript.magicType = results.cardData[i].releaseType;
+                        cardDetailScript.cardId = results.cardData[i].id;
+                        cardDetailScript.cardType = 1;
+                        cardDetailScript.race = results.cardData[i].race;
+                        cardDetailScript.attack = results.cardData[i].attack;
+                        cardDetailScript.health = results.cardData[i].health;
+                        cardDetailScript.velocity = results.cardData[i].speed;
+                    }
+                    cardDetailScript.usableType = results.cardData[i].usableType;
+
+                    var loadScript = newNode.getComponent("Card");
+                    loadScript.loadSpriteFrame(Global.cardSpriteFrames[results.cardData[i].id]);
+                    loadScript.manaConsume = results.cardData[i].mana;
+                    loadScript.rarity = results.cardData[i].rarity;
+                    loadScript.cardId = results.cardData[i].id;
+                    loadScript.cName = results.cardData[i].card_name;
+                    loadScript.describe = results.cardData[i].memo;
+                    loadScript.storyDescribe = results.cardData[i].detail[0];
+                    loadScript.cardType = results.cardData[i].card_type;
+
+                    var originNode,originShowCard;
+
+                    if(loadScript.cardType === 0) {
+                        originNode = cc.instantiate(self.mainScript.miniMagicPrefab);
+                        originShowCard = cc.instantiate(self.mainScript.showMagicPrefab);
+                        Global.cardPrefab[loadScript.cardId] = cc.instantiate(newNode);
+                    }else{
+                        var loadCreepCardScript = newNode.getComponent("CreepCard");
+
+                        originNode = cc.instantiate(self.mainScript.miniCreaturePrefab);
+                        //展示板所用的预制
+                        originShowCard = cc.instantiate(self.mainScript.showCreaturePrefab);
+                        Global.cardPrefab[loadScript.cardId] = cc.instantiate(newNode);
+                    }
+                    self.miniCardNode[loadScript.cardId] = originNode;
+                    self.showCardNode[loadScript.cardId] = originShowCard;
+
+                    var script = originNode.getComponent("MiniCard");
+                    var script2 = originShowCard.getComponent("InfoBoard");
+
+                    script.manaConsume = loadScript.manaConsume;
+                    script.rarity = loadScript.rarity;
+                    script.cName = loadScript.cName;
+                    script.cardId = loadScript.cardId;
+                    script.cardType = loadScript.cardType;
+                    script.loadSpriteFrame(Global.cardSpriteFrames[results.cardData[i].id]);
+
+                    script2.manaConsume = loadScript.manaConsume;
+                    script2.rarity = loadScript.rarity;
+                    script2.cName = loadScript.cName;
+                    script2.describe = loadScript.describe;
+                    script2.storyDescribe = loadScript.storyDescribe;
+                    script2.cardId = loadScript.cardId;
+                    script2.cardType = loadScript.cardType;
+                    script2.loadSpriteFrame(Global.cardSpriteFrames[results.cardData[i].id]);
+                    //如果是生物牌则注入三个其他的量
+                    if(loadScript.cardType === 1) {
+                        script2.attack = loadCreepCardScript.attack;
+                        script2.health = loadCreepCardScript.health;
+                        script2.velocity = loadCreepCardScript.velocity;
+                        script2.race = loadCreepCardScript.race;
+                        //cardDetailScript.race;
+                    }
                 }
-            }
-        });
+            });
+
     },
 
     changeAllCardEnable:function(){
@@ -220,34 +274,28 @@ cc.Class({
     },
 
     dispose: function(){
-        if(this.infoBoardScript.cardType === 0) {
-            if(this.mainScript.myMCards[this.infoBoardScript.cardId] > 0) {
-                if(--this.mainScript.myMCards[this.infoBoardScript.cardId] === 0){
-                    if (this.infoBoard !== null) {
-                        this.infoBoard.removeFromParent();
-                    }
-                    this.buttons.active = false;
+        var infoBoardScript = this.infoBoard.getComponent("InfoBoard");
+
+        if(Global.userCard[this.infoBoardScript.cardId] > 0) {
+            infoBoardScript.changeNum(-1);
+            if(-- Global.userCard[this.infoBoardScript.cardId] === 0){
+                if (this.infoBoard !== null) {
+                    this.infoBoard.removeFromParent();
                 }
-            }
-        }else{
-            if(this.mainScript.myCCards[this.infoBoardScript.cardId] > 0) {
-                if( --this.mainScript.myCCards[this.infoBoardScript.cardId] === 0){
-                    if (this.infoBoard !== null) {
-                        this.infoBoard.removeFromParent();
-                    }
-                    this.buttons.active = false;
-                }
+                this.buttons.active = false;
             }
         }
         this.renewShowCardGroup();
     },
     craft:function(){
-        if(this.infoBoardScript.cardType === 0) {
-                this.mainScript.myMCards[this.infoBoardScript.cardId] ++;
+        var infoBoardScript = this.infoBoard.getComponent("InfoBoard");
+        if(Global.userCard[this.infoBoardScript.cardId] < 99) {
+            Global.userCard[this.infoBoardScript.cardId]++;
+            infoBoardScript.changeNum(1);
+            this.renewShowCardGroup();
         }else{
-                this.mainScript.myCCards[this.infoBoardScript.cardId] ++;
+            cc.log("不要啊，太多了");
         }
-        this.renewShowCardGroup();
     },
 
     /**
@@ -264,7 +312,9 @@ cc.Class({
             var decks = cc.instantiate(this.deckPrefab);
             var deckScript = decks.getComponent("ViewDeck");
             if(Global.totalDeckData[i].usable === false)decks.opacity = 100;
-            deckScript.num = i;
+            //deckScript.num = i;
+            deckScript.deckId = Global.totalDeckData[i].deckId;
+            deckScript.sort = Global.totalDeckData[i].sort;
             deckScript.changeType(Global.totalDeckData[i].type);
             deckScript.changeName(Global.totalDeckData[i].name);
             this.layout.node.addChild(decks);
@@ -275,19 +325,8 @@ cc.Class({
     renewShowCardGroup: function(){
         this.cardGroup = [];
         //this.cardLayout.removeAllChildren(false);
-        for(var i = 0;i<this.mainScript.myCCards.length;i++){
-            //if(this.mode === 1 && this.mainScript.myCCards[i] === 0){
-            this.showCardGroup(i,this.mainScript.myCCards[i],1);
-            //}else if(this.mainScript.myCCards[i] !== 0){
-            //    this.showCardGroup(i,this.mainScript.myCCards[i],1);
-            //}
-        }
-        for(var j = 0;j<this.mainScript.myMCards.length;j++){
-            //if(this.mode === 1 && this.mainScript.myMCards[j] === 0){
-            this.showCardGroup(j,this.mainScript.myMCards[j],0);
-            //}else if(this.mainScript.myMCards[j] !== 0){
-            //    this.showCardGroup(j,this.mainScript.myMCards[j],0);
-            //}
+        for(var i = 0;i<Global.userCard.length;i++) {
+            this.showCardGroup(i,Global.userCard[i],1,1);
         }
         this.cardGroup = this.sortShowCardGroup();
         this.sortCardGroupLayout();
@@ -343,25 +382,22 @@ cc.Class({
      * @parameters 卡片ID 张数 卡片类型
      * @returns
      */
-    showCardGroup: function(indication,num,cardType) {
+    showCardGroup: function(indication,num,cardType,level) {
         var newCard = null;
-        if(cardType === 1){
-            if(this.miniCreatureNode[indication] === undefined || this.miniCreatureNode[indication] === null)return;
-            newCard = cc.instantiate(this.miniCreatureNode[indication]);
-        }else{
-            if(this.miniMagicNode[indication] === undefined || this.miniMagicNode[indication] === null)return;
-            newCard = cc.instantiate(this.miniMagicNode[indication]);
-        }
+
+        if(this.miniCardNode[indication] === undefined || this.miniCardNode[indication] === null)return;
+        newCard = cc.instantiate(this.miniCardNode[indication]);
 
         var script = newCard.getComponent('MiniCard');
-        script.cardId = indication;
-        script.cardType = cardType;
+        //script.cardId = indication;
+        //script.cardType = cardType;
         script.num = num;
         script.label = 'x' + num;
+        script.level = level;
         //通过键入的数据更新自己
         //script.initData();
         if(num === 0){
-            if(this.allCardEnable === true) {
+            if(this.allCardEnable === true && level === 1) {
                 newCard.opacity = 100;
             }else{
                 return;
@@ -435,18 +471,10 @@ cc.Class({
                cc.log("按下了左键");
                if (this.mode === 2) {
                    if (globalConstant.maxDeckCardNum > this.deckNum) {
-                       if (event.detail.typeId === 1) {
-                           if (this.mainScript.myCDeck[event.detail.id] < event.detail.num) {
-                               this.mainScript.myCDeck[event.detail.id]++;
-                               this.deckNum++;
-                               this.cardDeckInit();
-                           }
-                       } else {
-                           if (this.mainScript.myMDeck[event.detail.id] < event.detail.num) {
-                               this.mainScript.myMDeck[event.detail.id]++;
-                               this.deckNum++;
-                               this.cardDeckInit();
-                           }
+                       if (this.mainScript.myCardDeck[event.detail.id] < event.detail.num) {
+                           this.mainScript.myCardDeck[event.detail.id]++;
+                           this.deckNum++;
+                           this.cardDeckInit();
                        }
                    }
                } else if (this.mode === 1) {
@@ -459,14 +487,16 @@ cc.Class({
                /**
                 * @主要功能 卡牌展示位
                 */
-               if (event.detail.typeId === 1) {
-                   this.infoBoard = cc.instantiate(this.showCreatureNode[event.detail.id]);
-               } else {
-                   this.infoBoard = cc.instantiate(this.showMagicNode[event.detail.id]);
-               }
+               //if (event.detail.typeId === 1) {
+                   this.infoBoard = cc.instantiate(this.showCardNode[event.detail.id]);
+               //} else {
+               //    this.infoBoard = cc.instantiate(this.showMagicNode[event.detail.id]);
+               //}
                this.infoBoard.x = 300;
                this.infoBoard.y = 150;
-               this.infoBoardScript = event.detail.cardScript;
+               this.infoBoardScript = this.infoBoard.getComponent("InfoBoard");
+               this.infoBoardScript.num = event.detail.num;
+               this.infoBoardScript.level = event.detail.level;
                self.node.addChild(this.infoBoard);
                if (this.mode === 1)
                this.buttons.active = true;
@@ -490,58 +520,50 @@ cc.Class({
     return out;
     },
 
-    //将卡组的具体卡的组成呈现出来
+    //将卡组内部构成的具体卡的组成呈现出来
     cardDeckInit:function(){
         var i;
         var deckScript = null;
         //if(this.deck !== null)this.deck = [null];
         var deck = [],deckNum = 0;
 
-        for(i = 0 ;i < this.mainScript.myCDeck.length;i++){
+        for(i = 0 ;i < this.mainScript.myCardDeck.length;i++){
             var view = cc.instantiate(this.mainScript.deckBuildPrefab);
             var script = view.getComponent('ViewCard');
-            if(this.mainScript.myCDeck[i] !== 0 )
+            if(this.mainScript.myCardDeck[i] !== 0 )
             {
-                deckScript = cc.instantiate(this.miniCreatureNode[i]);
+                deckScript = cc.instantiate(this.miniCardNode[i]);
                 deckScript = deckScript.getComponent('MiniCard');
                 view.x = 0;
-                script.num = this.mainScript.myCDeck[i];
-                script.cardType = 1;
+
+                script.num = this.mainScript.myCardDeck[i];
+                script.cardType = deckScript.cardType;
                 script.cardId = deckScript.cardId;
                 script.cName = deckScript.cName;
                 script.manaConsume = deckScript.manaConsume;
 
                 deck.push(view);
 
-                deckNum += this.mainScript.myCDeck[i];
+                deckNum += this.mainScript.myCardDeck[i];
             }
         }
-        for(i = 0 ;i < this.mainScript.myMDeck.length;i++){
-            var view = cc.instantiate(this.mainScript.deckBuildPrefab);
-            var script = view.getComponent('ViewCard');
-            if(this.mainScript.myMDeck[i] !== 0 ){
-                deckScript = cc.instantiate(this.miniMagicNode[i]);
-                deckScript = deckScript.getComponent('MiniCard');
-                view.x = 0;
-                script.num = this.mainScript.myMDeck[i];
-                script.cardType = 0;
-                script.cardId = deckScript.cardId;
-                script.cName = deckScript.cName;
-                script.manaConsume = deckScript.manaConsume;
-                deck.push(view);
 
-                deckNum += this.mainScript.myMDeck[i];
-            }
-        }
         this.deckNum = deckNum;
         this.deck = deck;
         cc.log(deck);
         this.deck = this.sortDeck();
 
         this.sortLayout();
-        cc.log(this.mainScript.myCDeck);
+        cc.log(this.mainScript.myCardDeck);
     },
 
+    /**
+     * @主要功能 调整卡组编辑里面的卡片信息
+     * @author
+     * @Date 2018/2/27
+     * @parameters
+     * @returns
+     */
     sortLayout: function(){
     var i = 0;
     this.layout.node.removeAllChildren(false);

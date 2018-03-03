@@ -2,7 +2,7 @@
 
 module.exports = {
     //全场景宽度（单位个数 * 屏幕宽 为 场景宽度）
-    sceneWidth: 4,
+    sceneWidth: 3,
     //场景边界的单位个数
     sceneEdge:0.5,
 
@@ -33,6 +33,8 @@ module.exports = {
     //基地总血量
     totalBaseHealth:300,
 
+    //卡片的最大星级
+    cardMaxLevel:[3,3,4,5],
     //生物状态的枚举
     stateEnum:cc.Enum({
         none:0,
@@ -50,18 +52,20 @@ module.exports = {
     //卡组的最大卡片数量
     maxDeckCardNum:40,
 
-    fogOpen:true,
+    //迷雾的相关操作
+    //迷雾的相关操作
+    fogOpen:false,
     //烟雾开始坐标
     fogStart:1366,
     //烟雾间隔
-    fogOffset:50,
+    fogOffset:40,
     //烟雾结束坐标
-    fogEnd:5364,
+    fogEnd:1366*3,
 
     fogClearTime:1,
     fogRestoreTime:1,
+    fogColliderWidth:240,
 
-    fogColliderWidth:100,
 
     //碰撞框绘制调试模式
     collisionDebugDraw:false,

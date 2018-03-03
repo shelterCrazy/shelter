@@ -180,7 +180,7 @@ cc.Class({
         self.sendMessage("登录中...",false);
         setTimeout(function(){
             if(self.logSuccessFlag === null) {
-                var userLoginData = {
+                var userData = {
                     userName: "",
                     password: "",
                     usable: false
@@ -200,6 +200,7 @@ cc.Class({
                     cc.log("登录成功");
                     Global.userName = self.userNameBox.string;
                     Global.password = self.password1.string;
+                    Global.login = true;
                     self.wrong2.string = "";
                     self.logSuccessFlag = true;
                     self.logSuccess();

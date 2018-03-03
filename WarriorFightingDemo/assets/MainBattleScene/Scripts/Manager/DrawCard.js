@@ -19,7 +19,10 @@ cc.Class({
             default:[],
             type: cc.Prefab
         },
-
+        myCardDeck:{
+            default:[],
+            type: cc.Prefab,
+        },
         //魔法牌预制组，按照卡组的数据进行初始化
         myMDeck:{
             default:[],
@@ -58,16 +61,12 @@ cc.Class({
         this.cardTypeFlag = cc.randomMinus1To1();
         this.heroScript = this.heroNode.getComponent('Player');
 
-        if(Global.mainStart === false) {
+        if(Global.mainStart === true) {
             //初始化一个卡组数据
             var deckDatas = {
                 name: "我的卡组",
                 num: 0,
-                magicDeck: {
-                    default: [],
-                    type: cc.Integer
-                },
-                creatureDeck: {
+                deck: {
                     default: [],
                     type: cc.Integer
                 },
@@ -84,31 +83,22 @@ cc.Class({
                     default: 0
                 },
                 usable: true
-            }
+            };
             //将卡组数据推入到全局的总卡组数据中
             Global.totalDeckData.push(deckDatas);
             //初始化卡组的卡片构成
-            Global.totalDeckData[Global.deckUsage].magicDeck = [10,10];
-            Global.totalDeckData[Global.deckUsage].creatureDeck = [10,10,10,0,0,0,0];
+            Global.totalDeckData[Global.deckUsage].deck = [0,10,10,0,0,0,0,0,0,0,0,0];
             //Global.totalDeckData[Global.deckUsage].creatureDeck = [10,10,10,10,10,10,0];
             //卡组使用第0号卡组
             Global.deckUsage = 0;
             //this.cardListScript = this.cardList.getComponent('CardList');
         }
 
-        //将魔法卡的预制按照数量放入魔法卡卡组部分
-        for(i = 0 ;i < Global.totalDeckData[Global.deckUsage].magicDeck.length ; i++){
-            if(Global.totalDeckData[Global.deckUsage].magicDeck[i] !== 0){
-                for(j = 0 ;j < Global.totalDeckData[Global.deckUsage].magicDeck[i];j++) {
-                    this.myMDeck.push(this.magicCardPrefab[i]);
-                }
-            }
-        }
-        //将生物卡的预制按照数量放入生物卡卡组部分
-        for(i = 0 ;i < Global.totalDeckData[Global.deckUsage].creatureDeck.length ; i++){
-            if(Global.totalDeckData[Global.deckUsage].creatureDeck[i] !== 0){
-                for(j = 0 ;j < Global.totalDeckData[Global.deckUsage].creatureDeck[i];j++) {
-                    this.myCDeck.push(this.biologyCardPrefab[i]);
+        //将预制按照数量放入卡组部分
+        for(i = 0 ;i < Global.totalDeckData[Global.deckUsage].deck.length ; i++){
+            if(Global.totalDeckData[Global.deckUsage].deck[i] !== 0){
+                for(j = 0 ;j < Global.totalDeckData[Global.deckUsage].deck[i];j++) {
+                    this.myCardDeck.push(Global.cardPrefab[i]);
                 }
             }
         }
@@ -156,29 +146,18 @@ cc.Class({
         var rand = 0;
 
         //如果牌库没牌了
-        if(this.myCDeck.length + this.myMDeck.length === 0)return;
+        if(this.myCardDeck.length === 0)return;
 
         //创造从0号到总卡组牌数的随机数
-        rand = Math.floor(Math.random() * (this.myCDeck.length + this.myMDeck.length - 1));
+        rand = Math.floor(Math.random() * (this.myCardDeck.length - 1));
 
-        //如果随机数大于法术牌张数
-        if(rand >= this.myMDeck.length) {
-            //如果手牌没满
-            if(this.heroScript.handCard.length < globalConstant.handMaxNum) {
-                //按照预制为手牌添加生物牌
-                this.creatNewCard(this.myCDeck[rand - this.myMDeck.length]);
-            }
-            //删除被抽出的那张牌
-            this.myCDeck.splice(rand - this.myMDeck.length, 1);
-        }else{
-            //如果手牌没满
-            if(this.heroScript.handCard.length < globalConstant.handMaxNum) {
-                //按照预制为手牌添加魔法牌
-                this.creatNewCard(this.myMDeck[rand]);
-            }
-            //删除被抽出的那张牌
-            this.myMDeck.splice(rand, 1);
+        //如果手牌没满
+        if(this.heroScript.handCard.length < globalConstant.handMaxNum) {
+            //按照预制为手牌添加生物牌
+            this.creatNewCard(this.myCardDeck[rand]);
         }
+        //删除被抽出的那张牌
+        this.myCardDeck.splice(rand, 1);
     },
     /**
      * @主要功能 丢弃一张牌
@@ -201,12 +180,7 @@ cc.Class({
     },
     getCertainCard:function(cardType,cardId) {
         if(this.heroScript.handCard.length < globalConstant.handMaxNum) {
-            if (cardType === 0) {
-                //按照预制为手牌添加生物牌
-                this.creatNewCard(this.myMDeck[cardId]);
-            } else {
-                this.creatNewCard(this.myCDeck[cardId]);
-            }
+            this.creatNewCard(this.myCardDeck[cardId]);
         }
     },
     /**

@@ -4,7 +4,7 @@ module.exports = {
 
     userName:"kenan",
     password:"123456",
-
+    token:18,
     //玩家持有的金币
     money:10000,
     //灵魂碎片
@@ -28,6 +28,10 @@ module.exports = {
     magicCardPrefab:[cc.Prefab],
     creatureCardPrefab:[cc.Prefab],
     cardPrefab:[cc.Prefab],
+    //用户持有的卡片 键值 + 数量
+    userCard:[],
+    //卡片的图片
+    cardSpriteFrames:[],
 
     //卡组的类型
     type: {
@@ -57,6 +61,8 @@ module.exports = {
     mainEffectVolume:1,
     //以下是用户设置部分
     mainMusicVolume:1,
+
+    j:0,
 };
 //{
 //deckData:{

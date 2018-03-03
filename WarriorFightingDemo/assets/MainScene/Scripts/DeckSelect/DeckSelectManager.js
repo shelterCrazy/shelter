@@ -15,7 +15,7 @@ cc.Class({
     properties: {
 
         deckPrefab:cc.Prefab,
-        //¿¨×é²¼¾Ö
+        //ï¿½ï¿½ï¿½é²¼ï¿½ï¿½
         deckLayout:cc.Node,
 
         startButtonNode:cc.Node,
@@ -45,7 +45,7 @@ cc.Class({
         this.node.on('mouseDownTheDeck',this.selectCard, this);
     },
     /**
-     * @Ö÷Òª¹¦ÄÜ Ë¢ÐÂ²¢ÇÒ´´½¨¿É¹©Ñ¡ÔñµÄ¿¨×é½Úµã
+     * @ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ Ë¢ï¿½Â²ï¿½ï¿½Ò´ï¿½ï¿½ï¿½ï¿½É¹ï¿½Ñ¡ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½Úµï¿½
      * @author C14
      * @Date 2018/2/5
      * @parameters
@@ -68,7 +68,7 @@ cc.Class({
     },
 
     /**
-     * @Ö÷Òª¹¦ÄÜ Ñ¡Ôñ¿¨×éÊ±µÄº¯Êý´¥·¢
+     * @ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ Ñ¡ï¿½ï¿½ï¿½ï¿½Ê±ï¿½Äºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      * @author C14
      * @Date 2018/2/5
      * @parameters
@@ -81,20 +81,20 @@ cc.Class({
         }
     },
     renewSelectBox:function(){
-        if(Global.totalDeckData[Global.deckUsage] === null ||
-            Global.totalDeckData[Global.deckUsage].usable === false){
-            this.selectBox.active = false;
-            this.startButton.interactable = false;
-        }else{
+        //if(Global.totalDeckData[Global.deckUsage] === null ||
+        //    Global.totalDeckData[Global.deckUsage].usable === false){
+        //    //this.selectBox.active = false;
+        //    //this.startButton.interactable = false;
+        //}else{
             this.selectBox.active = true;
             this.selectBox.x = Global.deckUsage % 3 * 290 - 350;
             this.selectBox.y = -Math.floor(Global.deckUsage / 3) * 130 + 180;
             this.startButton.interactable = true;
-        }
+        //}
     },
 
     /**
-     * @Ö÷Òª¹¦ÄÜ ¿ªÊ¼ÓÎÏ·£¬Ä¿Ç°Ö»ÓÐPVP
+     * @ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ê¼ï¿½ï¿½Ï·ï¿½ï¿½Ä¿Ç°Ö»ï¿½ï¿½PVP
      * @author C14
      * @Date 2018/2/5
      * @parameters

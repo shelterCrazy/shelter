@@ -100,6 +100,7 @@ cc.Class({
     renewNumLabel:function(){
         for(var i = 0; i < this.numLabel.length ; i++) {
             var numLabel = this.numLabel[i].getComponent(cc.Label);
+            if(numLabel != undefined)
             numLabel.string = this.packageNumData[i];
 
             this.numLabel[i].active = !(this.packageNumData[i] <= 0);
@@ -234,8 +235,15 @@ cc.Class({
         Global.bagNum[0] += 10;
         this.renewBags();
     },
-    renewBags:function(){
-        this.cardBagNumLabel.string = '就第一种包，数量是:' + Global.bagNum[0];
+    //renewBags:function(){
+    //    this.cardBagNumLabel.string = '就第一种包，数量是:' + Global.bagNum[0];
+    //},
+
+    mainScene:function(){
+        setTimeout(function(){
+            cc.director.loadScene('MainScene');
+        },1000);
+
     }
     // called every frame, uncomment this function to activate update callback
     // update: function (dt) {

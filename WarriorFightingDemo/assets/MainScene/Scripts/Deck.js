@@ -25,7 +25,7 @@ cc.Class({
     },
     
     initListenEvent: function(){
-        
+
         this.node.on("mouseDownTheShowCard",removeCard,this);
         this.node.on("mouseDownTheDeck",getInDeck,this);
         this.node.on("nameTheDeck",changeDeckName,this);
@@ -34,55 +34,34 @@ cc.Class({
             function removeCard(event){
             var i = 0;
                 event.detail.object.addNumBy(-1);
-                if(event.detail.object.cardType === 1){
-                    //this.mainScript.myCDeck[event.detail.object.cardId]--;
-                    this.cardList.deckNum--;
-                    if(--this.mainScript.myCDeck[event.detail.object.cardId] === 0){
-                        this.cardList.cardDeckInit();
-                    }
-                }else{
-                    //this.mainScript.myMDeck[event.detail.object.cardId]--;
-                    this.cardList.deckNum--;
-                    if(--this.mainScript.myMDeck[event.detail.object.cardId] === 0){
-                        this.cardList.cardDeckInit();
-                    }
+
+                this.cardList.deckNum--;
+                if(-- this.mainScript.myCardDeck[event.detail.object.cardId] === 0){
+                    this.cardList.cardDeckInit();
                 }
             }
-            //for(i=0;i<this.cardList.deck.length;i++){
-            //    if(this.cardList.deck[i] === event.detail.object.node){
-            //        this.cardList.deck.splice(i,1);
-            //        event.detail.object.node.removeFromParent();
-            //    }else{
-            //        this.mainScript.myMDeck[event.detail.object.cardId]--;
-            //        this.cardList.deckNum--;
-            //        if(this.mainScript.myMDeck[event.detail.object.cardId] === 0){
-            //            for(i=0;i<this.cardList.deck.length;i++){
-            //                if(this.cardList.deck[i] === event.detail.object.node){
-            //                    this.cardList.deck.splice(i,1);
-            //                    event.detail.object.node.removeFromParent();
-            //                }
-            //            }
-            //        }
-            //    }
-            //}
+
             function changeDeckName(event){
                 Global.totalDeckData[Global.deckView].name = event.detail.name;
             }
             function removeDeck(event){
-                cc.log(event.detail.object.num);
-                Global.totalDeckData.splice(event.detail.object.num,1);
-                for(var i=0;i<Global.totalDeckData.length;i++)
+
+                for(var i = 0;i<Global.totalDeckData.length;i++)
                 {
-                    Global.totalDeckData[i].num = i;
+                    if(Global.totalDeckData[i].sort === event.detail.object.sort){
+                        Global.totalDeckData.splice(i,1);
+                        break;
+                    }
                 }
                 event.detail.object.node.removeFromParent();
+                this.cardList.renewDeckView();
             }
             function getInDeck(event){
                 this.cardList.modeChange2();
                 Global.deckView = event.detail.object.num;
 
-                this.mainScript.myMDeck = Global.totalDeckData[Global.deckView].magicDeck;
-                this.mainScript.myCDeck = Global.totalDeckData[Global.deckView].creatureDeck;
+                this.mainScript.myCardDeck = Global.totalDeckData[Global.deckView].deck;
+
                 this.deckAddScript.interactable = false;
                 this.cardList.ojbk.active = true;
 
@@ -94,10 +73,10 @@ cc.Class({
     getOutDeck:function(event) {
         this.cardList.modeChange0();
         //Global.totalDeckData.deckView = event.detail.object.num;
-        Global.totalDeckData[Global.deckView].magicDeck = this.mainScript.myMDeck;
-        Global.totalDeckData[Global.deckView].creatureDeck = this.mainScript.myCDeck;
-        if(this.cardList.deckNum === globalConstant.maxDeckCardNum)Global.totalDeckData[Global.deckView].usable = true;
-        else Global.totalDeckData[Global.deckView].usable = false;
+        Global.totalDeckData[Global.deckView].deck = this.mainScript.myCardDeck;
+        Global.totalDeckData[Global.deckView].usable =
+            (this.cardList.deckNum === globalConstant.maxDeckCardNum);
+
         this.deckAddScript.interactable = true;
         this.cardList.ojbk.active = false;
 
@@ -108,15 +87,12 @@ cc.Class({
             name:"new deck",
             //deckView:0,
             num:0,
-            magicDeck:{
+            deckId:0,
+            sort:0,
+            deck:{
                 default: [],
                 type: cc.Integer
             },
-            creatureDeck:{
-                default:[],
-                type: cc.Integer
-            },
-            //?????
             type: {
                 type: cc.Enum({
                     //??
@@ -133,15 +109,14 @@ cc.Class({
 
         this.cardList.modeChange2();
         deckData.num = Global.totalDeckData.length;
-        deckData.magicDeck = [0,0,0,0];
-        deckData.creatureDeck = [0,0,0,0];
+        for(var n = 0; n < 100; n++)deckData.deck[n] = 0;
+
         Global.totalDeckData.push(deckData);
         Global.deckView = Global.totalDeckData.length - 1;
-        this.mainScript.myMDeck = Global.totalDeckData[Global.deckView].magicDeck;
-        this.mainScript.myCDeck = Global.totalDeckData[Global.deckView].creatureDeck;
+        this.mainScript.myCardDeck = Global.totalDeckData[Global.deckView].deck;
+
         this.deckAddScript.interactable = false;
         this.cardList.ojbk.active = true;
-
         this.cardList.cardDeckInit();
     },
     // called every frame, uncomment this function to activate update callback

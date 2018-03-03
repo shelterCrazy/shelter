@@ -1,7 +1,9 @@
 
 var $ = {
     ajax:function(options){
+
         var xhr = cc.loader.getXMLHttpRequest();
+
 
         //xhr.open(options.type,"http://39.106.67.112:3000" + options.url,true);
         var params = this.formatParams(options.data);
@@ -20,7 +22,6 @@ var $ = {
                 xhr.open("GET","http://39.106.67.112:3000" + options.url + "?" + params, true);
                 xhr.send(params);
             }
-
         } else if (options.type == "POST") {
             //xhr.open("POST","http://39.106.67.112:3000" + options.url + "?" + params, true);
             xhr.open("POST","http://39.106.67.112:3000" + options.url, true);

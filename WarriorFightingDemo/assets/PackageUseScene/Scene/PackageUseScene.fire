@@ -631,9 +631,11 @@
   },
   {
     "__type__": "cc.ClickEvent",
-    "target": null,
-    "component": "LayerManager",
-    "handler": "openCardLayout",
+    "target": {
+      "__id__": 4
+    },
+    "component": "OpenCardManager",
+    "handler": "mainScene",
     "customEventData": ""
   },
   {

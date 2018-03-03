@@ -15,6 +15,8 @@ var MainGameManager = cc.Class({
         magicPrefab: [cc.Prefab],
         //全部咏唱预制
         chantPrefab:cc.Prefab,
+        //全部法术,生物预制
+        unitPrefab: [cc.Prefab],
         //生物节点
         creatures: [cc.Node],
         //英雄节点(2个)
@@ -29,6 +31,7 @@ var MainGameManager = cc.Class({
         magicLayer: cc.Node,
         //战争迷雾层
         fogLayer:cc.Node,
+        mapFogLayer:cc.Node,
 
         //小地图节点
         mapLayer: cc.Node,
@@ -42,6 +45,7 @@ var MainGameManager = cc.Class({
         audioSource: cc.AudioSource,
         //战争迷雾预制
         fogPrefab:cc.Prefab,
+        mapFogPrefab:cc.Prefab,
 
         //基地预制
         base: cc.Prefab,
@@ -70,6 +74,8 @@ var MainGameManager = cc.Class({
 
         //获取网络脚本
         this.network = this.node.getComponent("network");
+        //获取小地图脚本
+        var mapScript = this.mapLayer.getComponent("SmallMap");
 
         //初始化两个基地坐标，以及注入一些关键数据
         script1.init(this.baseData1,-this.baseOffset,-1);
@@ -84,22 +90,29 @@ var MainGameManager = cc.Class({
         script1.hero.init({team:Global.nowTeam});
         script2.hero.init({team:- Global.nowTeam});
 
-        for(var i = globalConstant.fogStart;i < globalConstant.fogEnd;i += globalConstant.fogOffset) {
-            var fogNode = cc.instantiate(this.fogPrefab);
-            this.fogLayer.addChild(fogNode);
-            cc.log((globalConstant.sceneWidth * cc.director.getWinSize().width) *
-                (1 + Global.team / Math.abs(script1.hero.team)) / 2 -
-                Global.team / Math.abs(script1.hero.team) * i);
-            fogNode.x = (globalConstant.sceneWidth * cc.director.getWinSize().width) *
-                (1 + script1.hero.team / Math.abs(script1.hero.team)) / 2 -
-                script1.hero.team / Math.abs(script1.hero.team) * i;
+        if(globalConstant.fogOpen) {
+            for (var i = globalConstant.fogStart; i < globalConstant.fogEnd; i += globalConstant.fogOffset) {
+                var fogNode = cc.instantiate(this.fogPrefab);
+                var fogNodeScript = fogNode.getComponent("Fog");
 
+                var mapFogNode = cc.instantiate(this.mapFogPrefab);
+                mapFogNode.y = 0;
+                fogNodeScript.mapFogNode = mapFogNode;
+                this.fogLayer.addChild(fogNode);
+                fogNode.x = (globalConstant.sceneWidth * cc.director.getWinSize().width) *
+                    (1 + script1.hero.team / Math.abs(script1.hero.team)) / 2 -
+                    script1.hero.team / Math.abs(script1.hero.team) * i;
+                cc.log(fogNode.x * globalConstant.smallMapLength / globalConstant.width /
+                    cc.director.getWinSize().width);
+                mapFogNode.x = fogNode.x * globalConstant.smallMapLength / globalConstant.sceneWidth /
+                    cc.director.getWinSize().width;
+                this.mapFogLayer.addChild(mapFogNode);
+            }
         }
         //碰撞系统打开
         cc.director.getCollisionManager().enabled = true;
 
-        //获取小地图脚本
-        var mapScript = this.mapLayer.getComponent("SmallMap");
+
         //英雄标记中添加两个英雄节点（方便坐标获取）
         mapScript.fnCreateHeroSign(this.heros[0]);
         mapScript.fnCreateHeroSign(this.heros[1]);
@@ -252,7 +265,7 @@ var MainGameManager = cc.Class({
         // this.scheduleOnce(function() {
 
         /** kenan 这里获取npc的资源方法可以改为，使用资源池获取npc节点*/
-        var mag = cc.instantiate(this.magicPrefab[event.detail.id]);
+        var mag = cc.instantiate(this.unitPrefab[event.detail.id]);
         var magScript = mag.getComponent("AreaMagic");
         if(magScript === null){
             magScript = mag.getComponent("DirectionMagic");
@@ -287,7 +300,7 @@ var MainGameManager = cc.Class({
      */
     magicCreateNetwork: function(data){
         /** kenan 这里获取npc的资源方法可以改为，使用资源池获取npc节点*/
-        var mag = cc.instantiate(this.magicPrefab[data.id]);
+        var mag = cc.instantiate(this.unitPrefab[data.id]);
         var magScript = mag.getComponent("AreaMagic");
         if(magScript === null){
             magScript = mag.getComponent("DirectionMagic");
@@ -324,7 +337,7 @@ var MainGameManager = cc.Class({
         // this.scheduleOnce(function() {
         /** kenan 这里获取npc的资源方法可以改为，使用资源池获取npc节点*/
         if(data.detail.prefab === undefined || data.detail.prefab === null){
-            npc = cc.instantiate(this.creaturePrefab[data.detail.id]);
+            npc = cc.instantiate(this.unitPrefab[data.detail.id]);
         }else{
             npc = cc.instantiate(data.detail.prefab);
         }
@@ -370,7 +383,7 @@ var MainGameManager = cc.Class({
         /** kenan 这里获取npc的资源方法可以改为，使用资源池获取npc节点*/
         var npc = null;
         if(data.prefab === undefined || data.prefab === null){
-            npc = cc.instantiate(this.creaturePrefab[data.id]);
+            npc = cc.instantiate(this.unitPrefab[data.id]);
         }else{
             npc = cc.instantiate(data.prefab);
         }

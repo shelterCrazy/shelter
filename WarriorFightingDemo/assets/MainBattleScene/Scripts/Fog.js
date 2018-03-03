@@ -6,7 +6,11 @@ cc.Class({
     properties: {
         disappear:false,
         //进入雾的单位
-        target:[]
+        target:[],
+        //有东西在范围内部
+        inside:false,
+
+        mapFogNode:cc.Node,
         // foo: {
         //     // ATTRIBUTES:
         //     default: null,        // The default value will be used only when the component attaching
@@ -36,7 +40,6 @@ cc.Class({
     onCollisionEnter: function (other, self) {
         var script = null;
         //if (this.disappear === false) {
-            cc.log("碰到了");
             //判断如果接触了生物
             if (other.node.group === "Creature" || other.node.group === "Hero") {
                 script = other.node.getComponent('Creature');
@@ -45,7 +48,10 @@ cc.Class({
                 if(script.team / Math.abs(script.team) === Global.nowTeam / Math.abs(Global.nowTeam)) {
                     this.clearFog();
                     this.target.push(other.node);
+                    this.dispear = true;
+                    this.inside = true;
                 }
+
             }
         //}
     },
@@ -54,7 +60,6 @@ cc.Class({
         var i = 0;
         var script = null;
         //判断
-        cc.log("离开了");
         if (other.node.group === "Creature" || other.node.group === "Hero") {
             script = other.node.getComponent('Creature');
             if(script === null)script = other.node.getComponent('Player');
@@ -66,6 +71,7 @@ cc.Class({
                     }
                 }
                 if (this.target.length === 0) {
+                    this.inside = false;
                     this.restoreFog();
                 }
             }
@@ -75,26 +81,26 @@ cc.Class({
     clearFog: function () {
         var self = this;
         this.node.runAction(
-            cc.sequence(
-                cc.fadeOut(globalConstant.fogClearTime),
-                cc.callFunc(function(){
-                    self.disappear = true;
-                },this)
-            )
+            cc.fadeOut(globalConstant.fogClearTime)
+        );
+        self.mapFogNode.runAction(
+            cc.fadeOut(globalConstant.fogClearTime)
         );
     },
     restoreFog: function () {
         var self = this;
         setTimeout(function() {
-            if (self.target.length === 0) {
+            if (self.dispear === false && self.inside === false) {
                 self.node.runAction(
-                    cc.sequence(
-                        cc.fadeIn(globalConstant.fogRestoreTime),
-                        cc.callFunc(function () {
-                            self.disappear = false;
-                        }, self)
-                    )
+                        cc.fadeIn(globalConstant.fogRestoreTime)
                 );
+                self.mapFogNode.runAction(
+                    cc.fadeIn(globalConstant.fogRestoreTime)
+                );
+            }
+            if(self.dispear === true){
+                self.dispear = false;
+                self.restoreFog();
             }
         },6 * 1000);
     }

@@ -23,7 +23,10 @@ cc.Class({
     // use this for initialization
     onLoad: function () {
         this.cameraComponent = this.cameraComponent.getComponent("CameraControl");
-
+        if(Global.login === true){
+            this.node.active = false;
+            this.cameraComponent.moveTarget(0, 0);
+        }
         //登录报告事件
         this.node.on('message',this.message,this);
         //登录成功
