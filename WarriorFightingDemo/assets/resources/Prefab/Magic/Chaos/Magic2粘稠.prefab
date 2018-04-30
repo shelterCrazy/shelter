@@ -426,7 +426,7 @@
     "state": 8,
     "dat1": 20,
     "dat2": 1,
-    "dat3": 0
+    "dat3": 1
   },
   {
     "__type__": "0cedbdmcyVLPIuDM9UAwqQv",
@@ -441,8 +441,8 @@
     "enemyHero": true,
     "enemyTower": false,
     "enemyBase": false,
-    "friendlyCreature": true,
-    "friendlyHero": true,
+    "friendlyCreature": false,
+    "friendlyHero": false,
     "friendlyTower": false,
     "friendlyBase": false,
     "selfTarget": false,
@@ -461,6 +461,11 @@
     "speedRangeMin": -1,
     "speedMaxSwitch": false,
     "speedMinSwitch": false,
+    "heightRangeSwitch": false,
+    "heightRangeMax": -1,
+    "heightRangeMin": -1,
+    "heightMaxSwitch": false,
+    "heightMinSwitch": false,
     "N": true,
     "R": true,
     "SR": true,

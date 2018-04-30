@@ -303,8 +303,8 @@
     "_enabled": true,
     "state": 9,
     "dat1": 1,
-    "dat2": -22,
-    "dat3": 1
+    "dat2": -16,
+    "dat3": 2
   },
   {
     "__type__": "0cedbdmcyVLPIuDM9UAwqQv",
@@ -339,6 +339,11 @@
     "speedRangeMin": -1,
     "speedMaxSwitch": false,
     "speedMinSwitch": false,
+    "heightRangeSwitch": false,
+    "heightRangeMax": -1,
+    "heightRangeMin": -1,
+    "heightMaxSwitch": false,
+    "heightMinSwitch": false,
     "N": true,
     "R": true,
     "SR": true,
@@ -1615,7 +1620,7 @@
   {
     "__type__": "Clips",
     "animtionName": "start",
-    "prefix": "cloud",
+    "prefix": "1",
     "suffix": "",
     "startNumber": 0,
     "endNumber": 50,
@@ -1626,7 +1631,7 @@
   {
     "__type__": "Clips",
     "animtionName": "loop",
-    "prefix": "cloud",
+    "prefix": "1",
     "suffix": "",
     "startNumber": 51,
     "endNumber": 65,
@@ -1637,7 +1642,7 @@
   {
     "__type__": "Clips",
     "animtionName": "end",
-    "prefix": "cloud",
+    "prefix": "1",
     "suffix": "",
     "startNumber": 66,
     "endNumber": 99,

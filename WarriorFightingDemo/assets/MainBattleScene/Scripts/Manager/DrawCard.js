@@ -71,7 +71,7 @@ cc.Class({
         this.heroScript = this.heroNode.getComponent('Hero');
 
 
-        if(Global.mainStart === false) {
+        if(true){//Global.mainStart === false) {
 
             for(i = 0;i < 300;i++) {
                 Global.cardPrefab[i] = null;
@@ -149,7 +149,7 @@ cc.Class({
             //将卡组数据推入到全局的总卡组数据中
             Global.totalDeckData.push(deckDatas);
             //初始化卡组的卡片构成
-            Global.totalDeckData[Global.deckUsage].deck = [0,10,10,0,10,0,0,0,0,0,0,0];
+            Global.totalDeckData[Global.deckUsage].deck = [0,4,6,4,6,0,0,0,0,0,0,0,0,0,0,3,3,3,3,3,3,3,3];
             //Global.totalDeckData[Global.deckUsage].creatureDeck = [10,10,10,10,10,10,0];
             //卡组使用第0号卡组
             Global.deckUsage = 0;

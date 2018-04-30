@@ -320,6 +320,166 @@ module.exports = {
         "race": 1,
         "version": 1
     },
+        {
+            "id": 15,
+            "card_name": "感染",
+            "card_type": 0,
+            "memo": "对范围内生命值最小的敌人施加效果，1个时间单位后造成12点伤害，如果该单位被该法术杀害，则该法术会传染给附近的敌方单位，并重复效果。",
+            "detail": [
+                "科学界之神。",
+                "",
+                ""
+            ],
+            "rarity": 3,
+            "mana": 2,
+            "releaseType": 1,
+            "usableType": 0,
+            "attack": 3,
+            "speed": 1,
+            "health": 65,
+            "race": 1,
+            "version": 1
+        },
+        {
+            "id": 16,
+            "card_name": "粘稠",
+            "card_type": 0,
+            "memo": "降低小范围内的敌方单位移动速度，降低至1",
+            "detail": [
+                "科学界之神。",
+                "",
+                ""
+            ],
+            "rarity": 3,
+            "mana": 2,
+            "releaseType": 1,
+            "usableType": 0,
+            "attack": 3,
+            "speed": 1,
+            "health": 65,
+            "race": 1,
+            "version": 1
+        },
+        {
+            "id": 17,
+            "card_name": "教皇之血",
+            "card_type": 0,
+            "memo": "范围内的敌人受到15点伤害，但该伤害不会杀死敌人，只会让敌人剩下1点生命",
+            "detail": [
+                "科学界之神。",
+                "",
+                ""
+            ],
+            "rarity": 3,
+            "mana": 3,
+            "releaseType": 1,
+            "usableType": 0,
+            "attack": 3,
+            "speed": 1,
+            "health": 65,
+            "race": 1,
+            "version": 1
+        },
+        {
+            "id": 18,
+            "card_name": "六芒星召唤阵",
+            "card_type": 0,
+            "memo": "范围内的敌人受到15点伤害，但该伤害不会杀死敌人，只会让敌人剩下1点生命",
+            "detail": [
+                "科学界之神。",
+                "",
+                ""
+            ],
+            "rarity": 3,
+            "mana": 4,
+            "releaseType": 1,
+            "usableType": 0,
+            "attack": 3,
+            "speed": 1,
+            "health": 65,
+            "race": 1,
+            "version": 1
+        },
+        {
+            "id": 19,
+            "card_name": "三重异体",
+            "card_type": 0,
+            "memo": "在选定的地方，每过一个时间单位召唤一个2/18的【异体缝补兽】，总共召唤3个",
+            "detail": [
+                "科学界之神。",
+                "",
+                ""
+            ],
+            "rarity": 3,
+            "mana": 6,
+            "releaseType": 1,
+            "usableType": 0,
+            "attack": 3,
+            "speed": 1,
+            "health": 65,
+            "race": 1,
+            "version": 1
+        },
+        {
+            "id": 20,
+            "card_name": "外神之息",
+            "card_type": 0,
+            "memo": "朝指定的方向投射，被击中的单位直接死亡",
+            "detail": [
+                "科学界之神。",
+                "",
+                ""
+            ],
+            "rarity": 3,
+            "mana": 7,
+            "releaseType": 2,
+            "usableType": 0,
+            "attack": 3,
+            "speed": 1,
+            "health": 65,
+            "race": 1,
+            "version": 1
+        },
+        {
+            "id": 21,
+            "card_name": "秩序逆转",
+            "card_type": 0,
+            "memo": "所有敌方的随从，英雄回到其阵营的基地位置",
+            "detail": [
+                "科学界之神。",
+                "",
+                ""
+            ],
+            "rarity": 3,
+            "mana": 8,
+            "releaseType": 0,
+            "usableType": 0,
+            "attack": 3,
+            "speed": 1,
+            "health": 65,
+            "race": 1,
+            "version": 1
+        },
+        {
+            "id": 22,
+            "card_name": "卡俄斯之力",
+            "card_type": 0,
+            "memo": "我方所有随从获得亡语：重生（从战场起点召唤）",
+            "detail": [
+                "科学界之神。",
+                "",
+                ""
+            ],
+            "rarity": 3,
+            "mana": 9,
+            "releaseType": 0,
+            "usableType": 0,
+            "attack": 3,
+            "speed": 1,
+            "health": 65,
+            "race": 1,
+            "version": 1
+        },
     {
         "id": 1,
         "card_name": "海森堡枪兵",
@@ -383,7 +543,7 @@ module.exports = {
     {
         "id": 4,
         "card_name": "跃迁刺客",
-        "card_type": 0,
+        "card_type": 1,
         "memo": "被动：每2个时间单位，提高1点攻击力",
         "detail": [
             "能够将量子涨落中的能量差吸收来强化自己。",
@@ -391,9 +551,9 @@ module.exports = {
             ""
         ],
         "rarity": 2,
-        "mana": 0,
-        "releaseType": 1,
-        "usableType": 0,
+        "mana": 4,
+        "releaseType": 0,
+        "usableType": 1,
         "attack": 1,
         "speed": 4,
         "health": 45,
