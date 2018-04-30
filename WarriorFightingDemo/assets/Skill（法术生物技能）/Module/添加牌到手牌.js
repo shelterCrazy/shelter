@@ -58,7 +58,7 @@ cc.Class({
         switch (this.target){
             case enumDat.hero:
                 for(i = 0;i < script.hero.length;i++) {
-                    heroScript = script.hero[i].getComponent("Player");
+                    heroScript = script.hero[i].getComponent("Hero");
                     if(this.card === null||this.card === undefined){
                         for(j = 0;j < this.num;j++)
                         heroScript.getCertainCard(this.cardType.this.cardId);
@@ -70,7 +70,7 @@ cc.Class({
                 break;
             case enumDat.selfHero:
                 for(i = 0;i < script.hero.length;i++) {
-                    heroScript = script.hero[i].getComponent("Player");
+                    heroScript = script.hero[i].getComponent("Hero");
                     if(heroScript.team * selfObjectScript.team > 0) {
                         if(this.card === null||this.card === undefined){
                             for(j = 0;j < this.num;j++)
@@ -84,7 +84,7 @@ cc.Class({
                 break;
             case enumDat.enemyHero:
                 for(i = 0;i < script.hero.length;i++) {
-                    heroScript = script.hero[i].getComponent("Player");
+                    heroScript = script.hero[i].getComponent("Hero");
                     if(heroScript.team * selfObjectScript.team < 0) {
                         if(this.card === null||this.card === undefined){
                             for(j = 0;j < this.num;j++)

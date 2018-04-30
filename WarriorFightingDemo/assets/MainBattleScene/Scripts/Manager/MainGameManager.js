@@ -1,6 +1,7 @@
 //var SmallMap = require('SmallMap');
 var globalConstant = require("Constant");
 var Global = require("Global");
+var CardData = require("CardData");
 /**
  * @主要功能:  游戏主流程控制器
  * @type {Function}
@@ -21,6 +22,8 @@ var MainGameManager = cc.Class({
         creatures: [cc.Node],
         //英雄节点(2个)
         heros: [cc.Node],
+
+        heroPrefab: [cc.Prefab],
         ////逻辑层
         //logicLayer: cc.Node,    //背景节点
         //基地层
@@ -29,10 +32,14 @@ var MainGameManager = cc.Class({
         creatureLayer: cc.Node,
         //魔法层
         magicLayer: cc.Node,
+
+        heroLayer: cc.Node,
         //战争迷雾层
         fogLayer:cc.Node,
         mapFogLayer:cc.Node,
 
+
+        drawCardNode:cc.Node,
         //小地图节点
         mapLayer: cc.Node,
         //右下角定时器的节点
@@ -60,11 +67,16 @@ var MainGameManager = cc.Class({
 
         //胜利，失败面板
         winPanel:cc.Node,
-        losePanel:cc.Node,
+        losePanel:cc.Node
     },
-
+    getCard:function(dat) {
+        var heroScript = this.heros[0].getComponent("Hero");
+        cc.log(dat);
+        heroScript.getCertainCard(4);
+    },
     onLoad: function () {
 
+        var self = this;
         //获取基地节点，将预制实例化
         var baseNode = cc.instantiate(this.base);
         //获取基地节点的js脚本
@@ -77,18 +89,17 @@ var MainGameManager = cc.Class({
         //获取小地图脚本
         var mapScript = this.mapLayer.getComponent("SmallMap");
 
+        this.heroCreate(0,-1);
+        this.heroCreate(0,1);
+
+        var cameraScript = this.cameraLayer.getComponent("CameraControl");
+
+        cameraScript.targets[0] = this.heros[0];
+        cameraScript.target = cameraScript.targets[0];
+
         //初始化两个基地坐标，以及注入一些关键数据
         script1.init(this.baseData1,-this.baseOffset,-1);
-        script1.hero = this.heros[0].getComponent("Player");
 
-        //基地层添加上述节点
-        this.baseLayer.addChild(baseNode);
-        script2.init(this.baseData2,this.baseOffset,1);
-        script2.hero = this.heros[1].getComponent("Player");
-        this.baseLayer.addChild(baseNode2);
-
-        script1.hero.init({team:Global.nowTeam});
-        script2.hero.init({team:- Global.nowTeam});
 
         if(globalConstant.fogOpen) {
             for (var i = globalConstant.fogStart; i < globalConstant.fogEnd; i += globalConstant.fogOffset) {
@@ -110,8 +121,9 @@ var MainGameManager = cc.Class({
             }
         }
         //碰撞系统打开
+        //cc.director.getCollisionManager().enabled = true;
         cc.director.getCollisionManager().enabled = true;
-
+        cc.director.getPhysicsManager().enabled = true;
 
         //英雄标记中添加两个英雄节点（方便坐标获取）
         mapScript.fnCreateHeroSign(this.heros[0]);
@@ -120,13 +132,39 @@ var MainGameManager = cc.Class({
         //获取时间记录器脚本，此脚本负责自动推进时间轴
         this.timerLayerScript = this.timerLayer.getComponent("GameTimer");
 
+        //for(i = 0;i < 200; i++) {
+        //    self.magicPrefab[i] = null;
+        //}
+        //var url = "Prefab/Magic";
+        //cc.loader.loadResDir(url,cc.Prefab, function (err, results) {
+        //    if (err) {
+        //        cc.error("失败了!!%s",err);
+        //        cc.log(err);
+        //    }else{
+        //        for(var i = 0;i < results.length; i++) {
+        //            var magicNode = cc.instantiate(results[i]);
+        //
+        //            var scripts = magicNode.getComponent("NormalMagic");
+        //            if(scripts === null || scripts === undefined){
+        //                scripts = magicNode.getComponent("AreaMagic");
+        //                cc.log("AreaMagic");
+        //            }
+        //            if(scripts === null || scripts === undefined){
+        //                scripts = magicNode.getComponent("DirectionMagic");
+        //                cc.log("DirectionMagic");
+        //            }
+        //            cc.log(scripts);
+        //            self.magicPrefab[scripts.id] = magicNode;
+        //        }
+        //    }
+        //});
         //var data = false;
         ////每隔一段时间召唤一个小怪
         //this.schedule(function() {
         //    var eventsend = new cc.Event.EventCustom('creatureCreate',true);
         //    var eventsend2 = new cc.Event.EventCustom('creatureCreate',true);
-        //    eventsend.setUserData({X:(cc.director.getWinSize().width * globalConstant.sceneWidth),Y:null,attack:1,health:5,team:1,velocity:10,id:1});
-        //    eventsend2.setUserData({X:0,Y:null,attack:1,health:5,team:-1,velocity:10,id:1});
+        //    eventsend.setUserData({X:(cc.director.getWinSize().width * globalConstant.sceneWidth),Y:null,attack:1,health:5,team:1,speed:10,id:1});
+        //    eventsend2.setUserData({X:0,Y:null,attack:1,health:5,team:-1,speed:10,id:1});
         //
         //    data = ~data;
         //    if(data) {
@@ -138,8 +176,12 @@ var MainGameManager = cc.Class({
         //    }
         //},1);
 
+
+
         //创建npc 小地图节点 事件
         this.node.on('creatureCreate',this.creatureCreate,this);
+
+        this.node.on('animationCreate',this.animationCreate,this);
         //创建咏唱法术事件
         this.node.on('chantCreate',this.chantCreate,this);
         //英雄死亡事件
@@ -222,7 +264,8 @@ var MainGameManager = cc.Class({
         //播放音效
         cc.audioEngine.playEffect(
             event.detail.effect,false,
-            event.detail.volume * volume * Global.mainEffectVolume * Global.mainVolume
+            event.detail.volume * volume *
+            Global.mainEffectVolume * Global.mainVolume * globalConstant.cameraRatio
         );
         event.stopPropagation();
     },
@@ -263,9 +306,15 @@ var MainGameManager = cc.Class({
         }
         //kenan 实验证明  事件是同步的  计时器是异步的
         // this.scheduleOnce(function() {
-
+        cc.log("magicCreate？？");
+        cc.log(event.detail.prefab);
         /** kenan 这里获取npc的资源方法可以改为，使用资源池获取npc节点*/
-        var mag = cc.instantiate(this.unitPrefab[event.detail.id]);
+        if(event.detail.prefab === undefined || event.detail.prefab === null){
+            var mag = cc.instantiate(this.magicPrefab[event.detail.id]);
+        }else{
+            mag = cc.instantiate(event.detail.prefab);
+        }
+
         var magScript = mag.getComponent("AreaMagic");
         if(magScript === null){
             magScript = mag.getComponent("DirectionMagic");
@@ -273,9 +322,13 @@ var MainGameManager = cc.Class({
                 magScript = mag.getComponent("NormalMagic");
             }
         }
-     //       magScript.fnCreateMagic(event.detail);//初始化npc属性
         magScript.fnGetManager(this);
+        if(event.detail.position === null) {
+
+        }else{
             mag.x = event.detail.position;
+        }
+
         if(event.detail.y === null){
             mag.y = globalConstant.magicY;
         }else{
@@ -300,7 +353,7 @@ var MainGameManager = cc.Class({
      */
     magicCreateNetwork: function(data){
         /** kenan 这里获取npc的资源方法可以改为，使用资源池获取npc节点*/
-        var mag = cc.instantiate(this.unitPrefab[data.id]);
+        var mag = cc.instantiate(this.magicPrefab[data.id]);
         var magScript = mag.getComponent("AreaMagic");
         if(magScript === null){
             magScript = mag.getComponent("DirectionMagic");
@@ -326,7 +379,7 @@ var MainGameManager = cc.Class({
      *              建议以后改用资源池获取节点   资源池使用工厂创建节点，这里可以负责初始化节点属性
      * @author kenan
      * @Date 2017/7/23 0:25
-     * @param event
+     * @param data
      */
     creatureCreate: function(data){  //event为父类事件  实际这里是Event.EventCustom子类
         if(data.detail.network === undefined || data.detail.network === true) {
@@ -336,12 +389,13 @@ var MainGameManager = cc.Class({
         //kenan 实验证明  事件是同步的  计时器是异步的
         // this.scheduleOnce(function() {
         /** kenan 这里获取npc的资源方法可以改为，使用资源池获取npc节点*/
+
         if(data.detail.prefab === undefined || data.detail.prefab === null){
-            npc = cc.instantiate(this.unitPrefab[data.detail.id]);
+            npc = cc.instantiate(this.creaturePrefab[data.detail.id]);
         }else{
             npc = cc.instantiate(data.detail.prefab);
         }
-        var npcScript = npc.getComponent("Creature");
+        var npcScript = npc.getComponent("Unit");
 
         var mapScript = this.mapLayer.getComponent("SmallMap");
 
@@ -355,10 +409,11 @@ var MainGameManager = cc.Class({
         mapScript.fnCreateCreatureSign(this.creatures[this.creatures.length - 1]);
 
 
-        npcScript.fnCreateCreature(detail);//初始化npc属性
+        npcScript.initUnit(detail);//初始化npc属性
         this.creatureLayer.addChild(this.creatures[this.creatures.length - 1]);
+
         if(data.detail.battleCry !== undefined && data.detail.battleCry === true){
-            npcScript.CreatureSkill.releaseFunction(0);
+            npcScript.skillComponent.releaseFunction(0);
         }
 
 
@@ -368,6 +423,77 @@ var MainGameManager = cc.Class({
         // console.log("creatureCreate结束");
 
         // });
+    },
+    /**
+     * @主要功能 创建英雄
+     * @author
+     * @Date 2018/4/18
+     * @parameters
+     * @returns
+     */
+    heroCreate: function(heroId,team){
+
+
+        var hero = cc.instantiate(this.heroPrefab[heroId]);
+        var heroScript = hero.getComponent("Hero");
+        var unitScript = hero.getComponent("Unit");
+        unitScript.fnGetManager(this);
+        unitScript.initUnit({
+            team: team,
+            X: (team/Math.abs(team) / 2 + 1 / 2) * cc.director.getWinSize().width * globalConstant.sceneWidth,
+            Y: globalConstant.heroY
+        });
+        heroScript.drawCardNode = this.drawCardNode;
+        heroScript.init({
+            team: team
+        });
+        if(team === Global.nowTeam) {
+            this.heros[0] = hero;
+        }else{
+            this.heros[1] = hero;
+            heroScript.self = false;
+        }
+            this.heroLayer.addChild(hero);
+        //基地层添加上述节点
+        //this.baseLayer.addChild(baseNode);
+        //script2.init(this.baseData2,this.baseOffset,1);
+        //script2.hero = this.heros[1].getComponent("Hero");
+        //var newscript2 = this.heros[1].getComponent("Unit");
+        //newscript2.fnGetManager(this);
+        //newscript2.initUnit({
+        //    team:-Global.nowTeam
+        //});
+        //script1.hero.init({team:Global.nowTeam});
+        //script2.hero.init({team:- Global.nowTeam});
+
+    },
+    /**
+     * @主要功能:  创建动画特效
+     * @author C14
+     * @Date 2018/3/17
+     * @param data
+     */
+    animationCreate: function(data){  //event为父类事件  实际这里是Event.EventCustom子类
+        if(data.detail.network === undefined || data.detail.network === true) {
+            this.network.roomMsg('roomChat', {name: "creatureCreate", detail: data.detail});
+        }
+        var animation = null;
+        // this.scheduleOnce(function() {
+        /** kenan 这里获取npc的资源方法可以改为，使用资源池获取npc节点*/
+        if(data.detail.prefab === undefined || data.detail.prefab === null){
+            cc.log("不存在的");
+            return;
+            //animation = cc.instantiate(this.creaturePrefab[data.detail.id]);
+        }else{
+            animation = cc.instantiate(data.detail.prefab);
+        }
+        var detail = data.detail;
+        animation.y = detail.Y === null ? globalConstant.magicY : detail.Y;
+        animation.x = detail.X;
+
+        this.magicLayer.addChild(animation);
+        //C14 停止事件冒泡   (停止继续向上传递此事件)
+        data.stopPropagation();
     },
     /**
      * @主要功能    网络模块调用此代码
@@ -383,11 +509,11 @@ var MainGameManager = cc.Class({
         /** kenan 这里获取npc的资源方法可以改为，使用资源池获取npc节点*/
         var npc = null;
         if(data.prefab === undefined || data.prefab === null){
-            npc = cc.instantiate(this.unitPrefab[data.id]);
+            npc = cc.instantiate(this.creaturePrefab[data.id]);
         }else{
             npc = cc.instantiate(data.prefab);
         }
-        var npcScript = npc.getComponent("Creature");
+        var npcScript = npc.getComponent("Unit");
 
         var mapScript = this.mapLayer.getComponent("SmallMap");
 
@@ -398,9 +524,13 @@ var MainGameManager = cc.Class({
 
         this.creatures.push(npc);
 
+
+        npcScript.initUnit(detail);//初始化npc属性
         mapScript.fnCreateCreatureSign(this.creatures[this.creatures.length - 1]);
-        npcScript.fnCreateCreature(detail);//初始化npc属性
         this.creatureLayer.addChild(this.creatures[this.creatures.length - 1]);
+        if(data.battleCry !== undefined && data.battleCry === true){
+            npcScript.skillComponent.releaseFunction(0);
+        }
     },
     /**
      * @主要功能:  创建吟唱
@@ -427,10 +557,6 @@ var MainGameManager = cc.Class({
 
         //kenan 停止事件冒泡   (停止继续向上传递此事件)
         event.stopPropagation();
-
-        // console.log("creatureCreate结束");
-
-        // });
     },
     /**
      * @主要功能    网络模块调用此代码
@@ -462,10 +588,12 @@ var MainGameManager = cc.Class({
      * @returns
      */
     changeEnemyMove:function(data){
-        var script = this.heros[1].getComponent("Player");
+        var script = this.heros[1].getComponent("Hero");
         this.heros[1].x = data.x;
         script.accLeft = data.accLeft;
         script.accRight = data.accRight;
+
+        var script1 = this.heros[1].getComponent("Unit");
         script.health = data.health;
     },
     /**
@@ -476,8 +604,14 @@ var MainGameManager = cc.Class({
      * @returns
      */
     changeEnemyJump:function(data){
-        var script = this.heros[1].getComponent("Player");
-        script.onceJumpAciton();
+        var script = this.heros[1].getComponent("Unit");
+        script.jumpAction();
+    },
+    changeEnemyAttack:function(data){
+        cc.log("attack");
+        var script = this.heros[1].getComponent("Unit");
+        script.ATKActionFlag = true;
+        script.attackAction();
     },
     /**
      * @主要功能: 释放小兵节点
@@ -486,7 +620,7 @@ var MainGameManager = cc.Class({
      */
     removeCreature: function(node){
         var i = 0;
-        var script = node.getComponent('Creature');
+        var script = node.getComponent('Unit');
         var mapScript = this.mapLayer.getComponent('SmallMap');
         mapScript.fnDeleteSign(node);
         for(i = 0;i < this.creatures.length; i++){

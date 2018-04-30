@@ -1,3 +1,4 @@
+var globalConstant = require("Constant");
 cc.Class({
     extends: cc.Component,
 
@@ -19,6 +20,11 @@ cc.Class({
         skillNode:cc.Node,
 
         GameManager:cc.Component,
+        //飞行速度
+        startSpeed:0,
+        speed:{
+            default: new cc.Vec2(0,0)
+        },
         //受到重力的值
         gravity:0,
         //英雄是否反弹
@@ -59,22 +65,51 @@ cc.Class({
             }),
             default:0
         },
+
+        _interval:[],
+        _stopLock:false,
+
+        id:0,
+
+        death:false
 },
 
     // use this for initialization
     onLoad: function () {
-        this.speed = cc.v2(0,0);
+        var self = this;
         this.team = 0;
-        this.area = 0;
+        //this.area = 0;
         //碰撞次数
         this.collisionTime = 0;
+
+        this.animation = this.node.getComponent("customAnimation");
         //传递创建法术成功时音效的事件
         if(this.loadEffect !== null)
             this.sendEvent(this.loadEffect);
 
-        var animation = this.node.getComponent(cc.Animation);
-        var animState = animation.play();
-        animState.repeatCount = Infinity;
+        this.schedule(function(){
+            this.magicSkill.releaseFunction(7);
+        }, globalConstant.unitTime, cc.macro.REPEAT_FOREVER);
+
+        if(this.animation !== null) {
+            for(var i = 0;i < 3; i++)
+            {
+                this._interval[i] = (this.animation.animations[i].endNumber -
+                    this.animation.animations[i].startNumber) * 1000 / 60 * this.animation.animations[i].loops;
+            }
+
+            this.animation.play("start");
+
+            setTimeout(function () {
+                self.animation.play("loop");
+                self.magicSkill.releaseFunction(8);
+            }, this._interval[0]);
+        }
+
+        //setTimeout(function(){
+        //    //e.stopPropagation();
+        //},this._interval[0] + this._interval[1]);
+
 
         //animation.on('finished',  this.onFinished,    this);
 
@@ -115,9 +150,9 @@ cc.Class({
         });
         if (other.node.group === "Ground") {
             this.collisionTime ++;
-            this.magicSkill.releaseFunction(8);
+            this.magicSkill.releaseFunction(3);
             if(this.judgeCondition(vanishType.ground)){
-                this.node.removeFromParent();
+                this.release();
             }
             if(this.groundBounce === true)
             this.speed.y = - this.speed.y * this.elasticCoefficient;
@@ -125,9 +160,9 @@ cc.Class({
         }
         if (other.node.group === "Sky") {
             this.collisionTime ++;
-            this.magicSkill.releaseFunction(9);
+            this.magicSkill.releaseFunction(4);
             if(this.judgeCondition(vanishType.sky)){
-                this.node.removeFromParent();
+                this.release();
             }
             if(this.skyBounce === true)
                 this.speed.y = - this.speed.y * this.elasticCoefficient;
@@ -135,12 +170,12 @@ cc.Class({
         if (other.node.group === "LBound") {
             this.collisionTime ++;
             if(this.team < 0){
-                this.magicSkill.releaseFunction(10);
+                this.magicSkill.releaseFunction(5);
             }else if(this.team > 0){
-                this.magicSkill.releaseFunction(11);
+                this.magicSkill.releaseFunction(6);
             }
             if(this.judgeCondition(vanishType.leftOrRight)){
-                this.node.removeFromParent();
+                this.release();
             }
             if(this.leftRightBounce === true)
                 this.speed.x = - this.speed.x * this.elasticCoefficient;
@@ -148,69 +183,37 @@ cc.Class({
         if (other.node.group === "RBound") {
             this.collisionTime ++;
             if(this.team < 0){
-                this.magicSkill.releaseFunction(11);
+                this.magicSkill.releaseFunction(6);
             }else if(this.team > 0){
-                this.magicSkill.releaseFunction(10);
+                this.magicSkill.releaseFunction(5);
             }
             if(this.judgeCondition(vanishType.leftOrRight)){
-                this.node.removeFromParent();
+                this.release();
             }
             if(this.leftRightBounce === true)
                 this.speed.x = - this.speed.x * this.elasticCoefficient;
         }
 
         if(this.judgeCondition(vanishType.time) && this.collisionTime > this.collisionMaxTime){
-            this.node.removeFromParent();
+            this.release();
         }
 
-        if (other.node.group === "Creature") {
-            var script1 = other.node.getComponent('Creature');
+        if (other.node.group === "Unit") {
+            var script1 = other.node.getComponent('Unit');
             var stateScript = script1.stateNode.getComponent('CreatureState');
 
-            if(script1.team === this.team){
-
-                this.magicSkill.releaseFunction(2,script1);
-                if(this.judgeCondition(vanishType.myCreature)){
-                    this.node.removeFromParent();
-                }
-                ////传递播放音效的事件
-                //if(this.hitEffect !== null)
-                //    this.sendEvent(this.hitEffect);
-            }else{
-                this.magicSkill.releaseFunction(3,script1);
-                if(this.judgeCondition(vanishType.enemyCreature)){
-                    this.node.removeFromParent();
+            if(this.heroBounce === true && script1.unitType === 1) {
+                this.speed.x = -this.speed.x * this.elasticCoefficient;
+                if(this.judgeCondition(vanishType.myHero) || this.judgeCondition(vanishType.enemyHero)){
+                    this.release();
                 }
             }
-        }
 
-        if (other.node.group === "Hero") {
-            var script2 = other.node.getComponent('Player');
-            if(script2.team === this.team){
-                this.magicSkill.releaseFunction(4,script2);
-                if(this.judgeCondition(vanishType.myHero)){
-                    this.node.removeFromParent();
-                }
-            }else{
-                this.magicSkill.releaseFunction(5,script2);
-                if(this.judgeCondition(vanishType.enemymyHero)){
-                    this.node.removeFromParent();
-                }
-            }
-            if(this.heroBounce === true)
-                this.speed.x = - this.speed.x * this.elasticCoefficient;
-        }
-        if (other.node.group === "Base") {
-            var script3 = other.node.getComponent('Base');
-            if(script3.team !== this.team){
-                this.magicSkill.releaseFunction(6,script3);
-                if(this.judgeCondition(vanishType.myBase)){
-                    this.node.removeFromParent();
-                }
-            }else{
-                this.magicSkill.releaseFunction(7,script3);
-                if(this.judgeCondition(vanishType.enemyBase)){
-                    this.node.removeFromParent();
+            this.magicSkill.releaseFunction(2,other.node);
+            cc.log("???:" + this.judgeCondition(vanishType.enemyCreature));
+            if(script1.unitType === 0){
+                if(this.judgeCondition(vanishType.myCreature) || this.judgeCondition(vanishType.enemyCreature)){
+                    this.release();
                 }
             }
         }
@@ -225,23 +228,41 @@ cc.Class({
 
         }
     },
+    release:function(){
+        var self = this;
+
+        if(this.hitEffect !== null)
+            this.sendEvent(this.hitEffect);
+        if(this.animation !== null) {
+            this.animation.play("end");
+        }
+        this.magicSkill.releaseFunction(9);
+
+        this._stopLock = true;
+        setTimeout(function () {
+            self.magicSkill.releaseFunction(1);
+            self.node.removeFromParent();
+        },this._interval[2]);
+    },
 
     changeTeam: function(team){
         //this.node.removeFromParent();
     },
     initMagic:function(detail){
         this.team = detail.team;
-        this.area = detail.area;
+        //this.area = detail.area;
         this.magicSkill = this.skillNode.getComponent("Skill");
-        this.speed.x = Math.sin((detail.angel + 90)*Math.PI/180)*detail.speed;
-        this.speed.y = Math.cos((detail.angel + 90)*Math.PI/180)*detail.speed;
+        this.speed.x = Math.sin((detail.angel + 90)*Math.PI/180) * this.startSpeed;
+        this.speed.y = Math.cos((detail.angel + 90)*Math.PI/180) * this.startSpeed;
     },
     //called every frame, uncomment this function to activate update callback
     update: function (dt) {
         //delayTime(1);
-        this.speed.y -= this.gravity * dt
-        this.node.x += this.speed.x * dt;
-        this.node.y += this.speed.y * dt;
+        if(this._stopLock === false) {
+            this.speed.y -= this.gravity * dt;
+            this.node.x += this.speed.x * dt;
+            this.node.y += this.speed.y * dt;
+        }
     },
     /**
      * @主要功能 向上级节点传递消息，使之播放音效

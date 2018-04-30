@@ -1,12 +1,3 @@
-// Learn cc.Class:
-//  - [Chinese] http://www.cocos.com/docs/creator/scripting/class.html
-//  - [English] http://www.cocos2d-x.org/docs/editors_and_tools/creator-chapters/scripting/class/index.html
-// Learn Attribute:
-//  - [Chinese] http://www.cocos.com/docs/creator/scripting/reference/attributes.html
-//  - [English] http://www.cocos2d-x.org/docs/editors_and_tools/creator-chapters/scripting/reference/attributes/index.html
-// Learn life-cycle callbacks:
-//  - [Chinese] http://www.cocos.com/docs/creator/scripting/life-cycle-callbacks.html
-//  - [English] http://www.cocos2d-x.org/docs/editors_and_tools/creator-chapters/scripting/life-cycle-callbacks/index.html
 
 cc.Class({
     extends: cc.Component,
@@ -38,7 +29,7 @@ cc.Class({
 //抽牌弃牌以及添加到手牌有重要的BUG，只能更加注意，只对己方英雄有好的效果
     releaseFunction:function(target){
         //获取技能的脚本
-        var script = this.node.parent.getComponent("Skill");
+        var script = this.node.parent.parent.getComponent("Skill");
         var creatureScript = null,heroScript = null;
         //获取creature的脚本
         var selfObjectScript = script.selfObjectScript;
@@ -56,14 +47,14 @@ cc.Class({
         switch (this.target){
             case enumDat.hero:
                 for(i = 0;i < script.hero.length;i++) {
-                    heroScript = script.hero[i].getComponent("Player");
+                    heroScript = script.hero[i].getComponent("Hero");
                     heroScript.drawCard(this.draw);
                     heroScript.throwCard(this.throw);
                 }
                 break;
             case enumDat.selfHero:
                 for(i = 0;i < script.hero.length;i++) {
-                    heroScript = script.hero[i].getComponent("Player");
+                    heroScript = script.hero[i].getComponent("Hero");
                     if(heroScript.team * selfObjectScript.team > 0) {
                         heroScript.drawCard(this.draw);
                         heroScript.throwCard(this.throw);
@@ -72,7 +63,7 @@ cc.Class({
                 break;
             case enumDat.enemyHero:
                 for(i = 0;i < script.hero.length;i++) {
-                    heroScript = script.hero[i].getComponent("Player");
+                    heroScript = script.hero[i].getComponent("Hero");
                     if(heroScript.team * selfObjectScript.team < 0) {
                         heroScript.drawCard(this.draw);
                         heroScript.throwCard(this.throw);

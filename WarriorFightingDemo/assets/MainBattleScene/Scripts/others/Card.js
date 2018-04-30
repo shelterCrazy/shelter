@@ -73,7 +73,8 @@ cc.Class({
         var self = this;
         //如果这两个变量未初始化，则作为展示用的卡牌
         if(self.hero !== null || self.cameraControl !== null) {
-            self.heroScirpt = self.hero.getComponent("Player");
+            self.heroScirpt = self.hero.getComponent("Hero");
+            self.heroUnitScirpt = self.hero.getComponent("Unit");
             self.cameraControlScript = this.cameraControl.getComponent("CameraControl");
             // this.cardHand = require("CardHand");
             // this.cardUsing = require("CardUsing");
@@ -164,7 +165,7 @@ cc.Class({
         // 判断魔法值
         if (self.heroScirpt.checkMana(self.manaConsume)) {
             //开始监听鼠标移动事件
-            if(!self.heroScirpt.death || self.cardType !== 0) {
+            if(!self.heroUnitScirpt.death || self.cardType !== 0) {
                 var cardObject = this.node;
                 var sender = new cc.Event.EventCustom('cardSelect', true);
                 sender.setUserData({card: this.node, posX: event.getLocationX(), posY: event.getLocationY()});

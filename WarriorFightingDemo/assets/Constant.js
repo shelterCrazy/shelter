@@ -16,19 +16,22 @@ module.exports = {
     //单位时间，单位长度，单位速度
     unitTime:8,
     unitLength:200,
-    unitVelocity:1,
+    unitspeed:1,
 
     heroY:-76,
     //生物召唤的默认Y坐标
     summonY:-130,
     //法术的默认Y坐标
-    magicY:-50,
+    magicY:-130,
 
     //小地图的长度（像素）
     smallMapLength:440,
 
+    lifeBarLength:300,
+
     //全局变量，相机坐标
     cameraOffset:0,
+    cameraRatio:1,
 
     //基地总血量
     totalBaseHealth:300,
@@ -45,7 +48,9 @@ module.exports = {
         speedDown:5,
         heal:6,
         //互换生命值与攻击力
-        healthAreAtk:7
+        healthAreAtk:7,
+        speedDownTo:8,
+        infect:9
     }),
     //故事模式所需的的金币
     storyModeNeedMoney:500,

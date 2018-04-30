@@ -78,8 +78,8 @@ cc.Class({
         this.preUse = false;
         //this.backRollScript = this.backRoll.getComponent("BackRoll");
         this.cardScript = self.node.getComponent('Card');
-        this.heroScirpt = this.cardScript.hero.getComponent('Player');
-
+        this.heroScirpt = this.cardScript.hero.getComponent('Hero');
+        this.heroUnitScirpt = this.cardScript.hero.getComponent('Unit');
 
         this.usableScript = this.usableComponent[this.usableType];
 
@@ -167,10 +167,13 @@ cc.Class({
                 this.currentEffect = cc.audioEngine.playEffect(this.prepareCardEffect, true, 1);
             }
             this.rangeAnimeNode.x = this.node.x;
-            this.rangeLNode.x = this.node.x - this.area * globalConstant.unitLength / 2;
-            this.rangeRNode.x = this.node.x + this.area * globalConstant.unitLength / 2;
+            this.rangeLNode.x = this.node.x - this.area / 2 * globalConstant.cameraRatio;
+            this.rangeRNode.x = this.node.x + this.area / 2 * globalConstant.cameraRatio;
+            this.rangeAnimeNode.scale = globalConstant.cameraRatio;
+            this.rangeLNode.scale = globalConstant.cameraRatio;
+            this.rangeRNode.scale = globalConstant.cameraRatio;
 
-            if(this.node.x + cc.director.getWinSize().width/2 > cc.director.getWinSize().width - globalConstant.magicMoveEdge){
+            if(this.node.x + cc.director.getWinSize().width / 2 > cc.director.getWinSize().width - globalConstant.magicMoveEdge){
                 if(this.cameraMoveFlag !== 8){
                     this.cameraMoveFlag = 8;
                     this.cardScript.cameraControlScript.target =
@@ -196,7 +199,7 @@ cc.Class({
 
 
 
-        if((this.node.y <= globalConstant.cardUseLine && this.preUse === true) || this.heroScirpt.death === true){
+        if((this.node.y <= globalConstant.cardUseLine && this.preUse === true) || this.heroUnitScirpt.death === true){
             this.node.opacity = 1000;
             this.preUse = false;
             this.rangeLNode.active = false;
@@ -246,32 +249,32 @@ cc.Class({
                 this.currentEffect = cc.audioEngine.playEffect(this.prepareCardEffect, true, 1);
             }
             var targetPos = this.arrow.convertToWorldSpaceAR(cc.Vec2.ZERO);
-            //if (globalConstant.cameraOffset === 0) {
-            //    this.arrow.rotation = 360 - Math.atan2(event.getLocationY() - targetPos.y,
-            //            event.getLocationX() - this.hero.x) * 180 / Math.PI;
-            //}else if(this.hero.x > cc.director.getWinSize().width * (globalConstant.sceneWidth - globalConstant.sceneEdge)) {
-            //    this.arrow.rotation = 360 - Math.atan2(event.getLocationY() - cc.director.getWinSize().height / 2 - (this.arrow.y + this.arrow.parent.y),
-            //            event.getLocationX() - this.hero.x + cc.director.getWinSize().width * (globalConstant.sceneWidth - globalConstant.sceneEdge * 2)) * 180 / Math.PI;
-            //} else {
-            //    this.arrow.rotation = 360 - Math.atan2(event.getLocationY() - cc.director.getWinSize().height / 2 - (this.arrow.y + this.arrow.parent.y),
-            //            event.getLocationX() - cc.director.getWinSize().width * globalConstant.sceneEdge) * 180 / Math.PI;
-            //}
+            //var target = event.getCurrentTarget(event);
+            //var posInParent = target.parent.convertToNodeSpace(event.getLocation());
+
+            var absolutelyLocation = new cc.Vec2(
+                (event.getLocationX() - cc.director.getWinSize().width / 2) / globalConstant.cameraRatio + cc.director.getWinSize().width / 2,
+                (event.getLocationY() - cc.director.getWinSize().height / 2) / globalConstant.cameraRatio + cc.director.getWinSize().height / 2
+            );
+            cc.log(absolutelyLocation.x + " Y== " + absolutelyLocation.y);
+            cc.log(globalConstant.cameraRatio);
             if (globalConstant.cameraOffset === 0) {
-                this.arrow.rotation = 360 - Math.atan2(event.getLocationY() - targetPos.y,
-                        event.getLocationX() - this.hero.x) * 180 / Math.PI;
+                this.arrow.rotation = 360 - Math.atan2(absolutelyLocation.y - targetPos.y,
+                        absolutelyLocation.x - this.hero.x) * 180 / Math.PI;
             }else if(this.hero.x > cc.director.getWinSize().width * (globalConstant.sceneWidth - globalConstant.sceneEdge)) {
-                this.arrow.rotation = 360 - Math.atan2(event.getLocationY() - targetPos.y,
-                        event.getLocationX() - this.hero.x + cc.director.getWinSize().width * (globalConstant.sceneWidth - globalConstant.sceneEdge * 2)) * 180 / Math.PI;
+                this.arrow.rotation = 360 - Math.atan2(absolutelyLocation.y - targetPos.y,
+                        absolutelyLocation.x - this.hero.x + cc.director.getWinSize().width * (globalConstant.sceneWidth - globalConstant.sceneEdge * 2)
+                    ) * 180 / Math.PI;
             } else {
                 this.arrow.rotation = 360 - Math.atan2(
-                        event.getLocationY() - targetPos.y,
-                        event.getLocationX() + globalConstant.cameraOffset - this.hero.x
+                        absolutelyLocation.y - targetPos.y,
+                        absolutelyLocation.x + globalConstant.cameraOffset - this.hero.x
                     ) * 180 / Math.PI;
             }
         }
 
 
-        if((this.node.y <= globalConstant.cardUseLine && this.preUse === true) || this.heroScirpt.death === true){
+        if((this.node.y <= globalConstant.cardUseLine && this.preUse === true) || this.heroUnitScirpt.death === true){
             this.node.opacity = 1000;
             this.preUse = false;
             this.arrow.active = false;
@@ -288,7 +291,7 @@ cc.Class({
     NoTargetMagicEndListen: function (event) {
         //停止准备用的音乐
         this.stopEffect();
-        if(this.preUse === true && this.heroScirpt.death === false && this.usableScript.getUseState() === true) {
+        if(this.preUse === true && this.heroUnitScirpt.death === false && this.usableScript.getUseState() === true) {
             this.sendEvent(this.useCardEffect, true);
             this.useCardA();
         }else{
@@ -306,15 +309,20 @@ cc.Class({
         //停止准备用的音乐
         this.stopEffect();
         this.cameraMoveFlag = 0;
-        if(this.preUse === true && this.heroScirpt.death === false && this.usableScript.getUseState() === true) {
+        if(this.preUse === true && this.heroUnitScirpt.death === false && this.usableScript.getUseState() === true) {
             this.rangeLNode.active = false;
             this.rangeRNode.active = false;
             this.rangeAnimeNode.active = false;
 
             this.heroScirpt.mana -= this.cardScript.manaConsume;
 
+            var absolutelyLocation = new cc.Vec2(
+                (event.getLocationX() - cc.director.getWinSize().width / 2) / globalConstant.cameraRatio + cc.director.getWinSize().width / 2,
+                (event.getLocationY() - cc.director.getWinSize().height / 2) / globalConstant.cameraRatio + cc.director.getWinSize().height / 2
+            );
+
             this.sendEvent(this.useCardEffect,true);
-            this.useCardB(event.getLocationX() + globalConstant.cameraOffset, this.area * globalConstant.unitLength);
+            this.useCardB(absolutelyLocation.x + globalConstant.cameraOffset, this.area);
         }else{
             this.node.opacity = 1000;
             this.preUse = false;
@@ -337,25 +345,31 @@ cc.Class({
         //停止准备用的音乐
         var targetPos = this.arrow.convertToWorldSpaceAR(cc.Vec2.ZERO);
         this.stopEffect();
-        if(this.preUse === true && this.heroScirpt.death === false && this.usableScript.getUseState() === true) {
+        cc.log("useCardC");
+        if(this.preUse === true && this.heroUnitScirpt.death === false && this.usableScript.getUseState() === true) {
             this.arrow.active = false;
             this.heroScirpt.mana -= this.cardScript.manaConsume;
             this.sendEvent(this.useCardEffect,true);
 
+            var absolutelyLocation = new cc.Vec2(
+                (event.getLocationX() - cc.director.getWinSize().width / 2) / globalConstant.cameraRatio + cc.director.getWinSize().width / 2,
+                (event.getLocationY() - cc.director.getWinSize().height / 2) / globalConstant.cameraRatio + cc.director.getWinSize().height / 2
+            );
             if (globalConstant.cameraOffset === 0) {
-                this.mAngle = 360 - Math.atan2(event.getLocationY() - targetPos.y,
-                        event.getLocationX() - this.hero.x) * 180 / Math.PI;
+                this.mAngle = 360 - Math.atan2(absolutelyLocation.y - targetPos.y,
+                        absolutelyLocation.x - this.hero.x) * 180 / Math.PI;
             }else if(this.hero.x > cc.director.getWinSize().width * (globalConstant.sceneWidth - globalConstant.sceneEdge)) {
-                this.mAngle = 360 - Math.atan2(event.getLocationY() - targetPos.y,
-                        event.getLocationX() - this.hero.x + cc.director.getWinSize().width * (globalConstant.sceneWidth - globalConstant.sceneEdge * 2)) * 180 / Math.PI;
+                this.mAngle = 360 - Math.atan2(absolutelyLocation.y - targetPos.y,
+                        absolutelyLocation.x - this.hero.x + cc.director.getWinSize().width * (globalConstant.sceneWidth - globalConstant.sceneEdge * 2)
+                    ) * 180 / Math.PI;
             } else {
                 this.mAngle = 360 - Math.atan2(
-                        event.getLocationY() - targetPos.y,
-                        event.getLocationX() + globalConstant.cameraOffset - this.hero.x
+                        absolutelyLocation.y - targetPos.y,
+                        absolutelyLocation.x + globalConstant.cameraOffset - this.hero.x
                     ) * 180 / Math.PI;
             }
 
-            this.useCardC(this.cardId, this.mAngle, this.speed, this.area * globalConstant.unitLength, this.hero.x, this.arrow.y + this.hero.y);
+            this.useCardC(this.cardId, this.mAngle, this.speed, this.area, this.hero.x, this.arrow.y + this.hero.y);
         }else{
             this.node.opacity = 1000;
             this.preUse = false;
@@ -443,8 +457,8 @@ cc.Class({
                 position: x,
                 y: y,
                 angel: angle,
-                speed: speed,
-                area: area,
+                //speed: speed,
+                //area: area,
                 team: this.cardScript.team,
                 id: this.cardScript.cardId
             });
@@ -465,11 +479,7 @@ cc.Class({
         if(volume === undefined || volume === null){
             volume = 1;
         }
-        if(fullVolume === undefined || fullVolume === null || fullVolume === false){
-            fullVolume = false;
-        }else{
-            fullVolume = true;
-        }
+        fullVolume = !(fullVolume === undefined || fullVolume === null || fullVolume === false);
         eventsend.setUserData({
             effect:audioChip,
             volume:volume,
@@ -478,7 +488,38 @@ cc.Class({
         });
         this.node.dispatchEvent(eventsend);
     },
-
+    renewByWheel:function(event){
+        switch (this.magicType) {
+            case 0:
+                break;
+            case 1:
+                this.rangeLNode.x = this.node.x - this.area / 2 * globalConstant.cameraRatio;
+                this.rangeRNode.x = this.node.x + this.area / 2 * globalConstant.cameraRatio;
+                this.rangeAnimeNode.scale = globalConstant.cameraRatio;
+                this.rangeLNode.scale = globalConstant.cameraRatio;
+                this.rangeRNode.scale = globalConstant.cameraRatio;
+                break;
+            case 2:
+                //var absolutelyLocation = new cc.Vec2(
+                //    (event.getLocationX() - cc.director.getWinSize().width / 2) / globalConstant.cameraRatio + cc.director.getWinSize().width / 2,
+                //    (event.getLocationY() - cc.director.getWinSize().height / 2) / globalConstant.cameraRatio + cc.director.getWinSize().height / 2
+                //);
+                //if (globalConstant.cameraOffset === 0) {
+                //    this.arrow.rotation = 360 - Math.atan2(absolutelyLocation.y - targetPos.y,
+                //            absolutelyLocation.x - this.hero.x) * 180 / Math.PI;
+                //}else if(this.hero.x > cc.director.getWinSize().width * (globalConstant.sceneWidth - globalConstant.sceneEdge)) {
+                //    this.arrow.rotation = 360 - Math.atan2(absolutelyLocation.y - targetPos.y,
+                //            absolutelyLocation.x - this.hero.x + cc.director.getWinSize().width * (globalConstant.sceneWidth - globalConstant.sceneEdge * 2)
+                //        ) * 180 / Math.PI;
+                //} else {
+                //    this.arrow.rotation = 360 - Math.atan2(
+                //            absolutelyLocation.y - targetPos.y,
+                //            absolutelyLocation.x + globalConstant.cameraOffset - this.hero.x
+                //        ) * 180 / Math.PI;
+                //}
+                break;
+        }
+    },
     /**
      * @主要功能 停止当前播放的音效
      * @author C14
@@ -535,6 +576,9 @@ cc.Class({
 
                 break;
         }
+        self.node.on(cc.Node.EventType.MOUSE_WHEEL, function (event) {
+            self.renewByWheel();
+        }, this);
     },
 
 

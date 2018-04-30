@@ -3,76 +3,85 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        //Ä§·¨´´½¨³É¹¦µÄÒôÀÖ
+        //Ä§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         loadEffect:cc.AudioClip,
-        //ÃüÖÐÊ±µÄÒôÀÖ
+        //ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         hitEffect:cc.AudioClip,
 
         skillNode:cc.Node,
 
         GameManager:cc.Component,
 
+        area:0,
+
+        team:0,
+
+        id:0,
+
+        _interval:[]
     },
 
     // use this for initialization
     onLoad: function () {
 
-        var animation = this.node.getComponent(cc.Animation);
+        var self = this;
+
+
+        this.animation = this.node.getComponent("customAnimation");
         this.team = 0;
 
-        //´«µÝ´´½¨·¨Êõ³É¹¦Ê±ÒôÐ§µÄÊÂ¼þ
+        //ï¿½ï¿½ï¿½Ý´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¹ï¿½Ê±ï¿½ï¿½Ð§ï¿½ï¿½ï¿½Â¼ï¿½
         if(this.loadEffect !== null)
             this.sendEvent(this.loadEffect);
 
-        animation.on('finished',  this.onFinished,    this);
+        this.schedule(function(){
+            this.magicSkill.releaseFunction(7);
+        }, globalConstant.unitTime, cc.macro.REPEAT_FOREVER);
+        //animation.on('finished',  this.onFinished,    this);
+        //cc.director.getCollisionManager().enabled = true;
+        if(this.animation !== null) {
+            for (var i = 0; i < 3; i++) {
+                this._interval[i] = (this.animation.animations[i].endNumber -
+                    this.animation.animations[i].startNumber) * 1000 / 60 *
+                    this.animation.animations[i].loops;
+            }
+            this.animation.play("start");
 
-        cc.director.getCollisionManager().enabled = true;
+            setTimeout(function () {
+                if (self._interval[1] !== 0) {
+                    self.animation.play("loop");
+                }
+                //å¾ªçŽ¯å¼€å§‹
+                self.magicSkill.releaseFunction(8);
+                //e.stopPropagation();
+            }, this._interval[0]);
+
+            setTimeout(function () {
+                self.animation.play("end");
+                //å¾ªçŽ¯ç»“æŸ
+                self.magicSkill.releaseFunction(9);
+                //e.stopPropagation();
+            }, this._interval[0] + this._interval[1]);
+
+            setTimeout(function () {
+                self.onFinished();
+                //e.stopPropagation();
+            }, this._interval[0] + this._interval[1] + this._interval[2]);
+        }
         //cc.director.getCollisionManager().enabledDebugDraw = true;
+        //this.node.on('start',this.magicStart,this);
+        //this.node.on('loop',this.magicLoop,this);
+        //this.node.on('end',this.magicStop,this);
 
     },
 
     onCollisionEnter: function (other, self) {
 
-        if (other.node.group === "Ground") {
-
-        }
-
-        if (other.node.group === "Creature") {
-            var script1 = other.node.getComponent('Creature');
+        if (other.node.group === "Unit") {
+            var script1 = other.node.getComponent('Unit');
             var stateScript = script1.stateNode.getComponent('CreatureState');
 
-            if(script1.team === this.team){
-
-                this.magicSkill.releaseFunction(2,script1);
-                ////´«µÝ²¥·ÅÒôÐ§µÄÊÂ¼þ
-                //if(this.hitEffect !== null)
-                //    this.sendEvent(this.hitEffect);
-            }else{
-                this.magicSkill.releaseFunction(3,script1);
-            }
-        }
-
-        if (other.node.group === "Hero") {
-            var script2 = other.node.getComponent('Player');
-            if(script2.team === this.team){
-                //´«µÝ²¥·ÅÒôÐ§µÄÊÂ¼þ
-                //if(this.hitEffect !== null)
-                //    this.sendEvent(this.hitEffect);
-                this.magicSkill.releaseFunction(4,script2);
-            }else{
-                this.magicSkill.releaseFunction(5,script2);
-            }
-        }
-        if (other.node.group === "Base") {
-            var script3 = other.node.getComponent('Base');
-            if(script3.team === this.team){
-                //´«µÝ²¥·ÅÒôÐ§µÄÊÂ¼þ
-                //if(this.hitEffect !== null)
-                //    this.sendEvent(this.hitEffect);
-                this.magicSkill.releaseFunction(6,script3);
-            }else{
-                this.magicSkill.releaseFunction(7,script3);
-            }
+            this.magicSkill.releaseFunction(2,other.node);
         }
     },
 
@@ -91,15 +100,21 @@ cc.Class({
     },
     initMagic:function(detail){
         var box = this.node.getComponent(cc.BoxCollider);
-        box.size.width = detail.area;
-        this.magicSkill = this.skillNode.getComponent("Skill");
-        this.team = detail.team;
-        this.node.width = detail.area;
 
-        this.magicSkill.releaseFunction(0);
+        this.team = detail.team;
+
+        if(!(detail.area === 0 || detail.area === undefined)){
+            this.area = detail.area;
+            box.size.width = this.area;
+            box.size.height = 1000;
+        }
+        this.magicSkill = this.skillNode.getComponent("Skill");
+        //this.node.width = this.area;
+        //this.magicSkill.releaseFunction(0);
     },
+
     /**
-     * @Ö÷Òª¹¦ÄÜ ÏòÉÏ¼¶½Úµã´«µÝÏûÏ¢£¬Ê¹Ö®²¥·ÅÒôÐ§
+     * @ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï¼ï¿½ï¿½Úµã´«ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½Ê¹Ö®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð§
      * @author C14
      * @Date 2017/12/12
      * @parameters audioChip volume
@@ -125,7 +140,7 @@ cc.Class({
     },
 
     /**
-     * @Ö÷Òª¹¦ÄÜ:   ³õÊ¼»¯×¢Èë¹ÜÀíÀà
+     * @ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½:   ï¿½ï¿½Ê¼ï¿½ï¿½×¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      * @parameters Manager
      */
     fnGetManager:function(Manager){

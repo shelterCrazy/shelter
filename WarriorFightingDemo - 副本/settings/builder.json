@@ -1,0 +1,34 @@
+{
+  "appKey": "",
+  "appSecret": "",
+  "encryptJs": false,
+  "excludeScenes": [
+    "a648526b-18c7-47db-a26a-03a50f178803"
+  ],
+  "includeAnySDK": false,
+  "includeSDKBox": false,
+  "inlineSpriteFrames": true,
+  "inlineSpriteFrames_native": false,
+  "jailbreakPlatform": false,
+  "md5Cache": true,
+  "mergeStartScene": false,
+  "oauthLoginServer": "",
+  "optimizeHotUpdate": false,
+  "orientation": {
+    "landscapeLeft": true,
+    "landscapeRight": true,
+    "portrait": false,
+    "upsideDown": false
+  },
+  "packageName": "org.cocos2d.WarriorFighting",
+  "privateKey": "",
+  "renderMode": "0",
+  "startScene": "6d22049f-f824-4d17-9f37-987038b7b2f2",
+  "title": "Demo",
+  "webOrientation": "auto",
+  "wechatgame": {
+    "appid": "",
+    "orientation": "portrait"
+  },
+  "xxteaKey": "246d7f03-1754-41"
+}

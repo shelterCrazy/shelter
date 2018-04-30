@@ -22,7 +22,7 @@ module.exports = {
     //现在正在浏览的卡组
     deckView:0,
     //本次作战的队伍是
-    nowTeam:-1,
+    nowTeam: - 1,
 
     //普通魔法卡生物牌的预制
     magicCardPrefab:[cc.Prefab],

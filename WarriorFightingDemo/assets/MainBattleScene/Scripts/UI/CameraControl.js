@@ -19,7 +19,15 @@ cc.Class({
 
         mainScene:false,
         //y坐标跟随
-        yFollow:false
+        yFollow:false,
+
+        //鼠标滚动的调整
+        _mouseWheel:0,
+
+        mouseWheelMax:{
+            type:cc.Integer,
+            default:8
+        }
         // foo: {
         //    default: null,      // The default value will be used only when the component attaching
         //                           to a node for the first time
@@ -50,9 +58,24 @@ cc.Class({
         ));
     },
 
+    mouseWheel:function(dat){
+        if(this._mouseWheel + dat >= 0 && this._mouseWheel + dat <= this.mouseWheelMax) {
+            this._mouseWheel += dat;
+        }
+        return this._mouseWheel;
+    },
+
     // use this for initialization
     onLoad: function () {
+        var self = this;
+
         this.camera = this.node.getComponent(cc.Camera);
+
+
+        //开启鼠标滚动监听
+        cc.find("Canvas").on(cc.Node.EventType.MOUSE_WHEEL, function (event) {
+            console.log('Mouse wheel:' + self.mouseWheel(event.getScrollY()));
+        }, this);
 
         //绘制碰撞框
         if(globalConstant.collisionDebugDraw)
@@ -81,9 +104,9 @@ cc.Class({
         if(this.mainScene) this.node.y = position.y + cc.winSize.height * 0.4;
         var ratio = targetPos.y / cc.winSize.height;
         if(!this.yFollow)
-            this.camera.zoomRatio = 1 + (0.5 - ratio) * 0.5;
+            globalConstant.cameraRatio = this.camera.zoomRatio = 1 + (0.5 - ratio) * 0.5 - this._mouseWheel/this.mouseWheelMax/2;
         else{
-            this.camera.zoomRatio = 1 + (0.5 - ratio) * 0.1;
+            globalConstant.cameraRatio = this.camera.zoomRatio = 1 + (0.5 - ratio) * 0.1 - this._mouseWheel/this.mouseWheelMax/2;
         }
     }
 });

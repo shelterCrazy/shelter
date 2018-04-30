@@ -1,6 +1,8 @@
 //获取全局变量脚本
 var Global = require('Global');
 var globalConstant = require('Constant');
+var globalCardData = require("CardData");
+
 /**
  * @主要功能 加载牌库，实现抽牌
  * @author 天际/老黄/C14
@@ -10,6 +12,8 @@ cc.Class({
     extends: cc.Component,
     
     properties: {
+        originMagicCardPrefab:cc.Prefab,
+        originCreatureCardPrefab:cc.Prefab,
         //全体魔法生物牌的预制
         magicCardPrefab: {
             default: [],
@@ -58,10 +62,68 @@ cc.Class({
     // use this for initialization
     onLoad: function () {
         var i = 0,j = 0;
+        var self = this;
+        var url = "Data/CardData2";
         this.cardTypeFlag = cc.randomMinus1To1();
-        this.heroScript = this.heroNode.getComponent('Player');
 
-        if(Global.mainStart === true) {
+        this.mainGameManagerScript = this.mainGameManagerNode.getComponent("MainGameManager");
+        this.heroNode = this.mainGameManagerScript.heros[0];
+        this.heroScript = this.heroNode.getComponent('Hero');
+
+
+        if(Global.mainStart === false) {
+
+            for(i = 0;i < 300;i++) {
+                Global.cardPrefab[i] = null;
+                //Global.userCard[i] = 0;
+            }
+
+            //cc.loader.loadRes(url, function (err, results) {
+            //    if(err){
+            //        cc.error("失败了!!%s","CardData.json");
+            //        cc.log(err);
+            //        return;
+            //    }
+            /**
+             * @主要功能 直接利用CardData的文档来进行初始化
+             */
+            var results = globalCardData;
+                for(i = 0;i < results.cardData.length;i++) {
+                    if(results.cardData[i].card_type === 0){
+                        var newNode = cc.instantiate(self.originMagicCardPrefab);
+                        var cardDetailScript = newNode.getComponent("MagicCard");
+
+                        cardDetailScript.magicType = results.cardData[i].releaseType;
+                        cardDetailScript.cardId = results.cardData[i].id;
+                        cardDetailScript.cardType = 0;
+                    }else{
+                        newNode = cc.instantiate(self.originCreatureCardPrefab);
+                        cardDetailScript = newNode.getComponent("CreepCard");
+
+                        cardDetailScript.magicType = results.cardData[i].releaseType;
+                        cardDetailScript.cardId = results.cardData[i].id;
+                        cardDetailScript.cardType = 1;
+                        cardDetailScript.race = results.cardData[i].race;
+                        cardDetailScript.attack = results.cardData[i].attack;
+                        cardDetailScript.health = results.cardData[i].health;
+                        cardDetailScript.speed = results.cardData[i].speed;
+                    }
+                    cardDetailScript.usableType = results.cardData[i].usableType;
+
+
+                    var loadScript = newNode.getComponent("Card");
+                    //loadScript.loadSpriteFrame(Global.cardSpriteFrames[results.cardData[i].id]);
+                    loadScript.manaConsume = results.cardData[i].mana;
+                    loadScript.rarity = results.cardData[i].rarity;
+                    loadScript.cardId = results.cardData[i].id;
+                    loadScript.cName = results.cardData[i].card_name;
+                    loadScript.describe = results.cardData[i].memo;
+                    loadScript.storyDescribe = results.cardData[i].detail[0];
+                    loadScript.cardType = results.cardData[i].card_type;
+                    Global.cardPrefab[results.cardData[i].id] = cc.instantiate(newNode);
+                }
+            //});
+
             //初始化一个卡组数据
             var deckDatas = {
                 name: "我的卡组",
@@ -87,27 +149,29 @@ cc.Class({
             //将卡组数据推入到全局的总卡组数据中
             Global.totalDeckData.push(deckDatas);
             //初始化卡组的卡片构成
-            Global.totalDeckData[Global.deckUsage].deck = [0,10,10,0,0,0,0,0,0,0,0,0];
+            Global.totalDeckData[Global.deckUsage].deck = [0,10,10,0,10,0,0,0,0,0,0,0];
             //Global.totalDeckData[Global.deckUsage].creatureDeck = [10,10,10,10,10,10,0];
             //卡组使用第0号卡组
             Global.deckUsage = 0;
             //this.cardListScript = this.cardList.getComponent('CardList');
         }
-
-        //将预制按照数量放入卡组部分
-        for(i = 0 ;i < Global.totalDeckData[Global.deckUsage].deck.length ; i++){
-            if(Global.totalDeckData[Global.deckUsage].deck[i] !== 0){
-                for(j = 0 ;j < Global.totalDeckData[Global.deckUsage].deck[i];j++) {
-                    this.myCardDeck.push(Global.cardPrefab[i]);
+        setTimeout(function(){
+            //将预制按照数量放入卡组部分
+            for(i = 0 ;i < Global.totalDeckData[Global.deckUsage].deck.length ; i++){
+                if(Global.totalDeckData[Global.deckUsage].deck[i] !== 0){
+                    for(j = 0 ;j < Global.totalDeckData[Global.deckUsage].deck[i];j++) {
+                        self.myCardDeck.push(Global.cardPrefab[i]);
+                    }
                 }
             }
-        }
-        //先发6张牌再说
-        for(i = 0 ;i < 6 ; i++){
-            this.showNewCard();
-        }
-        //4秒补充一张牌
-        this.delayTime(4);
+            //先发6张牌再说
+            for(i = 0 ;i < 6 ; i++){
+                self.showNewCard();
+            }
+            //4秒补充一张牌
+            self.delayTime(4);
+        },10);
+
     },
     /**
      * @主要功能 按照time运行抽牌函数
@@ -178,7 +242,7 @@ cc.Class({
             this.heroScript.handCard.splice(rand,1);
         }
     },
-    getCertainCard:function(cardType,cardId) {
+    getCertainCard:function(cardId) {
         if(this.heroScript.handCard.length < globalConstant.handMaxNum) {
             this.creatNewCard(this.myCardDeck[cardId]);
         }
@@ -201,7 +265,7 @@ cc.Class({
         script.cameraControl = this.cameraControlNode;
         script.mainGameManager = this.mainGameManagerNode;
         script.hero = this.heroNode;
-        script.team = this.heroScript.team;
+        script.team = Global.nowTeam;
         newCard.y = 0;
 
 
