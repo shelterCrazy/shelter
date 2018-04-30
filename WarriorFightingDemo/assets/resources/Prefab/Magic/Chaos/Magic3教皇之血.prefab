@@ -38,7 +38,7 @@
       }
     ],
     "_prefab": {
-      "__id__": 50
+      "__id__": 53
     },
     "_id": "",
     "_opacity": 232,
@@ -458,6 +458,11 @@
     "speedRangeMin": -1,
     "speedMaxSwitch": false,
     "speedMinSwitch": false,
+    "heightRangeSwitch": false,
+    "heightRangeMax": -1,
+    "heightRangeMin": -1,
+    "heightMaxSwitch": false,
+    "heightMinSwitch": false,
     "N": true,
     "R": true,
     "SR": true,
@@ -1576,22 +1581,71 @@
     }
   },
   {
-    "__type__": "cc.Animation",
+    "__type__": "47becnmtLlKqJsZw6DE3Ydy",
     "_name": "",
     "_objFlags": 0,
     "node": {
       "__id__": 1
     },
     "_enabled": true,
-    "_defaultClip": {
-      "__uuid__": "ee189f94-a75a-40eb-9faa-a435d19b1bee"
+    "atlas": {
+      "__uuid__": "ebfc6fae-ad18-42fd-acfa-111c74170ff9"
     },
-    "_clips": [
+    "animations": [
       {
-        "__uuid__": "ee189f94-a75a-40eb-9faa-a435d19b1bee"
+        "__id__": 50
+      },
+      {
+        "__id__": 51
+      },
+      {
+        "__id__": 52
       }
     ],
-    "playOnLoad": true
+    "defaultAnimName": "",
+    "speed": null,
+    "playOnLoad": false,
+    "backOriginFrame": false,
+    "_curAnimIdx": 0,
+    "_curFramesNum": 0,
+    "_frameAmount": 0,
+    "_isDone": true,
+    "_isPlaying": false,
+    "_curLoops": 0,
+    "_originFrame": null
+  },
+  {
+    "__type__": "Clips",
+    "animtionName": "start",
+    "prefix": "1",
+    "suffix": "",
+    "startNumber": 0,
+    "endNumber": 50,
+    "interval": 0,
+    "loops": 1,
+    "speed": 1
+  },
+  {
+    "__type__": "Clips",
+    "animtionName": "loop",
+    "prefix": "1",
+    "suffix": "",
+    "startNumber": 51,
+    "endNumber": 65,
+    "interval": 0,
+    "loops": 3,
+    "speed": 1
+  },
+  {
+    "__type__": "Clips",
+    "animtionName": "end",
+    "prefix": "1",
+    "suffix": "",
+    "startNumber": 66,
+    "endNumber": 99,
+    "interval": 0,
+    "loops": 1,
+    "speed": 1
   },
   {
     "__type__": "cc.PrefabInfo",
