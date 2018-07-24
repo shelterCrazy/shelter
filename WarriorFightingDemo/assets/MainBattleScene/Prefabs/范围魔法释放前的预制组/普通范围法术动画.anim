@@ -1,0 +1,77 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "普通范围法术动画",
+  "_objFlags": 0,
+  "_rawFiles": null,
+  "_duration": 0.3333333333333333,
+  "sample": 60,
+  "speed": 0.5,
+  "wrapMode": 2,
+  "curveData": {
+    "props": {
+      "color": [
+        {
+          "frame": 0,
+          "value": {
+            "__type__": "cc.Color",
+            "r": 255,
+            "g": 255,
+            "b": 255,
+            "a": 255
+          }
+        },
+        {
+          "frame": 0.06666666666666667,
+          "value": {
+            "__type__": "cc.Color",
+            "r": 255,
+            "g": 0,
+            "b": 0,
+            "a": 255
+          }
+        },
+        {
+          "frame": 0.13333333333333333,
+          "value": {
+            "__type__": "cc.Color",
+            "r": 73,
+            "g": 31,
+            "b": 31,
+            "a": 255
+          }
+        },
+        {
+          "frame": 0.2,
+          "value": {
+            "__type__": "cc.Color",
+            "r": 18,
+            "g": 116,
+            "b": 41,
+            "a": 255
+          }
+        },
+        {
+          "frame": 0.2833333333333333,
+          "value": {
+            "__type__": "cc.Color",
+            "r": 255,
+            "g": 195,
+            "b": 39,
+            "a": 255
+          }
+        },
+        {
+          "frame": 0.3333333333333333,
+          "value": {
+            "__type__": "cc.Color",
+            "r": 255,
+            "g": 255,
+            "b": 255,
+            "a": 255
+          }
+        }
+      ]
+    }
+  },
+  "events": []
+}
