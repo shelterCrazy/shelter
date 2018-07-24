@@ -190,7 +190,7 @@ cc.Class({
      */
     useCardPackage: function (packageType) {
         for(var i in Global.userPackageData){
-            if(Global.userPackageData[i].package_type === packageType){
+            if(Global.userPackageData[i].status === 0 && Global.userPackageData[i].package_type === packageType){
                 cc.log(Global.userPackageData[i].id);
                 cc.log(Global.userPackageData[i].package_type);
                 $.ajax({
