@@ -459,6 +459,11 @@
     "speedRangeMin": -1,
     "speedMaxSwitch": false,
     "speedMinSwitch": false,
+    "heightRangeSwitch": false,
+    "heightRangeMax": -1,
+    "heightRangeMin": -1,
+    "heightMaxSwitch": false,
+    "heightMinSwitch": false,
     "N": true,
     "R": true,
     "SR": true,
@@ -1540,7 +1545,7 @@
     "_atlas": null
   },
   {
-    "__type__": "e32ec51bHxN4qeajLoT254v",
+    "__type__": "a634cBvEABOip9Db+jKSpca",
     "_name": "",
     "_objFlags": 0,
     "node": {
@@ -1551,10 +1556,30 @@
       "__id__": 2
     },
     "GameManager": null,
+    "magicType": 1,
     "area": 400,
     "team": 0,
     "id": 105,
-    "_interval": []
+    "death": false,
+    "position": -1,
+    "_interval": [],
+    "network": true,
+    "createByNetwork": false,
+    "startSpeed": 0,
+    "speed": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "gravity": 0,
+    "heroBounce": false,
+    "skyBounce": false,
+    "groundBounce": false,
+    "leftRightBounce": false,
+    "elasticCoefficient": 1,
+    "collisionMaxTime": 0,
+    "vanishCondition": 0,
+    "_stopLock": false
   },
   {
     "__type__": "cc.BoxCollider",
@@ -1585,7 +1610,7 @@
     },
     "_enabled": true,
     "atlas": {
-      "__uuid__": "ebfc6fae-ad18-42fd-acfa-111c74170ff9"
+      "__uuid__": "4b65e5d7-d487-4936-bfc9-ff94979cb47e"
     },
     "animations": [
       {
@@ -1613,18 +1638,18 @@
   {
     "__type__": "Clips",
     "animtionName": "start",
-    "prefix": "1",
+    "prefix": "alumon_",
     "suffix": "",
     "startNumber": 0,
-    "endNumber": 60,
-    "interval": 0,
+    "endNumber": 15,
+    "interval": 0.09,
     "loops": 1,
     "speed": 1
   },
   {
     "__type__": "Clips",
     "animtionName": "loop",
-    "prefix": "1",
+    "prefix": "",
     "suffix": "",
     "startNumber": 41,
     "endNumber": 60,
@@ -1635,7 +1660,7 @@
   {
     "__type__": "Clips",
     "animtionName": "end",
-    "prefix": "1",
+    "prefix": "",
     "suffix": "",
     "startNumber": 61,
     "endNumber": 99,

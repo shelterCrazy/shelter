@@ -1,7 +1,7 @@
 //获取全局变量脚本
 var Global = require('Global');
 var globalConstant = require('Constant');
-var globalCardData = require("CardData");
+var globalCardData = require("CardData2");
 
 /**
  * @主要功能 加载牌库，实现抽牌
@@ -73,7 +73,7 @@ cc.Class({
 
         if(true){//Global.mainStart === false) {
 
-            for(i = 0;i < 300;i++) {
+            for(i = 0;i < 400;i++) {
                 Global.cardPrefab[i] = null;
                 //Global.userCard[i] = 0;
             }
@@ -95,6 +95,12 @@ cc.Class({
 
                         cardDetailScript.magicType = results.cardData[i].releaseType;
                         cardDetailScript.cardId = results.cardData[i].id;
+                        if(results.cardData[i].branch === 1){
+                            cardDetailScript.isBranch = true;
+                        }else{
+                            cardDetailScript.isBranch = false;
+                        }
+                        cardDetailScript.branchNum = results.cardData[i].branch_num;
                         cardDetailScript.cardType = 0;
                     }else{
                         newNode = cc.instantiate(self.originCreatureCardPrefab);
@@ -103,7 +109,7 @@ cc.Class({
                         cardDetailScript.magicType = results.cardData[i].releaseType;
                         cardDetailScript.cardId = results.cardData[i].id;
                         cardDetailScript.cardType = 1;
-                        cardDetailScript.race = results.cardData[i].race;
+                        //cardDetailScript.race = results.cardData[i].race;
                         cardDetailScript.attack = results.cardData[i].attack;
                         cardDetailScript.health = results.cardData[i].health;
                         cardDetailScript.speed = results.cardData[i].speed;
@@ -118,7 +124,7 @@ cc.Class({
                     loadScript.cardId = results.cardData[i].id;
                     loadScript.cName = results.cardData[i].card_name;
                     loadScript.describe = results.cardData[i].memo;
-                    loadScript.storyDescribe = results.cardData[i].detail[0];
+                    //loadScript.storyDescribe = results.cardData[i].detail[0];
                     loadScript.cardType = results.cardData[i].card_type;
                     Global.cardPrefab[results.cardData[i].id] = cc.instantiate(newNode);
                 }
@@ -148,12 +154,28 @@ cc.Class({
             };
             //将卡组数据推入到全局的总卡组数据中
             Global.totalDeckData.push(deckDatas);
-            //初始化卡组的卡片构成
-            Global.totalDeckData[Global.deckUsage].deck = [0,4,6,4,6,0,0,0,0,0,0,0,0,0,0,3,3,3,3,3,3,3,3];
+
             //Global.totalDeckData[Global.deckUsage].creatureDeck = [10,10,10,10,10,10,0];
             //卡组使用第0号卡组
             Global.deckUsage = 0;
-            //this.cardListScript = this.cardList.getComponent('CardList');
+            //初始化卡组的卡片构成
+            Global.totalDeckData[Global.deckUsage].deck = [0,3,0,0,3,0,0,3];
+            Global.totalDeckData[Global.deckUsage].deck[303] = 3;
+            Global.totalDeckData[Global.deckUsage].deck[4] = 3;//六芒星召唤阵太变态
+            Global.totalDeckData[Global.deckUsage].deck[301] = 2;
+            Global.totalDeckData[Global.deckUsage].deck[110] = 3;
+            Global.totalDeckData[Global.deckUsage].deck[109] = 0;
+            Global.totalDeckData[Global.deckUsage].deck[105] = 5;
+            Global.totalDeckData[Global.deckUsage].deck[103] = 3;
+            Global.totalDeckData[Global.deckUsage].deck[104] = 30;
+            Global.totalDeckData[Global.deckUsage].deck[102] = 3;
+            Global.totalDeckData[Global.deckUsage].deck[302] = 3;
+            Global.totalDeckData[Global.deckUsage].deck[307] = 3;
+            Global.totalDeckData[Global.deckUsage].deck[108] = 1;
+            Global.totalDeckData[Global.deckUsage].deck[107] = 3;
+            Global.totalDeckData[Global.deckUsage].deck[311] = 3;
+            Global.totalDeckData[Global.deckUsage].deck[309] = 3;
+            Global.totalDeckData[Global.deckUsage].deck[308] = 3;
         }
         setTimeout(function(){
             //将预制按照数量放入卡组部分
@@ -170,7 +192,7 @@ cc.Class({
             }
             //4秒补充一张牌
             self.delayTime(4);
-        },10);
+        },100);
 
     },
     /**

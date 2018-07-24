@@ -205,11 +205,11 @@ cc.Class({
         var anim = this.animations[curAnim];
 
         if(idx < 10){
-            var str = "000";
+            var str = "00";
         }else if(idx < 100){
-            str = "00";
-        }else if(idx < 1000){
             str = "0";
+        }else if(idx < 1000){
+            str = "";
         }else{
             str = "";
         }

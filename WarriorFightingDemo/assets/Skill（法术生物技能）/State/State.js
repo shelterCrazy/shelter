@@ -54,12 +54,14 @@ cc.Class({
     adjustLogic:function(){
         var flag = false;
 
+        //判断是否有与这个脚本相同的脚本；而且不是自身
         for(var i = 0;i < this.node.parent.children.length; i++) {
             var script = this.node.parent.children[i].getComponent("State");
             if(script.state === this.state && this.node.parent.children[i] !== this.node){
                 flag = true;
             }
         }
+        //如果已经没有这样子的状态
         if(flag === false){
             if(this.state === globalConstant.stateEnum.freeze){
                 this.unitScript.attackFreeze = false;
@@ -73,6 +75,9 @@ cc.Class({
             }
             if(this.state === globalConstant.stateEnum.speedDownTo){
                 this.unitScript.speed = this.save;
+            }
+            if(this.state === globalConstant.stateEnum.control){
+                this.unitScript.changeTeam();
             }
         }
         if(this.state === globalConstant.stateEnum.speedDown){
@@ -115,7 +120,7 @@ cc.Class({
                     network:false,
                     //area:area,
                     team:this.dat4,
-                    id:1
+                    id:301
                 });
                 this.node.dispatchEvent(eventsend);
             }

@@ -64,32 +64,20 @@ cc.Class({
         cardList:cc.Node,
 
     },
-    /**
-     * @主要功能 选择筛选类型
-     * @author
-     * @Date 2018/2/2
-     * @parameters
-     * @returns
-     */
-    filterTypeSelect:function(event, customEventData) {
-        this.filterType[customEventData[0] - '0'] = customEventData[1] - '0';
-        this.cardListScript.renewShowCardGroup();
-        cc.log(this.filterType);
-    },
+
     // use this for initialization
     onLoad: function () {
         var self = this;
-        //var deckDatas = Global.deckData;
-        //deckDatas.magicDeck = [1,2,3];
         //此处用于初始化全部的全局变量
         Global.mainStart = true;
         Global.bagNum = [0,0,0,0];
         Global.storyEnable = [false ,false ,false ,false];
 
-        this.cardListScript = this.cardList.getComponent('CardList');
-        this.cardListScript.mainScript = this;
+        //this.cardListScript = this.cardList.getComponent('CardList');
+        //this.cardListScript.mainScript = this;
+
         //动态加载牌库资源
-        self.cardListScript.initPrefab();
+        //self.cardListScript.initPrefab();
 
         setTimeout(function(){
             self.initUserData();
@@ -100,7 +88,6 @@ cc.Class({
             Global.userCard[i] = 0;
 
     },
-
     /**
      * @主要功能 初始化用户数据；包括用户的卡组信息，持有牌信息
      * @author C14
@@ -108,8 +95,8 @@ cc.Class({
      * @parameters
      * @returns
      */
-
     initUserData:function(){
+        Global.initUserData = true;
         cc.loader.loadResDir("CardTextures/",cc.SpriteFrame, function (err,spriteFrames) {
             if(err){
                 //cc.error("失败了%s","CardData.json");
@@ -161,7 +148,6 @@ cc.Class({
                         Global.totalDeckData[i].deck = [];
                         for(var n = 0; n < 300; n++)Global.totalDeckData[i].deck[n] = 0;
                         Global.totalDeckData[i].sort = rs.userDeckList[i].deck_sort;
-                        //cc.log(rs.userDeckList[i].id);
                     }
 
                     for(var j = 0;j < Global.totalDeckData.length;j++) {
@@ -208,10 +194,7 @@ cc.Class({
                 if(rs.status === "200") {
                     cc.log("用户卡牌数据获取成功");
                     for(i = 0;i < 300;i++)Global.userCard[i] = 0;
-                    for(var i = 0;i < rs.userCardList.length;i++){
-                        Global.userCard[rs.userCardList[i].card_id] ++;
-                    }
-
+                    Global.userCard = rs.userCardList[i];
                 }else{
                     cc.log("用户卡牌数据获取失败");
                 }

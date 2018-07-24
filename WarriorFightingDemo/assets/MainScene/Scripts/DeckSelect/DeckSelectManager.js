@@ -80,6 +80,32 @@ cc.Class({
             this.renewSelectBox();
         }
     },
+
+    /**
+     * @主要功能 调整窗口的出现与消失
+     * @author C14
+     * @Date 2018/6/24
+     * @parameters active
+     * @returns null
+     */
+    changeActive:function(active){
+        var self = this;
+        if(active === true){
+            this.startButton = this.startButtonNode.getComponent(cc.Button);
+            this.renewSelectBox();
+            this.deckInit();
+            this.node.active = true;
+            this.node.runAction(cc.fadeIn(0.3));
+        }else{
+            this.node.runAction(cc.sequence(
+                cc.fadeOut(0.35),
+                cc.callFunc(function(){
+                    self.node.active = false;
+                }.bind(this))
+            ));
+        }
+    },
+
     renewSelectBox:function(){
         //if(Global.totalDeckData[Global.deckUsage] === null ||
         //    Global.totalDeckData[Global.deckUsage].usable === false){
@@ -109,10 +135,7 @@ cc.Class({
         this.node.active = false;
     },
     opoenSelectWindow: function(){
-        this.startButton = this.startButtonNode.getComponent(cc.Button);
-        this.renewSelectBox();
-        this.deckInit();
-        this.node.active = true;
+
     }
     // update (dt) {},
 });

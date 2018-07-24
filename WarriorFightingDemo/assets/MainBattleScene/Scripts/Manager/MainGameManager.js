@@ -67,7 +67,9 @@ var MainGameManager = cc.Class({
 
         //胜利，失败面板
         winPanel:cc.Node,
-        losePanel:cc.Node
+        losePanel:cc.Node,
+
+        backGroundMusic:cc.AudioClip
     },
     getCard:function(dat) {
         var heroScript = this.heros[0].getComponent("Hero");
@@ -126,38 +128,85 @@ var MainGameManager = cc.Class({
         cc.director.getPhysicsManager().enabled = true;
 
         //英雄标记中添加两个英雄节点（方便坐标获取）
-        mapScript.fnCreateHeroSign(this.heros[0]);
-        mapScript.fnCreateHeroSign(this.heros[1]);
+        this.heros[0].getComponent("Unit")._mapSign = mapScript.fnCreateHeroSign(this.heros[0]);
+        this.heros[1].getComponent("Unit")._mapSign = mapScript.fnCreateHeroSign(this.heros[1]);
 
         //获取时间记录器脚本，此脚本负责自动推进时间轴
         this.timerLayerScript = this.timerLayer.getComponent("GameTimer");
 
-        //for(i = 0;i < 200; i++) {
-        //    self.magicPrefab[i] = null;
-        //}
-        //var url = "Prefab/Magic";
-        //cc.loader.loadResDir(url,cc.Prefab, function (err, results) {
-        //    if (err) {
-        //        cc.error("失败了!!%s",err);
-        //        cc.log(err);
-        //    }else{
-        //        for(var i = 0;i < results.length; i++) {
-        //            var magicNode = cc.instantiate(results[i]);
-        //
-        //            var scripts = magicNode.getComponent("NormalMagic");
-        //            if(scripts === null || scripts === undefined){
-        //                scripts = magicNode.getComponent("AreaMagic");
-        //                cc.log("AreaMagic");
-        //            }
-        //            if(scripts === null || scripts === undefined){
-        //                scripts = magicNode.getComponent("DirectionMagic");
-        //                cc.log("DirectionMagic");
-        //            }
-        //            cc.log(scripts);
-        //            self.magicPrefab[scripts.id] = magicNode;
+        for(i = 0;i < 400; i++) {
+            self.magicPrefab[i] = null;
+        }
+        var url = "Prefab/Magic/Sprite";
+        cc.loader.loadResDir(url,cc.Prefab, function (err, results) {
+            if (err) {
+                cc.error("失败了!!%s",err);
+                cc.log(err);
+            }else{
+                for(var i = 0;i < results.length; i++) {
+                    var magicNode = cc.instantiate(results[i]);
+
+                    var scripts = magicNode.getComponent("Magic");
+
+                    self.magicPrefab[scripts.id] = results[i];
+                }
+            }
+        });
+        url = "Prefab/Magic/Chaos";
+        cc.loader.loadResDir(url,cc.Prefab, function (err, results) {
+            if (err) {
+                cc.error("失败了!!%s",err);
+                cc.log(err);
+            }else{
+                for(var i = 0;i < results.length; i++) {
+                    var magicNode = cc.instantiate(results[i]);
+
+                    var scripts = magicNode.getComponent("Magic");
+
+                    self.magicPrefab[scripts.id] = results[i];
+                }
+            }
+        });
+        url = "Prefab/Magic/Science";
+        cc.loader.loadResDir(url,cc.Prefab, function (err, results) {
+            if (err) {
+                cc.error("失败了!!%s",err);
+                cc.log(err);
+            }else{
+                for(var i = 0;i < results.length; i++) {
+                    var magicNode = cc.instantiate(results[i]);
+
+                    var scripts = magicNode.getComponent("Magic");
+                    self.magicPrefab[scripts.id] = results[i];
+                }
+            }
+        });
+
+        //this.creaturePool = [];
+        //for(i = 0;i < 20; i++) {
+        //    if(self.creaturePrefab[i] !== null){
+        //        this.creaturePool[i] = new cc.NodePool();
+        //        let initCount = 30;
+        //        for (var j = 0; j < initCount; j++) {
+        //            //var creatureObject = ;
+        //            this.creaturePool[i].put(cc.instantiate(this.creaturePrefab[i])); // 通过 putInPool 接口放入对象池
         //        }
         //    }
-        //});
+        //}
+        setTimeout(function(){
+            self.magicPool = [];
+            for(i = 0;i < 400; i++) {
+                if(self.magicPrefab[i] !== null){
+                    self.magicPool[i] = new cc.NodePool(); 
+                    var initCount = 10;
+                    for (var j = 0; j < initCount; j++) {
+                        //var magicObject = ;
+                        self.magicPool[i].put(cc.instantiate(self.magicPrefab[i])); // 通过 putInPool 接口放入对象池
+                    }
+                }
+            }
+        },2000);
+        
         //var data = false;
         ////每隔一段时间召唤一个小怪
         //this.schedule(function() {
@@ -194,6 +243,8 @@ var MainGameManager = cc.Class({
         this.node.on('callWinLosePanel',this.callWinLosePanel,this);
         //音效播放事件
         this.node.on('playEffect',this.playEffect,this);
+
+        cc.audioEngine.playMusic(this.backGroundMusic,true);
             
     },
 
@@ -261,11 +312,12 @@ var MainGameManager = cc.Class({
                 volume = 0;
             }
         }
+        var cameraRatioEffect = Math.pow(globalConstant.cameraRatio,4);
         //播放音效
         cc.audioEngine.playEffect(
             event.detail.effect,false,
             event.detail.volume * volume *
-            Global.mainEffectVolume * Global.mainVolume * globalConstant.cameraRatio
+            Global.mainEffectVolume * Global.mainVolume * (cameraRatioEffect)
         );
         event.stopPropagation();
     },
@@ -306,23 +358,21 @@ var MainGameManager = cc.Class({
         }
         //kenan 实验证明  事件是同步的  计时器是异步的
         // this.scheduleOnce(function() {
-        cc.log("magicCreate？？");
-        cc.log(event.detail.prefab);
+            var mag = null;
         /** kenan 这里获取npc的资源方法可以改为，使用资源池获取npc节点*/
         if(event.detail.prefab === undefined || event.detail.prefab === null){
-            var mag = cc.instantiate(this.magicPrefab[event.detail.id]);
+            if (this.magicPool[event.detail.id].size() > 0) { // 通过 size 接口判断对象池中是否有空闲的对象
+                mag = this.magicPool[event.detail.id].get();
+            } else { // 如果没有空闲对象，也就是对象池中备用对象不够时，我们就用 cc.instantiate 重新创建
+                mag = cc.instantiate(this.magicPrefab[event.detail.id]);
+            }
+            //var mag = cc.instantiate();
         }else{
             mag = cc.instantiate(event.detail.prefab);
         }
-
-        var magScript = mag.getComponent("AreaMagic");
-        if(magScript === null){
-            magScript = mag.getComponent("DirectionMagic");
-            if(magScript === null){
-                magScript = mag.getComponent("NormalMagic");
-            }
-        }
+        var magScript = mag.getComponent("Magic");
         magScript.fnGetManager(this);
+
         if(event.detail.position === null) {
 
         }else{
@@ -334,7 +384,9 @@ var MainGameManager = cc.Class({
         }else{
             mag.y = event.detail.y;
         }
+        
         this.magicLayer.addChild(mag);
+        magScript.init();
         magScript.initMagic(event.detail);
 
         //if(data.detail.battleCry !== undefined && data.detail.battleCry === true){
@@ -353,14 +405,17 @@ var MainGameManager = cc.Class({
      */
     magicCreateNetwork: function(data){
         /** kenan 这里获取npc的资源方法可以改为，使用资源池获取npc节点*/
-        var mag = cc.instantiate(this.magicPrefab[data.id]);
-        var magScript = mag.getComponent("AreaMagic");
-        if(magScript === null){
-            magScript = mag.getComponent("DirectionMagic");
-            if(magScript === null){
-                magScript = mag.getComponent("NormalMagic");
-            }
+        var mag = null;
+        if (this.magicPool[data.id].size() > 0) { // 通过 size 接口判断对象池中是否有空闲的对象
+            mag = this.magicPool[data.id].get();
+        } else { // 如果没有空闲对象，也就是对象池中备用对象不够时，我们就用 cc.instantiate 重新创建
+            mag = cc.instantiate(this.magicPrefab[data.id]);
         }
+        //var mag = cc.instantiate(this.magicPrefab[data.id]);
+
+        var magScript = mag.getComponent("Magic");
+
+        magScript.createByNetwork = true;
         magScript.fnGetManager(this);
         // magScript.fnCreateMagic(event.detail);//初始化npc属性
         mag.x = data.position;
@@ -369,7 +424,9 @@ var MainGameManager = cc.Class({
         }else{
             mag.y = data.y;
         }
+        
         this.magicLayer.addChild(mag);
+        magScript.init();
         magScript.initMagic(data);
         magScript.magicSkill.releaseFunction(0);
     },
@@ -389,9 +446,15 @@ var MainGameManager = cc.Class({
         //kenan 实验证明  事件是同步的  计时器是异步的
         // this.scheduleOnce(function() {
         /** kenan 这里获取npc的资源方法可以改为，使用资源池获取npc节点*/
-
         if(data.detail.prefab === undefined || data.detail.prefab === null){
-            npc = cc.instantiate(this.creaturePrefab[data.detail.id]);
+            //if (this.creaturePool[data.detail.id].size() > 0) { // 通过 size 接口判断对象池中是否有空闲的对象
+                //npc = this.creaturePool[data.detail.id].get();
+            //} else { // 如果没有空闲对象，也就是对象池中备用对象不够时，我们就用 cc.instantiate 重新创建
+                npc = cc.instantiate(this.creaturePrefab[data.detail.id]);
+            //}
+            //enemy.parent = parentNode; // 将生成的敌人加入节点树
+            //enemy.getComponent('Enemy').init(); //接下来就可以调用 enemy 身上的脚本进行初始化
+            //npc = cc.instantiate(this.creaturePrefab[data.detail.id]);
         }else{
             npc = cc.instantiate(data.detail.prefab);
         }
@@ -406,12 +469,16 @@ var MainGameManager = cc.Class({
 
         this.creatures.push(npc);
 
-        mapScript.fnCreateCreatureSign(this.creatures[this.creatures.length - 1]);
-
-
         npcScript.initUnit(detail);//初始化npc属性
-        this.creatureLayer.addChild(this.creatures[this.creatures.length - 1]);
+        npcScript._mapSign = mapScript.fnCreateCreatureSign(npc);
 
+        if(npcScript.team * this.heros[0].getComponent("Unit").team > 0){
+            npcScript.focusTarget = this.heros[1];
+        }else{
+            npcScript.focusTarget = this.heros[0];
+        }
+        
+        this.creatureLayer.addChild(this.creatures[this.creatures.length - 1]);
         if(data.detail.battleCry !== undefined && data.detail.battleCry === true){
             npcScript.skillComponent.releaseFunction(0);
         }
@@ -509,7 +576,12 @@ var MainGameManager = cc.Class({
         /** kenan 这里获取npc的资源方法可以改为，使用资源池获取npc节点*/
         var npc = null;
         if(data.prefab === undefined || data.prefab === null){
-            npc = cc.instantiate(this.creaturePrefab[data.id]);
+            //if (this.creaturePool[data.id].size() > 0) { // 通过 size 接口判断对象池中是否有空闲的对象
+            //    npc = this.creaturePool[data.id].get();
+            //} else { // 如果没有空闲对象，也就是对象池中备用对象不够时，我们就用 cc.instantiate 重新创建
+                npc = cc.instantiate(this.creaturePrefab[data.id]);
+            //}
+            //npc = cc.instantiate(this.creaturePrefab[data.id]);
         }else{
             npc = cc.instantiate(data.prefab);
         }
@@ -526,8 +598,13 @@ var MainGameManager = cc.Class({
 
 
         npcScript.initUnit(detail);//初始化npc属性
-        mapScript.fnCreateCreatureSign(this.creatures[this.creatures.length - 1]);
-        this.creatureLayer.addChild(this.creatures[this.creatures.length - 1]);
+        if(npcScript.team * this.heros[0].getComponent("Unit").team > 0){
+            npcScript.focusTarget = this.heros[1];
+        }else{
+            npcScript.focusTarget = this.heros[0];
+        }
+        npcScript._mapSign = mapScript.fnCreateCreatureSign(npc);//this.creatures[this.creatures.length - 1]
+        this.creatureLayer.addChild(npc);
         if(data.battleCry !== undefined && data.battleCry === true){
             npcScript.skillComponent.releaseFunction(0);
         }
@@ -619,21 +696,47 @@ var MainGameManager = cc.Class({
      * @param node
      */
     removeCreature: function(node){
-        var i = 0;
-        var script = node.getComponent('Unit');
+        var i = 0; 
+        
+        var id = node.getComponent('Unit').id;
+        cc.log(id);
         var mapScript = this.mapLayer.getComponent('SmallMap');
         mapScript.fnDeleteSign(node);
         for(i = 0;i < this.creatures.length; i++){
             if( this.creatures[i] === node){
-                
+                //this.creatures[i].destroy();
                 //this.creatures[i].removeFromParent();
+                node.destroy();
                 this.creatures.splice(i,1);
+                break;
             }
         }
-
+        
         //kenan 因为没有回收池  这里需要释放资源
-//        node.destroy();
+        //if(i !== this.creatures.length){
+        
 
+        //this.creaturePool[id].put(node);
+    },
+
+    /**
+     * @主要功能: 释放法术
+     *          建议使用资源池回收节点
+     * @param node
+     */
+    removeMagic: function(node){
+        var i = 0; 
+        
+        var id = node.getComponent('Magic').id;
+
+        this.magicPool[id].put(node);
+    },
+
+    update: function (dt) {
+        for(var i = 0;i < this.creatureLayer.children.length;i ++)
+        this.creatureLayer.children[i].getComponent("Unit").theUpdate(dt);
+        for(i = 0;i < this.heroLayer.children.length;i ++)
+        this.heroLayer.children[i].getComponent("Unit").theUpdate(dt);
     }
     
 });

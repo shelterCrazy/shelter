@@ -173,7 +173,7 @@ cc.Class({
                 //console.log("downMouse!");
 
                 this.node.x = event.getLocationX() - cc.director.getWinSize().width / 2;
-                this.node.y = event.getLocationY() - (cc.director.getWinSize().height / 2 - 220);
+                this.node.y = event.getLocationY() - (cc.director.getWinSize().height / 2) + 300;
 
                 // 开启移动监听
                 cardObject.on(cc.Node.EventType.TOUCH_MOVE, this.moveMouseEvent, this);

@@ -146,7 +146,7 @@ cc.Class({
 
             sky:8,
             ground:9,
-            leftOrRight:10,
+            leftOrRight:10
         });
         if (other.node.group === "Ground") {
             this.collisionTime ++;

@@ -16,7 +16,9 @@ cc.Class({
                 //互换生命值与攻击力
                 healthAreAtk: 7,
                 speedDownTo: 8,
-                infect:9
+                infect:9,
+                //受控制
+                control:10
             }),
             default:0
         },

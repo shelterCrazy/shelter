@@ -11,7 +11,7 @@ cc.Class({
 
         targets: {
             default: [],
-            type: [cc.Node],
+            type: [cc.Node]
         },
         //相机移动范围限制
         areaLeft:0,
@@ -20,7 +20,8 @@ cc.Class({
         mainScene:false,
         //y坐标跟随
         yFollow:false,
-
+        //Y坐标偏移量
+        offsetY:0,
         //鼠标滚动的调整
         _mouseWheel:0,
 
@@ -46,14 +47,18 @@ cc.Class({
      * @parameters targetNum time
      * @returns
      */
-    moveTarget:function(targetNum,time){
+    moveTarget:function(targetNum,customEventData,time){
         var self = this;
-        self.targets[1].position = this.target.position;
-        self.target = self.targets[1];
+
+        Number(customEventData);
+        self.targets[0].position = this.target.position;
+        self.target = self.targets[0];
+
+        if(time === undefined || time === null)time = 2;
         self.target.runAction(cc.sequence(
-            cc.moveTo(time,self.targets[targetNum].position).easing(cc.easeQuadraticActionInOut()),
+            cc.moveTo(time,self.targets[customEventData].position).easing(cc.easeQuadraticActionInOut()),
             cc.callFunc(function(){
-                self.target = self.targets[targetNum];
+                self.target = self.targets[customEventData];
             },this)
         ));
     },
@@ -74,7 +79,7 @@ cc.Class({
 
         //开启鼠标滚动监听
         cc.find("Canvas").on(cc.Node.EventType.MOUSE_WHEEL, function (event) {
-            console.log('Mouse wheel:' + self.mouseWheel(event.getScrollY()));
+            //console.log('Mouse wheel:' + self.mouseWheel(event.getScrollY()));
         }, this);
 
         //绘制碰撞框
@@ -93,20 +98,23 @@ cc.Class({
     lateUpdate: function (dt) {
         var targetPos = this.target.convertToWorldSpaceAR(cc.Vec2.ZERO);
         var position = this.node.parent.convertToNodeSpaceAR(targetPos);
+        if (this.camera !== undefined) {
+            if (position.x > cc.director.getWinSize().width * (this.areaRight - globalConstant.sceneEdge)) {
+                this.node.x = cc.director.getWinSize().width * (this.areaRight - globalConstant.sceneEdge);
+            } else if (position.x < cc.director.getWinSize().width * globalConstant.sceneEdge) {
+                this.node.x = cc.director.getWinSize().width * globalConstant.sceneEdge;
+            } else {
+                this.node.x = position.x;
+            }
 
-        if(position.x > cc.director.getWinSize().width * (this.areaRight - globalConstant.sceneEdge)){
-            this.node.x = cc.director.getWinSize().width * (this.areaRight - globalConstant.sceneEdge);
-        }else if(position.x < cc.director.getWinSize().width * globalConstant.sceneEdge){
-            this.node.x = cc.director.getWinSize().width * globalConstant.sceneEdge;
-        }else {
-            this.node.x = position.x;
-        }
-        if(this.mainScene) this.node.y = position.y + cc.winSize.height * 0.4;
-        var ratio = targetPos.y / cc.winSize.height;
-        if(!this.yFollow)
-            globalConstant.cameraRatio = this.camera.zoomRatio = 1 + (0.5 - ratio) * 0.5 - this._mouseWheel/this.mouseWheelMax/2;
-        else{
-            globalConstant.cameraRatio = this.camera.zoomRatio = 1 + (0.5 - ratio) * 0.1 - this._mouseWheel/this.mouseWheelMax/2;
+            this.node.y = position.y + this.offsetY;
+            var ratio = targetPos.y / cc.winSize.height;
+            if (!this.yFollow)
+                globalConstant.cameraRatio = this.camera.zoomRatio = 1;// + (0.5 - ratio) * 0.5 - this._mouseWheel/this.mouseWheelMax/2;
+            else {
+                globalConstant.cameraRatio = this.camera.zoomRatio = 1 + (0.5 - ratio) * 0.1 -
+                    this._mouseWheel / this.mouseWheelMax / 2;
+            }
         }
     }
 });

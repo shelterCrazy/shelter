@@ -41,25 +41,32 @@ cc.Class({
             * globalConstant.smallMapLength;
             this.script = this.creature.getComponent('Unit');
         if(this.script === null)this.script = this.creature.getComponent('Player');
+
+        this.fnInitSign();
     },
-    fnRenewSign:function(){
+    
+    fnInitSign:function(){
+        this.fnRenewSignPosition();
+        this.fnRenewSignAttack();
+        this.fnRenewSignHealth();
+        this.fnRenewSignTeam();
+    },
+    fnRenewSignPosition:function(){
         this.node.x = this.creature.x / (cc.director.getWinSize().width * globalConstant.sceneWidth)
             * globalConstant.smallMapLength;
+    },
+    fnRenewSignAttack:function(){
         if(this.nodeType === 0) {
             this.attack.string = this.script.attack;
         }else{
             this.attack.string = "";
         }
         this.health.string = this.script.health;
-        for(var i = 0;i < this.signNode.length;i++){
-            if(this.signState === i){
-                this.signNode[i].active = true;
-            }else{
-                this.signNode[i].active = false;
-            }
-        }
     },
-    renewTeam:function(){
+    fnRenewSignHealth:function(){
+        this.health.string = this.script.health;
+    },
+    fnRenewSignTeam:function(){
         if(this.nodeType === 0) {
             if (this.script.team < 0) {
                 this.signState = 0;
@@ -84,19 +91,24 @@ cc.Class({
             } else {
 
             }
-
+        }
+        for(var i = 0;i < this.signNode.length;i++){
+            if(this.signState === i){
+                this.signNode[i].active = true;
+            }else{
+                this.signNode[i].active = false;
+            }
         }
     },
     removeSign: function(){
         this.node.removeFromParent();
-        this.node.active = false;
+        //this.node.active = false;
     },
 
     // called every frame, uncomment this function to activate update callback
-    update: function (dt) {
-        this.renewTeam();
-        this.fnRenewSign();
-    },
+    // update: function (dt) {
+    //     this.fnInitSign();
+    // },
     
     
 });

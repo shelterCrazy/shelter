@@ -1,4 +1,4 @@
-var globalConstant = require("Constant");
+﻿var globalConstant = require("Constant");
 
 cc.Class({
     extends: cc.Component,
@@ -106,7 +106,7 @@ cc.Class({
         }
         if(this.unitScript.death === false && this.xSpeed !== 0) {
             // 根据当前速度更新主角的位置
-            this.unitScript.moveAction(this.xSpeed);
+            this.unitScript.moveAction(this.xSpeed);//  Math.abs(this.xSpeed)
         }
 
         if (this.mana < this.maxMana){
@@ -225,9 +225,9 @@ cc.Class({
                         if (self.unitScript.coolTimer === self.unitScript.coolTime &&
                             self.unitScript.attackFreeze === false) {
                             if(self.unitScript.ATKActionFlag === false){
-                                self.sendAttackMessage();
-                                self.unitScript.ATKActionFlag = true;
+                               self.unitScript.ATKActionFlag = true;
                             }
+                            self.sendAttackMessage();
                             self.unitScript.attackAction();
                         }
                         break;

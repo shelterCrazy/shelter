@@ -1,4 +1,4 @@
-var globalConstant = require("Constant");
+﻿var globalConstant = require("Constant");
 
 cc.Class({
     extends: cc.Component,
@@ -31,7 +31,7 @@ cc.Class({
 
     refresh:function(dt){
 
-        //自身移动判定  存在目标+非攻击+可以移动标记+自己没死
+        
         if (!this.unitScript.ATKActionFlag) {
             for(var i = 0;i < this.unitScript.enemyTarget.length; i++){
                 var script = this.unitScript.enemyTarget[i].getComponent("Unit");
@@ -41,12 +41,31 @@ cc.Class({
                 }
             }
         }
-
-        if (this.unitScript.team > 0) {
-            this.unitScript.moveAction(- this.unitScript.speed);
-        } else {
-            this.unitScript.moveAction(this.unitScript.speed);
+        /**
+         * @主要功能 按照队伍调整移动
+         */
+        //if (this.unitScript.team > 0) {
+        //    this.unitScript.moveAction(- this.unitScript.speed);
+        //} else {
+        //    this.unitScript.moveAction(this.unitScript.speed);
+        //}
+        /**
+         * @主要功能 按照移动目标
+         */
+        //自身移动判定  存在目标+非攻击+可以移动标记+自己没死
+        if(!this.unitScript.ATKActionFlag){
+            if (this.unitScript.node.x > this.unitScript.focusTarget.x) {
+                this.unitScript.moveAction(- this.unitScript.speed);
+            } else {
+                this.unitScript.moveAction(this.unitScript.speed);
+            }
         }
+        //if (this.unitScript.node.x > this.unitScript.focusTarget.x) {
+        //    this.unitScript.moveAccAction(- 1);
+        //} else {
+        //    this.unitScript.moveAccAction(1);
+        //}
+
 
         if(this.unitScript.death === false) {
             //if (this.unitScript.enemyTarget.length === 0) {

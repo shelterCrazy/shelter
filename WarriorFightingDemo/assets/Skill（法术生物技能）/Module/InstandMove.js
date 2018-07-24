@@ -61,7 +61,7 @@ cc.Class({
                     cc.p((1 / 2 + (targetScript.team / Math.abs(targetScript.team) / 2)) *
                         globalConstant.sceneWidth * cc.director.getWinSize().width -
                         targetScript.team / Math.abs(targetScript.team) * this.final,
-                        globalConstant.summonY)));
+                        targetScript.node.y)));
             }
             return;
         }
@@ -83,7 +83,7 @@ cc.Class({
                     cc.p((1 / 2 + (targetScript.team / Math.abs(targetScript.team) / 2)) *
                         globalConstant.sceneWidth * cc.director.getWinSize().width -
                         targetScript.team / Math.abs(targetScript.team) * this.final,
-                            globalConstant.summonY)));
+                        targetScript.node.y)));
             }
         }
         //targets = effectAbleScript.isEffectEnable(script.baseLayer.children);
@@ -108,7 +108,7 @@ cc.Class({
                     (1 / 2 + (targetScript.team / Math.abs(targetScript.team) / 2)) *
                         globalConstant.sceneWidth * cc.director.getWinSize().width -
                         targetScript.team / Math.abs(targetScript.team) * this.final,
-                    globalConstant.summonY));
+                    targetScript.node.y));
             }
         }
     }

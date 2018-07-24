@@ -50,12 +50,15 @@ module.exports = {
         //互换生命值与攻击力
         healthAreAtk:7,
         speedDownTo:8,
-        infect:9
+        //感染
+        infect:9,
+        //受控制
+        control:10
     }),
     //故事模式所需的的金币
     storyModeNeedMoney:500,
     //卡组的最大卡片数量
-    maxDeckCardNum:40,
+    maxDeckCardNum:30,
 
     //迷雾的相关操作
     //迷雾的相关操作

@@ -47,7 +47,9 @@ cc.Class({
         y:0,
         area:0,
         //法术释放的延迟
-        delay:0
+        delay:0,
+
+        network:false
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -115,7 +117,7 @@ cc.Class({
                     this.angel * team / Math.abs(team),
             area: this.area,
             team: team,
-            network:false,
+            network:this.network,
             prefab:this.magicPrefab,
             id: this.id
         });

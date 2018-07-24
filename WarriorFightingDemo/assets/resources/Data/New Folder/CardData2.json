@@ -321,6 +321,26 @@
             "version": 1
         },
         {
+            "id": 365,
+            "card_name": "阿撒托斯",
+            "card_type": 1,
+            "memo": "",
+            "detail": [
+                "混沌之王。",
+                "",
+                ""
+            ],
+            "rarity": 3,
+            "mana": 10,
+            "releaseType": 0,
+            "usableType": 0,
+            "attack": 7,
+            "speed": 0,
+            "health": 200,
+            "race": 0,
+            "version": 1
+        },
+        {
             "id": 1,
             "card_name": "海森堡枪兵",
             "card_type": 1,

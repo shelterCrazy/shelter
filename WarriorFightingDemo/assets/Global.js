@@ -32,7 +32,8 @@ module.exports = {
     userCard:[],
     //卡片的图片
     cardSpriteFrames:[],
-
+    //是否联网获取用户卡牌数据
+    initUserData:false,
     //卡组的类型
     type: {
         type: cc.Enum({
@@ -47,7 +48,11 @@ module.exports = {
     },
 
     //所有的卡组数据在此
-    totalDeckData:[],
+    userDeckData:[],
+    //所有的卡组内部的卡牌数据在此
+    userDeckCardData:[],
+
+    userPackageData:[],
 
     //出战选择的卡组编号
     deckUsage: 0,

@@ -827,6 +827,11 @@
     "speedRangeMin": -1,
     "speedMaxSwitch": false,
     "speedMinSwitch": false,
+    "heightRangeSwitch": false,
+    "heightRangeMax": -1,
+    "heightRangeMin": -1,
+    "heightMaxSwitch": false,
+    "heightMinSwitch": false,
     "N": true,
     "R": true,
     "SR": true,
@@ -1542,7 +1547,7 @@
     "_atlas": null
   },
   {
-    "__type__": "e32ec51bHxN4qeajLoT254v",
+    "__type__": "a634cBvEABOip9Db+jKSpca",
     "_name": "",
     "_objFlags": 0,
     "node": {
@@ -1553,10 +1558,30 @@
       "__id__": 2
     },
     "GameManager": null,
-    "area": 2,
+    "magicType": 1,
+    "area": 400,
     "team": 0,
     "id": 102,
-    "_interval": []
+    "death": false,
+    "position": -1,
+    "_interval": [],
+    "network": true,
+    "createByNetwork": false,
+    "startSpeed": 0,
+    "speed": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "gravity": 0,
+    "heroBounce": false,
+    "skyBounce": false,
+    "groundBounce": false,
+    "leftRightBounce": false,
+    "elasticCoefficient": 1,
+    "collisionMaxTime": 0,
+    "vanishCondition": 0,
+    "_stopLock": false
   },
   {
     "__type__": "cc.BoxCollider",

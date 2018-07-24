@@ -37,6 +37,7 @@ var smallMap = cc.Class({
 
         this.signs.push(newsign);
         this.node.addChild(this.signs[this.signs.length - 1]);
+        return newsign;
     },
     fnCreateHeroSign: function(node){
         //借用一个node来创建一个小兵标记，将Node绑定在预制资源中
@@ -51,6 +52,7 @@ var smallMap = cc.Class({
 
         this.signs.push(newsign);
         this.node.addChild(this.signs[this.signs.length - 1]);
+        return newsign;
     },
 
     /**

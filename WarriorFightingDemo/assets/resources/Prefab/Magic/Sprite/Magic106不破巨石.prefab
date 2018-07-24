@@ -1495,23 +1495,6 @@
     "_atlas": null
   },
   {
-    "__type__": "e32ec51bHxN4qeajLoT254v",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 1
-    },
-    "_enabled": true,
-    "skillNode": {
-      "__id__": 2
-    },
-    "GameManager": null,
-    "area": 400,
-    "team": 0,
-    "id": 106,
-    "_interval": []
-  },
-  {
     "__type__": "cc.BoxCollider",
     "_name": "",
     "_objFlags": 0,
@@ -1530,6 +1513,43 @@
       "width": 0,
       "height": 0
     }
+  },
+  {
+    "__type__": "a634cBvEABOip9Db+jKSpca",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "skillNode": {
+      "__id__": 2
+    },
+    "GameManager": null,
+    "magicType": 1,
+    "area": 400,
+    "team": 0,
+    "id": 106,
+    "death": false,
+    "position": -1,
+    "_interval": [],
+    "network": true,
+    "createByNetwork": false,
+    "startSpeed": 0,
+    "speed": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "gravity": 0,
+    "heroBounce": false,
+    "skyBounce": false,
+    "groundBounce": false,
+    "leftRightBounce": false,
+    "elasticCoefficient": 1,
+    "collisionMaxTime": 0,
+    "vanishCondition": 0,
+    "_stopLock": false
   },
   {
     "__type__": "47becnmtLlKqJsZw6DE3Ydy",

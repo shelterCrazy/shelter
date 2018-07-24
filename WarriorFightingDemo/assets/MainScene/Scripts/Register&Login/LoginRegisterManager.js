@@ -25,7 +25,7 @@ cc.Class({
         this.cameraComponent = this.cameraComponent.getComponent("CameraControl");
         if(Global.login === true){
             this.node.active = false;
-            this.cameraComponent.moveTarget(0, 0);
+            //this.cameraComponent.moveTarget(0, 0, 0);
         }
         //登录报告事件
         this.node.on('message',this.message,this);
@@ -50,7 +50,7 @@ cc.Class({
     },
     moveCamera:function() {
         this.body.active = false;
-        this.cameraComponent.moveTarget(0, 4);
+        this.cameraComponent.moveTarget(0, 1, 4);
     },
     message:function(e){
         var self = this;

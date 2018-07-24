@@ -33,11 +33,33 @@ cc.Class({
         //细节的文字提前说明
         detailLabel:cc.Label
     },
-
     // use this for initialization
     onLoad: function () {
         this.node.on('purchaseId',this.purchaseIdChange,this);
     },
+
+    /**
+     * @主要功能 调整窗口的出现与消失
+     * @author C14
+     * @Date 2018/6/24
+     * @parameters active
+     * @returns null
+     */
+    changeActive:function(active){
+        var self = this;
+        if(active === true){
+            this.node.active = true;
+            this.node.runAction(cc.fadeIn(0.3));
+        }else{
+            this.node.runAction(cc.sequence(
+                cc.fadeOut(0.35),
+                cc.callFunc(function(){
+                    self.node.active = false;
+                }.bind(this))
+            ));
+        }
+    },
+
     purchaseIdChange:function(event){
         this.purchaseId = event.detail.id;
         this.nowMoney = event.detail.script.money;

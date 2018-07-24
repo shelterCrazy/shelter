@@ -219,7 +219,29 @@ cc.Class({
             }
         });
     },
-
+    match:function(){
+        var self = this;
+        $.ajax({
+            url: "/login/captcha",
+            type: "GET",
+            dataType: "json",
+            data:null,
+            success: function(rs){
+                self.codeLabel.string = rs.x + " + " + rs.y + " = ?";
+                self.answer = rs.x + rs.y;
+                if(parseInt(self.codeBox.string) === self.answer){
+                    self.verifyCodeEnable = true;
+                    self.wrong4.string = "";
+                }else{
+                    self.verifyCodeEnable = false;
+                    self.wrong4.string = "验证码错误";
+                }
+            },
+            error: function(){
+                cc.log("验证码获取失败");
+            }
+        });
+    },
     sendMessage:function(message,dispear){
         var eventsend = new cc.Event.EventCustom('message',true);
         eventsend.setUserData({message:message,dispear:dispear});

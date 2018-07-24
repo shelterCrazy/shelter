@@ -32,6 +32,9 @@ cc.Class({
         if(state === globalConstant.stateEnum.burn){
             this.removeStateByState(globalConstant.stateEnum.freeze);
         }
+        if(state === globalConstant.stateEnum.control){
+            this.unitScript.changeTeam();
+        }
         script.target = target;
         script.state = state;
         script.stateParam1 = dat1;

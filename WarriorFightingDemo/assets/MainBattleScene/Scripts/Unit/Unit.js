@@ -1,4 +1,4 @@
-/**
+﻿/**
  * @主要功能:   单位
  * @type {Function}
  */
@@ -25,7 +25,7 @@ var unit = cc.Class({
         enemyTarget:[cc.Node],
 
         id:0,
-        animationId:0,
+        _animationId:0,
 
         unitType:{
             type:cc.Enum({
@@ -57,7 +57,7 @@ var unit = cc.Class({
 
         teamPicNode:[cc.Node],
         //生物宽度
-        //wanimationIdth:0,
+        //w_animationIdth:0,
         //攻击力
         attack:0,
         //攻击力标签
@@ -89,6 +89,7 @@ var unit = cc.Class({
         coolTime: 0,
         //攻击计时器 作废
         // attackTimer: 0,
+        _mapSign:cc.Node,
 
         bodyNode:cc.Node,
 
@@ -112,6 +113,10 @@ var unit = cc.Class({
         this.ATKActionFlag = false;  //攻击行为标记 1攻击进行中
         this.coolTimer = this.coolTime;   //攻击计时器
         this.isCanJump = true;
+
+        this._acc = 5;
+        this._f = 0.5;
+        this._nowSpeed = 0;
 
         this.moveFreeze = false;
         this.attackFreeze = false;
@@ -146,10 +151,8 @@ var unit = cc.Class({
 
 
 
-    update: function (dt) {
-        var self = this;
-        //self.delay ++;
-        //cc.log(this.coolTimer);
+    theUpdate: function (dt) {
+
         if(this.coolTimer > this.coolTime){
             this.coolTimer = this.coolTime;
         }else if(this.coolTimer < this.coolTime){
@@ -171,22 +174,61 @@ var unit = cc.Class({
      */
     moveAction:function(value){
 
-        if (!this.ATKActionFlag && this.move === true && this.death === false &&
+        if (this.move === true && this.death === false &&//!this.ATKActionFlag && 
             this.moveFreeze === false && this.speed > 0) {
             if(value < 0 && this.bodyNode.scaleX === 1)this.bodyNode.scaleX = -1;
             if(value > 0 && this.bodyNode.scaleX === -1)this.bodyNode.scaleX = 1;
             //this.rigidbody.linearVelocity = cc.v2(value * 70,this.rigidbody.linearVelocity.y);
+            if(this._mapSign !== null)
+            this._mapSign.getComponent("SignScript").fnRenewSignPosition();
             this.node.x += value;
 
             if(this.bodySkeleton !== null && this.bodySkeleton.animation === "idle")
                 this.bodySkeleton.animation = "walk";
 
             if (this.animationClip !== null) {
-                var animState = this.animationClip.getAnimationState(this.animationId + " " + "walk");
-                var animState2 = this.animationClip.getAnimationState(this.animationId + " " + "attack");
+                var animState = this.animationClip.getAnimationState(this._animationId + " " + "walk");
+                var animState2 = this.animationClip.getAnimationState(this._animationId + " " + "attack");
                 if(!animState.isPlaying && !animState2.isPlaying) {
-                    this.animationClip.play(this.animationId + " " + "walk");
-                    this.animationClip.stop(this.animationId + " " + "idle");
+                    this.animationClip.play(this._animationId + " " + "walk");
+                    this.animationClip.stop(this._animationId + " " + "idle");
+                }
+            }
+        }
+    },
+    /**
+     * @主要功能 移动行为
+     * value为正表示向右移动，为负表示向左移动
+     * @author C14
+     * @Date 2018/3/8
+     * @parameters value
+     * @returns
+     */
+    moveAccAction:function(position){
+
+        if (this.move === true && this.death === false &&
+            this.moveFreeze === false && this.speed > 0) {
+
+            this._nowSpeed += position * this._acc;
+            if(this._nowSpeed > this.speed){
+                this._nowSpeed = this.speed;
+            }else if(this._nowSpeed < - this.speed){
+                this._nowSpeed = - this.speed;
+            }
+
+            if(position < 0 && this.bodyNode.scaleX === 1)this.bodyNode.scaleX = -1;
+            if(position > 0 && this.bodyNode.scaleX === -1)this.bodyNode.scaleX = 1;
+            //this.rigidbody.linearVelocity = cc.v2(value * 70,this.rigidbody.linearVelocity.y);
+
+            if(this.bodySkeleton !== null && this.bodySkeleton.animation === "idle")
+                this.bodySkeleton.animation = "walk";
+
+            if (this.animationClip !== null) {
+                var animState = this.animationClip.getAnimationState(this._animationId + " " + "walk");
+                var animState2 = this.animationClip.getAnimationState(this._animationId + " " + "attack");
+                if(!animState.isPlaying && !animState2.isPlaying) {
+                    this.animationClip.play(this._animationId + " " + "walk");
+                    this.animationClip.stop(this._animationId + " " + "idle");
                 }
             }
         }
@@ -207,11 +249,11 @@ var unit = cc.Class({
                 this.bodySkeleton.animation = "idle";
             }
             if (this.animationClip !== null) {
-                var animState = this.animationClip.getAnimationState(this.animationId + " " + "idle");
-                var animState2 = this.animationClip.getAnimationState(this.animationId + " " + "attack");
+                var animState = this.animationClip.getAnimationState(this._animationId + " " + "idle");
+                var animState2 = this.animationClip.getAnimationState(this._animationId + " " + "attack");
                 if (!animState.isPlaying && !animState2.isPlaying) {
-                    this.animationClip.stop(this.animationId + " " + "walk");
-                    this.animationClip.play(this.animationId + " " + "idle");
+                    this.animationClip.stop(this._animationId + " " + "walk");
+                    this.animationClip.play(this._animationId + " " + "idle");
                 }
             }
         }
@@ -257,6 +299,29 @@ var unit = cc.Class({
 
             this.coolTimer = 0;
             self.isCanJump = false;
+
+            //var script = self.enemyTarget[0].getComponent("Unit");
+            //while (script.team / Math.abs(script.team) === this.team / Math.abs(this.team)) {
+            //    self.friendlyTarget.push(self.enemyTarget[0]);
+            //    self.enemyTarget.splice(0, 1);
+            //    if (self.enemyTarget.length === 0) {
+            //        self.ATKActionFlag = false;
+            //        //self.animationClip.resume(self._animationId + " " + "walk");
+            //        if(self.bodySkeleton !== null)
+            //            self.bodySkeleton.animation = "idle";
+            //        self.bodyNode.scaleX = - self.team;
+            //        return;
+            //    }
+            //    script = self.enemyTarget[0].getComponent("Unit");
+            //}
+            //script = self.friendlyTarget[0].getComponent("Unit");
+            //while (script.team / Math.abs(script.team) === this.team / Math.abs(this.team)) {
+            //    self.enemyTarget.push(self.friendlyTarget[0]);
+            //    self.friendlyTarget.splice(0, 1);
+            //    script = self.enemyTarget[0].getComponent("Unit");
+            //}
+
+
             //如果有攻击动画效果   和子弹  就这里执行和创建吧   攻速可以用动画时长+延迟处理
             this.sendEvent(this.attackEffect);
             if(this.bodySkeleton !== null) {
@@ -271,23 +336,22 @@ var unit = cc.Class({
                     }
                 );
             }
-
             //if (this.animationClip !== null) {
-            //    this.animationClip.play(this.animationId + " " + "attack");
-            //    this.animationClip.stop(this.animationId + " " + "walk");
-            //    this.animationClip.stop(this.animationId + " " + "idle");
+            //    this.animationClip.play(this._animationId + " " + "attack");
+            //    this.animationClip.stop(this._animationId + " " + "walk");
+            //    this.animationClip.stop(this._animationId + " " + "idle");
             //}
             //
             //if (this.animationClip !== null) {
-            //    var anim1 = this.animationClip.getAnimationState(this.animationId + " " + "attack");
+            //    var anim1 = this.animationClip.getAnimationState(this._animationId + " " + "attack");
             //    anim1.on('finished', function () {
             //        if(self.bodySkeleton !== null) {
             //            self.bodySkeleton.animation = "idle";
             //        }
-            //        //this.animationClip.play(self.animationId + " " + "idle");
+            //        //this.animationClip.play(self._animationId + " " + "idle");
             //        self.ATKActionFlag = false;
             //        self.isCanJump = true;
-            //        //this.animationClip.pause(this.animationId + " " + "walk");
+            //        //this.animationClip.pause(this._animationId + " " + "walk");
             //    }, this);
             //}
             //延时后调用攻击行为
@@ -299,7 +363,7 @@ var unit = cc.Class({
                         self.enemyTarget.splice(0, 1);
                         if (self.enemyTarget.length === 0) {
                             self.ATKActionFlag = false;
-                            //self.animationClip.resume(self.animationId + " " + "walk");
+                            //self.animationClip.resume(self._animationId + " " + "walk");
                             if(self.bodySkeleton !== null)
                                 self.bodySkeleton.animation = "idle";
                             self.bodyNode.scaleX = - self.team;
@@ -339,6 +403,9 @@ var unit = cc.Class({
             if (this.health + value > 0) {
                 this.health = this.health + value * add;
                 this.skillComponent.releaseFunction(2);
+                if(this._mapSign !== null)
+                this._mapSign.getComponent("SignScript").fnRenewSignHealth();
+                if(this.healthLabel !== null)
                 this.healthLabel.string = this.health.toFixed(0);
 
                 if(this.maxHealth < this.health){
@@ -352,6 +419,9 @@ var unit = cc.Class({
                 this.death = true;
 
                 this.health = 0;
+                if(this._mapSign !== null)
+                this._mapSign.getComponent("SignScript").fnRenewSignHealth();
+                if(this.healthLabel !== null)
                 this.healthLabel.string = this.health.toFixed(0);
                 if(this.lifeBar !== null)this.lifeBar.progress = this.health / this.maxHealth;
 
@@ -367,6 +437,9 @@ var unit = cc.Class({
     },
     changeHealthTo: function(value,enemyTarget){
         this.health = value;
+        if(this._mapSign !== null)
+        this._mapSign.getComponent("SignScript").fnRenewSignHealth();
+        if(this.healthLabel !== null)
         this.healthLabel.string = this.health.toFixed(0);
         if(this.maxHealth < this.health){
             this.maxHealth = this.health;
@@ -377,11 +450,15 @@ var unit = cc.Class({
     changeAttackBy: function(value){
         this.attack += value;
         if(this.attack < 0)this.attack = 0;
+        if(this._mapSign !== null)
+        this._mapSign.getComponent("SignScript").fnRenewSignAttack();
         if(this.attackLabel !== null)
         this.attackLabel.string = this.attack.toFixed(0);
     },
     changeAttackTo: function(value){
         this.attack = value;
+        if(this._mapSign !== null)
+        this._mapSign.getComponent("SignScript").fnRenewSignAttack();
         if(this.attackLabel !== null)
         this.attackLabel.string = this.attack.toFixed(0);
     },
@@ -396,24 +473,31 @@ var unit = cc.Class({
 
     //释放此资源
     release:function(){
-        //this.animationClip.stop(this.animationId + " " + "walk");
+        //this.animationClip.stop(this._animationId + " " + "walk");
         var self = this;
         this.death = true;
         this.skillComponent.releaseFunction(4);
-        //this.animationClip.play(this.animationId + " " + "death");
+        //this.animationClip.play(this._animationId + " " + "death");
         if(this.bodySkeleton !== null) {
             this.bodySkeleton.animation = "death";
             this.bodySkeleton.setCompleteListener(
                 function() {
                     self.GameManager.removeCreature(self.node);
                     self.node.removeFromParent();
+                    //self.node.removeFromParent();
+                    // self.bodySkeleton.setCompleteListener(
+                    //     function() {
+                    //         //self.GameManager.removeCreature(self.node);
+                    //         //self.node.removeFromParent();
+                    //     }
+                    //);
                 }
             );
         }
         this.sendEvent(this.dieEffect);
 
         //this.bodySkeleton.setCompleteListener();
-        //var anim1 = this.animationClip.getAnimationState(this.animationId + " " + "death");
+        //var anim1 = this.animationClip.getAnimationState(this._animationId + " " + "death");
         //anim1.on('finished',function(){
         //    this.GameManager.removeCreature(this.node);
         //    this.node.removeFromParent();
@@ -427,12 +511,73 @@ var unit = cc.Class({
      * @parameters team
      * @returns null
      */
-    changeTeam: function(team){
-        var k = this.enemyTarget;
+    changeTeam: function(){
+        this.team = - this.team;
+        var k = this.enemyTarget,i = 0,self = this;
+        var num = 0;
         this.enemyTarget = this.friendlyTarget;
         this.friendlyTarget = k;
-        this.team = team;
+        if(this._mapSign !== null)
+        this._mapSign.getComponent("SignScript").fnRenewSignTeam();
+        if(this.team * this.GameManager.heros[0].getComponent("Unit").team > 0){
+            this.focusTarget = this.GameManager.heros[1];
+        }else{
+            this.focusTarget = this.GameManager.heros[0];
+        }
+
+
+        //for(i = 0;i < this.enemyTarget.length;i++){
+        //    var team = this.enemyTarget[i - num].getComponent("Unit").team;
+        //    cc.log("队伍" + team);
+        //    if(team/Math.abs(team) === this.team/Math.abs(this.team)){
+        //        this.friendlyTarget.push(this.enemyTarget[i - num]);
+        //        this.enemyTarget.splice(i - num);
+        //        num ++;
+        //    }
+        //}
+        //num = 0;
+        //for(i = 0;i < this.friendlyTarget.length;i++){
+        //    team = this.friendlyTarget[i - num].getComponent("Unit").team;
+        //    cc.log("队伍" + team);
+        //    if(team/Math.abs(team) === this.team/Math.abs(this.team)){
+        //        this.enemyTarget.push(this.friendlyTarget[i - num]);
+        //        this.friendlyTarget.splice(i - num);
+        //        num ++;
+        //    }
+        //}
+        setTimeout(function(){
+            var creatures = self.GameManager.creatureLayer.children;
+            for(i = 0;i < creatures.length;i++){
+                creatures[i].getComponent("Unit").renewTarget();
+            }
+        },50)
         this.fnTeamRenew();
+    },
+
+    renewTarget:function(){
+//***********然而这个地方还是有问题啊，this.friendlyTarget.push(arr[0]);要合适的互换友军敌军
+        var num = 0;
+        for(var i = 0;i < this.enemyTarget.length;i++){
+            var team = this.enemyTarget[i - num].getComponent("Unit").team;
+            //cc.log("类型是" + this.enemyTarget[i - num].getComponent("Unit").unitType);
+            if(team/Math.abs(team) === this.team/Math.abs(this.team)){
+                var arr = this.enemyTarget.splice(i - num,1);
+		//cc.log(arr.length);
+                //this.friendlyTarget.push(arr[0]);
+                num ++;
+            }
+        }
+        num = 0;
+        for(i = 0;i < this.friendlyTarget.length;i++){
+            team = this.friendlyTarget[i - num].getComponent("Unit").team;
+            //cc.log("队伍是" + this.team);
+            if(team/Math.abs(team) === this.team/Math.abs(this.team)){
+                arr = this.friendlyTarget.splice(i - num,1);
+		//cc.log(arr.length);
+                //this.enemyTarget.push(arr[0]);
+                num ++;
+            }
+        }
     },
 
     /**
@@ -460,44 +605,52 @@ var unit = cc.Class({
         this.maxHealth = this.health;
         if(data.rarity !== undefined)
             this.typeComponent.rarity = data.rarity;
+        
+        this.death = false;
 
         if(data.speed !== undefined)
             this.speed = data.speed;
 
-        //cc.log(this.savespeed);
-
-        //this.speed = 0;
+        this.ATKActionFlag = false;
+        this.coolTimer = 0;
+        this.friendlyTarget = [];
+        this.enemyTarget = [];
+        
         this.team = data.team;
 
         if(this.attackLabel !== null)
         this.attackLabel.string = this.attack.toFixed(0);
+        if(this.healthLabel !== null)
         this.healthLabel.string = this.health.toFixed(0);
         
         this.AttackBehavior = this.AttackBehavior.getComponent("AttackBehavior");
         this.skillComponent = this.skillComponent.getComponent("Skill");
 
         this.animationClip = this.node.getComponent(cc.Animation);
+        if(this.bodySkeleton !== null)
+            this.bodySkeleton.animation = "walk";
         if(this.animationClip !== null) {
-            this.animationClip.play(this.animationId + " " + "appear");
+            this.animationClip.play(this._animationId + " " + "appear");
             this.summon = true;
 
             this.sendEvent(this.summonEffect);
-            var anim1 = this.animationClip.getAnimationState(this.animationId + " " + "appear");
+            var anim1 = this.animationClip.getAnimationState(this._animationId + " " + "appear");
             anim1.on('finished', function () {
                 this.sendEvent(this.summonEndEffect);
-                this.animationClip.play(this.animationId + " " + "walk");
+                this.animationClip.play(this._animationId + " " + "walk");
                 //cc.log(this.savespeed);
                 //this.speed = this.savespeed;
                 this.summon = false;
             }, this);
         }else{
             this.sendEvent(this.summonEndEffect);
-            //this.animationClip.play(this.animationId + " " + "walk");
+            //this.animationClip.play(this._animationId + " " + "walk");
             //cc.log(this.savespeed);
             //this.speed = this.savespeed;
             this.summon = false;
         }
         this.fnTeamRenew();
+        if(this.lifeBar !== null)this.lifeBar.progress = this.health / this.maxHealth;
     },
 
 

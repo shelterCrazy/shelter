@@ -2810,7 +2810,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 48.94,
+      "width": 49,
       "height": 40
     },
     "_rotationX": 0,
@@ -2901,7 +2901,7 @@
     "handCard": [],
     "mana": 0,
     "maxMana": 10,
-    "manaRecoverSpeedK": 1
+    "manaRecoverSpeedK": 2
   },
   {
     "__type__": "ba16cCkOt1FdKsHTs1cOXOk",
@@ -2963,6 +2963,7 @@
     "attackLabel": null,
     "attackArea": 0,
     "speed": 3,
+    "resist": false,
     "move": true,
     "moveLock": false,
     "team": 0,
