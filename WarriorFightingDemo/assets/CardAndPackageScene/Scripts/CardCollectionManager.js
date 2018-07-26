@@ -124,6 +124,7 @@ cc.Class({
                 self.miniCardNode[i] = null;
                 self.showCardNode[i] = null;
                 Global.cardPrefab[i] = null;
+                Global.showCardNode[i] = null;
             }
             setTimeout(function() {
                 self.initUserData(function (flag) {
@@ -150,6 +151,9 @@ cc.Class({
             cc.log(Global.userDeckCardData);
         },1000);
 
+        this.schedule(fixedUpdate:function(){
+            cc.log("ky");
+        },100,true);
         // this.insertCardElement(this.moonLightWorm);
         // this.insertCardElement(this.undeadBirdDirt);
         // while(this.cardIndex < 2){
@@ -247,6 +251,7 @@ cc.Class({
                 script2.race = cardDetailScript.race;
                 //cardDetailScript.race;
             }
+            Global.showCardNode[script2.cardId] = cc.instantiate(originShowCard);
         }
     },
 

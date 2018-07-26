@@ -28,6 +28,8 @@ module.exports = {
     magicCardPrefab:[cc.Prefab],
     creatureCardPrefab:[cc.Prefab],
     cardPrefab:[cc.Prefab],
+
+    showCardNode:[cc.Prefab],
     //用户持有的卡片 键值 + 数量
     userCard:[],
     //卡片的图片

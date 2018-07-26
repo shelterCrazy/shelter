@@ -8,14 +8,14 @@ cc.Class({
         packageLayer: cc.Node,
 
         packageUseLayer: cc.Node,
-        //卡包预支
+        //卡包预制
         packagePrefab: [cc.Prefab],
-        //卡包Layout控制盒
+        //卡包收容盒
         packageBox: cc.Prefab,
 
         //卡包数据
         packageNumData: [cc.Integer],
-
+        //卡包数据
         packageData: [],
         //数量标签
         numLabel: [cc.Node],
@@ -25,16 +25,12 @@ cc.Class({
         connectionSuccess: false,
 
         useAreaLayer: cc.Node,
-        // foo: {
-        //    default: null,      // The default value will be used only when the component attaching
-        //                           to a node for the first time
-        //    url: cc.Texture2D,  // optional, default is typeof default
-        //    serializable: true, // optional, default is true
-        //    visible: true,      // optional, default is true
-        //    displayName: 'Foo', // optional
-        //    readonly: false,    // optional, default is false
-        // },
-        // ...
+        //卡包开启后的卡牌预制
+        packageCardPrefab:cc.Prefab,
+        //用户开启卡包成功后的展示节点
+        packageCardListNode:cc.Node,
+        //结束卡牌的按钮
+        endButton:cc.Node
     },
 
     // use this for initialization
@@ -44,6 +40,7 @@ cc.Class({
         var self = this;
         this.getPackageNum();
 
+        this.clickNum = 0;
 
         setTimeout(function () {
             if (self.connectionSuccess === true) {
@@ -55,8 +52,20 @@ cc.Class({
 
                 self.node.on("enterArea", self.enterArea, self);
                 self.node.on("leaveArea", self.leaveArea, self);
+
+                self.node.on("rotateCard", function(){
+                    this.clickNum ++;
+                    cc.log(this.clickNum);
+                    if(this.clickNum === 5){
+                        this.clickNum = 0;
+                        this.endButton.active = true;
+                    }
+                }.bind(this), self);
             }
-        }, 1000);
+        }.bind(this), 1000);
+    },
+    closePackageCardList:function(){
+        this.packageCardListNode.removeAllChildren();
     },
     packageSelect: function (e) {
         if (--this.packageNumData[e.detail.packageType] === 0) {
@@ -189,10 +198,9 @@ cc.Class({
      * @returns
      */
     useCardPackage: function (packageType) {
+        var self = this;
         for(var i in Global.userPackageData){
             if(Global.userPackageData[i].status === 0 && Global.userPackageData[i].package_type === packageType){
-                cc.log(Global.userPackageData[i].id);
-                cc.log(Global.userPackageData[i].package_type);
                 $.ajax({
                     url: "/areadly/useCardPackage",
                     type: "GET",
@@ -206,7 +214,14 @@ cc.Class({
                         if (rs.status === "200") {
                             cc.log("开包成功");
                             cc.log(rs);
-                            Global.userPackageData.splice(i,1)
+                            Global.userPackageData.splice(i,1);
+                            //遍历得到的卡牌，按照ID进行初始化，然后保持可以开启查看的姿态
+                            for(var j in rs.packageCardList) {
+                                var card = cc.instantiate(self.packageCardPrefab);
+                                card.getComponent("CardBack").cardId = rs.packageCardList[j].id;
+                                card.getComponent("CardBack").init(rs.packageCardList[j].id);
+                                self.packageCardListNode.addChild(card);
+                            }
                         } else {
                             cc.log("开包失败");
                             cc.log(rs);
@@ -220,35 +235,6 @@ cc.Class({
             }
         }
     },
-
-    /**
-     * @主要功能 创建一个随机数
-     * @author C14
-     * @Date 2017/12/21
-     * @parameters
-     * @returns
-     */
-    randomCard: function () {
-        var num = 0;
-        num = Math.floor(Math.random() * (this.mainSceneScript.miniMagicPrefab.length
-            + this.mainSceneScript.miniCreaturePrefab.length));
-        return num;
-    },
-    /**
-     * @主要功能 添加10包卡
-     * @author C14
-     * @Date 2017/12/21
-     * @parameters
-     * @returns
-     */
-    addBags: function () {
-        Global.bagNum[0] += 10;
-        this.renewBags();
-    },
-    //renewBags:function(){
-    //    this.cardBagNumLabel.string = '就第一种包，数量是:' + Global.bagNum[0];
-    //},
-
     mainScene: function () {
         setTimeout(function () {
             cc.director.loadScene('MainScene');
