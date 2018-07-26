@@ -117,7 +117,9 @@ cc.Class({
         this.userDeckCardComponent = this.userDeckCardComponent.getComponent("DeckCardManager");
         Global.userDeckCardData = [];
 
-        //$test.login();
+        //this.schedule(function(){
+        //    cc.log("ky?????");
+        //},1);
 
         if(Global.initUserData === false) {
             for(var i = 0;i < 400;i++) {
@@ -151,9 +153,6 @@ cc.Class({
             cc.log(Global.userDeckCardData);
         },1000);
 
-        this.schedule(fixedUpdate:function(){
-            cc.log("ky");
-        },100,true);
         // this.insertCardElement(this.moonLightWorm);
         // this.insertCardElement(this.undeadBirdDirt);
         // while(this.cardIndex < 2){
