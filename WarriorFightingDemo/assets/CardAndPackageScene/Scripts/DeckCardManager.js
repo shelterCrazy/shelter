@@ -56,7 +56,7 @@ cc.Class({
 
             var viewCard = cc.instantiate(this.userDeckCardPrefab);
             var script = viewCard.getComponent("ViewCard");
-
+            cc.log(num);
             script.cName = globalCardData.cardData[i].card_name;
             script.num = num;
             script.cardId = globalCardData.cardData[i].id;

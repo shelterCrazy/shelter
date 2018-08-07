@@ -87,7 +87,9 @@ var MainGameManager = cc.Class({
         var script2 = baseNode2.getComponent('Base');
 
         //获取网络脚本
-        this.network = this.node.getComponent("network");
+        NetworkModule.loadManager(this);
+        NetworkModule.getGlobal(Global);
+        NetworkModule.init();
         //获取小地图脚本
         var mapScript = this.mapLayer.getComponent("SmallMap");
 
@@ -205,7 +207,7 @@ var MainGameManager = cc.Class({
                     }
                 }
             }
-        },2000);
+        },3000);
         
         //var data = false;
         ////每隔一段时间召唤一个小怪
@@ -244,7 +246,7 @@ var MainGameManager = cc.Class({
         //音效播放事件
         this.node.on('playEffect',this.playEffect,this);
 
-        cc.audioEngine.playMusic(this.backGroundMusic,true);
+        //cc.audioEngine.playMusic(this.backGroundMusic,true);
             
     },
 
@@ -354,7 +356,7 @@ var MainGameManager = cc.Class({
      */
     magicCreate: function(event){  //event为父类事件  实际这里是Event.EventCustom子类
         if(event.detail.network === undefined || event.detail.network === true) {
-            this.network.roomMsg('roomChat', {name: "magicCreate", detail: event.detail});
+            NetworkModule.roomMsg(Global.room, 'roomChat', {name: "magicCreate", detail: event.detail});
         }
         //kenan 实验证明  事件是同步的  计时器是异步的
         // this.scheduleOnce(function() {
@@ -440,7 +442,7 @@ var MainGameManager = cc.Class({
      */
     creatureCreate: function(data){  //event为父类事件  实际这里是Event.EventCustom子类
         if(data.detail.network === undefined || data.detail.network === true) {
-            this.network.roomMsg('roomChat', {name: "creatureCreate", detail: data.detail});
+            NetworkModule.roomMsg(Global.room, 'roomChat', {name: "creatureCreate", detail: data.detail});
         }
         var npc = null;
         //kenan 实验证明  事件是同步的  计时器是异步的
@@ -542,7 +544,7 @@ var MainGameManager = cc.Class({
      */
     animationCreate: function(data){  //event为父类事件  实际这里是Event.EventCustom子类
         if(data.detail.network === undefined || data.detail.network === true) {
-            this.network.roomMsg('roomChat', {name: "creatureCreate", detail: data.detail});
+            NetworkModule.roomMsg(Global.room, 'roomChat', {name: "creatureCreate", detail: data.detail});
         }
         var animation = null;
         // this.scheduleOnce(function() {
@@ -617,7 +619,7 @@ var MainGameManager = cc.Class({
      * @param event
      */
     chantCreate: function(event){  //event为父类事件  实际这里是Event.EventCustom子类
-        this.network.roomMsg('roomChat',{name:"chantCreate",detail:event.detail});
+        NetworkModule.roomMsg(Global.room, 'roomChat',{name:"chantCreate",detail:event.detail});
 
         /** kenan 这里获取npc的资源方法可以改为，使用资源池获取npc节点*/
         var chantMag = cc.instantiate(this.chantPrefab);

@@ -139,7 +139,7 @@ cc.Class({
             url: "/areadly/userCard",
             type: "GET",
             dataType: "json",
-            data: {"token": 18},
+            data: {"token": Global.token},
             success: function (rs) {
                 if (rs.status === "200") {
                     cc.log("获取卡包成功");

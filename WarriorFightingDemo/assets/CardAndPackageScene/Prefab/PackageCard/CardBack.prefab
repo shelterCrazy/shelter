@@ -48,8 +48,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 98,
-      "height": 152
+      "width": 196,
+      "height": 304
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -102,8 +102,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 98,
-      "height": 152
+      "width": 196,
+      "height": 304
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -133,7 +133,7 @@
       "__uuid__": "745c31a2-4243-42eb-8231-52ac9c314244"
     },
     "_type": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
@@ -170,9 +170,7 @@
       "__id__": 2
     },
     "rotateSound": [
-      {
-        "__uuid__": "4fc4d6cc-d9da-4e33-a573-358008265711"
-      },
+      null,
       {
         "__uuid__": "389c495f-a49e-4816-a7d0-d9a7c27a77b9"
       },
@@ -183,7 +181,8 @@
         "__uuid__": "c983268f-e527-4b78-99f6-f07edce14b12"
       }
     ],
-    "cardId": 365
+    "cardId": 365,
+    "interactivable": true
   },
   {
     "__type__": "e9e40SkUlhCYbhgwh7RN2MX",

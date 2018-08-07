@@ -43,7 +43,7 @@ cc.Class({
         }else{
             self.numLabel.string = '';   
         }
-        
+
         if(self.cName.length <= 3 ){
             self.cNameLabel.string = self.cName;
         }else{
@@ -82,7 +82,7 @@ cc.Class({
             eventsend.setUserData({object:self});
             self.node.dispatchEvent(eventsend);
         }
-    },
+    }
     
     
     // called every frame, uncomment this function to activate update callback

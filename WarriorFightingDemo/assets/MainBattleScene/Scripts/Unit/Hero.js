@@ -1,4 +1,5 @@
 ﻿var globalConstant = require("Constant");
+var Global = require("Global");
 
 cc.Class({
     extends: cc.Component,
@@ -158,7 +159,7 @@ cc.Class({
     //},
     sendMoveMessage:function(){
         var self = this;
-        self.networkScript.roomMsg('roomChat', {
+        NetworkModule.roomMsg(Global.room, 'roomChat', {
             name: "enemyMove",
             detail: {
                 accLeft: self.accLeft,
@@ -171,7 +172,7 @@ cc.Class({
     sendJumpMessage:function(){
         var self = this;
         if(self.unitScript.isCanJump === true) {
-            self.networkScript.roomMsg('roomChat', {
+            NetworkModule.roomMsg(Global.room, 'roomChat', {
                 name: "enemyJump",
                 detail: {}
             })
@@ -179,10 +180,10 @@ cc.Class({
     },
     sendAttackMessage:function(){
         var self = this;
-            self.networkScript.roomMsg('roomChat', {
-                name: "enemyAttack",
-                detail: {}
-            })
+        NetworkModule.roomMsg(Global.room, 'roomChat', {
+            name: "enemyAttack",
+            detail: {}
+        })
     },
     setInputControl: function () {
         var self = this;

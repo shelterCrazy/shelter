@@ -96,7 +96,7 @@ cc.Class({
                     self.summonMagic(x,selfObjectScript.team);
                     break;
                 case enumDat.random:
-                    x = (Math.random() * (self.areaB - self.areaA) + self.areaA) *
+                    x = (Math.seededRandom(0,1) * (self.areaB - self.areaA) + self.areaA) *
                         (- selfObjectScript.team/Math.abs(selfObjectScript.team)) +
                         cc.director.getWinSize().width * globalConstant.sceneWidth / 2 *
                         (1 + selfObjectScript.team/Math.abs(selfObjectScript.team));

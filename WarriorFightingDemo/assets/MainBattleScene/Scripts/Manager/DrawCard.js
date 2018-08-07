@@ -1,7 +1,7 @@
 //获取全局变量脚本
 var Global = require('Global');
 var globalConstant = require('Constant');
-var globalCardData = require("CardData2");
+var globalCardData = require("CardData");
 
 /**
  * @主要功能 加载牌库，实现抽牌
@@ -47,8 +47,7 @@ cc.Class({
         
         //指定卡片生成的X坐标    
         positionX: 0,
-        //指定卡片生成的类型  
-        cardTypeFlag: 0,
+
         //handCardMaxNum: 0,
         drawCardFlag: 0,
 
@@ -64,14 +63,13 @@ cc.Class({
         var i = 0,j = 0;
         var self = this;
         var url = "Data/CardData2";
-        this.cardTypeFlag = cc.randomMinus1To1();
 
         this.mainGameManagerScript = this.mainGameManagerNode.getComponent("MainGameManager");
         this.heroNode = this.mainGameManagerScript.heros[0];
         this.heroScript = this.heroNode.getComponent('Hero');
 
 
-        if(true){//Global.mainStart === false) {
+
 
             for(i = 0;i < 400;i++) {
                 Global.cardPrefab[i] = null;
@@ -95,11 +93,7 @@ cc.Class({
 
                         cardDetailScript.magicType = results.cardData[i].releaseType;
                         cardDetailScript.cardId = results.cardData[i].id;
-                        if(results.cardData[i].branch === 1){
-                            cardDetailScript.isBranch = true;
-                        }else{
-                            cardDetailScript.isBranch = false;
-                        }
+                        cardDetailScript.isBranch = (results.cardData[i].branch === 1);
                         cardDetailScript.branchNum = results.cardData[i].branch_num;
                         cardDetailScript.cardType = 0;
                     }else{
@@ -128,8 +122,9 @@ cc.Class({
                     loadScript.cardType = results.cardData[i].card_type;
                     Global.cardPrefab[results.cardData[i].id] = cc.instantiate(newNode);
                 }
+        cc.log(Global.cardPrefab);
             //});
-
+        if(Global.mainStart === false) {
             //初始化一个卡组数据
             var deckDatas = {
                 name: "我的卡组",
@@ -160,39 +155,65 @@ cc.Class({
             Global.deckUsage = 0;
             //初始化卡组的卡片构成
             Global.totalDeckData[Global.deckUsage].deck = [0,3,0,0,3,0,0,3];
-            Global.totalDeckData[Global.deckUsage].deck[303] = 3;
+            Global.totalDeckData[Global.deckUsage].deck[203] = 3;
             Global.totalDeckData[Global.deckUsage].deck[4] = 3;//六芒星召唤阵太变态
-            Global.totalDeckData[Global.deckUsage].deck[301] = 2;
+            Global.totalDeckData[Global.deckUsage].deck[201] = 2;
             Global.totalDeckData[Global.deckUsage].deck[110] = 3;
             Global.totalDeckData[Global.deckUsage].deck[109] = 0;
             Global.totalDeckData[Global.deckUsage].deck[105] = 5;
             Global.totalDeckData[Global.deckUsage].deck[103] = 3;
-            Global.totalDeckData[Global.deckUsage].deck[104] = 30;
+            Global.totalDeckData[Global.deckUsage].deck[104] = 3;
             Global.totalDeckData[Global.deckUsage].deck[102] = 3;
-            Global.totalDeckData[Global.deckUsage].deck[302] = 3;
-            Global.totalDeckData[Global.deckUsage].deck[307] = 3;
-            Global.totalDeckData[Global.deckUsage].deck[108] = 1;
+            Global.totalDeckData[Global.deckUsage].deck[202] = 3;
+            Global.totalDeckData[Global.deckUsage].deck[207] = 3;
+            Global.totalDeckData[Global.deckUsage].deck[108] = 40;
             Global.totalDeckData[Global.deckUsage].deck[107] = 3;
-            Global.totalDeckData[Global.deckUsage].deck[311] = 3;
-            Global.totalDeckData[Global.deckUsage].deck[309] = 3;
-            Global.totalDeckData[Global.deckUsage].deck[308] = 3;
-        }
-        setTimeout(function(){
-            //将预制按照数量放入卡组部分
-            for(i = 0 ;i < Global.totalDeckData[Global.deckUsage].deck.length ; i++){
-                if(Global.totalDeckData[Global.deckUsage].deck[i] !== 0){
-                    for(j = 0 ;j < Global.totalDeckData[Global.deckUsage].deck[i];j++) {
-                        self.myCardDeck.push(Global.cardPrefab[i]);
+            Global.totalDeckData[Global.deckUsage].deck[211] = 3;
+            Global.totalDeckData[Global.deckUsage].deck[209] = 3;
+            Global.totalDeckData[Global.deckUsage].deck[208] = 3;
+
+            setTimeout(function(){
+                //将预制按照数量放入卡组部分
+                for(i = 0 ;i < Global.totalDeckData[Global.deckUsage].deck.length ; i++){
+                    if(Global.totalDeckData[Global.deckUsage].deck[i] !== 0){
+                        for(j = 0 ;j < Global.totalDeckData[Global.deckUsage].deck[i];j++) {
+                            self.myCardDeck.push(Global.cardPrefab[i]);
+                        }
                     }
                 }
-            }
-            //先发6张牌再说
-            for(i = 0 ;i < 6 ; i++){
-                self.showNewCard();
-            }
-            //4秒补充一张牌
-            self.delayTime(4);
-        },100);
+                //先发6张牌再说
+                for(i = 0 ;i < 6 ; i++){
+                    self.showNewCard();
+                }
+                //4秒补充一张牌
+                self.delayTime(4);
+            },100);
+        }else{
+            setTimeout(function(){
+                //将预制按照数量放入卡组部分
+                cc.log(Global.userDeckCardData);
+                for(var i in Global.userDeckCardData){
+                    if(Global.userDeckCardData[i][0].deck_id === Global.deckUsage){
+                        Global.deckUsage = i;
+                        break;
+                    }
+                }
+                cc.log(Global.userDeckCardData[i]);
+                for(i = 0 ;i < Global.userDeckCardData[Global.deckUsage].length ; i++){
+                    this.myCardDeck.push(Global.cardPrefab[
+                        Global.userDeckCardData[Global.deckUsage][i].card_id]);
+                }
+                //先发6张牌再说
+                for(i = 0 ;i < 6 ; i++){
+                    self.showNewCard();
+                }
+                //4秒补充一张牌
+                self.delayTime(4);
+            }.bind(this),100);
+
+        }
+
+
 
     },
     /**
@@ -254,7 +275,7 @@ cc.Class({
      */
     throwCard:function() {
         if(this.heroScript.handCard.length > 0){
-            var rand = Math.floor(Math.random() * (this.heroScript.handCard.length - 1));
+            var rand = Math.floor(Math.seededRandom(0,1) * (this.heroScript.handCard.length - 1));
             for(var i = 0;i < this.node.children.length;i++){
                 if(this.heroScript.handCard[rand] === this.node.children[i]){
                     this.node.children[i].removeFromParent(true);

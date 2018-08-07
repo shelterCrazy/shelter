@@ -4949,7 +4949,7 @@
     "death": false,
     "position": -1,
     "_interval": [],
-    "network": false,
+    "network": true,
     "createByNetwork": false,
     "startSpeed": 0,
     "speed": {

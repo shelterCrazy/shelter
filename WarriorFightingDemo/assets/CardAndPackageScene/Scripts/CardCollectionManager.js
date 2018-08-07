@@ -102,7 +102,6 @@ cc.Class({
 
     // use this for initialization
     onLoad: function () {
-        var assWeCan = false;
         var self = this;
 
         self.nowPage = 0;
@@ -117,48 +116,32 @@ cc.Class({
         this.userDeckCardComponent = this.userDeckCardComponent.getComponent("DeckCardManager");
         Global.userDeckCardData = [];
 
-        //this.schedule(function(){
-        //    cc.log("ky?????");
-        //},1);
-
         if(Global.initUserData === false) {
-            for(var i = 0;i < 400;i++) {
-                self.miniCardNode[i] = null;
-                self.showCardNode[i] = null;
-                Global.cardPrefab[i] = null;
-                Global.showCardNode[i] = null;
-            }
-            setTimeout(function() {
-                self.initUserData(function (flag) {
-                    if (flag === true) {
-                        self.initPrefab();
-                        self.infoBoardScript = null;
-                        //self.buttons.active = false;
-                        //self.ojbk.active = false;
-                        //第一次刷新预览卡组
-
-
-                        //if(self.mode === 2)self.cardDeckInit();
-                        //self.userDeckComponent.userDeckInit();
-                        //self.initListenEvent();
-                    }
-                });
-            }.bind(this),100);
+            cc.loader.loadResDir("CardTextures/",cc.SpriteFrame, function (err,spriteFrames) {
+                if(err){
+                    return;
+                }
+                for(var i = 0;i < spriteFrames.length;i++) {
+                    cc.log(parseInt(spriteFrames[i].name));
+                    Global.cardSpriteFrames[parseInt(spriteFrames[i].name)] = spriteFrames[i];
+                }
+                for(i = 0;i < 400;i++) {
+                    self.miniCardNode[i] = null;
+                    self.showCardNode[i] = null;
+                    Global.cardPrefab[i] = null;
+                    Global.showCardNode[i] = null;
+                }
+                self.initPrefab();
+                self.infoBoardScript = null;
+                this.initUserCard();
+                this.initUserDeck();
+            }.bind(this));
+        }else{
+            this.userCardInit();
+            this.renewShowCardGroup();
+            this.userDeckComponent.initUserDeck();
         }
-        setTimeout(function(){
-            self.userCardInit();
-            self.renewShowCardGroup();
-            self.initListenEvent();
-            self.userDeckComponent.initUserDeck();
-            cc.log(Global.userDeckCardData);
-        },1000);
-
-        // this.insertCardElement(this.moonLightWorm);
-        // this.insertCardElement(this.undeadBirdDirt);
-        // while(this.cardIndex < 2){
-        //     this.showCardGroup(this.cardGroup[this.cardIndex]);
-        //     this.cardIndex++;
-        // }
+        this.initListenEvent();
     },
 
     /**
@@ -311,6 +294,7 @@ cc.Class({
      */
     filterTypeSelect:function(event, customEventData) {
         this.filterType[customEventData[0] - '0'] = customEventData[1] - '0';
+        this.nowPage = 0;
         this.renewShowCardGroup();
     },
 
@@ -350,28 +334,6 @@ cc.Class({
         }
     },
 
-    /**
-     * @主要功能 更新一次现在的总卡组浏览
-     * @author C14
-     * @Date 2017/10/21
-     * @parameters
-     * @returns
-     */
-    renewDeckView: function(){
-        var i = 0;
-        this.layout.node.removeAllChildren();
-        for(i = 0;i<Global.totalDeckData.length;i++){
-            var decks = cc.instantiate(this.deckPrefab);
-            var deckScript = decks.getComponent("ViewDeck");
-            if(Global.totalDeckData[i].usable === false)decks.opacity = 100;
-            //deckScript.num = i;
-            deckScript.deckId = Global.totalDeckData[i].deckId;
-            deckScript.sort = Global.totalDeckData[i].sort;
-            deckScript.changeType(Global.totalDeckData[i].type);
-            deckScript.changeName(Global.totalDeckData[i].name);
-            this.layout.node.addChild(decks);
-        }
-    },
     renewShowCardGroup: function(){
         var flag = 0;
         this.userCardNode.removeAllChildren();
@@ -382,7 +344,7 @@ cc.Class({
             //筛选符合条件的牌，符合条件，flag加1
             if((((this.filterType[0] - 1)*100 <= this.userCardData[i].card_id &&
                 (this.filterType[0] - 1)*100 + 100 > this.userCardData[i].card_id) || this.filterType[0] === 0) &&
-                (this.userCardData[i].rarity + 1 === this.filterType[1] || this.filterType[1] === 0) &&
+                (this.userCardData[i].rarity === this.filterType[1] || this.filterType[1] === 0) &&
                 (this.userCardData[i].mana === this.filterType[2] || this.filterType[2] === 9))
             {
                 //到达了这一页，那么可以开始显示了
@@ -582,23 +544,35 @@ cc.Class({
        }
     },
 
-    /**
-     * @主要功能 调整卡组编辑里面的卡片信息
-     * @author
-     * @Date 2018/2/27
-     * @parameters
-     * @returns
-     */
+    changeScene:function(){
+        cc.director.loadScene("MainScene");
+    },
 
+    initUserCard:function(){
+        this.getUserCardData(function(flag){
+            if(flag === true) {
+                this.userCardInit();
+                this.renewShowCardGroup();
+            }
+        }.bind(this));
+    },
+    initUserDeck:function(){
+        this.getUserDeckData(function(flag){
 
+        });
+        setTimeout(function(flag){
+            this.userDeckComponent.initUserDeck();
+        }.bind(this),500);
+
+    },
     /**
-     * @主要功能 初始化用户数据；包括用户的卡组信息，持有牌信息
+     * @主要功能 初始化用户卡组数据；持有牌信息
      * @author C14
      * @Date 2018/2/27
      * @parameters
      * @returns
      */
-    initUserData:function(fn){
+    getUserDeckData:function(fn){
         //按照卡组顺序来排列
         var compare2 = function (obj1, obj2) {
             var val1 = obj1.deck_sort;
@@ -611,33 +585,6 @@ cc.Class({
                 return 0;
             }
         };
-        //按照card_id排序
-        var compare = function (obj1, obj2) {
-            var val1 = obj1.card_id;
-            var val2 = obj2.card_id;
-            if (val1 < val2) {
-                return -1;
-            } else if (val1 > val2) {
-                return 1;
-            } else {
-                return 0;
-            }
-        };
-        cc.loader.loadResDir("CardTextures/",cc.SpriteFrame, function (err,spriteFrames) {
-            if(err){
-                //cc.error("失败了%s","CardData.json");
-                return;
-            }
-            for(var i = 0;i < spriteFrames.length;i++) {
-                cc.log(parseInt(spriteFrames[i].name));
-                Global.cardSpriteFrames[parseInt(spriteFrames[i].name)] = spriteFrames[i];
-            }
-            //for(i = 0;i < 100;i++) {
-            //    Global.cardSpriteFrames[i] = Global.cardSpriteFrames[i];
-            //}
-            cc.log(spriteFrames);
-            //cc.loader.releaseRes("CardTextures/", cc.SpriteFrame);
-        });
         $.ajax({
             url: "/areadly/getUserDeck",
             type: "GET",
@@ -648,12 +595,6 @@ cc.Class({
                     cc.log("卡组数据获取成功");
                     //将卡组数据放入
                     Global.userDeckData = rs.userDeckList;
-                        //Global.totalDeckData[i].deck = [];
-                        //for(var n = 0; n < 300; n++)Global.totalDeckData[i].deck[n] = 0;
-                        //Global.totalDeckData[i].sort = rs.userDeckList[i].deck_sort;
-                        ////cc.log(rs.userDeckList[i].id);
-                    //}
-
                     Global.userDeckData.sort(compare2);
                     cc.log(Global.userDeckData);
                     for(var j = 0;j < Global.userDeckData.length; j++) {
@@ -686,6 +627,21 @@ cc.Class({
                 fn(false);
             }
         });
+
+    },
+    getUserCardData:function(fn){
+        //按照card_id排序
+        var compare = function (obj1, obj2) {
+            var val1 = obj1.card_id;
+            var val2 = obj2.card_id;
+            if (val1 < val2) {
+                return -1;
+            } else if (val1 > val2) {
+                return 1;
+            } else {
+                return 0;
+            }
+        };
         $.ajax({
             url: "/areadly/getUserCardInfo",
             type: "GET",
@@ -698,8 +654,10 @@ cc.Class({
                     //按照法力水晶消耗排序
                     Global.userCard.sort(compare);
                     cc.log(Global.userCard);
+                    fn(true);
                 }else{
                     cc.log("用户卡牌数据获取失败");
+                    fn(false);
                 }
             },
             error: function(){

@@ -6,6 +6,7 @@ cc.Class({
     properties: {
         deckId:0,
         deckSort:0,
+        selectSort:0,
         //卡组的类型
         type: {
             type: cc.Enum({

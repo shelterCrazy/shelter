@@ -10,7 +10,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "Magic310",
+    "_name": "Magic210",
     "_objFlags": 0,
     "_parent": null,
     "_children": [
@@ -1706,7 +1706,7 @@
     "magicType": 1,
     "area": 400,
     "team": 0,
-    "id": 310,
+    "id": 210,
     "death": false,
     "position": -1,
     "_interval": [],

@@ -32,10 +32,13 @@
       },
       {
         "__id__": 45
+      },
+      {
+        "__id__": 49
       }
     ],
     "_prefab": {
-      "__id__": 49
+      "__id__": 50
     },
     "_id": "",
     "_opacity": 255,
@@ -50,7 +53,7 @@
     "_anchorPoint": {
       "__type__": "cc.Vec2",
       "x": 0.5,
-      "y": 0
+      "y": 0.5
     },
     "_contentSize": {
       "__type__": "cc.Size",
@@ -1386,9 +1389,7 @@
       "__id__": 1
     },
     "_enabled": true,
-    "_spriteFrame": {
-      "__uuid__": "ded8e687-cbc9-48c1-a020-7679dc4f48b4"
-    },
+    "_spriteFrame": null,
     "_type": 0,
     "_sizeMode": 0,
     "_fillType": 0,
@@ -1454,11 +1455,11 @@
     "gravity": 800,
     "heroBounce": false,
     "skyBounce": false,
-    "groundBounce": false,
-    "leftRightBounce": false,
+    "groundBounce": true,
+    "leftRightBounce": true,
     "elasticCoefficient": 1,
-    "collisionMaxTime": 0,
-    "vanishCondition": 9,
+    "collisionMaxTime": 3,
+    "vanishCondition": 1,
     "_stopLock": false
   },
   {
@@ -1470,7 +1471,7 @@
     },
     "_enabled": true,
     "atlas": {
-      "__uuid__": "8d900fe6-7c6b-4a8c-bf7d-3e708fe5fdda"
+      "__uuid__": "4181c21f-cee6-43c8-9561-195040af43dc"
     },
     "animations": [
       {
@@ -1498,10 +1499,10 @@
   {
     "__type__": "Clips",
     "animtionName": "start",
-    "prefix": "fire_start",
+    "prefix": "arcane_shield_sheet_",
     "suffix": "",
     "startNumber": 0,
-    "endNumber": 63,
+    "endNumber": 2,
     "interval": 0,
     "loops": 1,
     "speed": 1
@@ -1509,10 +1510,10 @@
   {
     "__type__": "Clips",
     "animtionName": "loop",
-    "prefix": "fireloop",
+    "prefix": "arcane_shield_sheet_",
     "suffix": "",
     "startNumber": 0,
-    "endNumber": 63,
+    "endNumber": 31,
     "interval": 0,
     "loops": -1,
     "speed": 1
@@ -1520,13 +1521,37 @@
   {
     "__type__": "Clips",
     "animtionName": "end",
-    "prefix": "fireEnd",
+    "prefix": "arcane_shield_sheet_",
     "suffix": "",
     "startNumber": 0,
-    "endNumber": 59,
+    "endNumber": 31,
     "interval": 0,
     "loops": 1,
     "speed": 1
+  },
+  {
+    "__type__": "cc.MotionStreak",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "_fadeTime": 1,
+    "_minSeg": 1,
+    "_stroke": 64,
+    "_texture": {
+      "__uuid__": "8f88e038-48ea-45e7-8d75-52fcb73b6acd"
+    },
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "_fastMode": true,
+    "_N$preview": true
   },
   {
     "__type__": "cc.PrefabInfo",

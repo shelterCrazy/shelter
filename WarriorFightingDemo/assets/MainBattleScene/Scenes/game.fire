@@ -63,7 +63,7 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 121
+        "__id__": 120
       }
     ],
     "_prefab": null,
@@ -129,9 +129,6 @@
       },
       {
         "__id__": 119
-      },
-      {
-        "__id__": 120
       }
     ],
     "_prefab": null,
@@ -290,17 +287,17 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 3840,
-      "height": 500
+      "width": 5760,
+      "height": 1000
     },
     "_rotationX": 0,
     "_rotationY": 0,
-    "_scaleX": 1.1,
+    "_scaleX": 1,
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
       "x": 0,
-      "y": 172
+      "y": 362
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -368,12 +365,12 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 3840,
+      "width": 5760,
       "height": 696
     },
     "_rotationX": 0,
     "_rotationY": 0,
-    "_scaleX": 1.1,
+    "_scaleX": 1,
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
@@ -494,8 +491,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1000,
-      "height": 2000
+      "width": 0,
+      "height": 0
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -808,6 +805,7 @@
     "areaRight": 0,
     "mainScene": false,
     "yFollow": false,
+    "offsetY": 200,
     "_mouseWheel": 0,
     "mouseWheelMax": 5
   },
@@ -962,7 +960,7 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 3684,
+      "x": 5224,
       "y": 0
     },
     "_skewX": 0,
@@ -1106,8 +1104,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -640,
-      "y": 567
+      "x": 780,
+      "y": 687
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -1132,7 +1130,7 @@
     },
     "_size": {
       "__type__": "cc.Size",
-      "width": 4258,
+      "width": 10000,
       "height": 200
     }
   },
@@ -1178,7 +1176,7 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -640,
+      "x": 680,
       "y": -145
     },
     "_skewX": 0,
@@ -1204,7 +1202,7 @@
     },
     "_size": {
       "__type__": "cc.Size",
-      "width": 6532,
+      "width": 10000,
       "height": 200
     }
   },
@@ -1737,7 +1735,6 @@
     "Deck": [],
     "heroNode": null,
     "positionX": 0,
-    "cardTypeFlag": 0,
     "drawCardFlag": 0,
     "mainGameManagerNode": {
       "__id__": 3
@@ -1792,7 +1789,7 @@
     "_position": {
       "__type__": "cc.Vec2",
       "x": 0,
-      "y": -380
+      "y": -329
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -1811,7 +1808,7 @@
     "_enabled": true,
     "isAlignOnce": true,
     "_target": null,
-    "_alignFlags": 44,
+    "_alignFlags": 40,
     "_left": 0,
     "_right": 0,
     "_top": 384,
@@ -2956,8 +2953,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -328,
-      "y": 293
+      "x": -342,
+      "y": 506
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -3210,8 +3207,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -205,
-      "y": 292
+      "x": -219,
+      "y": 505
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -3455,7 +3452,7 @@
     "_position": {
       "__type__": "cc.Vec2",
       "x": -83,
-      "y": 332
+      "y": 504
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -4408,57 +4405,6 @@
       },
       {
         "__uuid__": "748918e1-0dac-46c3-99ff-b3545ca97d0f"
-      },
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      {
-        "__uuid__": "b01d5b4e-1be2-47aa-bcc1-f18ca3023aaa"
       }
     ],
     "magicPrefab": [
@@ -4577,24 +4523,6 @@
     "_isAbsVerticalCenter": true,
     "_originalWidth": 0,
     "_originalHeight": 0
-  },
-  {
-    "__type__": "052c4pbRqxA1q538BY1v5oY",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 3
-    },
-    "_enabled": true,
-    "label": null,
-    "url": "http://39.106.67.112:3000",
-    "socket": null,
-    "token": 1,
-    "userName": "kenan",
-    "password": "123456",
-    "sign": 0,
-    "editBoxNode": null,
-    "messageLabel": null
   },
   {
     "__type__": "cc.Canvas",

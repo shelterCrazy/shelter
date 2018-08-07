@@ -1,12 +1,3 @@
-// Learn cc.Class:
-//  - [Chinese] http://www.cocos.com/docs/creator/scripting/class.html
-//  - [English] http://www.cocos2d-x.org/docs/editors_and_tools/creator-chapters/scripting/class/index.html
-// Learn Attribute:
-//  - [Chinese] http://www.cocos.com/docs/creator/scripting/reference/attributes.html
-//  - [English] http://www.cocos2d-x.org/docs/editors_and_tools/creator-chapters/scripting/reference/attributes/index.html
-// Learn life-cycle callbacks:
-//  - [Chinese] http://www.cocos.com/docs/creator/scripting/life-cycle-callbacks.html
-//  - [English] http://www.cocos2d-x.org/docs/editors_and_tools/creator-chapters/scripting/life-cycle-callbacks/index.html
 var Global = require("Global");
 
 cc.Class({
@@ -18,30 +9,16 @@ cc.Class({
         //���鲼��
         deckLayout:cc.Node,
 
-        startButtonNode:cc.Node,
+        startButton:cc.Button,
 
         selectBox:cc.Node,
-        // foo: {
-        //     // ATTRIBUTES:
-        //     default: null,        // The default value will be used only when the component attaching
-        //                           // to a node for the first time
-        //     type: cc.SpriteFrame, // optional, default is typeof default
-        //     serializable: true,   // optional, default is true
-        // },
-        // bar: {
-        //     get () {
-        //         return this._bar;
-        //     },
-        //     set (value) {
-        //         this._bar = value;
-        //     }
-        // },
     },
 
     // LIFE-CYCLE CALLBACKS:
 
     onLoad: function()
     {
+        this.selectSort = 0;
         this.node.on('mouseDownTheDeck',this.selectCard, this);
     },
     /**
@@ -55,13 +32,15 @@ cc.Class({
         var viewDeck,script;
         this.deckLayout.removeAllChildren();
 
-        for(var i = 0;i < Global.totalDeckData.length;i++){
+        for(var i = 0;i < Global.userDeckData.length;i++){
             viewDeck = cc.instantiate(this.deckPrefab);
             script = viewDeck.getComponent("ViewDeck");
-            script.num = i;
-            script.changeType(Global.totalDeckData[i].type);
-            script.changeName(Global.totalDeckData[i].name);
-            script.judgeUsable();
+            //script.num = i;
+            //script.changeType(Global.userDeckData[i].type);
+            script.changeName(Global.userDeckData[i].deck_name);
+            script.deckSort = Global.userDeckData[i].deck_sort;
+            script.deckId = Global.userDeckData[i].id;
+            script.selectSort = i;
             this.deckLayout.addChild(viewDeck);
         }
 
@@ -76,7 +55,9 @@ cc.Class({
      */
     selectCard:function(e){
         if(e.detail.object.usable) {
-            Global.deckUsage = e.detail.object.num;
+            Global.deckUsage = e.detail.object.deckId;
+            cc.log(Global.deckUsage);
+            this.selectSort = e.detail.object.selectSort;
             this.renewSelectBox();
         }
     },
@@ -91,7 +72,7 @@ cc.Class({
     changeActive:function(active){
         var self = this;
         if(active === true){
-            this.startButton = this.startButtonNode.getComponent(cc.Button);
+            //this.startButton = this.startButtonNode.getComponent(cc.Button);
             this.renewSelectBox();
             this.deckInit();
             this.node.active = true;
@@ -113,8 +94,8 @@ cc.Class({
         //    //this.startButton.interactable = false;
         //}else{
             this.selectBox.active = true;
-            this.selectBox.x = Global.deckUsage % 3 * 290 - 350;
-            this.selectBox.y = -Math.floor(Global.deckUsage / 3) * 130 + 180;
+            this.selectBox.x = this.selectSort % 3 * 290 - 350;
+            this.selectBox.y = - Math.floor(this.selectSort / 3) * 130 + 180;
             this.startButton.interactable = true;
         //}
     },
@@ -134,8 +115,8 @@ cc.Class({
     closeSelectWindow: function(){
         this.node.active = false;
     },
-    opoenSelectWindow: function(){
-
+    openSelectWindow: function(){
+        this.changeActive(true);
     }
     // update (dt) {},
 });

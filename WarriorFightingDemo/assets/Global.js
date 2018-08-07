@@ -5,6 +5,8 @@ module.exports = {
     userName:"kenan",
     password:"123456",
     token:18,
+    loginFlag:false,
+    room:"",
     //玩家持有的金币
     money:10000,
     //灵魂碎片
@@ -55,6 +57,8 @@ module.exports = {
     userDeckCardData:[],
 
     userPackageData:[],
+    //测试用卡组数据
+    totalDeckData:[],
 
     //出战选择的卡组编号
     deckUsage: 0,

@@ -5,6 +5,7 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
+
         //bodyNode卡背的图样
         bodyNode:cc.Node,
         //翻牌时播放的音效

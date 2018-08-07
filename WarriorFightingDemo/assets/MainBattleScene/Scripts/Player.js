@@ -1,5 +1,5 @@
 var globalConstant = require("Constant");
-
+var Global = require("Global");
 cc.Class({
     extends: cc.Component,
 
@@ -231,7 +231,7 @@ cc.Class({
     },
     sendMoveMessage:function(){
         var self = this;
-        self.networkScript.roomMsg('roomChat', {
+        NetworkModule.roomMsg(Global.room, 'roomChat', {
             name: "enemyMove",
             detail: {
                 accLeft: self.accLeft,
@@ -243,7 +243,7 @@ cc.Class({
     },
     sendJumpMessage:function(){
         var self = this;
-        self.networkScript.roomMsg('roomChat', {
+        NetworkModule.roomMsg(Global.room, 'roomChat', {
             name: "enemyJump",
             detail: {
 

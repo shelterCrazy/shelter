@@ -128,10 +128,10 @@ cc.Class({
         //播放音效
         if(this.loadEffect !== null)
             this.sendEvent(this.loadEffect);
-
+        this.collisionTime = 0;
         //实现单位时间释放性质的法术
         this.schedule(function(){
-            if(self.network !== false || self.createByNetwork !== true)
+            //if(self.network === true) self.createByNetwork !== true
             this.magicSkill.releaseFunction(7);
         }, globalConstant.unitTime, cc.macro.REPEAT_FOREVER);
 
@@ -161,7 +161,6 @@ cc.Class({
                     if (self._interval[1] !== 0) {
                         self.animation.play("loop");
                     }
-                    if (self.network !== false || self.createByNetwork !== true)
                         self.magicSkill.releaseFunction(8);
                 }, this._interval[0]);
 
@@ -240,7 +239,6 @@ cc.Class({
                 });
                 if (other.node.group === "Ground") {
                     this.collisionTime++;
-                    if (self.network !== false || self.createByNetwork !== true)
                         this.magicSkill.releaseFunction(3);
                     if (this.judgeCondition(vanishType.ground)) {
                         this.release();
@@ -251,7 +249,6 @@ cc.Class({
                 }
                 if (other.node.group === "Sky") {
                     this.collisionTime++;
-                    if (self.network !== false || self.createByNetwork !== true)
                         this.magicSkill.releaseFunction(4);
                     if (this.judgeCondition(vanishType.sky)) {
                         this.release();
@@ -262,10 +259,8 @@ cc.Class({
                 if (other.node.group === "LBound") {
                     this.collisionTime++;
                     if (this.team < 0) {
-                        if (self.network !== false || self.createByNetwork !== true)
                             this.magicSkill.releaseFunction(5);
                     } else if (this.team > 0) {
-                        if (self.network !== false || self.createByNetwork !== true)
                             this.magicSkill.releaseFunction(6);
                     }
                     if (this.judgeCondition(vanishType.leftOrRight)) {
@@ -277,10 +272,8 @@ cc.Class({
                 if (other.node.group === "RBound") {
                     this.collisionTime++;
                     if (this.team < 0) {
-                        if (self.network !== false || self.createByNetwork !== true)
                             this.magicSkill.releaseFunction(6);
                     } else if (this.team > 0) {
-                        if (self.network !== false || self.createByNetwork !== true)
                             this.magicSkill.releaseFunction(5);
                     }
                     if (this.judgeCondition(vanishType.leftOrRight)) {
@@ -289,7 +282,7 @@ cc.Class({
                     if (this.leftRightBounce === true)
                         this.speed.x = -this.speed.x * this.elasticCoefficient;
                 }
-
+                cc.log(this.collisionTime);
                 if (this.judgeCondition(vanishType.time) && this.collisionTime > this.collisionMaxTime) {
                     this.release();
                 }
@@ -304,7 +297,6 @@ cc.Class({
                         }
                     }
 
-                    if (self.network !== false || self.createByNetwork !== true)
                         this.magicSkill.releaseFunction(2, other.node);
                     if (script1.unitType === 0) {
                         if (this.judgeCondition(vanishType.myCreature) || this.judgeCondition(vanishType.enemyCreature)) {
@@ -336,14 +328,12 @@ cc.Class({
         switch (this.magicType)
         {
             case typeMagic.normalMagic:
-                if(self.network !== false || self.createByNetwork !== true)
-                        this.magicSkill.releaseFunction(1);
+                    this.magicSkill.releaseFunction(1);
                 //self.node.removeFromParent();
                 //self.node.destroy();
                 self.GameManager.removeMagic(self.node);
                 break;
             case typeMagic.areaMagic:
-                if(self.network !== false || self.createByNetwork !== true)
                     this.magicSkill.releaseFunction(1);
                     
                 //this.node.removeFromParent();
@@ -356,12 +346,10 @@ cc.Class({
                 if(this.animation !== null) {
                     this.animation.play("end");
                 }
-                if(self.network !== false || self.createByNetwork !== true)
                 this.magicSkill.releaseFunction(9);
 
                 this._stopLock = true;
                 setTimeout(function () {
-                    if(self.network !== false || self.createByNetwork !== true)
                     self.magicSkill.releaseFunction(1);
                     //self.node.removeFromParent();
                     //self.node.destroy();
