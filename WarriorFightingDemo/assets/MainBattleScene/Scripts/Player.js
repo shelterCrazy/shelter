@@ -145,10 +145,11 @@ cc.Class({
         if(0 > this.node.x){
             this.node.x = 0;
         }
-        if(this.node.x > cc.director.getWinSize().width * globalConstant.sceneWidth){
-            this.node.x = cc.director.getWinSize().width * globalConstant.sceneWidth;
+        //if(this.node.x > cc.director.getWinSize().width * globalConstant.sceneWidth){
+        if(this.node.x > cc.winSize.width * globalConstant.sceneWidth){
+            this.node.x = cc.winSize.width * globalConstant.sceneWidth;
         }
-        if(this.death === false && 0 <= this.node.x && this.node.x <= cc.director.getWinSize().width * globalConstant.sceneWidth) {
+        if(this.death === false && 0 <= this.node.x && this.node.x <= cc.winSize.width * globalConstant.sceneWidth) {
             // 根据当前速度更新主角的位置
             this.node.x += this.xSpeed;
         }
@@ -214,7 +215,7 @@ cc.Class({
     },
     init:function(data){
         this.team = data.team;
-        this.node.x = globalConstant.sceneWidth * cc.director.getWinSize().width / 2
+        this.node.x = globalConstant.sceneWidth * cc.winSize.width / 2
             * (1 + this.team / Math.abs(this.team));
         this.changeOutLook();
     },

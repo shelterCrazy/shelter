@@ -12,9 +12,15 @@ cc.Class({
 
     properties: {
         //启动的时候播放的音效
-        loadEffect:cc.AudioClip,
+        loadEffect:{
+            type:cc.AudioSource,
+            default:null
+        },
         //击中单位播放的音效
-        hitEffect:cc.AudioClip,
+        hitEffect:{
+            type:cc.AudioSource,
+            default:null
+        },
         //效果节点
         skillNode:cc.Node,
         //游戏管理器
@@ -399,7 +405,9 @@ cc.Class({
                 }
                 break;
             case typeMagic.directionMagic:
+                if(this.speed.x === 0)
                 this.speed.x = Math.sin((detail.angel + 90)*Math.PI/180) * this.startSpeed;
+                if(this.speed.y === 0)
                 this.speed.y = Math.cos((detail.angel + 90)*Math.PI/180) * this.startSpeed;
                 break;
         }
@@ -407,13 +415,14 @@ cc.Class({
 
     },
 
-    update: function (dt) {
-
+    updateByNet: function (fps) {
+        //获得当前帧率下应当推进的速率
+        var frameSpeed = globalConstant.frameRate / fps;
         if(this.magicType === 2) {
             if (this._stopLock === false) {
-                this.speed.y -= this.gravity * dt;
-                this.node.x += this.speed.x * dt;
-                this.node.y += this.speed.y * dt;
+                this.speed.y -= this.gravity * frameSpeed;
+                this.node.x += this.speed.x * frameSpeed;
+                this.node.y += this.speed.y * frameSpeed;
             }
         }
     },

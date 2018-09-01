@@ -1,4 +1,5 @@
 var $ = {
+    url:"http://111.230.42.175:3000",
     ajax:function(options){
         var xhr = cc.loader.getXMLHttpRequest();
         //xhr.open(options.type,"http://39.106.67.112:3000" + options.url,true);
@@ -13,15 +14,15 @@ var $ = {
         if (options.type == "GET") {
             if(options.data === undefined || options.data === null){
                 //CEO的网址http://39.106.67.112:3000
-                xhr.open("GET","http://39.106.67.112:3000" + options.url, true);
+                xhr.open("GET",this.url + options.url, true);
                 xhr.send();
             }else{
-                xhr.open("GET","http://39.106.67.112:3000" + options.url + "?" + params, true);
+                xhr.open("GET",this.url + options.url + "?" + params, true);
                 xhr.send(params);
             }
         } else if (options.type == "POST") {
             //xhr.open("POST","http://39.106.67.112:3000" + options.url + "?" + params, true);
-            xhr.open("POST","http://39.106.67.112:3000" + options.url, true);
+            xhr.open("POST",this.url + options.url, true);
             //设置表单提交时的内容类型
             xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
             xhr.send(params);
