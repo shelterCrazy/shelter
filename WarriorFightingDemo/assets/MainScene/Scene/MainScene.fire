@@ -505,7 +505,7 @@
     },
     "_children": [],
     "_tag": -1,
-    "_active": false,
+    "_active": true,
     "_components": [
       {
         "__id__": 11
@@ -2280,7 +2280,7 @@
       }
     ],
     "_tag": -1,
-    "_active": false,
+    "_active": true,
     "_components": [
       {
         "__id__": 68
@@ -2847,7 +2847,7 @@
     },
     "_children": [],
     "_tag": -1,
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 74
@@ -3052,7 +3052,7 @@
         "__id__": 78
       }
     ],
-    "_N$isChecked": true
+    "_N$isChecked": false
   },
   {
     "__type__": "cc.ClickEvent",
@@ -3136,7 +3136,7 @@
     },
     "_children": [],
     "_tag": -1,
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 81
@@ -3172,8 +3172,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 1788,
-      "y": 1235
+      "x": 1912,
+      "y": 2
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -3254,7 +3254,7 @@
     },
     "_children": [],
     "_tag": -1,
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 85
@@ -3290,8 +3290,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 2326,
-      "y": 1471
+      "x": 2450,
+      "y": 238
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -3333,7 +3333,7 @@
     },
     "_enabled": true,
     "atlas": {
-      "__uuid__": "6fbeffbf-64d9-462c-a9a6-d497ad319efc"
+      "__uuid__": "4b65e5d7-d487-4936-bfc9-ff94979cb47e"
     },
     "animations": [
       {
@@ -3355,10 +3355,10 @@
   {
     "__type__": "Clips",
     "animtionName": "alumon",
-    "prefix": "",
+    "prefix": "alumon_",
     "suffix": "",
     "startNumber": 0,
-    "endNumber": 15,
+    "endNumber": 19,
     "interval": 0.09,
     "loops": -1,
     "speed": 1
@@ -5209,8 +5209,13 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
+<<<<<<< HEAD
       "x": 0,
       "y": 0
+=======
+      "x": 2227,
+      "y": 93
+>>>>>>> parent of ed95a6b... C14的修改
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -5331,8 +5336,13 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
+<<<<<<< HEAD
       "x": 0,
       "y": 0
+=======
+      "x": 2397,
+      "y": 51
+>>>>>>> parent of ed95a6b... C14的修改
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -5394,7 +5404,38 @@
     "groupIndex": 0
   },
   {
+<<<<<<< HEAD
     "__type__": "cc.Sprite",
+=======
+    "__type__": "05863W3ILBA5KPipWoJvHUu",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 150
+    },
+    "_enabled": true,
+    "target": {
+      "__id__": 149
+    },
+    "targets": [
+      {
+        "__id__": 149
+      },
+      {
+        "__id__": 145
+      }
+    ],
+    "areaLeft": 0,
+    "areaRight": 4,
+    "mainScene": false,
+    "yFollow": true,
+    "offsetY": 400,
+    "_mouseWheel": 0,
+    "mouseWheelMax": 8
+  },
+  {
+    "__type__": "cc.Camera",
+>>>>>>> parent of ed95a6b... C14的修改
     "_name": "",
     "_objFlags": 0,
     "node": {
@@ -12103,11 +12144,11 @@
     "_N$backgroundImage": {
       "__uuid__": "67e68bc9-dad5-4ad9-a2d8-7e03d458e32f"
     },
-    "_N$returnType": 2,
+    "_N$returnType": 0,
     "_N$inputFlag": 1,
     "_N$inputMode": 6,
     "_N$fontSize": 20,
-    "_N$lineHeight": 20,
+    "_N$lineHeight": 40,
     "_N$fontColor": {
       "__type__": "cc.Color",
       "r": 0,
@@ -12125,7 +12166,7 @@
       "a": 255
     },
     "_N$maxLength": 30,
-    "_N$stayOnTop": true
+    "_N$stayOnTop": false
   },
   {
     "__type__": "cc.ClickEvent",
@@ -12210,11 +12251,11 @@
     "_N$backgroundImage": {
       "__uuid__": "67e68bc9-dad5-4ad9-a2d8-7e03d458e32f"
     },
-    "_N$returnType": 1,
+    "_N$returnType": 0,
     "_N$inputFlag": 0,
     "_N$inputMode": 6,
     "_N$fontSize": 20,
-    "_N$lineHeight": 20,
+    "_N$lineHeight": 40,
     "_N$fontColor": {
       "__type__": "cc.Color",
       "r": 0,
@@ -12232,7 +12273,7 @@
       "a": 255
     },
     "_N$maxLength": 16,
-    "_N$stayOnTop": true
+    "_N$stayOnTop": false
   },
   {
     "__type__": "cc.ClickEvent",
@@ -12351,8 +12392,8 @@
     "_N$returnType": 0,
     "_N$inputFlag": 5,
     "_N$inputMode": 6,
-    "_N$fontSize": 20,
-    "_N$lineHeight": 20,
+    "_N$fontSize": 29,
+    "_N$lineHeight": 40,
     "_N$fontColor": {
       "__type__": "cc.Color",
       "r": 0,
@@ -12364,13 +12405,13 @@
     "_N$placeholderFontSize": 20,
     "_N$placeholderFontColor": {
       "__type__": "cc.Color",
-      "r": 231,
-      "g": 231,
-      "b": 231,
+      "r": 127,
+      "g": 127,
+      "b": 127,
       "a": 255
     },
     "_N$maxLength": 8,
-    "_N$stayOnTop": true
+    "_N$stayOnTop": false
   },
   {
     "__type__": "cc.ClickEvent",

@@ -29,17 +29,9 @@ cc.Class({
         this.unitScript = this.node.getComponent("Unit");
     },
 
-    /**
-     * @主要功能 刷新生物单位
-     * @author C14
-     * @Date 2018/8/23
-     * @parameters fps：此刷新的帧率
-     * @returns
-     */
-    refresh:function(fps){
-        //获得当前帧率下应当推进的速率
-        var frameSpeed = globalConstant.frameRate / fps;
+    refresh:function(dt){
 
+        
         if (!this.unitScript.ATKActionFlag) {
             for(var i = 0;i < this.unitScript.enemyTarget.length; i++){
                 var script = this.unitScript.enemyTarget[i].getComponent("Unit");
@@ -63,11 +55,16 @@ cc.Class({
         //自身移动判定  存在目标+非攻击+可以移动标记+自己没死
         if(!this.unitScript.ATKActionFlag){
             if (this.unitScript.node.x > this.unitScript.focusTarget.x) {
-                this.unitScript.moveAction(- this.unitScript.speed * frameSpeed);
+                this.unitScript.moveAction(- this.unitScript.speed);
             } else {
-                this.unitScript.moveAction(this.unitScript.speed * frameSpeed);
+                this.unitScript.moveAction(this.unitScript.speed);
             }
         }
+        //if (this.unitScript.node.x > this.unitScript.focusTarget.x) {
+        //    this.unitScript.moveAccAction(- 1);
+        //} else {
+        //    this.unitScript.moveAccAction(1);
+        //}
 
 
         if(this.unitScript.death === false) {

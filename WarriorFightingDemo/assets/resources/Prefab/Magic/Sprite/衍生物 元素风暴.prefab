@@ -1463,8 +1463,9 @@
       "__id__": 1
     },
     "_enabled": true,
-    "loadEffect": null,
-    "hitEffect": null,
+    "hitEffect": {
+      "__uuid__": "7c874d9a-d510-4053-8208-b24ce24b5e00"
+    },
     "skillNode": {
       "__id__": 2
     },
@@ -1484,7 +1485,7 @@
       "x": 0,
       "y": 0
     },
-    "gravity": 0.1,
+    "gravity": 200,
     "heroBounce": false,
     "skyBounce": false,
     "groundBounce": false,

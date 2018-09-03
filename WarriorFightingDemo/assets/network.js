@@ -1,7 +1,6 @@
 var NetworkModule = {
     token:1,
-    //39.106.67.112
-    url:"http://111.230.42.175:3000",
+    url:"http://39.106.67.112:3000",
     socket:null,
     initFlag:false,
     loadManager: function (managerScript) {

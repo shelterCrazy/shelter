@@ -12,15 +12,9 @@ cc.Class({
 
     properties: {
         //启动的时候播放的音效
-        loadEffect:{
-            type:cc.AudioSource,
-            default:null
-        },
+        loadEffect:cc.AudioClip,
         //击中单位播放的音效
-        hitEffect:{
-            type:cc.AudioSource,
-            default:null
-        },
+        hitEffect:cc.AudioClip,
         //效果节点
         skillNode:cc.Node,
         //游戏管理器
@@ -406,11 +400,15 @@ cc.Class({
                 }
                 break;
             case typeMagic.directionMagic:
+<<<<<<< HEAD
                 //if(detail.speed !== undefined && detail.speed !== 0)
                 //this.startSpeed = detail.speed;
                 //if(this.speed.x === 0)
                 this.speed.x = Math.sin((detail.angel + 90)*Math.PI/180) * this.startSpeed;
                 //if(this.speed.y === 0)
+=======
+                this.speed.x = Math.sin((detail.angel + 90)*Math.PI/180) * this.startSpeed;
+>>>>>>> parent of ed95a6b... C14的修改
                 this.speed.y = Math.cos((detail.angel + 90)*Math.PI/180) * this.startSpeed;
                 break;
         }
@@ -418,14 +416,13 @@ cc.Class({
 
     },
 
-    updateByNet: function (fps) {
-        //获得当前帧率下应当推进的速率
-        var frameSpeed = globalConstant.frameRate / fps;
+    update: function (dt) {
+
         if(this.magicType === 2) {
             if (this._stopLock === false) {
-                this.speed.y -= this.gravity * frameSpeed;
-                this.node.x += this.speed.x * frameSpeed;
-                this.node.y += this.speed.y * frameSpeed;
+                this.speed.y -= this.gravity * dt;
+                this.node.x += this.speed.x * dt;
+                this.node.y += this.speed.y * dt;
             }
         }
     },

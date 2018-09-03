@@ -13,9 +13,6 @@ module.exports = {
     //魔法卡到了这个边缘就会移动场景的镜头
     magicMoveEdge:200,
 
-    //通常情况下每秒的帧率
-    frameRate:60,
-
     //单位时间，单位长度，单位速度
     unitTime:8,
     unitLength:200,

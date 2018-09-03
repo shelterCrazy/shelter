@@ -3363,7 +3363,11 @@
     "move": true,
     "moveLock": false,
     "team": 0,
+<<<<<<< HEAD
     "delay": 0,
+=======
+    "delay": 100,
+>>>>>>> parent of ed95a6b... C14的修改
     "death": false,
     "summon": true,
     "ATKActionFlag": false,

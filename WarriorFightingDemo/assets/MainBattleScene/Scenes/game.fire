@@ -366,7 +366,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 5760,
-      "height": 887
+      "height": 696
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -805,7 +805,7 @@
     "areaRight": 0,
     "mainScene": false,
     "yFollow": false,
-    "offsetY": 100,
+    "offsetY": 200,
     "_mouseWheel": 0,
     "mouseWheelMax": 5
   },
@@ -4500,16 +4500,36 @@
     "preload": true
   },
   {
-    "__type__": "67fcbVbXx5GG6Re+5DO6f9I",
+    "__type__": "cc.Widget",
     "_name": "",
     "_objFlags": 0,
     "node": {
       "__id__": 3
     },
     "_enabled": true,
+<<<<<<< HEAD
     "atk": 0,
     "matk": 1,
     "_attackList": []
+=======
+    "isAlignOnce": true,
+    "_target": null,
+    "_alignFlags": 45,
+    "_left": 0,
+    "_right": 0,
+    "_top": 0,
+    "_bottom": 0,
+    "_verticalCenter": 0,
+    "_horizontalCenter": 0,
+    "_isAbsLeft": true,
+    "_isAbsRight": true,
+    "_isAbsTop": true,
+    "_isAbsBottom": true,
+    "_isAbsHorizontalCenter": true,
+    "_isAbsVerticalCenter": true,
+    "_originalWidth": 0,
+    "_originalHeight": 0
+>>>>>>> parent of ed95a6b... C14的修改
   },
   {
     "__type__": "cc.Canvas",

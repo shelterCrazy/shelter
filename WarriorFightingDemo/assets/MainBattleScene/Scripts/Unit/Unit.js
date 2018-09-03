@@ -118,9 +118,12 @@ var unit = cc.Class({
         this.ATKActionFlag = false;  //攻击行为标记 1攻击进行中
         this.coolTimer = this.coolTime;   //攻击计时器
         this.isCanJump = true;
+<<<<<<< HEAD
         this.isJump = false;
         //攻击等待帧数计时器
         this.delayTimer = 0;
+=======
+>>>>>>> parent of ed95a6b... C14的修改
 
         this._acc = 5;
         this._f = 0.5;
@@ -160,19 +163,22 @@ var unit = cc.Class({
 
 
 
-    updateByNet: function (fps) {
-        //获得当前帧率下应当推进的速率
-        var frameSpeed = globalConstant.frameRate / fps;
+    theUpdate: function (dt) {
 
         if(this.coolTimer > this.coolTime){
             this.coolTimer = this.coolTime;
         }else if(this.coolTimer < this.coolTime){
+<<<<<<< HEAD
             this.coolTimer += frameSpeed;
+=======
+            this.coolTimer += dt;
+>>>>>>> parent of ed95a6b... C14的修改
         }
 
         if(this.summon === true){
             return;
         }
+<<<<<<< HEAD
 
         if(this.isJump === true){
             this.ySpeed -= 0.6 * frameSpeed;
@@ -197,6 +203,9 @@ var unit = cc.Class({
             }
         }
 
+=======
+        this.typeComponent.refresh(dt);
+>>>>>>> parent of ed95a6b... C14的修改
     },
 
     onCollisionEnter: function (other, self) {
@@ -309,22 +318,51 @@ var unit = cc.Class({
      * @author kenan
      * @Date 2017/7/23 1:39
      */
-    attackAction: function() {
+    attackAction: function(){
 
         var self = this;
 
-        this.coolTimer = 0;
-        self.isCanJump = false;
+            this.coolTimer = 0;
+            self.isCanJump = false;
 
+<<<<<<< HEAD
         //如果有攻击动画效果   和子弹  就这里执行和创建吧   攻速可以用动画时长+延迟处理
         this.sendEvent(this.attackEffect);
         //如果是显示层的话，显示身体转动，动画等相关操作
         if(this.node === this.viewNode) {
             if (this.bodySkeleton !== null) {
+=======
+            //var script = self.enemyTarget[0].getComponent("Unit");
+            //while (script.team / Math.abs(script.team) === this.team / Math.abs(this.team)) {
+            //    self.friendlyTarget.push(self.enemyTarget[0]);
+            //    self.enemyTarget.splice(0, 1);
+            //    if (self.enemyTarget.length === 0) {
+            //        self.ATKActionFlag = false;
+            //        //self.animationClip.resume(self._animationId + " " + "walk");
+            //        if(self.bodySkeleton !== null)
+            //            self.bodySkeleton.animation = "idle";
+            //        self.bodyNode.scaleX = - self.team;
+            //        return;
+            //    }
+            //    script = self.enemyTarget[0].getComponent("Unit");
+            //}
+            //script = self.friendlyTarget[0].getComponent("Unit");
+            //while (script.team / Math.abs(script.team) === this.team / Math.abs(this.team)) {
+            //    self.enemyTarget.push(self.friendlyTarget[0]);
+            //    self.friendlyTarget.splice(0, 1);
+            //    script = self.enemyTarget[0].getComponent("Unit");
+            //}
+
+
+            //如果有攻击动画效果   和子弹  就这里执行和创建吧   攻速可以用动画时长+延迟处理
+            this.sendEvent(this.attackEffect);
+            if(this.bodySkeleton !== null) {
+>>>>>>> parent of ed95a6b... C14的修改
                 this.bodySkeleton.animation = "attack";
                 this.bodySkeleton.setCompleteListener(
                     function () {
                         self.ATKActionFlag = false;
+<<<<<<< HEAD
                         //如果现在在跳跃的话，那么无法立刻恢复可以跳跃的状态
                         if (this.isJump === false)
                             self.isCanJump = true;
@@ -368,11 +406,65 @@ var unit = cc.Class({
                 }.bind(this));
             } else {
                 this.AttackBehavior.areaAttack(this.node);
+=======
+                        self.isCanJump = true;
+                        if(self.bodySkeleton !== null) {
+                            self.bodySkeleton.animation = "idle";
+                        }
+                    }
+                );
+>>>>>>> parent of ed95a6b... C14的修改
             }
+            //if (this.animationClip !== null) {
+            //    this.animationClip.play(this._animationId + " " + "attack");
+            //    this.animationClip.stop(this._animationId + " " + "walk");
+            //    this.animationClip.stop(this._animationId + " " + "idle");
+            //}
+            //
+            //if (this.animationClip !== null) {
+            //    var anim1 = this.animationClip.getAnimationState(this._animationId + " " + "attack");
+            //    anim1.on('finished', function () {
+            //        if(self.bodySkeleton !== null) {
+            //            self.bodySkeleton.animation = "idle";
+            //        }
+            //        //this.animationClip.play(self._animationId + " " + "idle");
+            //        self.ATKActionFlag = false;
+            //        self.isCanJump = true;
+            //        //this.animationClip.pause(this._animationId + " " + "walk");
+            //    }, this);
+            //}
+            //延时后调用攻击行为
+            setTimeout(function () {
 
-            this.skillComponent.releaseFunction(5, this.enemyTarget[0]);
-        }
+                if (self.enemyTarget.length !== 0 && self.death === false) {
+                    var script = self.enemyTarget[0].getComponent("Unit");
+                    while (script.death === true) {
+                        self.enemyTarget.splice(0, 1);
+                        if (self.enemyTarget.length === 0) {
+                            self.ATKActionFlag = false;
+                            //self.animationClip.resume(self._animationId + " " + "walk");
+                            if(self.bodySkeleton !== null)
+                                self.bodySkeleton.animation = "idle";
+                            self.bodyNode.scaleX = - self.team;
+                            return;
+                        }
+                        script = self.enemyTarget[0].getComponent("Unit");
+                    }
+                    if (self.attackArea === 0) {
+                        if (self.AttackBehavior.attack(self.node, self.enemyTarget[0])) {
+                            self.skillComponent.releaseFunction(6);
+                        }
+                    } else {
+                        self.AttackBehavior.areaAttack(self.node);
+                    }
+
+                    self.skillComponent.releaseFunction(5, self.enemyTarget[0]);
+                }
+
+            }, this.delay);
+            //单体或者范围攻击    调用伤害发生器
     },
+
 
     /**
      * @主要功能:   生命变更函数改变值为value，发动这个函数的对方目标为enemyTarget
@@ -470,12 +562,30 @@ var unit = cc.Class({
             this.bodySkeleton.setCompleteListener(
                 function() {
                     self.GameManager.removeCreature(self.node);
+<<<<<<< HEAD
                     self.node.parent.removeFromParent();
                     self.node.parent.destroy();
+=======
+                    self.node.removeFromParent();
+                    //self.node.removeFromParent();
+                    // self.bodySkeleton.setCompleteListener(
+                    //     function() {
+                    //         //self.GameManager.removeCreature(self.node);
+                    //         //self.node.removeFromParent();
+                    //     }
+                    //);
+>>>>>>> parent of ed95a6b... C14的修改
                 }
             );
         }
         this.sendEvent(this.dieEffect);
+
+        //this.bodySkeleton.setCompleteListener();
+        //var anim1 = this.animationClip.getAnimationState(this._animationId + " " + "death");
+        //anim1.on('finished',function(){
+        //    this.GameManager.removeCreature(this.node);
+        //    this.node.removeFromParent();
+        //},this);
     },
 
     /**
@@ -524,7 +634,7 @@ var unit = cc.Class({
             for(i = 0;i < creatures.length;i++){
                 creatures[i].getComponent("Unit").renewTarget();
             }
-        },50);
+        },50)
         this.fnTeamRenew();
     },
 
@@ -597,7 +707,7 @@ var unit = cc.Class({
         if(this.healthLabel !== null)
         this.healthLabel.string = this.health.toFixed(0);
         
-        this.AttackBehavior = this.GameManager.node.getComponent("AttackBehavior");
+        this.AttackBehavior = this.AttackBehavior.getComponent("AttackBehavior");
         this.skillComponent = this.skillComponent.getComponent("Skill");
 
         this.animationClip = this.node.getComponent(cc.Animation);

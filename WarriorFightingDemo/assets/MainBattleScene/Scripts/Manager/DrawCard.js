@@ -166,11 +166,11 @@ cc.Class({
             Global.totalDeckData[Global.deckUsage].deck[109] = 0;
             Global.totalDeckData[Global.deckUsage].deck[105] = 5;
             Global.totalDeckData[Global.deckUsage].deck[103] = 3;
-            Global.totalDeckData[Global.deckUsage].deck[104] = 30;
+            Global.totalDeckData[Global.deckUsage].deck[104] = 3;
             Global.totalDeckData[Global.deckUsage].deck[102] = 3;
             Global.totalDeckData[Global.deckUsage].deck[202] = 3;
             Global.totalDeckData[Global.deckUsage].deck[207] = 3;
-            Global.totalDeckData[Global.deckUsage].deck[108] = 4;
+            Global.totalDeckData[Global.deckUsage].deck[108] = 40;
             Global.totalDeckData[Global.deckUsage].deck[107] = 3;
             Global.totalDeckData[Global.deckUsage].deck[211] = 3;
             Global.totalDeckData[Global.deckUsage].deck[209] = 3;

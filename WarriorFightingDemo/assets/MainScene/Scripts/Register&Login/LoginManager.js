@@ -46,8 +46,8 @@ cc.Class({
         this.logSuccessFlag = null;
         //验证码用的回答
         this.answer = -1;
-        //var userLoginData = null;
-        var userLoginData = JSON.parse(cc.sys.localStorage.getItem('userLoginData'));
+        var userLoginData = null;
+        //var userLoginData = JSON.parse(cc.sys.localStorage.getItem('userLoginData'));
         if(userLoginData !== null && userLoginData !== undefined && userLoginData.usable === true){
             self.userNameBox.string = userLoginData.userName;
             self.password1.string = userLoginData.password;

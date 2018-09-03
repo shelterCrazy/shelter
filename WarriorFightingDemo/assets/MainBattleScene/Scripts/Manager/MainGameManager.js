@@ -90,7 +90,6 @@ var MainGameManager = cc.Class({
         NetworkModule.loadManager(this);
         NetworkModule.getGlobal(Global);
         NetworkModule.init();
-
         //获取小地图脚本
         var mapScript = this.mapLayer.getComponent("SmallMap");
 
@@ -193,10 +192,22 @@ var MainGameManager = cc.Class({
                 }
             }
         });
+
+        //this.creaturePool = [];
+        //for(i = 0;i < 20; i++) {
+        //    if(self.creaturePrefab[i] !== null){
+        //        this.creaturePool[i] = new cc.NodePool();
+        //        let initCount = 30;
+        //        for (var j = 0; j < initCount; j++) {
+        //            //var creatureObject = ;
+        //            this.creaturePool[i].put(cc.instantiate(this.creaturePrefab[i])); // 通过 putInPool 接口放入对象池
+        //        }
+        //    }
+        //}
         setTimeout(function(){
             self.magicPool = [];
             for(i = 0;i < 400; i++) {
-                if(self.magicPrefab[i] !== null && self.magicPrefab[i] !== undefined){
+                if(self.magicPrefab[i] !== null){
                     self.magicPool[i] = new cc.NodePool(); 
                     var initCount = 10;
                     for (var j = 0; j < initCount; j++) {
@@ -205,16 +216,15 @@ var MainGameManager = cc.Class({
                     }
                 }
             }
-
-        },1000);
-
+        },3000);
+        
         //var data = false;
         ////每隔一段时间召唤一个小怪
         //this.schedule(function() {
         //    var eventsend = new cc.Event.EventCustom('creatureCreate',true);
         //    var eventsend2 = new cc.Event.EventCustom('creatureCreate',true);
-        //    eventsend.setUserData({X:(cc.director.getWinSize().width * globalConstant.sceneWidth),Y:null,attack:1,health:5,team:1,speed:5,id:1});
-        //    eventsend2.setUserData({X:0,Y:null,attack:1,health:5,team:-1,speed:5,id:1});
+        //    eventsend.setUserData({X:(cc.director.getWinSize().width * globalConstant.sceneWidth),Y:null,attack:1,health:5,team:1,speed:10,id:1});
+        //    eventsend2.setUserData({X:0,Y:null,attack:1,health:5,team:-1,speed:10,id:1});
         //
         //    data = ~data;
         //    if(data) {
@@ -226,8 +236,7 @@ var MainGameManager = cc.Class({
         //    }
         //},1);
 
-        //量子化的更新方式，一次只更新0.1帧
-        this.updateSchedule(10);
+
 
         //创建npc 小地图节点 事件
         this.node.on('creatureCreate',this.creatureCreate,this);
@@ -247,7 +256,7 @@ var MainGameManager = cc.Class({
         this.node.on('playEffect',this.playEffect,this);
 
         //cc.audioEngine.playMusic(this.backGroundMusic,true);
-
+            
     },
 
     /**
@@ -611,7 +620,6 @@ var MainGameManager = cc.Class({
             npcScript.skillComponent.releaseFunction(0);
         }
     },
-
     /**
      * @主要功能:  创建吟唱
      *              建议以后改用资源池获取节点   资源池使用工厂创建节点，这里可以负责初始化节点属性
@@ -632,6 +640,9 @@ var MainGameManager = cc.Class({
         chantMagScript.fnInitChant(event.detail);
 
         //       magScript.fnCreateMagic(event.detail);//初始化npc属性
+
+
+
         //kenan 停止事件冒泡   (停止继续向上传递此事件)
         event.stopPropagation();
     },
@@ -734,6 +745,7 @@ var MainGameManager = cc.Class({
         this.magicPool[id].put(node);
     },
 
+<<<<<<< HEAD
     updateSchedule:function(fps){
         this.schedule(this.updateByNet.bind(this,fps),1 / fps);
 
@@ -756,6 +768,13 @@ var MainGameManager = cc.Class({
             this.heroLayer.children[i].getComponent("UnitRouter").updateByNet(fps);
 
         this.node.getComponent("AttackBehavior").attackCalculation();
+=======
+    update: function (dt) {
+        for(var i = 0;i < this.creatureLayer.children.length;i ++)
+        this.creatureLayer.children[i].getComponent("Unit").theUpdate(dt);
+        for(i = 0;i < this.heroLayer.children.length;i ++)
+        this.heroLayer.children[i].getComponent("Unit").theUpdate(dt);
+>>>>>>> parent of ed95a6b... C14的修改
     }
     
 });
