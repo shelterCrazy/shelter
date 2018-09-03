@@ -13,6 +13,8 @@ cc.Class({
         //卡包收容盒
         packageBox: cc.Prefab,
 
+        blockLayer:cc.Node,
+
         //卡包数据
         packageNumData: [cc.Integer],
         //卡包数据
@@ -199,6 +201,7 @@ cc.Class({
      */
     useCardPackage: function (packageType) {
         var self = this;
+
         for(var i in Global.userPackageData){
             if(Global.userPackageData[i].status === 0 && Global.userPackageData[i].package_type === packageType){
                 $.ajax({
@@ -214,6 +217,7 @@ cc.Class({
                         if (rs.status === "200") {
                             cc.log("开包成功");
                             cc.log(rs);
+                            self.blockLayer.active = true;
                             Global.userPackageData.splice(i,1);
                             //遍历得到的卡牌，按照ID进行初始化，然后保持可以开启查看的姿态
                             for(var j in rs.packageCardList) {
@@ -234,6 +238,9 @@ cc.Class({
                 break;
             }
         }
+    },
+    endBlock:function(){
+        this.blockLayer.active = false;
     },
     mainScene: function () {
         setTimeout(function () {

@@ -42,6 +42,10 @@ cc.Class({
             default: [],
             type: cc.Node,
         },
+        handCard:{
+            default: [],
+            type: cc.Node,
+        },
         //英雄的节点
         heroNode: cc.Node,
         
@@ -236,7 +240,7 @@ cc.Class({
      */
     showNewCard: function() {
         //如果手牌数量小于9张，那么发一张牌
-        if(this.heroScript.handCard.length < globalConstant.handMaxNum){
+        if(this.handCard.length < globalConstant.handMaxNum){
             this.creatCardType();
         }
     },
@@ -259,7 +263,7 @@ cc.Class({
         rand = Math.floor(Math.random() * (this.myCardDeck.length - 1));
 
         //如果手牌没满
-        if(this.heroScript.handCard.length < globalConstant.handMaxNum) {
+        if(this.handCard.length < globalConstant.handMaxNum) {
             //按照预制为手牌添加生物牌
             this.creatNewCard(this.myCardDeck[rand]);
         }
@@ -274,19 +278,19 @@ cc.Class({
      * @returns
      */
     throwCard:function() {
-        if(this.heroScript.handCard.length > 0){
-            var rand = Math.floor(Math.seededRandom(0,1) * (this.heroScript.handCard.length - 1));
+        if(this.handCard.length > 0){
+            var rand = Math.floor(Math.seededRandom(0,1) * (this.handCard.length - 1));
             for(var i = 0;i < this.node.children.length;i++){
-                if(this.heroScript.handCard[rand] === this.node.children[i]){
+                if(this.handCard[rand] === this.node.children[i]){
                     this.node.children[i].removeFromParent(true);
                     break;
                 }
             }
-            this.heroScript.handCard.splice(rand,1);
+            this.handCard.splice(rand,1);
         }
     },
     getCertainCard:function(cardId) {
-        if(this.heroScript.handCard.length < globalConstant.handMaxNum) {
+        if(this.handCard.length < globalConstant.handMaxNum) {
             this.creatNewCard(this.myCardDeck[cardId]);
         }
     },
@@ -328,7 +332,7 @@ cc.Class({
         //script.cardIndex = this.cardGroup.length;
         // ------------------------------------------------------------------------------ //
         //英雄的手牌节点，加入此新牌
-        this.heroScript.handCard.push(newCard);
+        this.handCard.push(newCard);
 
         //此节点加入该新牌作为子节点
         //this.node.addChild(newCard);
@@ -343,9 +347,9 @@ cc.Class({
      * @returns
      */
     deleteCard: function (card) {
-        for(var index = 0;index < this.heroScript.handCard.length;index++){
-            if(card === this.heroScript.handCard[index]){
-                this.heroScript.handCard.splice(index, 1);
+        for(var index = 0;index < this.handCard.length;index++){
+            if(card === this.handCard[index]){
+                this.handCard.splice(index, 1);
             }
         }
         card.removeFromParent(true);

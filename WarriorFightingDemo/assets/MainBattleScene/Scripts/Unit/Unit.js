@@ -95,6 +95,11 @@ var unit = cc.Class({
 
         stateNode:cc.Node,
 
+        //关键的！表现层节点
+        viewNode:cc.Node,
+        //关键的！逻辑层节点
+        logicNode:cc.Node,
+
         //召唤生物的音效
         summonEffect:cc.AudioClip,
         //召唤完成时的音效
@@ -113,12 +118,14 @@ var unit = cc.Class({
         this.ATKActionFlag = false;  //攻击行为标记 1攻击进行中
         this.coolTimer = this.coolTime;   //攻击计时器
         this.isCanJump = true;
+        this.isJump = false;
         //攻击等待帧数计时器
         this.delayTimer = 0;
 
         this._acc = 5;
         this._f = 0.5;
         this._nowSpeed = 0;
+        this.ySpeed = 0;
 
         this.moveFreeze = false;
         this.attackFreeze = false;
@@ -160,12 +167,21 @@ var unit = cc.Class({
         if(this.coolTimer > this.coolTime){
             this.coolTimer = this.coolTime;
         }else if(this.coolTimer < this.coolTime){
-            this.coolTimer += 1 / frameSpeed;
+            this.coolTimer += frameSpeed;
         }
 
         if(this.summon === true){
             return;
         }
+
+        if(this.isJump === true){
+            this.ySpeed -= 0.6 * frameSpeed;
+            this.node.y += this.ySpeed * frameSpeed;
+        }
+        if(this.death === false){
+            this.skillComponent.releaseFunction(3);
+        }
+
         this.typeComponent.refresh(fps);
 
         //如果延迟用定时器不等于0
@@ -182,6 +198,25 @@ var unit = cc.Class({
         }
 
     },
+
+    onCollisionEnter: function (other, self) {
+        if (other.node.group === "Ground") {
+
+            this.ySpeed = 0;
+
+            this.node.y = other.node.y;
+            //this.node.y = otherPreAabb.yMax - this.node.parent.y;
+            this.isJump = false;
+
+            this.isCanJump = true;
+            //如果是显示层的话，显示身体转动，动画等相关操作
+            if (this.node === this.viewNode) {
+                if (this.bodySkeleton !== null) {
+                    this.bodySkeleton.animation = "idle";
+                }
+            }
+        }
+    },
     /**
      * @主要功能 移动行为
      * value为正表示向右移动，为负表示向左移动
@@ -194,61 +229,28 @@ var unit = cc.Class({
 
         if (this.move === true && this.death === false &&//!this.ATKActionFlag && 
             this.moveFreeze === false && this.speed > 0) {
-            if(value < 0 && this.bodyNode.scaleX === 1)this.bodyNode.scaleX = -1;
-            if(value > 0 && this.bodyNode.scaleX === -1)this.bodyNode.scaleX = 1;
-            //this.rigidbody.linearVelocity = cc.v2(value * 70,this.rigidbody.linearVelocity.y);
-            if(this._mapSign !== null)
-            this._mapSign.getComponent("SignScript").fnRenewSignPosition();
+            //如果是显示层的话，显示身体转动，动画等相关操作
+            if(this.node === this.viewNode) {
+                if (value < 0 && this.bodyNode.scaleX === 1)this.bodyNode.scaleX = -1;
+                if (value > 0 && this.bodyNode.scaleX === -1)this.bodyNode.scaleX = 1;
+
+                if(this.bodySkeleton !== null && this.bodySkeleton.animation === "idle")
+                    this.bodySkeleton.animation = "walk";
+
+                if (this.animationClip !== null) {
+                    var animState = this.animationClip.getAnimationState(this._animationId + " " + "walk");
+                    var animState2 = this.animationClip.getAnimationState(this._animationId + " " + "attack");
+                    if(!animState.isPlaying && !animState2.isPlaying) {
+                        this.animationClip.play(this._animationId + " " + "walk");
+                        this.animationClip.stop(this._animationId + " " + "idle");
+                    }
+                }
+            }else{
+                //如果是逻辑层的话，刷新小地图的效果
+                if (this._mapSign !== null)
+                    this._mapSign.getComponent("SignScript").fnRenewSignPosition();
+            }
             this.node.x += value;
-
-            if(this.bodySkeleton !== null && this.bodySkeleton.animation === "idle")
-                this.bodySkeleton.animation = "walk";
-
-            if (this.animationClip !== null) {
-                var animState = this.animationClip.getAnimationState(this._animationId + " " + "walk");
-                var animState2 = this.animationClip.getAnimationState(this._animationId + " " + "attack");
-                if(!animState.isPlaying && !animState2.isPlaying) {
-                    this.animationClip.play(this._animationId + " " + "walk");
-                    this.animationClip.stop(this._animationId + " " + "idle");
-                }
-            }
-        }
-    },
-    /**
-     * @主要功能 移动行为
-     * value为正表示向右移动，为负表示向左移动
-     * @author C14
-     * @Date 2018/3/8
-     * @parameters value
-     * @returns
-     */
-    moveAccAction:function(position){
-
-        if (this.move === true && this.death === false &&
-            this.moveFreeze === false && this.speed > 0) {
-
-            this._nowSpeed += position * this._acc;
-            if(this._nowSpeed > this.speed){
-                this._nowSpeed = this.speed;
-            }else if(this._nowSpeed < - this.speed){
-                this._nowSpeed = - this.speed;
-            }
-
-            if(position < 0 && this.bodyNode.scaleX === 1)this.bodyNode.scaleX = -1;
-            if(position > 0 && this.bodyNode.scaleX === -1)this.bodyNode.scaleX = 1;
-            //this.rigidbody.linearVelocity = cc.v2(value * 70,this.rigidbody.linearVelocity.y);
-
-            if(this.bodySkeleton !== null && this.bodySkeleton.animation === "idle")
-                this.bodySkeleton.animation = "walk";
-
-            if (this.animationClip !== null) {
-                var animState = this.animationClip.getAnimationState(this._animationId + " " + "walk");
-                var animState2 = this.animationClip.getAnimationState(this._animationId + " " + "attack");
-                if(!animState.isPlaying && !animState2.isPlaying) {
-                    this.animationClip.play(this._animationId + " " + "walk");
-                    this.animationClip.stop(this._animationId + " " + "idle");
-                }
-            }
         }
     },
     /**
@@ -260,18 +262,20 @@ var unit = cc.Class({
      */
     stopAction:function(){
         if (this.death === false) {
-
-            if(this.bodySkeleton !== null &&
-                this.bodySkeleton.animation === "walk" &&
-                this.bodySkeleton.animation !== "idle") {
-                this.bodySkeleton.animation = "idle";
-            }
-            if (this.animationClip !== null) {
-                var animState = this.animationClip.getAnimationState(this._animationId + " " + "idle");
-                var animState2 = this.animationClip.getAnimationState(this._animationId + " " + "attack");
-                if (!animState.isPlaying && !animState2.isPlaying) {
-                    this.animationClip.stop(this._animationId + " " + "walk");
-                    this.animationClip.play(this._animationId + " " + "idle");
+            //如果是显示层的话，显示身体转动，动画等相关操作
+            if (this.node === this.viewNode) {
+                if (this.bodySkeleton !== null &&
+                    this.bodySkeleton.animation === "walk" &&
+                    this.bodySkeleton.animation !== "idle") {
+                    this.bodySkeleton.animation = "idle";
+                }
+                if (this.animationClip !== null) {
+                    var animState = this.animationClip.getAnimationState(this._animationId + " " + "idle");
+                    var animState2 = this.animationClip.getAnimationState(this._animationId + " " + "attack");
+                    if (!animState.isPlaying && !animState2.isPlaying) {
+                        this.animationClip.stop(this._animationId + " " + "walk");
+                        this.animationClip.play(this._animationId + " " + "idle");
+                    }
                 }
             }
         }
@@ -288,21 +292,15 @@ var unit = cc.Class({
 
         if(self.isCanJump === true && this.death === false) {
             self.isCanJump = false;
-            if(self.bodySkeleton !== null) {
-                self.bodySkeleton.animation = "jump";
+            this.isJump = true;
+            //如果是显示层的话，显示身体转动，动画等相关操作
+            if (this.node === this.viewNode) {
+                if (self.bodySkeleton !== null) {
+                    self.bodySkeleton.animation = "jump";
+                }
             }
 
-            var jumpUp = cc.moveBy(self.jumpDuration, cc.p(0, self.jumpHeight)).easing(cc.easeCubicActionOut());
-            var jumpDown = cc.moveBy(self.jumpDuration, cc.p(0, -self.jumpHeight)).easing(cc.easeCubicActionIn());
-
-            self.node.runAction(cc.sequence(jumpUp, jumpDown,
-                cc.callFunc(function(){
-                    self.isCanJump = true;
-                    if(self.bodySkeleton !== null) {
-                        self.bodySkeleton.animation = "idle";
-                    }
-                }))
-            );
+            this.ySpeed = 20;
         }
     },
 
@@ -320,17 +318,22 @@ var unit = cc.Class({
 
         //如果有攻击动画效果   和子弹  就这里执行和创建吧   攻速可以用动画时长+延迟处理
         this.sendEvent(this.attackEffect);
-        if (this.bodySkeleton !== null) {
-            this.bodySkeleton.animation = "attack";
-            this.bodySkeleton.setCompleteListener(
-                function () {
-                    self.ATKActionFlag = false;
-                    self.isCanJump = true;
-                    if (self.bodySkeleton !== null) {
-                        self.bodySkeleton.animation = "idle";
-                    }
-                }
-            );
+        //如果是显示层的话，显示身体转动，动画等相关操作
+        if(this.node === this.viewNode) {
+            if (this.bodySkeleton !== null) {
+                this.bodySkeleton.animation = "attack";
+                this.bodySkeleton.setCompleteListener(
+                    function () {
+                        self.ATKActionFlag = false;
+                        //如果现在在跳跃的话，那么无法立刻恢复可以跳跃的状态
+                        if (this.isJump === false)
+                            self.isCanJump = true;
+                        if (self.bodySkeleton !== null) {
+                            self.bodySkeleton.animation = "idle";
+                        }
+                    }.bind(this)
+                );
+            }
         }
         //延时后调用攻击行为
         if(this.delayTimer === 0)
@@ -467,7 +470,8 @@ var unit = cc.Class({
             this.bodySkeleton.setCompleteListener(
                 function() {
                     self.GameManager.removeCreature(self.node);
-                    self.node.removeFromParent();
+                    self.node.parent.removeFromParent();
+                    self.node.parent.destroy();
                 }
             );
         }
@@ -597,30 +601,36 @@ var unit = cc.Class({
         this.skillComponent = this.skillComponent.getComponent("Skill");
 
         this.animationClip = this.node.getComponent(cc.Animation);
-        if(this.bodySkeleton !== null)
-            this.bodySkeleton.animation = "walk";
-        if(this.animationClip !== null) {
-            this.animationClip.play(this._animationId + " " + "appear");
-            this.summon = true;
+        //初始化自身类型相关的类型元件
+        this.typeComponent.init();
+        //如果自身就是显示层的话，那么运行显示相关程序
+        if(this.viewNode === this.node) {
+            if (this.bodySkeleton !== null)
+                this.bodySkeleton.animation = "walk";
+            if (this.animationClip !== null) {
+                this.animationClip.play(this._animationId + " " + "appear");
+                this.summon = true;
 
-            this.sendEvent(this.summonEffect);
-            var anim1 = this.animationClip.getAnimationState(this._animationId + " " + "appear");
-            anim1.on('finished', function () {
+                this.sendEvent(this.summonEffect);
+                var anim1 = this.animationClip.getAnimationState(this._animationId + " " + "appear");
+                anim1.on('finished', function () {
+                    this.sendEvent(this.summonEndEffect);
+                    this.animationClip.play(this._animationId + " " + "walk");
+                    //cc.log(this.savespeed);
+                    //this.speed = this.savespeed;
+                    this.summon = false;
+                }, this);
+            } else {
                 this.sendEvent(this.summonEndEffect);
-                this.animationClip.play(this._animationId + " " + "walk");
+                //this.animationClip.play(this._animationId + " " + "walk");
                 //cc.log(this.savespeed);
                 //this.speed = this.savespeed;
                 this.summon = false;
-            }, this);
-        }else{
-            this.sendEvent(this.summonEndEffect);
-            //this.animationClip.play(this._animationId + " " + "walk");
-            //cc.log(this.savespeed);
-            //this.speed = this.savespeed;
-            this.summon = false;
+                this.logicNode.getComponent("Unit").summon = false;
+            }
+            this.fnTeamRenew();
+            if (this.lifeBar !== null)this.lifeBar.progress = this.health / this.maxHealth;
         }
-        this.fnTeamRenew();
-        if(this.lifeBar !== null)this.lifeBar.progress = this.health / this.maxHealth;
     },
 
 

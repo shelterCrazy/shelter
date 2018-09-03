@@ -377,6 +377,7 @@ cc.Class({
         });
 
         this.team = detail.team;
+
         this.death = false;
         switch (this.magicType)
         {
@@ -405,9 +406,11 @@ cc.Class({
                 }
                 break;
             case typeMagic.directionMagic:
-                if(this.speed.x === 0)
+                //if(detail.speed !== undefined && detail.speed !== 0)
+                //this.startSpeed = detail.speed;
+                //if(this.speed.x === 0)
                 this.speed.x = Math.sin((detail.angel + 90)*Math.PI/180) * this.startSpeed;
-                if(this.speed.y === 0)
+                //if(this.speed.y === 0)
                 this.speed.y = Math.cos((detail.angel + 90)*Math.PI/180) * this.startSpeed;
                 break;
         }

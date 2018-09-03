@@ -78,8 +78,8 @@ cc.Class({
         this.preUse = false;
         //this.backRollScript = this.backRoll.getComponent("BackRoll");
         this.cardScript = self.node.getComponent('Card');
-        this.heroScirpt = this.cardScript.hero.getComponent('Hero');
-        this.heroUnitScirpt = this.cardScript.hero.getComponent('Unit');
+        self.heroScirpt = self.hero.getComponent("UnitRouter").getLogicTypeScript();
+        self.heroUnitScirpt = self.hero.getComponent("UnitRouter").getLogicUnitScript();
 
         this.usableScript = this.usableComponent[this.usableType];
 
@@ -272,7 +272,7 @@ cc.Class({
                     ) * 180 / Math.PI;
             }
         }
-
+        cc.log("现在" + this.arrow.rotation);
 
         if((this.node.y <= globalConstant.cardUseLine && this.preUse === true) || this.heroUnitScirpt.death === true){
             this.node.opacity = 1000;
@@ -368,7 +368,7 @@ cc.Class({
                         absolutelyLocation.x + globalConstant.cameraOffset - this.hero.x
                     ) * 180 / Math.PI;
             }
-
+            cc.log("最终" + this.mAngle);
             this.useCardC(this.cardId, this.mAngle, this.speed, this.area, this.hero.x, this.arrow.y + this.hero.y);
         }else{
             this.node.opacity = 1000;
@@ -438,8 +438,8 @@ cc.Class({
                     position: x,
                     y: y,
                     angel: startAngel + this.branchAngle * i,
-                    speed: speed,
-                    area: area,
+                    //speed: speed,
+                    //area: area,
                     team: this.cardScript.team,
                     id: this.cardScript.cardId
                 });

@@ -117,8 +117,16 @@ cc.Class({
 
     // called every frame, uncomment this function to activate update callback
     lateUpdate: function (dt) {
-        var targetPos = this.target.convertToWorldSpaceAR(cc.Vec2.ZERO);
+
+
+        var script = this.target.getComponent("UnitRouter");
+        if(script !== undefined && script !== null){
+            var targetPos = script.getViewUnitNode().convertToWorldSpaceAR(cc.Vec2.ZERO);
+        }else{
+            targetPos = this.target.convertToWorldSpaceAR(cc.Vec2.ZERO);
+        }
         var position = this.node.parent.convertToNodeSpaceAR(targetPos);
+
         if (this.camera !== undefined) {
             if (position.x > cc.director.getWinSize().width * (this.areaRight - globalConstant.sceneEdge)) {
                 this.node.x = cc.director.getWinSize().width * (this.areaRight - globalConstant.sceneEdge);

@@ -71,11 +71,11 @@ var MainGameManager = cc.Class({
 
         backGroundMusic:cc.AudioClip
     },
-    getCard:function(dat) {
-        var heroScript = this.heros[0].getComponent("Hero");
-        cc.log(dat);
-        heroScript.getCertainCard(4);
-    },
+    //getCard:function(dat) {
+    //    var heroScript = this.heros[0].getComponent("Hero");
+    //    cc.log(dat);
+    //    heroScript.getCertainCard(4);
+    //},
     onLoad: function () {
 
         var self = this;
@@ -130,9 +130,18 @@ var MainGameManager = cc.Class({
         cc.director.getCollisionManager().enabled = true;
         cc.director.getPhysicsManager().enabled = true;
 
+
         //英雄标记中添加两个英雄节点（方便坐标获取）
-        this.heros[0].getComponent("Unit")._mapSign = mapScript.fnCreateHeroSign(this.heros[0]);
-        this.heros[1].getComponent("Unit")._mapSign = mapScript.fnCreateHeroSign(this.heros[1]);
+        this.heros[0].getComponent("UnitRouter").setMapSign(
+            mapScript.fnCreateHeroSign(
+                this.heros[0].getComponent("UnitRouter").getLogicNode()
+            )
+        );
+        this.heros[1].getComponent("UnitRouter").setMapSign(
+            mapScript.fnCreateHeroSign(
+                this.heros[1].getComponent("UnitRouter").getLogicNode()
+            )
+        );
 
         //获取时间记录器脚本，此脚本负责自动推进时间轴
         this.timerLayerScript = this.timerLayer.getComponent("GameTimer");
@@ -345,7 +354,12 @@ var MainGameManager = cc.Class({
      * @Date 2017/11/01 13:04
      * @param event
      */
-    magicCreate: function(event){  //event为父类事件  实际这里是Event.EventCustom子类
+    magicCreate: function(event){
+        //event为父类事件  实际这里是Event.EventCustom子类
+        //将这些坐标化为整数
+        event.detail.position = Math.round(event.detail.position);
+        event.detail.y = Math.round(event.detail.y);
+
         if(event.detail.network === undefined || event.detail.network === true) {
             NetworkModule.roomMsg(Global.room, 'roomChat', {name: "magicCreate", detail: event.detail});
         }
@@ -431,44 +445,42 @@ var MainGameManager = cc.Class({
      * @Date 2017/7/23 0:25
      * @param data
      */
-    creatureCreate: function(data){  //event为父类事件  实际这里是Event.EventCustom子类
+    creatureCreate: function(data){
+        //event为父类事件  实际这里是Event.EventCustom子类
+        //将这些坐标化为整数
+        data.detail.X = Math.round(data.detail.X);
+        var detail = data.detail;
+        detail.Y = detail.Y === null ? globalConstant.summonY : detail.Y;
+        detail.Y = Math.round(detail.Y);
+
         if(data.detail.network === undefined || data.detail.network === true) {
-            NetworkModule.roomMsg(Global.room, 'roomChat', {name: "creatureCreate", detail: data.detail});
+            NetworkModule.roomMsg(Global.room, 'roomChat', {name: "creatureCreate", detail: detail});
         }
         var npc = null;
         //kenan 实验证明  事件是同步的  计时器是异步的
         // this.scheduleOnce(function() {
         /** kenan 这里获取npc的资源方法可以改为，使用资源池获取npc节点*/
         if(data.detail.prefab === undefined || data.detail.prefab === null){
-            //if (this.creaturePool[data.detail.id].size() > 0) { // 通过 size 接口判断对象池中是否有空闲的对象
-                //npc = this.creaturePool[data.detail.id].get();
-            //} else { // 如果没有空闲对象，也就是对象池中备用对象不够时，我们就用 cc.instantiate 重新创建
-                npc = cc.instantiate(this.creaturePrefab[data.detail.id]);
-            //}
-            //enemy.parent = parentNode; // 将生成的敌人加入节点树
-            //enemy.getComponent('Enemy').init(); //接下来就可以调用 enemy 身上的脚本进行初始化
-            //npc = cc.instantiate(this.creaturePrefab[data.detail.id]);
+            npc = cc.instantiate(this.creaturePrefab[data.detail.id]);
         }else{
             npc = cc.instantiate(data.detail.prefab);
         }
-        var npcScript = npc.getComponent("Unit");
+
+        var npcScript = npc.getComponent("UnitRouter");
 
         var mapScript = this.mapLayer.getComponent("SmallMap");
-
-        var detail = data.detail;
-        detail.Y = detail.Y === null ? globalConstant.summonY : detail.Y;
 
         npcScript.fnGetManager(this);
 
         this.creatures.push(npc);
 
         npcScript.initUnit(detail);//初始化npc属性
-        npcScript._mapSign = mapScript.fnCreateCreatureSign(npc);
+        npcScript.setMapSign(mapScript.fnCreateCreatureSign(npcScript.getLogicNode()));
 
-        if(npcScript.team * this.heros[0].getComponent("Unit").team > 0){
-            npcScript.focusTarget = this.heros[1];
+        if(npcScript.team * this.heros[0].getComponent("UnitRouter").getTeam() > 0){
+            npcScript.setFocusTarget(this.heros[1].getComponent("UnitRouter").getLogicNode());
         }else{
-            npcScript.focusTarget = this.heros[0];
+            npcScript.setFocusTarget(this.heros[0].getComponent("UnitRouter").getLogicNode());
         }
         
         this.creatureLayer.addChild(this.creatures[this.creatures.length - 1]);
@@ -495,24 +507,21 @@ var MainGameManager = cc.Class({
 
 
         var hero = cc.instantiate(this.heroPrefab[heroId]);
-        var heroScript = hero.getComponent("Hero");
-        var unitScript = hero.getComponent("Unit");
+        var unitScript = hero.getComponent("UnitRouter");
         unitScript.fnGetManager(this);
         unitScript.initUnit({
             team: team,
             X: (team/Math.abs(team) / 2 + 1 / 2) * cc.director.getWinSize().width * globalConstant.sceneWidth,
             Y: globalConstant.heroY
         });
-        heroScript.drawCardNode = this.drawCardNode;
-        heroScript.init({
-            team: team
-        });
+
         if(team === Global.nowTeam) {
             this.heros[0] = hero;
         }else{
             this.heros[1] = hero;
-            heroScript.self = false;
         }
+        hero.x = 0;
+        hero.y = 0;
             this.heroLayer.addChild(hero);
         //基地层添加上述节点
         //this.baseLayer.addChild(baseNode);
@@ -578,7 +587,7 @@ var MainGameManager = cc.Class({
         }else{
             npc = cc.instantiate(data.prefab);
         }
-        var npcScript = npc.getComponent("Unit");
+        var npcScript = npc.getComponent("UnitRouter");
 
         var mapScript = this.mapLayer.getComponent("SmallMap");
 
@@ -591,12 +600,12 @@ var MainGameManager = cc.Class({
 
 
         npcScript.initUnit(detail);//初始化npc属性
-        if(npcScript.team * this.heros[0].getComponent("Unit").team > 0){
+        if(npcScript.team * this.heros[0].getComponent("UnitRouter").getTeam() > 0){
             npcScript.focusTarget = this.heros[1];
         }else{
             npcScript.focusTarget = this.heros[0];
         }
-        npcScript._mapSign = mapScript.fnCreateCreatureSign(npc);//this.creatures[this.creatures.length - 1]
+        npcScript._mapSign = mapScript.fnCreateCreatureSign(npcScript.getLogicNode());//this.creatures[this.creatures.length - 1]
         this.creatureLayer.addChild(npc);
         if(data.battleCry !== undefined && data.battleCry === true){
             npcScript.skillComponent.releaseFunction(0);
@@ -657,12 +666,14 @@ var MainGameManager = cc.Class({
      */
     changeEnemyMove:function(data){
         var script = this.heros[1].getComponent("Hero");
-        this.heros[1].x = data.x;
+        //this.heros[1].x = data.x;
+        if(data.accLeft !== undefined)
         script.accLeft = data.accLeft;
+        if(data.accRight !== undefined)
         script.accRight = data.accRight;
 
-        var script1 = this.heros[1].getComponent("Unit");
-        script.health = data.health;
+        //var script1 = this.heros[1].getComponent("Unit");
+        //script.health = data.health;
     },
     /**
      * @主要功能 让敌人跳一下
@@ -672,12 +683,12 @@ var MainGameManager = cc.Class({
      * @returns
      */
     changeEnemyJump:function(data){
-        var script = this.heros[1].getComponent("Unit");
+        var script = this.heros[1].getComponent("UnitRouter");
         script.jumpAction();
     },
     changeEnemyAttack:function(data){
         cc.log("attack");
-        var script = this.heros[1].getComponent("Unit");
+        var script = this.heros[1].getComponent("UnitRouter");
         script.ATKActionFlag = true;
         script.attackAction();
     },
@@ -725,15 +736,24 @@ var MainGameManager = cc.Class({
 
     updateSchedule:function(fps){
         this.schedule(this.updateByNet.bind(this,fps),1 / fps);
+
+        this.schedule(function(){
+            for(var i = 0;i < this.creatureLayer.children.length;i ++)
+                this.creatureLayer.children[i].getComponent("UnitRouter").updateView(60);
+            for(i = 0;i < this.heroLayer.children.length;i ++)
+                this.heroLayer.children[i].getComponent("UnitRouter").updateView(60);
+            for(i = 0;i < this.magicLayer.children.length;i ++)
+                this.magicLayer.children[i].getComponent("Magic").updateByNet(60);
+        }.bind(this),1 / 60);
     },
     updateByNet: function (fps) {
         for(var i = 0;i < this.creatureLayer.children.length;i ++)
-            this.creatureLayer.children[i].getComponent("Unit").updateByNet(fps);
+            this.creatureLayer.children[i].getComponent("UnitRouter").updateByNet(fps);
         for(i = 0;i < this.magicLayer.children.length;i ++)
             this.magicLayer.children[i].getComponent("Magic").updateByNet(fps);
 
         for(i = 0;i < this.heroLayer.children.length;i ++)
-            this.heroLayer.children[i].getComponent("Unit").updateByNet(fps);
+            this.heroLayer.children[i].getComponent("UnitRouter").updateByNet(fps);
 
         this.node.getComponent("AttackBehavior").attackCalculation();
     }

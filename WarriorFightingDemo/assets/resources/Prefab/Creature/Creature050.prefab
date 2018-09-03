@@ -3288,7 +3288,8 @@
     },
     "_enabled": true,
     "atk": 0,
-    "matk": 1
+    "matk": 1,
+    "_attackList": []
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -3347,7 +3348,7 @@
     "friendlyTarget": [],
     "enemyTarget": [],
     "id": 49,
-    "animationId": 0,
+    "_animationId": 0,
     "unitType": 0,
     "bodySkeleton": {
       "__id__": 49
@@ -3391,11 +3392,12 @@
     "move": true,
     "moveLock": false,
     "team": 0,
-    "delay": 100,
+    "delay": 4,
     "death": false,
     "summon": true,
     "ATKActionFlag": false,
-    "coolTime": 2,
+    "coolTime": 80,
+    "_mapSign": null,
     "bodyNode": {
       "__id__": 47
     },

@@ -151,9 +151,25 @@ var NetworkModule = {
 
     match:function(){
         cc.log("matching");
-        setTimeout(function(){
-            this.socket.emit('match', {'token':this.Global.token});
-        }.bind(this),2000);
+        //setTimeout(function(){
+        //    this.socket.emit('match', {'token':this.Global.token});
+        //}.bind(this),2000);
+        //this.messageLabel.string = data.room;
+        //获取房间号
+        setTimeout(function () {
+            this.Global.room = 'roomChat';
+            cc.log(this.room);
+            //生成一个随机数，用于大小比较，以判别英雄的左右
+            this.randNum = Math.random();
+            //发送消息
+            setTimeout(function () {
+                this.roomMsg(this.Global.room, 'roomChat', "init");
+            }.bind(this), 200);
+            //发送随机数过去
+            setTimeout(function () {
+                this.roomMsg(this.Global.room, 'roomChat', {"name": "rand", num: this.randNum});
+            }.bind(this), 1500);
+        }.bind(this), 2000);
     },
     joinRoom:function(){
         this.joinMsg('roomChat', this.Global.room);

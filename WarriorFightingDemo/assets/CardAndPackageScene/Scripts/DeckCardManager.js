@@ -162,7 +162,7 @@ cc.Class({
                 dataType: "json",
                 data: {"token": Global.token, "deckId":self.editDeckId,"data":JSON.stringify(data)},
                 success: function (rs) {
-                    if (rs.status === "003") {
+                    if (rs.status === "200") {
                         cc.log("用户卡组更新成功");
                         self.getOutDeck();
                     } else {

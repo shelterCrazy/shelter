@@ -315,7 +315,7 @@
     "enemyHero": false,
     "enemyTower": false,
     "enemyBase": false,
-    "friendlyCreature": true,
+    "friendlyCreature": false,
     "friendlyHero": false,
     "friendlyTower": false,
     "friendlyBase": false,
@@ -1570,6 +1570,8 @@
       "__id__": 1
     },
     "_enabled": true,
+    "loadEffect": null,
+    "hitEffect": null,
     "skillNode": {
       "__id__": 2
     },

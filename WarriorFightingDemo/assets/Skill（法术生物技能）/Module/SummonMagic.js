@@ -43,7 +43,11 @@ cc.Class({
         areaB:0,
 
         //角度，角度对称
-        angel:0,
+        angelA:0,
+        angelB:0,
+        //默认速度开关，如果非默认速度，则按照speed来赋值
+        defaultSpeedSwitch:false,
+        speed:0,
         y:0,
         area:0,
         //法术释放的延迟
@@ -110,12 +114,17 @@ cc.Class({
         var eventsend;
         eventsend = new cc.Event.EventCustom('magicCreate',true);
         cc.log("send a magic init");
+        if(this.defaultSpeedSwitch === true){
+            this.speed = undefined;
+        }
         eventsend.setUserData({
-            position: x - this.offset * team / Math.abs(team),
-            y: this.y,
+            position: x - this.offset * team / Math.abs(team) +
+            (this.areaA + (this.areaB - this.areaA) * Math.seededRandom(0,1)),
+            y: this.y + globalConstant.magicY,
             angel: 90 * (1 + team/Math.abs(team)) -
-                    this.angel * team / Math.abs(team),
+                (this.angelA + (this.angelB - this.angelA) * Math.seededRandom(0,1)) * team / Math.abs(team),
             area: this.area,
+            speed:this.speed,
             team: team,
             network:this.network,
             prefab:this.magicPrefab,

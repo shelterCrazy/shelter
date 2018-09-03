@@ -18,7 +18,7 @@ cc.Class({
     },
     start: function () {
         var mainGameManagerScript = this.mainGameManager.getComponent("MainGameManager");
-        this.heroScript = mainGameManagerScript.heros[0].getComponent("Hero");
+        this.heroScript = mainGameManagerScript.heros[0].getComponent("UnitRouter").getLogicTypeScript();
     },
     // use this for initialization
     lateUpdate: function () {

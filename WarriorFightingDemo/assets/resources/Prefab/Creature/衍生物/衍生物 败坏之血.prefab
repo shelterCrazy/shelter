@@ -2862,7 +2862,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 48.94,
+      "width": 49,
       "height": 40
     },
     "_rotationX": 0,
@@ -3040,7 +3040,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 48.94,
+      "width": 49,
       "height": 40
     },
     "_rotationX": 0,
@@ -3155,7 +3155,8 @@
     },
     "_enabled": true,
     "atk": 0,
-    "matk": 1
+    "matk": 1,
+    "_attackList": []
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -3214,7 +3215,7 @@
     "friendlyTarget": [],
     "enemyTarget": [],
     "id": 0,
-    "animationId": 9003,
+    "_animationId": 0,
     "unitType": 0,
     "bodySkeleton": {
       "__id__": 45
@@ -3254,14 +3255,16 @@
     },
     "attackArea": 0,
     "speed": 2,
+    "resist": false,
     "move": true,
     "moveLock": false,
     "team": 0,
-    "delay": 100,
+    "delay": 4,
     "death": false,
     "summon": true,
     "ATKActionFlag": false,
-    "coolTime": 2,
+    "coolTime": 80,
+    "_mapSign": null,
     "bodyNode": {
       "__id__": 43
     },

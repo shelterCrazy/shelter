@@ -30,9 +30,9 @@ cc.Class({
     },
     // use this for initialization
     onLoad: function () {
-        this.unitScript = this.node.getComponent("Unit");
 
-        this.drawCardScript = this.drawCardNode.getComponent("DrawCard");
+
+        //this.drawCardScript = this.drawCardNode.getComponent("DrawCard");
 
         this.networkScript = this.unitScript.GameManager.getComponent("network");
         this.mainGameManagerScript = this.unitScript.GameManager.getComponent('MainGameManager');
@@ -66,30 +66,7 @@ cc.Class({
             this.setInputControl();
         }
     },
-    //抽取X张牌
-    drawCard:function(x){
-        //抽牌循环
-        for(var i = 0;i < x;i++) {
-            this.drawCardScript.creatCardType();
-        }
-    },
-    //丢弃X张牌
-    throwCard:function(x){
-        //弃牌循环
-        for(var i = 0;i < x;i++) {
-            this.drawCardScript.throwCard();
-        }
-    },
-    //获得确定的牌
-    getCertainCard:function(cardId,cardPrefab){
-        if(cardPrefab === undefined) {
-            this.drawCardScript.getCertainCard(cardId);
-        }else{
-            if(this.handCard.length < globalConstant.handMaxNum){
-                this.drawCardScript.creatNewCard(cardPrefab);
-            }
-        }
-    },
+
     /**
      * @主要功能 刷新英雄单位
      * @author C14
@@ -131,13 +108,13 @@ cc.Class({
             switch (this._controlList1[i].press){
                 case "left":
                     this.sendMoveMessage({
-                        accLeft: true,
-                        accRight: this.accRight
+                        accLeft: true
+                        //accRight: this.accRight
                     });
                     break;
                 case "right":
                     this.sendMoveMessage({
-                        accLeft: this.accLeft,
+                        //accLeft: this.accLeft,
                         accRight: true
                     });
                     break;
@@ -156,12 +133,12 @@ cc.Class({
             switch (this._controlList1[i].release){
                 case "left":
                     this.sendMoveMessage({
-                        accLeft: false,
-                        accRight: this.accRight
+                        accLeft: false
+                        //accRight: this.accRight
                     });break;
                 case "right":
                     this.sendMoveMessage({
-                        accLeft: this.accLeft,
+                        //accLeft: this.accLeft,
                         accRight: false
                     });break;
             }
@@ -235,10 +212,13 @@ cc.Class({
         this.death = false;
     },
     init:function(data){
-        this.team = data.team;
+        this.unitScript = this.node.getComponent("Unit");
+        this.team = this.unitScript.team;
         this.node.x = globalConstant.sceneWidth * cc.director.getWinSize().width / 2
             * (1 + this.team / Math.abs(this.team) * 0.9);
-        //this.changeOutLook();
+        if(this.team !== Global.nowTeam) {
+            this.self = false;
+        }
     },
     sendMoveMessage:function(detail){
         var self = this;
@@ -249,12 +229,10 @@ cc.Class({
     },
     sendJumpMessage:function(){
         var self = this;
-        if(self.unitScript.isCanJump === true) {
-            NetworkModule.roomMsg(Global.room, 'roomChat', {
-                name: "enemyJump",
-                detail: {}
-            })
-        }
+        NetworkModule.roomMsg(Global.room, 'roomChat', {
+            name: "enemyJump",
+            detail: {}
+        })
     },
     sendAttackMessage:function(){
         var self = this;
@@ -324,7 +302,30 @@ cc.Class({
     removeNode: function (sender, monster) {
         this._pool.put(monster);
     },
-
+    ////抽取X张牌
+    //drawCard:function(x){
+    //    //抽牌循环
+    //    for(var i = 0;i < x;i++) {
+    //        this.drawCardScript.creatCardType();
+    //    }
+    //},
+    ////丢弃X张牌
+    //throwCard:function(x){
+    //    //弃牌循环
+    //    for(var i = 0;i < x;i++) {
+    //        this.drawCardScript.throwCard();
+    //    }
+    //},
+    ////获得确定的牌
+    //getCertainCard:function(cardId,cardPrefab){
+    //    if(cardPrefab === undefined) {
+    //        this.drawCardScript.getCertainCard(cardId);
+    //    }else{
+    //        if(this.handCard.length < globalConstant.handMaxNum){
+    //            this.drawCardScript.creatNewCard(cardPrefab);
+    //        }
+    //    }
+    //},
     // called every frame, uncomment this function to activate update callback
     //update: function (dt) {
     //

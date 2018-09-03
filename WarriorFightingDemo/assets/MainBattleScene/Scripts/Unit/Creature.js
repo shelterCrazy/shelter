@@ -104,7 +104,8 @@ cc.Class({
                 this.unitScript.attackAction();
             }
         }
-
+    },
+    init:function(){
 
     }
 });

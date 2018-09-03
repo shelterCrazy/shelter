@@ -987,7 +987,7 @@
     "_size": {
       "__type__": "cc.Size",
       "width": 200,
-      "height": 1000
+      "height": 5000
     }
   },
   {
@@ -1059,7 +1059,7 @@
     "_size": {
       "__type__": "cc.Size",
       "width": 200,
-      "height": 1000
+      "height": 5000
     }
   },
   {
@@ -1167,8 +1167,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 3900,
-      "height": 200
+      "width": 0,
+      "height": 0
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -1176,8 +1176,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 680,
-      "y": -145
+      "x": 2090,
+      "y": -130
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -1197,13 +1197,13 @@
     "tag": 0,
     "_offset": {
       "__type__": "cc.Vec2",
-      "x": 2338,
-      "y": -100
+      "x": 0,
+      "y": -130
     },
     "_size": {
       "__type__": "cc.Size",
       "width": 10000,
-      "height": 200
+      "height": 260
     }
   },
   {
@@ -1733,6 +1733,7 @@
     "myMDeck": [],
     "myCDeck": [],
     "Deck": [],
+    "handCard": [],
     "heroNode": null,
     "positionX": 0,
     "drawCardFlag": 0,
@@ -4507,7 +4508,8 @@
     },
     "_enabled": true,
     "atk": 0,
-    "matk": 1
+    "matk": 1,
+    "_attackList": []
   },
   {
     "__type__": "cc.Canvas",

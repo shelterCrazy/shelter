@@ -73,8 +73,8 @@ cc.Class({
         var self = this;
         //如果这两个变量未初始化，则作为展示用的卡牌
         if(self.hero !== null || self.cameraControl !== null) {
-            self.heroScirpt = self.hero.getComponent("Hero");
-            self.heroUnitScirpt = self.hero.getComponent("Unit");
+            self.heroScirpt = self.hero.getComponent("UnitRouter").getLogicTypeScript();
+            self.heroUnitScirpt = self.hero.getComponent("UnitRouter").getLogicUnitScript();
             self.cameraControlScript = this.cameraControl.getComponent("CameraControl");
             // this.cardHand = require("CardHand");
             // this.cardUsing = require("CardUsing");

@@ -23,7 +23,7 @@ cc.Class({
         var script = null;
         if(this.unitScript.death === false) {
             //�ж�
-            if (other.node.group === "Unit") {
+            if (other.node.group === "Unit" || other.node.group === "ViewUnit") {
                 //cc.log("touch the Creature");
                 script = other.node.getComponent("Unit");
                 if (script.death === false) {
@@ -34,40 +34,13 @@ cc.Class({
                     }
                 }
             }
-
-
-            //�ж�
-            //if (other.node.group === "Hero") {
-            //    script = other.node.getComponent('Hero');
-            //
-            //    if (script.team !== this.unitScript.team && script.death === false) {
-            //        this.unitScript.target.push(other.node);
-            //        this.unitScript.targetType.push(1);
-            //        if (!this.unitScript.ATKActionFlag) {
-            //            this.unitScript.ATKActionFlag = 1; //����
-            //        }
-            //    }
-            //}
-
-            //�ж�
-            //if (other.node.group === "Base") {
-            //    //console.log("touch the Base");
-            //    script = other.node.getComponent('Base');
-            //    if (script.team !== this.unitScript.team) {
-            //        this.unitScript.target.push(other.node);
-            //        this.unitScript.targetType.push(2);
-            //        if (!this.unitScript.ATKActionFlag) {
-            //            this.unitScript.ATKActionFlag = 1; //����
-            //        }
-            //    }
-            //}
         }
     },
 
     onCollisionExit: function (other, self) {
         var i = 0;
         //�ж�
-        if (other.node.group === "Unit") {
+        if (other.node.group === "Unit" || other.node.group === "ViewUnit") {
             var script = other.node.getComponent("Unit");
 
             for(i = 0;i<this.unitScript.friendlyTarget.length;i++){

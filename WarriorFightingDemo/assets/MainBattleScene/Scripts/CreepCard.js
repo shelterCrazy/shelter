@@ -75,7 +75,8 @@ cc.Class({
         }
 
         self.cardScript = self.node.getComponent('Card');
-        this.heroScirpt = this.cardScript.hero.getComponent('Hero');
+        self.heroScirpt = self.hero.getComponent("UnitRouter").getLogicTypeScript();
+        self.heroUnitScirpt = self.hero.getComponent("UnitRouter").getLogicUnitScript();
 
         //this.usableComponent[this.usableType].mainGameManagerScript =
         //    this.cardScript.mainGameManager.getComponent("MainGameManager");
