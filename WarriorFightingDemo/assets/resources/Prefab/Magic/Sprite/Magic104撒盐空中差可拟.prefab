@@ -1433,6 +1433,8 @@
       "__id__": 1
     },
     "_enabled": true,
+    "loadEffect": null,
+    "hitEffect": null,
     "skillNode": {
       "__id__": 2
     },
@@ -1446,20 +1448,20 @@
     "_interval": [],
     "network": true,
     "createByNetwork": false,
-    "startSpeed": 800,
+    "startSpeed": 10,
     "speed": {
       "__type__": "cc.Vec2",
       "x": 0,
       "y": 0
     },
-    "gravity": 800,
+    "gravity": 0.2,
     "heroBounce": false,
     "skyBounce": false,
     "groundBounce": true,
     "leftRightBounce": true,
     "elasticCoefficient": 1,
     "collisionMaxTime": 3,
-    "vanishCondition": 1,
+    "vanishCondition": 9,
     "_stopLock": false
   },
   {

@@ -505,7 +505,7 @@
     },
     "_children": [],
     "_tag": -1,
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 11
@@ -2280,7 +2280,7 @@
       }
     ],
     "_tag": -1,
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 68
@@ -2847,7 +2847,7 @@
     },
     "_children": [],
     "_tag": -1,
-    "_active": false,
+    "_active": true,
     "_components": [
       {
         "__id__": 74
@@ -3052,7 +3052,7 @@
         "__id__": 78
       }
     ],
-    "_N$isChecked": false
+    "_N$isChecked": true
   },
   {
     "__type__": "cc.ClickEvent",
@@ -3136,7 +3136,7 @@
     },
     "_children": [],
     "_tag": -1,
-    "_active": false,
+    "_active": true,
     "_components": [
       {
         "__id__": 81
@@ -3172,8 +3172,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 1912,
-      "y": 2
+      "x": 1788,
+      "y": 1235
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -3254,7 +3254,7 @@
     },
     "_children": [],
     "_tag": -1,
-    "_active": false,
+    "_active": true,
     "_components": [
       {
         "__id__": 85
@@ -3290,8 +3290,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 2450,
-      "y": 238
+      "x": 2326,
+      "y": 1471
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -3333,7 +3333,7 @@
     },
     "_enabled": true,
     "atlas": {
-      "__uuid__": "4b65e5d7-d487-4936-bfc9-ff94979cb47e"
+      "__uuid__": "6fbeffbf-64d9-462c-a9a6-d497ad319efc"
     },
     "animations": [
       {
@@ -3355,10 +3355,10 @@
   {
     "__type__": "Clips",
     "animtionName": "alumon",
-    "prefix": "alumon_",
+    "prefix": "",
     "suffix": "",
     "startNumber": 0,
-    "endNumber": 19,
+    "endNumber": 15,
     "interval": 0.09,
     "loops": -1,
     "speed": 1
@@ -5305,7 +5305,7 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 2227,
+      "x": 2270,
       "y": 93
     },
     "_skewX": 0,
@@ -5415,8 +5415,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 2397,
-      "y": 51
+      "x": 2337,
+      "y": 198
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -5506,7 +5506,7 @@
     "areaRight": 4,
     "mainScene": false,
     "yFollow": true,
-    "offsetY": 400,
+    "offsetY": 250,
     "_mouseWheel": 0,
     "mouseWheelMax": 8
   },
@@ -9884,7 +9884,7 @@
       }
     ],
     "_tag": -1,
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 361
@@ -12103,11 +12103,11 @@
     "_N$backgroundImage": {
       "__uuid__": "67e68bc9-dad5-4ad9-a2d8-7e03d458e32f"
     },
-    "_N$returnType": 0,
+    "_N$returnType": 2,
     "_N$inputFlag": 1,
     "_N$inputMode": 6,
     "_N$fontSize": 20,
-    "_N$lineHeight": 40,
+    "_N$lineHeight": 20,
     "_N$fontColor": {
       "__type__": "cc.Color",
       "r": 0,
@@ -12125,7 +12125,7 @@
       "a": 255
     },
     "_N$maxLength": 30,
-    "_N$stayOnTop": false
+    "_N$stayOnTop": true
   },
   {
     "__type__": "cc.ClickEvent",
@@ -12210,11 +12210,11 @@
     "_N$backgroundImage": {
       "__uuid__": "67e68bc9-dad5-4ad9-a2d8-7e03d458e32f"
     },
-    "_N$returnType": 0,
+    "_N$returnType": 1,
     "_N$inputFlag": 0,
     "_N$inputMode": 6,
     "_N$fontSize": 20,
-    "_N$lineHeight": 40,
+    "_N$lineHeight": 20,
     "_N$fontColor": {
       "__type__": "cc.Color",
       "r": 0,
@@ -12232,7 +12232,7 @@
       "a": 255
     },
     "_N$maxLength": 16,
-    "_N$stayOnTop": false
+    "_N$stayOnTop": true
   },
   {
     "__type__": "cc.ClickEvent",
@@ -12351,8 +12351,8 @@
     "_N$returnType": 0,
     "_N$inputFlag": 5,
     "_N$inputMode": 6,
-    "_N$fontSize": 29,
-    "_N$lineHeight": 40,
+    "_N$fontSize": 20,
+    "_N$lineHeight": 20,
     "_N$fontColor": {
       "__type__": "cc.Color",
       "r": 0,
@@ -12364,13 +12364,13 @@
     "_N$placeholderFontSize": 20,
     "_N$placeholderFontColor": {
       "__type__": "cc.Color",
-      "r": 127,
-      "g": 127,
-      "b": 127,
+      "r": 231,
+      "g": 231,
+      "b": 231,
       "a": 255
     },
     "_N$maxLength": 8,
-    "_N$stayOnTop": false
+    "_N$stayOnTop": true
   },
   {
     "__type__": "cc.ClickEvent",

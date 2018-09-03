@@ -1,0 +1,15 @@
+{
+  "AutoClean": false,
+  "IgnorePatterns": "",
+  "colors": {
+    "error": "#df2020",
+    "failed": "#DA2121",
+    "info": "#0099FF",
+    "log": "#999999",
+    "success": "#009900",
+    "warn": "#999900"
+  },
+  "fontfamilies": "Monaco",
+  "fontsize": 11,
+  "lineheight": 18
+}

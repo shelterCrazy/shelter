@@ -22,6 +22,9 @@ cc.Class({
         maxMana:10,
 
         manaRecoverSpeedK:1,
+
+        _controlList1:[],
+        _controlList2:[]
         //英雄队伍颜色的调整
         //teamColorNode:[cc.Node]
     },
@@ -32,11 +35,11 @@ cc.Class({
         this.drawCardScript = this.drawCardNode.getComponent("DrawCard");
 
         this.networkScript = this.unitScript.GameManager.getComponent("network");
-        var mainGameManagerScript = this.unitScript.GameManager.getComponent('MainGameManager');
+        this.mainGameManagerScript = this.unitScript.GameManager.getComponent('MainGameManager');
         // 初始化跳跃动作
         //this.jumpAction = this.setJumpAction();
         //this.node.runAction(this.jumpAction);
-        this.cameraControlScript = mainGameManagerScript.cameraLayer.getComponent('CameraControl');
+        this.cameraControlScript = this.mainGameManagerScript.cameraLayer.getComponent('CameraControl');
 
         this.deathTimes = 0;
         // 加速度方向开关
@@ -87,17 +90,97 @@ cc.Class({
             }
         }
     },
-    refresh: function (dt) {
+    /**
+     * @主要功能 刷新英雄单位
+     * @author C14
+     * @Date 2018/8/23
+     * @parameters fps：此刷新的帧率
+     * @returns
+     */
+    refresh: function (fps) {
+        //获得当前帧率下应当推进的速率
+        var frameSpeed = globalConstant.frameRate / fps;
+
+        //处理操作列表2中的全部操作
+        for(var i in this._controlList2){
+            if(this._controlList2[i].press !== undefined)
+            switch (this._controlList2[i].press){
+                case "left":
+                    if(this.accLeft === false){
+                        this.accLeft = true;
+                    }break;
+                case "right":
+                if(this.accRight === false) {
+                    this.accRight = true;
+                }break;
+                case "up":this.onceJumpAciton();break;
+                case "space":this.unitScript.attackAction();break;
+            }
+            if(this._controlList2[i].release !== undefined)
+            switch (this._controlList2[i].release){
+                case "left":
+                    this.accLeft = false;break;
+                case "right":
+                    this.accRight = false;break;
+            }
+        }
+        this._controlList2 = [];
+        //处理操作列表1中的全部操作
+        for(i in this._controlList1){
+            if(this._controlList1[i].press !== undefined)
+            switch (this._controlList1[i].press){
+                case "left":
+                    this.sendMoveMessage({
+                        accLeft: true,
+                        accRight: this.accRight
+                    });
+                    break;
+                case "right":
+                    this.sendMoveMessage({
+                        accLeft: this.accLeft,
+                        accRight: true
+                    });
+                    break;
+                case "up":this.sendJumpMessage();break;
+                case "space":
+                    if (this.unitScript.coolTimer === this.unitScript.coolTime &&
+                        this.unitScript.attackFreeze === false) {
+                        if(this.unitScript.ATKActionFlag === false){
+                            this.unitScript.ATKActionFlag = true;
+                        }
+                        this._controlList2.push(this._controlList1[i]);
+                        this.sendAttackMessage();
+                    }continue;
+            }
+            if(this._controlList1[i].release !== undefined)
+            switch (this._controlList1[i].release){
+                case "left":
+                    this.sendMoveMessage({
+                        accLeft: false,
+                        accRight: this.accRight
+                    });break;
+                case "right":
+                    this.sendMoveMessage({
+                        accLeft: this.accLeft,
+                        accRight: false
+                    });break;
+            }
+            //把1中的操作转移给2号
+            this._controlList2.push(this._controlList1[i]);
+        }
+        this._controlList1 = [];
+
+
         //处理X轴的速度
         if (this.accLeft === this.accRight) {//左右键同时按或不按，则不动
             this.xSpeed = 0;
             this.unitScript.stopAction();
         } else if (this.accLeft === true) {
             //this.unitScript.bodyNode.scaleX = -1;
-            this.xSpeed = - this.unitScript.speed;//向左
+            this.xSpeed = - this.unitScript.speed * frameSpeed;//向左
         } else if (this.accRight === true) {
             //this.unitScript.bodyNode.scaleX = 1;
-            this.xSpeed = this.unitScript.speed;//向右
+            this.xSpeed = this.unitScript.speed * frameSpeed;//向右
         }
         if(0 > this.node.x){
             this.node.x = 0;
@@ -110,15 +193,26 @@ cc.Class({
             this.unitScript.moveAction(this.xSpeed);//  Math.abs(this.xSpeed)
         }
 
+
         if (this.mana < this.maxMana){
-            this.mana += this.manaRecoverSpeedK * Math.sqrt(1 - this.mana / this.maxMana) * dt;
+            this.mana += this.manaRecoverSpeedK * Math.sqrt(1 - this.mana / this.maxMana) * frameSpeed;
         } else {
             this.mana = this.maxMana;
         }
     },
+    /**
+     * @主要功能 根据玩家操作，推后一帧才进行执行
+     * @author C14
+     * @Date 2018/8/31
+     * @parameters
+     * @returns
+     */
+    delayFrame:function(){
+
+    },
+
     onceJumpAciton: function() {
         var self = this;
-        this.sendJumpMessage();
         this.unitScript.jumpAction();
     },
     releaseTarget:function(){
@@ -146,27 +240,11 @@ cc.Class({
             * (1 + this.team / Math.abs(this.team) * 0.9);
         //this.changeOutLook();
     },
-    //changeOutLook:function(){
-    //    if(this.team < 0) {
-    //        this.teamColorNode[0].active = true;
-    //        this.teamColorNode[1].active = false;
-    //        this.teamColorNode[2].active = false;
-    //    }else if(this.team > 0){
-    //        this.teamColorNode[0].active = false;
-    //        this.teamColorNode[1].active = false;
-    //        this.teamColorNode[2].active = true;
-    //    }
-    //},
-    sendMoveMessage:function(){
+    sendMoveMessage:function(detail){
         var self = this;
         NetworkModule.roomMsg(Global.room, 'roomChat', {
             name: "enemyMove",
-            detail: {
-                accLeft: self.accLeft,
-                accRight: self.accRight,
-                health:self.unitScript.health,
-                x:self.node.x
-            }
+            detail: detail
         })
     },
     sendJumpMessage:function(){
@@ -195,21 +273,15 @@ cc.Class({
                 switch(keyCode) {
                     case cc.KEY.a:
                     case cc.KEY.left:
-                        if(self.accLeft === false){
-                            self.accLeft = true;
-                            self.sendMoveMessage();
-                        }
+                        this._controlList1.push({"press":"left"});
                         break;
                     case cc.KEY.d:
                     case cc.KEY.right:
-                        if(self.accRight === false) {
-                            self.accRight = true;
-                            self.sendMoveMessage();
-                        }
+                        this._controlList1.push({"press":"right"});
                         break;
                     case cc.KEY.w:
                     case cc.KEY.up:
-                            self.onceJumpAciton();
+                        this._controlList1.push({"press":"up"});
                         break;
                     case cc.KEY.j:
                     case cc.KEY.z:
@@ -223,32 +295,23 @@ cc.Class({
                         self.cameraControlScript.targets[1].x = self.cameraControlScript.targets[0].x;
                         break;
                     case cc.KEY.space:
-                        if (self.unitScript.coolTimer === self.unitScript.coolTime &&
-                            self.unitScript.attackFreeze === false) {
-                            if(self.unitScript.ATKActionFlag === false){
-                               self.unitScript.ATKActionFlag = true;
-                            }
-                            self.sendAttackMessage();
-                            self.unitScript.attackAction();
-                        }
+                        this._controlList1.push({"press":"space"});
                         break;
                 }
-            },
+            }.bind(this),
             // 松开按键时，停止向该方向的加速
             onKeyReleased: function(keyCode, event) {
                 switch(keyCode) {
                     case cc.KEY.a:
                     case cc.KEY.left:
-                        self.accLeft = false;
-                        self.sendMoveMessage();
+                        this._controlList1.push({"release":"left"});
                         break;
                     case cc.KEY.d:
                     case cc.KEY.right:
-                        self.accRight = false;
-                        self.sendMoveMessage();
+                        this._controlList1.push({"release":"right"});
                         break;
                 }
-            }
+            }.bind(this)
         }, self.node);
     },
 
