@@ -1,4 +1,5 @@
 var global = require("Global");
+var Global = require("Global");
 var globalConstant = require("Constant");
 cc.Class({
     extends: cc.Component,
@@ -133,16 +134,41 @@ cc.Class({
      * @returns
      */
     purchaseCardBag:function(){
-        if(global.money >= this.needMoney){
-            global.money -= this.needMoney;
-            global.bagNum[this.purchaseId] += Math.floor(this.purchaseNumLabel.string);
-            this.purchaseNumLabel.string = 0;
-            this.purchaseNumChange();
-        }else{
-            this.massage.string = "抱歉，已经没有钱了";
-            var action = cc.sequence(cc.fadeIn(1).easing(cc.easeSineOut()),cc.fadeOut(1).easing(cc.easeSineIn()));
-            this.massageNode.runAction(action);
-        }
+        var self = this;
+        var packageNum = Math.floor(this.purchaseNumLabel.string);
+        $.ajax({
+            url: "/areadly/purchasePackage",
+            type: "GET",
+            dataType: "json",
+            data: {"token": Global.token, "packageType":this.purchaseId,"packageNum":packageNum},
+            success: function (rs) {
+                if (rs.status === "200") {
+                    cc.log("购买卡包成功");
+                    self.purchaseNumLabel.string = 0;
+                    self.purchaseNumChange();
+                    self.massage.string = "购买成功";
+                    var action = cc.sequence(cc.fadeIn(1).easing(cc.easeSineOut()),cc.fadeOut(1).easing(cc.easeSineIn()));
+                    self.massageNode.runAction(action);
+                } else {
+                    cc.log("购买卡包失败");
+                    this.massage.string = "购买失败";
+                    action = cc.sequence(cc.fadeIn(1).easing(cc.easeSineOut()),cc.fadeOut(1).easing(cc.easeSineIn()));
+                    this.massageNode.runAction(action);
+                    cc.log(rs);
+                }
+            },
+            error: function () {
+                cc.log("购买卡包错误");
+            }
+        });
+        //if(global.money >= this.needMoney){
+        //    global.money -= this.needMoney;
+        //    global.bagNum[this.purchaseId] += Math.floor(this.purchaseNumLabel.string);
+        //
+        //
+        //}else{
+        //
+        //}
     },
     /**
      * @主要功能 购买故事模式
