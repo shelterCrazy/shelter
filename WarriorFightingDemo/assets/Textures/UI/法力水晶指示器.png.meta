@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "3b1aa38c-630e-49f8-ab66-10c2a58bd27c",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "法力水晶指示器": {
+      "ver": "1.0.3",
+      "uuid": "e7b08501-a6a0-4410-b61b-83b09ee104db",
+      "rawTextureUuid": "3b1aa38c-630e-49f8-ab66-10c2a58bd27c",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 744,
+      "height": 18,
+      "rawWidth": 744,
+      "rawHeight": 18,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 44,
+      "subMetas": {}
+    }
+  }
+}

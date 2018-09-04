@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "db69ae2d-9633-48bc-ad0f-76db76e4090a",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "血量记02": {
+      "ver": "1.0.3",
+      "uuid": "e6671465-8d9f-48bf-b107-3733ee886a2b",
+      "rawTextureUuid": "db69ae2d-9633-48bc-ad0f-76db76e4090a",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": -1,
+      "trimX": 1,
+      "trimY": 3,
+      "width": 43,
+      "height": 41,
+      "rawWidth": 45,
+      "rawHeight": 45,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

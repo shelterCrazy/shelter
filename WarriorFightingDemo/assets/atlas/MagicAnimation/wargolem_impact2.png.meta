@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "a0c6faf8-5c50-4c9d-9acc-4bfd600c4cf1",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "wargolem_impact2": {
+      "ver": "1.0.3",
+      "uuid": "06a23d31-38bc-4c52-a920-71cb72bd6756",
+      "rawTextureUuid": "a0c6faf8-5c50-4c9d-9acc-4bfd600c4cf1",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 2,
+      "offsetY": 36.5,
+      "trimX": 4,
+      "trimY": 13,
+      "width": 508,
+      "height": 413,
+      "rawWidth": 512,
+      "rawHeight": 512,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

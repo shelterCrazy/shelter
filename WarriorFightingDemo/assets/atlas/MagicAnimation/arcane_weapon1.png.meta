@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "7bfd8779-70f4-4d8a-b23a-64d845ba2311",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "arcane_weapon1": {
+      "ver": "1.0.3",
+      "uuid": "119667bd-38b4-4b07-9c29-98a2d6866747",
+      "rawTextureUuid": "7bfd8779-70f4-4d8a-b23a-64d845ba2311",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 6,
+      "offsetY": 2.5,
+      "trimX": 27,
+      "trimY": 7,
+      "width": 470,
+      "height": 237,
+      "rawWidth": 512,
+      "rawHeight": 256,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}
