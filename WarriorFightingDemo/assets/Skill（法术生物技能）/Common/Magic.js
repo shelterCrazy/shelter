@@ -26,6 +26,11 @@ cc.Class({
         //游戏管理器
         GameManager:cc.Component,
 
+        //显示层
+        viewNode:cc.Node,
+        //逻辑层
+        logicNode:cc.Node,
+
         magicType:{
             type:cc.Enum({
                 //常规法术
@@ -321,7 +326,7 @@ cc.Class({
      * @parameters
      * @returns
      */
-    release: function(){
+    release: function(flag){
         var self = this;
         var typeMagic = cc.Enum({
             //常规法术
@@ -331,6 +336,34 @@ cc.Class({
             //指向性法术
             directionMagic:2
         });
+        if(this.logicNode === this.node){
+            this.viewNode.getComponent("Magic").release(true);
+        }
+        //如果是显示层那么不触发相应的效果
+        //但是如果是控制过去让其播放死亡动画的话，那么release
+        if(this.viewNode === this.node && flag !== undefined && flag === true){
+            switch (this.magicType)
+            {
+                case typeMagic.normalMagic:
+                    self.GameManager.removeMagic(self.node);
+                    break;
+                case typeMagic.areaMagic:
+                    self.GameManager.removeMagic(self.node);
+                    break;
+                case typeMagic.directionMagic:
+                    if(this.hitEffect !== null)
+                        this.sendEvent(this.hitEffect);
+                    if(this.animation !== null) {
+                        this.animation.play("end");
+                    }
+
+                    this._stopLock = true;
+                    setTimeout(function () {
+                        self.GameManager.removeMagic(self.node);
+                    },this._interval[2]);
+                    break;
+            }
+        }
         switch (this.magicType)
         {
             case typeMagic.normalMagic:
@@ -341,7 +374,7 @@ cc.Class({
                 break;
             case typeMagic.areaMagic:
                     this.magicSkill.releaseFunction(1);
-                    
+
                 //this.node.removeFromParent();
                 //self.node.destroy();
                 self.GameManager.removeMagic(self.node);
@@ -423,6 +456,20 @@ cc.Class({
                 this.speed.y -= this.gravity * frameSpeed;
                 this.node.x += this.speed.x * frameSpeed;
                 this.node.y += this.speed.y * frameSpeed;
+            }
+        }
+        //为逻辑节点
+        if(this.logicNode === this.node) {
+            if ((++ this.timer) % 6 === 0) {
+                this.viewNode.stopAllActions();
+                this.viewNode.runAction(
+                    cc.moveBy(
+                        5,
+                        cc.v2(
+                            this.node.x - this.viewNode.x,
+                            this.node.y - this.viewNode.y
+                        )
+                ));
             }
         }
     },

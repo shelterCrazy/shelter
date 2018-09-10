@@ -42,18 +42,23 @@ cc.Class({
      * @returns
      */
     releaseFunction:function(dat,target){
-        for(var i = 0;i < this.releaseFunc[dat].children.length; i++) {
-            var script = this.releaseFunc[dat].children[i].getComponents(cc.Component);
-            for (var j = 0; j < script.length; j++) {
-                script[j].releaseFunction(target);
+        //如果是逻辑层的话
+        if(this.selfObjectScript.logicNode === this.selfObject) {
+            for (var i = 0; i < this.releaseFunc[dat].children.length; i++) {
+                var script = this.releaseFunc[dat].children[i].getComponents(cc.Component);
+                for (var j = 0; j < script.length; j++) {
+                    script[j].releaseFunction(target);
+                }
             }
         }
     },
     releaseFunctionWithTarget:function(target){
-        var script = this.releaseWithTarget.getComponents(cc.Component);
-        for(var i = 0;i < script.length; i++)
-        {
-            script[i].releaseFunctionWithTarget(target);
+        //如果是逻辑层的话
+        if(this.selfObjectScript.logicNode === this.selfObject) {
+            var script = this.releaseWithTarget.getComponents(cc.Component);
+            for (var i = 0; i < script.length; i++) {
+                script[i].releaseFunctionWithTarget(target);
+            }
         }
     },
     onLoad:function()

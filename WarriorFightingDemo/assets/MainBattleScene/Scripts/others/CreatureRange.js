@@ -23,7 +23,7 @@ cc.Class({
         var script = null;
         if(this.unitScript.death === false) {
             //�ж�
-            if (other.node.group === "Unit") {
+            if (other.node.group === "Unit" || other.node.group === "ViewUnit") {
                 //cc.log("touch the Creature");
                 script = other.node.getComponent("Unit");
                 if (script.death === false) {
@@ -67,7 +67,7 @@ cc.Class({
     onCollisionExit: function (other, self) {
         var i = 0;
         //�ж�
-        if (other.node.group === "Unit") {
+        if (other.node.group === "Unit" || other.node.group === "ViewUnit") {
             var script = other.node.getComponent("Unit");
 
             for(i = 0;i<this.unitScript.friendlyTarget.length;i++){

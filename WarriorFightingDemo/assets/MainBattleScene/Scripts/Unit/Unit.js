@@ -37,6 +37,12 @@ var unit = cc.Class({
 
             default: 0
         },
+        //所属层数的枚举
+        //逻辑层节点
+        logicNode:cc.Node,
+        //显示层节点
+        viewNode:cc.Node,
+
 
         bodySkeleton:cc.Component,
 
@@ -104,7 +110,7 @@ var unit = cc.Class({
         //生物攻击的音效
         attackEffect:cc.AudioClip,
         //死亡时的音效
-        dieEffect:cc.AudioClip,
+        dieEffect:cc.AudioClip
     },
 
 
@@ -115,10 +121,12 @@ var unit = cc.Class({
         this.isCanJump = true;
         //攻击等待帧数计时器
         this.delayTimer = 0;
-
+        this.timer = 0;
         this._acc = 5;
         this._f = 0.5;
         this._nowSpeed = 0;
+        this.ySpeed = 0;
+        this.isJump = false;
 
         this.moveFreeze = false;
         this.attackFreeze = false;
@@ -160,11 +168,15 @@ var unit = cc.Class({
         if(this.coolTimer > this.coolTime){
             this.coolTimer = this.coolTime;
         }else if(this.coolTimer < this.coolTime){
-            this.coolTimer += 1 / frameSpeed;
+            this.coolTimer += frameSpeed;
         }
-
+        //如果正在召唤的话，那就返回，不执行下面的内容
         if(this.summon === true){
             return;
+        }
+        if(this.isJump === true){
+            this.ySpeed -= 0.6 * frameSpeed;
+            this.node.y += this.ySpeed * frameSpeed;
         }
         this.typeComponent.refresh(fps);
 
@@ -173,7 +185,7 @@ var unit = cc.Class({
             //加加
             this.delayTimer ++;
             //达到了延迟的数量以后
-            if (this.delayTimer >= this.delay) {
+            if (this.delayTimer * frameSpeed >= this.delay) {
                 //达到了延迟的数量以后，清零
                 this.delayTimer = 0;
                 //攻击一次
@@ -181,7 +193,40 @@ var unit = cc.Class({
             }
         }
 
+        //为逻辑节点
+        if(this.logicNode === this.node) {
+            if ((++ this.timer) % 6 === 0) {
+                this.viewNode.stopAllActions();
+                this.viewNode.runAction(cc.moveBy(5,cc.v2(this.node.x - this.viewNode.x,0)));
+                this.viewNode.getComponent("Unit").health = this.health;
+                this.viewNode.getComponent("Unit").attack = this.attack;
+            }
+            //this.viewNode.getComponent("Unit").changeHealthTo(this.health);
+        }
     },
+
+    onCollisionEnter: function (other, self) {
+        if (other.node.group === "Ground") {
+
+            this.ySpeed = 0;
+
+            this.node.y = other.node.y;
+            cc.log(other.node.y);
+            //this.node.y = otherPreAabb.yMax - this.node.parent.y;
+            this.isJump = false;
+
+            this.isCanJump = true;
+            //如果是显示层的话，显示身体转动，动画等相关操作
+            if (this.node === this.viewNode) {
+                if (this.bodySkeleton !== null) {
+                    this.bodySkeleton.animation = "idle";
+                }
+            }
+        }
+    },
+
+
+
     /**
      * @主要功能 移动行为
      * value为正表示向右移动，为负表示向左移动
@@ -288,23 +333,18 @@ var unit = cc.Class({
 
         if(self.isCanJump === true && this.death === false) {
             self.isCanJump = false;
-            if(self.bodySkeleton !== null) {
-                self.bodySkeleton.animation = "jump";
+            this.isJump = true;
+            //如果是显示层的话，显示身体转动，动画等相关操作
+            if (this.node === this.viewNode) {
+                if (self.bodySkeleton !== null) {
+                    self.bodySkeleton.animation = "jump";
+                }
             }
 
-            var jumpUp = cc.moveBy(self.jumpDuration, cc.p(0, self.jumpHeight)).easing(cc.easeCubicActionOut());
-            var jumpDown = cc.moveBy(self.jumpDuration, cc.p(0, -self.jumpHeight)).easing(cc.easeCubicActionIn());
-
-            self.node.runAction(cc.sequence(jumpUp, jumpDown,
-                cc.callFunc(function(){
-                    self.isCanJump = true;
-                    if(self.bodySkeleton !== null) {
-                        self.bodySkeleton.animation = "idle";
-                    }
-                }))
-            );
+            this.ySpeed = 20;
         }
     },
+
 
     /**
      * @主要功能:  攻击行为
@@ -325,11 +365,12 @@ var unit = cc.Class({
             this.bodySkeleton.setCompleteListener(
                 function () {
                     self.ATKActionFlag = false;
-                    self.isCanJump = true;
+                    if (this.isJump === false)
+                        self.isCanJump = true;
                     if (self.bodySkeleton !== null) {
                         self.bodySkeleton.animation = "idle";
                     }
-                }
+                }.bind(this)
             );
         }
         //延时后调用攻击行为
@@ -409,8 +450,10 @@ var unit = cc.Class({
                 this.healthLabel.string = this.health.toFixed(0);
                 if(this.lifeBar !== null)this.lifeBar.progress = this.health / this.maxHealth;
 
-                if (this.death === true) {
-                    this.release();
+                if (this.death === true ) {
+                    if(this.logicNode === this.node) {
+                        this.release();
+                    }
                     return true;
                 }else{
                     return false;
@@ -459,8 +502,14 @@ var unit = cc.Class({
     release:function(){
         //this.animationClip.stop(this._animationId + " " + "walk");
         var self = this;
+        if(this.logicNode === this.node) {
+            this.viewNode.getComponent("Unit").release();
+            this.skillComponent.releaseFunction(4);
+        }else{
+            this.sendEvent(this.dieEffect);
+            this.changeHealthTo(0);
+        }
         this.death = true;
-        this.skillComponent.releaseFunction(4);
         //this.animationClip.play(this._animationId + " " + "death");
         if(this.bodySkeleton !== null) {
             this.bodySkeleton.animation = "death";
@@ -468,10 +517,10 @@ var unit = cc.Class({
                 function() {
                     self.GameManager.removeCreature(self.node);
                     self.node.removeFromParent();
+                    self.node.destroy();
                 }
             );
         }
-        this.sendEvent(this.dieEffect);
     },
 
     /**

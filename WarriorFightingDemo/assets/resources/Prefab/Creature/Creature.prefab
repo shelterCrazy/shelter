@@ -43,26 +43,23 @@
       },
       {
         "__id__": 96
-      },
-      {
-        "__id__": 99
       }
     ],
     "_tag": -1,
     "_active": true,
     "_components": [
       {
-        "__id__": 102
+        "__id__": 99
       },
       {
-        "__id__": 103
+        "__id__": 100
       },
       {
-        "__id__": 104
+        "__id__": 101
       }
     ],
     "_prefab": {
-      "__id__": 105
+      "__id__": 102
     },
     "_id": "",
     "_opacity": 255,
@@ -3062,82 +3059,6 @@
     "sync": false
   },
   {
-    "__type__": "cc.Node",
-    "_name": "AttackBehavior",
-    "_objFlags": 0,
-    "_parent": {
-      "__id__": 1
-    },
-    "_children": [],
-    "_tag": -1,
-    "_active": true,
-    "_components": [
-      {
-        "__id__": 100
-      }
-    ],
-    "_prefab": {
-      "__id__": 101
-    },
-    "_id": "",
-    "_opacity": 255,
-    "_color": {
-      "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
-      "a": 255
-    },
-    "_cascadeOpacityEnabled": true,
-    "_anchorPoint": {
-      "__type__": "cc.Vec2",
-      "x": 0.5,
-      "y": 0.5
-    },
-    "_contentSize": {
-      "__type__": "cc.Size",
-      "width": 0,
-      "height": 0
-    },
-    "_rotationX": 0,
-    "_rotationY": 0,
-    "_scaleX": 1,
-    "_scaleY": 1,
-    "_position": {
-      "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 0
-    },
-    "_skewX": 0,
-    "_skewY": 0,
-    "_localZOrder": 0,
-    "_globalZOrder": 0,
-    "_opacityModifyRGB": false,
-    "groupIndex": 0
-  },
-  {
-    "__type__": "67fcbVbXx5GG6Re+5DO6f9I",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 99
-    },
-    "_enabled": true,
-    "atk": 0,
-    "matk": 1
-  },
-  {
-    "__type__": "cc.PrefabInfo",
-    "root": {
-      "__id__": 1
-    },
-    "asset": {
-      "__uuid__": "748918e1-0dac-46c3-99ff-b3545ca97d0f"
-    },
-    "fileId": "bciZ3BTbhFCJzAcohoUjKJ",
-    "sync": false
-  },
-  {
     "__type__": "ba16cCkOt1FdKsHTs1cOXOk",
     "_name": "",
     "_objFlags": 0,
@@ -3146,9 +3067,7 @@
     },
     "_enabled": true,
     "GameManager": null,
-    "AttackBehavior": {
-      "__id__": 100
-    },
+    "AttackBehavior": null,
     "skillComponent": {
       "__id__": 37
     },
@@ -3161,6 +3080,8 @@
     "id": 1,
     "_animationId": 0,
     "unitType": 0,
+    "logicNode": null,
+    "viewNode": null,
     "bodySkeleton": {
       "__id__": 45
     },
@@ -3203,11 +3124,11 @@
     "move": true,
     "moveLock": false,
     "team": 0,
-    "delay": 4,
+    "delay": 20,
     "death": false,
     "summon": true,
     "ATKActionFlag": false,
-    "coolTime": 2,
+    "coolTime": 60,
     "_mapSign": null,
     "bodyNode": {
       "__id__": 43
