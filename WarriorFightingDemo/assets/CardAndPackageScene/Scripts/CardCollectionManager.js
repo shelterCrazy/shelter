@@ -114,7 +114,7 @@ cc.Class({
 
         this.userDeckComponent = this.userDeckComponent.getComponent("DeckManager");
         this.userDeckCardComponent = this.userDeckCardComponent.getComponent("DeckCardManager");
-        Global.userDeckCardData = [];
+        //Global.userDeckCardData = [];
 
         if(Global.initUserData === false) {
             cc.loader.loadResDir("CardTextures/",cc.SpriteFrame, function (err,spriteFrames) {
@@ -126,13 +126,11 @@ cc.Class({
                     Global.cardSpriteFrames[parseInt(spriteFrames[i].name)] = spriteFrames[i];
                 }
                 for(i = 0;i < 400;i++) {
-                    self.miniCardNode[i] = null;
-                    self.showCardNode[i] = null;
+                    Global.miniCardNode[i] = null;
                     Global.cardPrefab[i] = null;
                     Global.showCardNode[i] = null;
                 }
                 self.initPrefab();
-                self.infoBoardScript = null;
                 this.initUserCard();
                 this.initUserDeck();
             }.bind(this));
@@ -141,7 +139,9 @@ cc.Class({
             this.renewShowCardGroup();
             this.userDeckComponent.initUserDeck();
         }
+        self.infoBoardScript = null;
         this.initListenEvent();
+        this.changePageButtonState();
     },
 
     /**
@@ -201,8 +201,8 @@ cc.Class({
             loadScript.storyDescribe = results.cardData[i].detail[0];
             loadScript.cardType = results.cardData[i].card_type;
 
-            self.miniCardNode[loadScript.cardId] = originNode;
-            self.showCardNode[loadScript.cardId] = originShowCard;
+            Global.miniCardNode[loadScript.cardId] = originNode;
+            //Global.showCardNode[loadScript.cardId] = originShowCard;
 
             Global.cardPrefab[loadScript.cardId] = cc.instantiate(newNode);
 
@@ -296,6 +296,7 @@ cc.Class({
         this.filterType[customEventData[0] - '0'] = customEventData[1] - '0';
         this.nowPage = 0;
         this.renewShowCardGroup();
+        this.changePageButtonState();
     },
 
     dispose: function(event, customEventData){
@@ -350,7 +351,7 @@ cc.Class({
                 //到达了这一页，那么可以开始显示了
                 if(flag >= this.nowPage * 9){
                     if(flag < (this.nowPage + 1) * 9){
-                        var card = cc.instantiate(this.miniCardNode[this.userCardData[i].card_id]);
+                        var card = cc.instantiate(Global.miniCardNode[this.userCardData[i].card_id]);
                         (card.getComponent("MiniCard")).num = this.userCardData[i].num;
                         this.userCardNode.addChild(card);
                     }
@@ -428,28 +429,30 @@ cc.Class({
                 if(this.nowPage < this.maxPage - 1)
                 {
                     this.nowPage++;
-                    this.lastPageButton.interactable = true;
                     this.renewShowCardGroup();
-                    if(this.nowPage == this.maxPage - 1){
-                        cc.log(event);
-                        //event.target.active = false;
-                        this.nextPageButton.interactable = false;
-                    }
+                    this.changePageButtonState();
                 }
                 break;
             case 'last':
                 if(this.nowPage > 0)
                 {
                     this.nowPage --;
-                    this.nextPageButton.interactable = true;
                     this.renewShowCardGroup();
-                    if(this.nowPage == 0){
-                        //event.target.active = false;
-                        this.lastPageButton.interactable = false;
-                    }
+                    this.changePageButtonState();
                 }
                 break;
         }
+    },
+    /**
+     * @主要功能 更具当前的页数改变翻页按钮的状态
+     * @author
+     * @Date 2018/9/29
+     * @parameters
+     * @returns
+     */
+    changePageButtonState:function(){
+        this.lastPageButton.node.active = !(this.nowPage == 0);
+        this.nextPageButton.node.active = !(this.nowPage == this.maxPage - 1);
     },
 
 
@@ -474,7 +477,7 @@ cc.Class({
            if (this.infoBoard !== null) {
                this.infoBoard.removeFromParent();
            }
-           this.infoBoard = cc.instantiate(this.showCardNode[event.detail.id]);
+           this.infoBoard = cc.instantiate(Global.showCardNode[event.detail.id]);
 
            this._nowCard = event.detail.miniCardNode;
            this.infoBoard.x = 400;
@@ -524,7 +527,7 @@ cc.Class({
                 * @主要功能 卡牌展示位
                 */
                //if (event.detail.typeId === 1) {
-                   this.infoBoard = cc.instantiate(this.showCardNode[event.detail.id]);
+                   this.infoBoard = cc.instantiate(Global.showCardNode[event.detail.id]);
                //} else {
                //    this.infoBoard = cc.instantiate(this.showMagicNode[event.detail.id]);
                //}
@@ -558,11 +561,13 @@ cc.Class({
     },
     initUserDeck:function(){
         this.getUserDeckData(function(flag){
-
-        });
-        setTimeout(function(flag){
-            this.userDeckComponent.initUserDeck();
-        }.bind(this),500);
+            if(flag === true){
+                this.userDeckComponent.initUserDeck();
+            }
+        }.bind(this));
+        //setTimeout(function(flag){
+        //    this.userDeckComponent.initUserDeck();
+        //}.bind(this),500);
 
     },
     /**
@@ -591,6 +596,7 @@ cc.Class({
             dataType: "json",
             data: {"token":Global.token},
             success: function(rs){
+                var deckNum = 0;
                 if(rs.status === "200") {
                     cc.log("卡组数据获取成功");
                     //将卡组数据放入
@@ -607,24 +613,28 @@ cc.Class({
                                 if (rs.status === "200") {
                                     cc.log("用户卡组卡牌数据获取成功");
                                     Global.userDeckCardData.push(rs.userDeckCardList);
+                                    deckNum ++;
                                 } else {
+                                    deckNum ++;
                                     cc.log("用户卡组卡牌数据获取失败");
+                                }
+                                if(deckNum >= Global.userDeckData.length){
+                                    fn(true);
                                 }
                             },
                             error: function () {
                                 cc.log("用户卡组卡牌数据获取错误");
-                                fn(false);
+                                //fn(false);
                             }
                         });
                     }
-                    fn(true);
                 }else{
                     cc.log("卡组数据获取失败");
                 }
             },
             error: function(){
                 cc.log("卡组数据获取错误");
-                fn(false);
+                //fn(false);
             }
         });
 

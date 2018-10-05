@@ -22,7 +22,7 @@ var MainGameManager = cc.Class({
         creatures: [cc.Node],
         //英雄节点(2个)
         heros: [cc.Node],
-        viewHero:cc.Node,
+        viewHero:[cc.Node],
         heroPrefab: [cc.Prefab],
         ////逻辑层
         //logicLayer: cc.Node,    //背景节点
@@ -107,7 +107,7 @@ var MainGameManager = cc.Class({
 
         var cameraScript = this.cameraLayer.getComponent("CameraControl");
 
-        cameraScript.targets[0] = this.viewHero;
+        cameraScript.targets[0] = this.viewHero[0];
         cameraScript.target = cameraScript.targets[0];
 
         //初始化两个基地坐标，以及注入一些关键数据
@@ -314,6 +314,7 @@ var MainGameManager = cc.Class({
             }
         }
         var cameraRatioEffect = Math.pow(globalConstant.cameraRatio,4);
+        //cc.log()
         //播放音效
         cc.audioEngine.playEffect(
             event.detail.effect,false,
@@ -354,94 +355,68 @@ var MainGameManager = cc.Class({
      * @param event
      */
     magicCreate: function(event){  //event为父类事件  实际这里是Event.EventCustom子类
+        //如果召唤的层为view层的话，那么返回而不进行召唤
+        if(!(event.detail.summonLayer === undefined || event.detail.summonLayer === "View")){
+            return;
+        }
+        //如果没有说明，或者允许通过网络创建为真，那么发送数据
         if(event.detail.network === undefined || event.detail.network === true) {
             NetworkModule.roomMsg(Global.room, 'roomChat', {name: "magicCreate", detail: event.detail});
         }
-        //kenan 实验证明  事件是同步的  计时器是异步的
-        /** kenan 这里获取npc的资源方法可以改为，使用资源池获取npc节点*/
-        if(event.detail.prefab === undefined || event.detail.prefab === null){
-            //if (this.magicPool[event.detail.id].size() > 0) { // 通过 size 接口判断对象池中是否有空闲的对象
-            //    mag = this.magicPool[event.detail.id].get();
-            //} else { // 如果没有空闲对象，也就是对象池中备用对象不够时，我们就用 cc.instantiate 重新创建
-            var viewMagic = cc.instantiate(this.magicPrefab[event.detail.id]);
-            var logicMagic = cc.instantiate(this.magicPrefab[event.detail.id]);
-           // }
-        }else{
-            viewMagic = cc.instantiate(event.detail.prefab);
-            logicMagic = cc.instantiate(event.detail.prefab);
-        }
-        var viewScript = viewMagic.getComponent("Magic");
-        viewScript.fnGetManager(this);
-        var logicScript = logicMagic.getComponent("Magic");
-        logicScript.fnGetManager(this);
+        //setTimeout(function() {
+            //kenan 实验证明  事件是同步的  计时器是异步的
+            /** kenan 这里获取npc的资源方法可以改为，使用资源池获取npc节点*/
+            if(event.detail.prefab === undefined || event.detail.prefab === null){
+                //if (this.magicPool[event.detail.id].size() > 0) { // 通过 size 接口判断对象池中是否有空闲的对象
+                //    mag = this.magicPool[event.detail.id].get();
+                //} else { // 如果没有空闲对象，也就是对象池中备用对象不够时，我们就用 cc.instantiate 重新创建
+                var viewMagic = cc.instantiate(this.magicPrefab[event.detail.id]);
+                var logicMagic = cc.instantiate(this.magicPrefab[event.detail.id]);
+                // }
+            }else{
+                viewMagic = cc.instantiate(event.detail.prefab);
+                logicMagic = cc.instantiate(event.detail.prefab);
+            }
+            var viewScript = viewMagic.getComponent("Magic");
+            viewScript.fnGetManager(this);
+            var logicScript = logicMagic.getComponent("Magic");
+            logicScript.fnGetManager(this);
 
-        if(event.detail.position === null) {
+            if(event.detail.position === null) {
 
-        }else{
-            viewMagic.x = event.detail.position;
-            logicMagic.x = event.detail.position;
-        }
+            }else{
+                viewMagic.x = event.detail.position;
+                logicMagic.x = event.detail.position;
+            }
 
-        if(event.detail.y === null){
-            logicMagic.y = globalConstant.magicY;
-            viewMagic.y = globalConstant.magicY;
-        }else{
-            logicMagic.y = event.detail.y;
-            viewMagic.y = event.detail.y;
-        }
-        
-        this.magicLayer.addChild(logicMagic);
-        this.viewMagicLayer.addChild(viewMagic);
+            if(event.detail.y === null){
+                logicMagic.y = globalConstant.magicY;
+                viewMagic.y = globalConstant.magicY;
+            }else{
+                logicMagic.y = event.detail.y;
+                viewMagic.y = event.detail.y;
+            }
 
-        viewScript.logicNode = logicMagic;
-        viewScript.viewNode = viewMagic;
-        logicScript.logicNode = logicMagic;
-        logicScript.viewNode = viewMagic;
+            viewMagic.group = "ViewMagic";
 
-        viewScript.init();
-        logicScript.init();
-        viewScript.initMagic(event.detail);
-        logicScript.initMagic(event.detail);
-        //if(data.detail.battleCry !== undefined && data.detail.battleCry === true){
-        logicScript.magicSkill.releaseFunction(0);
-        //}
+            this.magicLayer.addChild(logicMagic);
+            this.viewMagicLayer.addChild(viewMagic);
+
+            viewScript.logicNode = logicMagic;
+            viewScript.viewNode = viewMagic;
+            logicScript.logicNode = logicMagic;
+            logicScript.viewNode = viewMagic;
+
+            viewScript.init();
+            logicScript.init();
+            viewScript.initMagic(event.detail);
+            logicScript.initMagic(event.detail);
+            //if(data.detail.battleCry !== undefined && data.detail.battleCry === true){
+            logicScript.magicSkill.releaseFunction(0);
+            viewScript.magicSkill.releaseFunction(0);
+        //}.bind(this),(event.detail.delay === undefined) ? event.detail.delay : 0);
         //停止事件冒泡(停止继续向上传递此事件)
         event.stopPropagation();
-    },
-    /**
-     * @主要功能    网络模块调用此代码
-     *               创建其他人的法术
-     * @author C14
-     * @Date 2018/1/9
-     * @parameters
-     * @returns
-     */
-    magicCreateNetwork: function(data){
-        /** kenan 这里获取npc的资源方法可以改为，使用资源池获取npc节点*/
-        var mag = null;
-        if (this.magicPool[data.id].size() > 0) { // 通过 size 接口判断对象池中是否有空闲的对象
-            mag = this.magicPool[data.id].get();
-        } else { // 如果没有空闲对象，也就是对象池中备用对象不够时，我们就用 cc.instantiate 重新创建
-            mag = cc.instantiate(this.magicPrefab[data.id]);
-        }
-        //var mag = cc.instantiate(this.magicPrefab[data.id]);
-
-        var magScript = mag.getComponent("Magic");
-
-        magScript.createByNetwork = true;
-        magScript.fnGetManager(this);
-        // magScript.fnCreateMagic(event.detail);//初始化npc属性
-        mag.x = data.position;
-        if(data.y === null){
-            mag.y = globalConstant.magicY;
-        }else{
-            mag.y = data.y;
-        }
-        
-        this.magicLayer.addChild(mag);
-        magScript.init();
-        magScript.initMagic(data);
-        magScript.magicSkill.releaseFunction(0);
     },
 
     /**
@@ -452,60 +427,68 @@ var MainGameManager = cc.Class({
      * @param data
      */
     creatureCreate: function(data){  //event为父类事件  实际这里是Event.EventCustom子类
+        //如果召唤的层为view层的话，那么返回而不进行召唤
+        if(!(data.detail.summonLayer === undefined || data.detail.summonLayer === "View")){
+            return;
+        }
         if(data.detail.network === undefined || data.detail.network === true) {
             NetworkModule.roomMsg(Global.room, 'roomChat', {name: "creatureCreate", detail: data.detail});
         }
-        //kenan 实验证明  事件是同步的  计时器是异步的
-        /** kenan 这里获取logicUnit的资源方法可以改为，使用资源池获取logicUnit节点*/
-        if(data.detail.prefab === undefined || data.detail.prefab === null){
-            var logicUnit = cc.instantiate(this.creaturePrefab[data.detail.id]);
-            var viewUnit = cc.instantiate(this.creaturePrefab[data.detail.id]);
-        }else{
-            logicUnit = cc.instantiate(data.detail.prefab);
-            viewUnit = cc.instantiate(data.detail.prefab);
-        }
-        var logicUnitScript = logicUnit.getComponent("Unit");
-        var viewUnitScript = viewUnit.getComponent("Unit");
+        setTimeout(function() {
 
-        var mapScript = this.mapLayer.getComponent("SmallMap");
+            //kenan 实验证明  事件是同步的  计时器是异步的
+            /** kenan 这里获取logicUnit的资源方法可以改为，使用资源池获取logicUnit节点*/
+            if (data.detail.prefab === undefined || data.detail.prefab === null) {
+                var logicUnit = cc.instantiate(this.creaturePrefab[data.detail.id]);
+                var viewUnit = cc.instantiate(this.creaturePrefab[data.detail.id]);
+            } else {
+                logicUnit = cc.instantiate(data.detail.prefab);
+                viewUnit = cc.instantiate(data.detail.prefab);
+            }
+            var logicUnitScript = logicUnit.getComponent("Unit");
+            var viewUnitScript = viewUnit.getComponent("Unit");
 
-        var detail = data.detail;
-        detail.Y = detail.Y === null ? globalConstant.summonY : detail.Y;
+            var mapScript = this.mapLayer.getComponent("SmallMap");
 
-        logicUnitScript.fnGetManager(this);
-        viewUnitScript.fnGetManager(this);
+            var detail = data.detail;
+            detail.Y = detail.Y === null ? globalConstant.summonY : detail.Y;
 
-        this.creatures.push(logicUnit);
+            logicUnitScript.fnGetManager(this);
+            viewUnitScript.fnGetManager(this);
+
+            this.creatures.push(logicUnit);
 
 
-        //setTimeout(function(){
+            //setTimeout(function(){
             viewUnit.group = "ViewUnit";
             viewUnit.getChildByName("range").group = "ViewRange";
-        //},100);
+            //},100);
 
-        logicUnitScript.initUnit(detail);//初始化logicUnit的属性
-        viewUnitScript.initUnit(detail);
-        logicUnitScript._mapSign = mapScript.fnCreateCreatureSign(logicUnit);
+            logicUnitScript.initUnit(detail);//初始化logicUnit的属性
+            viewUnitScript.initUnit(detail);
+            logicUnitScript._mapSign = mapScript.fnCreateCreatureSign(logicUnit);
 
-        logicUnitScript.viewNode = viewUnit;
-        logicUnitScript.logicNode = logicUnit;
-        viewUnitScript.viewNode = viewUnit;
-        viewUnitScript.logicNode = logicUnit;
+            logicUnitScript.viewNode = viewUnit;
+            logicUnitScript.logicNode = logicUnit;
+            viewUnitScript.viewNode = viewUnit;
+            viewUnitScript.logicNode = logicUnit;
 
-        if(logicUnitScript.team * this.heros[0].getComponent("Unit").team > 0){
-            logicUnitScript.focusTarget = this.heros[1];
-            viewUnitScript.focusTarget = this.heros[1];
-        }else{
-            logicUnitScript.focusTarget = this.heros[0];
-            viewUnitScript.focusTarget = this.heros[0];
-        }
-        
-        this.creatureLayer.addChild(this.creatures[this.creatures.length - 1]);
-        this.viewCreatureLayer.addChild(viewUnit);
+            if (logicUnitScript.team * this.heros[0].getComponent("Unit").team > 0) {
+                logicUnitScript.focusTarget = this.heros[1];
+                viewUnitScript.focusTarget = this.heros[1];
+            } else {
+                logicUnitScript.focusTarget = this.heros[0];
+                viewUnitScript.focusTarget = this.heros[0];
+            }
 
-        if(data.detail.battleCry !== undefined && data.detail.battleCry === true){
-            logicUnitScript.skillComponent.releaseFunction(0);
-        }
+            this.creatureLayer.addChild(this.creatures[this.creatures.length - 1]);
+            this.viewCreatureLayer.addChild(viewUnit);
+
+            if (data.detail.battleCry !== undefined && data.detail.battleCry === true) {
+                logicUnitScript.skillComponent.releaseFunction(0);
+                viewUnitScript.skillComponent.releaseFunction(0);
+            }
+        }.bind(this),(data.detail.delay === undefined) ? data.detail.delay : 0);
         //kenan 停止事件冒泡   (停止继续向上传递此事件)
         data.stopPropagation();
     },
@@ -540,11 +523,13 @@ var MainGameManager = cc.Class({
         viewHero.group = "ViewUnit";
         viewHero.getChildByName("range").group = "ViewRange";
 
+
         if(team === Global.nowTeam) {
             this.heros[0] = hero;
-            this.viewHero = viewHero;
+            this.viewHero[0] = viewHero;
         }else{
             this.heros[1] = hero;
+            this.viewHero[1] = viewHero;
             hero.getComponent("Hero").self = false;
             viewHero.getComponent("Hero").self = false;
         }
@@ -594,53 +579,6 @@ var MainGameManager = cc.Class({
         this.magicLayer.addChild(animation);
         //C14 停止事件冒泡   (停止继续向上传递此事件)
         data.stopPropagation();
-    },
-    /**
-     * @主要功能    网络模块调用此代码
-     *               创建其他人的生物
-     * @author C14
-     * @Date 2018/1/9
-     * @parameters
-     * @returns
-     */
-    creatureCreateNetwork: function(data){
-        //kenan 实验证明  事件是同步的  计时器是异步的
-        // this.scheduleOnce(function() {
-        /** kenan 这里获取npc的资源方法可以改为，使用资源池获取npc节点*/
-        var npc = null;
-        if(data.prefab === undefined || data.prefab === null){
-            //if (this.creaturePool[data.id].size() > 0) { // 通过 size 接口判断对象池中是否有空闲的对象
-            //    npc = this.creaturePool[data.id].get();
-            //} else { // 如果没有空闲对象，也就是对象池中备用对象不够时，我们就用 cc.instantiate 重新创建
-                npc = cc.instantiate(this.creaturePrefab[data.id]);
-            //}
-            //npc = cc.instantiate(this.creaturePrefab[data.id]);
-        }else{
-            npc = cc.instantiate(data.prefab);
-        }
-        var npcScript = npc.getComponent("Unit");
-
-        var mapScript = this.mapLayer.getComponent("SmallMap");
-
-        var detail = data;
-        detail.Y = detail.Y === null ? globalConstant.summonY : detail.Y;
-
-        npcScript.fnGetManager(this);
-
-        this.creatures.push(npc);
-
-
-        npcScript.initUnit(detail);//初始化npc属性
-        if(npcScript.team * this.heros[0].getComponent("Unit").team > 0){
-            npcScript.focusTarget = this.heros[1];
-        }else{
-            npcScript.focusTarget = this.heros[0];
-        }
-        npcScript._mapSign = mapScript.fnCreateCreatureSign(npc);//this.creatures[this.creatures.length - 1]
-        this.creatureLayer.addChild(npc);
-        if(data.battleCry !== undefined && data.battleCry === true){
-            npcScript.skillComponent.releaseFunction(0);
-        }
     },
 
     /**
@@ -696,13 +634,18 @@ var MainGameManager = cc.Class({
      * @returns
      */
     changeEnemyMove:function(data){
+        cc.log(data.accLeft + "?" + data.accRight);
         var script = this.heros[1].getComponent("Hero");
-        this.heros[1].x = data.x;
-        script.accLeft = data.accLeft;
-        script.accRight = data.accRight;
+        //this.heros[1].x = data.x;
+        script.accLeft = (data.accLeft === undefined) ? script.accLeft : data.accLeft;
+        script.accRight = (data.accRight === undefined) ? script.accRight : data.accRight;
 
-        var script1 = this.heros[1].getComponent("Unit");
-        script.health = data.health;
+        script = this.viewHero[1].getComponent("Hero");
+        //this.heros[1].x = data.x;
+        script.accLeft = (data.accLeft === undefined) ? script.accLeft : data.accLeft;
+        script.accRight = (data.accRight === undefined) ? script.accRight : data.accRight;
+        //var script1 = this.heros[1].getComponent("Unit");
+        //script.health = data.health;
     },
     /**
      * @主要功能 让敌人跳一下
@@ -714,10 +657,15 @@ var MainGameManager = cc.Class({
     changeEnemyJump:function(data){
         var script = this.heros[1].getComponent("Unit");
         script.jumpAction();
+        script = this.viewHero[1].getComponent("Unit");
+        script.jumpAction();
     },
     changeEnemyAttack:function(data){
         cc.log("attack");
         var script = this.heros[1].getComponent("Unit");
+        script.ATKActionFlag = true;
+        script.attackAction();
+        script = this.viewHero[1].getComponent("Unit");
         script.ATKActionFlag = true;
         script.attackAction();
     },
@@ -758,9 +706,12 @@ var MainGameManager = cc.Class({
     removeMagic: function(node){
         var i = 0; 
         
-        var id = node.getComponent('Magic').id;
+        //var id = node.getComponent('Magic').id;
 
-        this.magicPool[id].put(node);
+        //this.magicPool[id].put(node);
+
+        node.removeFromParent();
+        node.destroy();
     },
 
     updateSchedule:function(fps){

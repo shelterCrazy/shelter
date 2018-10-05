@@ -362,6 +362,7 @@
     "position": 2,
     "id": 0,
     "offset": 0,
+    "delay": 0,
     "creaturePrefab": {
       "__uuid__": "5aa72e84-d239-4b7f-a90a-132221b5725a"
     },
@@ -1439,6 +1440,8 @@
       "__id__": 2
     },
     "GameManager": null,
+    "viewNode": null,
+    "logicNode": null,
     "magicType": 2,
     "area": 0,
     "team": 0,
@@ -1448,7 +1451,7 @@
     "_interval": [],
     "network": true,
     "createByNetwork": false,
-    "startSpeed": 10,
+    "startSpeed": 20,
     "speed": {
       "__type__": "cc.Vec2",
       "x": 0,

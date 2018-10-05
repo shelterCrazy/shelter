@@ -771,6 +771,28 @@ module.exports = {
         "Column19": ""
       },
       {
+        "id": 111,
+        "card_name": "降火术",
+        "card_type": 0,
+        "memo": "飞行，分支4，接触地面后，在该坐标召唤一个1-9的空气精灵",
+        "detail": "",
+        "rarity": 2,
+        "mana": 5,
+        "releaseType": 2,
+        "usableType": 0,
+        "version": 1,
+        "branch": 0,
+        "branch_num": 1,
+        "attack": 0,
+        "health": 0,
+        "speed": 0,
+        "race": 0,
+        "status": 0,
+        "ash_required": 1000,
+        "card_package_type": 0,
+        "Column19": ""
+      },
+      {
         "id": 150,
         "card_name": "吟唱侍女",
         "card_type": 1,

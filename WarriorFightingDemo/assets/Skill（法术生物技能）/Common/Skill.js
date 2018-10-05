@@ -44,21 +44,28 @@ cc.Class({
     releaseFunction:function(dat,target){
         //如果是逻辑层的话
         if(this.selfObjectScript.logicNode === this.selfObject) {
-            for (var i = 0; i < this.releaseFunc[dat].children.length; i++) {
-                var script = this.releaseFunc[dat].children[i].getComponents(cc.Component);
-                for (var j = 0; j < script.length; j++) {
-                    script[j].releaseFunction(target);
-                }
+            this.switchLayer("Logic");
+        }else{
+            this.switchLayer("View");
+        }
+        for (var i = 0; i < this.releaseFunc[dat].children.length; i++) {
+            var script = this.releaseFunc[dat].children[i].getComponents(cc.Component);
+            for (var j = 0; j < script.length; j++) {
+                script[j].releaseFunction(target);
             }
         }
     },
     releaseFunctionWithTarget:function(target){
         //如果是逻辑层的话
         if(this.selfObjectScript.logicNode === this.selfObject) {
-            var script = this.releaseWithTarget.getComponents(cc.Component);
-            for (var i = 0; i < script.length; i++) {
-                script[i].releaseFunctionWithTarget(target);
-            }
+            this.switchLayer("Logic");
+        }else{
+            this.switchLayer("View");
+        }
+
+        var script = this.releaseWithTarget.getComponents(cc.Component);
+        for (var i = 0; i < script.length; i++) {
+            script[i].releaseFunctionWithTarget(target);
         }
     },
     onLoad:function()
@@ -69,14 +76,37 @@ cc.Class({
             this.selfObjectScript = this.selfObject.getComponent("Magic");
         }
 
-        this.hero = this.selfObjectScript.GameManager.heros;
-        //基地层
-        this.baseLayer = this.selfObjectScript.GameManager.baseLayer;
-        //生物层
-        this.creatureLayer = this.selfObjectScript.GameManager.creatureLayer;
-        //魔法层
-        this.magicLayer = this.selfObjectScript.GameManager.magicLayer;
+        this.switchLayer("Logic");
     },
+    /**
+     * @主要功能 切换当前产生效果的层
+     * @author C14
+     * @Date 2018/10/3
+     * @parameters
+     * @returns
+     */
+    switchLayer:function(value){
+        switch(value){
+            case "View":
+                this.hero = this.selfObjectScript.GameManager.viewHero;
+                //基地层
+                this.baseLayer = this.selfObjectScript.GameManager.baseLayer;
+                //生物层
+                this.creatureLayer = this.selfObjectScript.GameManager.viewCreatureLayer;
+                //魔法层
+                this.magicLayer = this.selfObjectScript.GameManager.viewMagicLayer;
+                break;
+            case "Logic":
+                this.hero = this.selfObjectScript.GameManager.heros;
+                //基地层
+                this.baseLayer = this.selfObjectScript.GameManager.baseLayer;
+                //生物层
+                this.creatureLayer = this.selfObjectScript.GameManager.creatureLayer;
+                //魔法层
+                this.magicLayer = this.selfObjectScript.GameManager.magicLayer;
+                break;
+        }
+    }
 
 
 

@@ -196,8 +196,11 @@ var unit = cc.Class({
         //为逻辑节点
         if(this.logicNode === this.node) {
             if ((++ this.timer) % 6 === 0) {
-                this.viewNode.stopAllActions();
-                this.viewNode.runAction(cc.moveBy(5,cc.v2(this.node.x - this.viewNode.x,0)));
+                var action = cc.moveBy(5,cc.v2(this.node.x - this.viewNode.x,0));
+                action.setTag(1);
+                //暂停同步用的那个动画
+                this.viewNode.stopAction(this.viewNode.getActionByTag(1));
+                this.viewNode.runAction(action);
                 this.viewNode.getComponent("Unit").health = this.health;
                 this.viewNode.getComponent("Unit").attack = this.attack;
             }

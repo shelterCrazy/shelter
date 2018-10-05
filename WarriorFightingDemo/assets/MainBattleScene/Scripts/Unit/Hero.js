@@ -103,67 +103,77 @@ cc.Class({
 
         //处理操作列表2中的全部操作
         for(var i in this._controlList2){
-            if(this._controlList2[i].press !== undefined)
-            switch (this._controlList2[i].press){
-                case "left":
-                    if(this.accLeft === false){
-                        this.accLeft = true;
-                    }break;
-                case "right":
-                if(this.accRight === false) {
-                    this.accRight = true;
-                }break;
-                case "up":this.onceJumpAciton();break;
-                case "space":this.unitScript.attackAction();break;
-            }
-            if(this._controlList2[i].release !== undefined)
-            switch (this._controlList2[i].release){
-                case "left":
-                    this.accLeft = false;break;
-                case "right":
-                    this.accRight = false;break;
+            if(this._controlList2[i].control === "press") {
+                switch (this._controlList2[i].key) {
+                    case "left":
+                        if (this.accLeft === false) {
+                            this.accLeft = true;
+                        }
+                        break;
+                    case "right":
+                        if (this.accRight === false) {
+                            this.accRight = true;
+                        }
+                        break;
+                    case "up":
+                        this.onceJumpAciton();
+                        break;
+                    case "space":
+                        this.unitScript.attackAction();
+                        break;
+                }
+            }else if(this._controlList2[i].control === "release") {
+                switch (this._controlList2[i].key) {
+                    case "left":
+                        this.accLeft = false;
+                        break;
+                    case "right":
+                        this.accRight = false;
+                        break;
+                }
             }
         }
         this._controlList2 = [];
         //处理操作列表1中的全部操作
         for(i in this._controlList1){
-            if(this._controlList1[i].press !== undefined)
-            switch (this._controlList1[i].press){
-                case "left":
-                    this.sendMoveMessage({
-                        accLeft: true,
-                        accRight: this.accRight
-                    });
-                    break;
-                case "right":
-                    this.sendMoveMessage({
-                        accLeft: this.accLeft,
-                        accRight: true
-                    });
-                    break;
-                case "up":this.sendJumpMessage();break;
-                case "space":
-                    if (this.unitScript.coolTimer === this.unitScript.coolTime &&
-                        this.unitScript.attackFreeze === false) {
-                        if(this.unitScript.ATKActionFlag === false){
-                            this.unitScript.ATKActionFlag = true;
-                        }
-                        this._controlList2.push(this._controlList1[i]);
-                        this.sendAttackMessage();
-                    }continue;
-            }
-            if(this._controlList1[i].release !== undefined)
-            switch (this._controlList1[i].release){
-                case "left":
-                    this.sendMoveMessage({
-                        accLeft: false,
-                        accRight: this.accRight
-                    });break;
-                case "right":
-                    this.sendMoveMessage({
-                        accLeft: this.accLeft,
-                        accRight: false
-                    });break;
+            if(this._controlList1[i].control === "press"){
+                switch (this._controlList1[i].key){
+                    case "left":
+                        this.sendMoveMessage({
+                            accLeft: true,
+                            //accRight: this.accRight
+                        });
+                        break;
+                    case "right":
+                        this.sendMoveMessage({
+                            //accLeft: this.accLeft,
+                            accRight: true
+                        });
+                        break;
+                    case "up":this.sendJumpMessage();break;
+                    case "space":
+                        if (this.unitScript.coolTimer === this.unitScript.coolTime &&
+                            this.unitScript.attackFreeze === false) {
+                            if(this.unitScript.ATKActionFlag === false){
+                                this.unitScript.ATKActionFlag = true;
+                            }
+                            this._controlList2.push(this._controlList1[i]);
+                            this.sendAttackMessage();
+                        }continue;
+                }
+            }else if(this._controlList1[i].control === "release"){
+                switch (this._controlList1[i].key){
+                    case "left":
+                        this.sendMoveMessage({
+                            accLeft: false,
+                            //accRight: this.accRight
+                        });break;
+                    case "right":
+                        this.sendMoveMessage({
+                            //accLeft: this.accLeft,
+                            accRight: false
+                        });break;
+                }
             }
             //把1中的操作转移给2号
             this._controlList2.push(this._controlList1[i]);
@@ -242,26 +252,32 @@ cc.Class({
     },
     sendMoveMessage:function(detail){
         var self = this;
-        NetworkModule.roomMsg(Global.room, 'roomChat', {
-            name: "enemyMove",
-            detail: detail
-        })
+        if(this.unitScript.logicNode === this.node) {
+            NetworkModule.roomMsg(Global.room, 'roomChat', {
+                name: "enemyMove",
+                detail: detail
+            })
+        }
     },
     sendJumpMessage:function(){
         var self = this;
-        if(self.unitScript.isCanJump === true) {
-            NetworkModule.roomMsg(Global.room, 'roomChat', {
-                name: "enemyJump",
-                detail: {}
-            })
+        if(this.unitScript.logicNode === this.node) {
+            if (self.unitScript.isCanJump === true) {
+                NetworkModule.roomMsg(Global.room, 'roomChat', {
+                    name: "enemyJump",
+                    detail: {}
+                })
+            }
         }
     },
     sendAttackMessage:function(){
         var self = this;
-        NetworkModule.roomMsg(Global.room, 'roomChat', {
-            name: "enemyAttack",
-            detail: {}
-        })
+        if(this.unitScript.logicNode === this.node) {
+            NetworkModule.roomMsg(Global.room, 'roomChat', {
+                name: "enemyAttack",
+                detail: {}
+            })
+        }
     },
     setInputControl: function () {
         var self = this;
@@ -273,15 +289,15 @@ cc.Class({
                 switch(keyCode) {
                     case cc.KEY.a:
                     case cc.KEY.left:
-                        this._controlList1.push({"press":"left"});
+                        this._controlList1.push({"control":"press","key":"left"});
                         break;
                     case cc.KEY.d:
                     case cc.KEY.right:
-                        this._controlList1.push({"press":"right"});
+                        this._controlList1.push({"control":"press","key":"right"});
                         break;
                     case cc.KEY.w:
                     case cc.KEY.up:
-                        this._controlList1.push({"press":"up"});
+                        this._controlList1.push({"control":"press","key":"up"});
                         break;
                     case cc.KEY.j:
                     case cc.KEY.z:
@@ -295,7 +311,7 @@ cc.Class({
                         self.cameraControlScript.targets[1].x = self.cameraControlScript.targets[0].x;
                         break;
                     case cc.KEY.space:
-                        this._controlList1.push({"press":"space"});
+                        this._controlList1.push({"control":"press","key":"space"});
                         break;
                 }
             }.bind(this),
@@ -304,11 +320,11 @@ cc.Class({
                 switch(keyCode) {
                     case cc.KEY.a:
                     case cc.KEY.left:
-                        this._controlList1.push({"release":"left"});
+                        this._controlList1.push({"control":"release","key":"left"});
                         break;
                     case cc.KEY.d:
                     case cc.KEY.right:
-                        this._controlList1.push({"release":"right"});
+                        this._controlList1.push({"control":"release","key":"right"});
                         break;
                 }
             }.bind(this)

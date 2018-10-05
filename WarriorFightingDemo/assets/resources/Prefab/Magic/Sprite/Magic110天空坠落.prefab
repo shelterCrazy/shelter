@@ -787,6 +787,7 @@
     },
     "_enabled": true,
     "position": 2,
+    "summonYFlag": false,
     "id": 0,
     "offset": 0,
     "magicPrefab": {
@@ -1528,10 +1529,14 @@
       "__id__": 1
     },
     "_enabled": true,
+    "loadEffect": null,
+    "hitEffect": null,
     "skillNode": {
       "__id__": 2
     },
     "GameManager": null,
+    "viewNode": null,
+    "logicNode": null,
     "magicType": 1,
     "area": 0,
     "team": 0,

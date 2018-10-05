@@ -25,6 +25,8 @@ cc.Class({
         //召唤时的像素间隔
         interval:0,
 
+        delay:0,
+
         battleCry:false,
     },
 
@@ -36,7 +38,8 @@ cc.Class({
     releaseFunction:function(){
         var script = this.node.parent.parent.getComponent("Skill");
         var creatureScript = null;
-        var selfObjectScript = script.selfObjectScript;
+        var selfObjectScript = this.selfObjectScript = script.selfObjectScript;
+        this.selfObject = this.selfObjectScript.node;
         var i = 0,x;
         var enumDat = cc.Enum({
             //场景中间
@@ -82,12 +85,14 @@ cc.Class({
     summonCreature:function(x,team,id){
         var eventsend = new cc.Event.EventCustom('creatureCreate',true);
         eventsend.setUserData({
+            summonLayer:(this.selfObjectScript.logicNode === this.selfObject) ? "View" : "Logic",
             X:x - this.offset * team / Math.abs(team),
             Y:null,
             team:team,
             id:id,
             network:false,
-            battleCry:this.battleCry
+            battleCry:this.battleCry,
+            delay:this.delay
         });
         this.node.dispatchEvent(eventsend);
     }

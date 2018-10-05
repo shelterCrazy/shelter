@@ -7,6 +7,17 @@ module.exports = {
     token:18,
     loginFlag:false,
     room:"",
+    //第一次进入游戏
+    firstEnterGame:false,
+
+    //角色选择界面//
+    heroNum: -1,
+    maxHeroNum: 3,
+
+    nowDeckNum:-1,
+
+    //玩家在主界面的坐标
+    playerPosition:cc.Vec2,
     //玩家持有的金币
     money:10000,
     //灵魂碎片
@@ -31,7 +42,9 @@ module.exports = {
     creatureCardPrefab:[cc.Prefab],
     cardPrefab:[cc.Prefab],
 
-    showCardNode:[cc.Prefab],
+    miniCardNode:[cc.Node],
+
+    showCardNode:[cc.Node],
     //用户持有的卡片 键值 + 数量
     userCard:[],
     //卡片的图片
@@ -72,6 +85,7 @@ module.exports = {
     mainEffectVolume:1,
     //以下是用户设置部分
     mainMusicVolume:1,
+    cameraPosition:cc.Vec2,
 
     j:0,
 };

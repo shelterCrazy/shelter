@@ -4938,10 +4938,14 @@
       "__id__": 1
     },
     "_enabled": true,
+    "loadEffect": null,
+    "hitEffect": null,
     "skillNode": {
       "__id__": 2
     },
     "GameManager": null,
+    "viewNode": null,
+    "logicNode": null,
     "magicType": 0,
     "area": 0,
     "team": 0,

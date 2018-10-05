@@ -145,6 +145,11 @@ cc.Class({
             //if(self.network === true) self.createByNetwork !== true
             this.magicSkill.releaseFunction(7);
         }, globalConstant.unitTime, cc.macro.REPEAT_FOREVER);
+        //实现每秒时间释放性质的法术
+        this.schedule(function(){
+            //if(self.network === true) self.createByNetwork !== true
+            this.magicSkill.releaseFunction(10);
+        }, 0.3, cc.macro.REPEAT_FOREVER);
 
         //动画存在的话运行，增加代码的耐操性
         if(this.animation !== null) {
@@ -211,7 +216,7 @@ cc.Class({
         });
         switch (this.magicType) {
             case typeMagic.normalMagic:
-                if (other.node.group === "Unit") {
+                if (other.node.group === "Unit" || other.node.group === "ViewUnit") {
                     //var script1 = other.node.getComponent('Unit');
                     //var stateScript = script1.stateNode.getComponent('CreatureState');
 
@@ -219,7 +224,7 @@ cc.Class({
                 }
                 break;
             case typeMagic.areaMagic:
-                if (other.node.group === "Unit") {
+                if (other.node.group === "Unit" || other.node.group === "ViewUnit") {
                     //script1 = other.node.getComponent('Unit');
                     //stateScript = script1.stateNode.getComponent('CreatureState');
                     this.magicSkill.releaseFunction(2,other.node);
@@ -298,7 +303,8 @@ cc.Class({
                     this.release();
                 }
 
-                if (other.node.group === "Unit") {
+                if (other.node.group === "Unit" || other.node.group === "ViewUnit") {
+                    cc.log(other.node.group);
                     var script1 = other.node.getComponent('Unit');
 
                     if (this.heroBounce === true && script1.unitType === 1) {
@@ -336,12 +342,12 @@ cc.Class({
             //指向性法术
             directionMagic:2
         });
-        if(this.logicNode === this.node){
-            this.viewNode.getComponent("Magic").release(true);
-        }
+        //if(this.logicNode === this.node){
+        //    this.viewNode.getComponent("Magic").release(true);
+        //}
         //如果是显示层那么不触发相应的效果
         //但是如果是控制过去让其播放死亡动画的话，那么release
-        if(this.viewNode === this.node && flag !== undefined && flag === true){
+        if(this.viewNode === this.node){
             switch (this.magicType)
             {
                 case typeMagic.normalMagic:
@@ -363,38 +369,38 @@ cc.Class({
                     },this._interval[2]);
                     break;
             }
-        }
-        switch (this.magicType)
-        {
-            case typeMagic.normalMagic:
+        }else {
+            switch (this.magicType) {
+                case typeMagic.normalMagic:
                     this.magicSkill.releaseFunction(1);
-                //self.node.removeFromParent();
-                //self.node.destroy();
-                self.GameManager.removeMagic(self.node);
-                break;
-            case typeMagic.areaMagic:
-                    this.magicSkill.releaseFunction(1);
-
-                //this.node.removeFromParent();
-                //self.node.destroy();
-                self.GameManager.removeMagic(self.node);
-                break;
-            case typeMagic.directionMagic:
-                if(this.hitEffect !== null)
-                    this.sendEvent(this.hitEffect);
-                if(this.animation !== null) {
-                    this.animation.play("end");
-                }
-                this.magicSkill.releaseFunction(9);
-
-                this._stopLock = true;
-                setTimeout(function () {
-                    self.magicSkill.releaseFunction(1);
                     //self.node.removeFromParent();
                     //self.node.destroy();
                     self.GameManager.removeMagic(self.node);
-                },this._interval[2]);
-                break;
+                    break;
+                case typeMagic.areaMagic:
+                    this.magicSkill.releaseFunction(1);
+
+                    //this.node.removeFromParent();
+                    //self.node.destroy();
+                    self.GameManager.removeMagic(self.node);
+                    break;
+                case typeMagic.directionMagic:
+                    //if (this.hitEffect !== null)
+                    //    this.sendEvent(this.hitEffect);
+                    //if (this.animation !== null) {
+                    //    this.animation.play("end");
+                    //}
+                    this.magicSkill.releaseFunction(9);
+
+                    this._stopLock = true;
+                    setTimeout(function () {
+                        self.magicSkill.releaseFunction(1);
+                        //self.node.removeFromParent();
+                        //self.node.destroy();
+                        self.GameManager.removeMagic(self.node);
+                    }, this._interval[2]);
+                    break;
+            }
         }
     },
 
@@ -458,18 +464,20 @@ cc.Class({
                 this.node.y += this.speed.y * frameSpeed;
             }
         }
-        //为逻辑节点
+        //如果自己是逻辑节点，那么进行一些同步的处理
         if(this.logicNode === this.node) {
             if ((++ this.timer) % 6 === 0) {
-                this.viewNode.stopAllActions();
-                this.viewNode.runAction(
-                    cc.moveBy(
-                        5,
-                        cc.v2(
-                            this.node.x - this.viewNode.x,
-                            this.node.y - this.viewNode.y
-                        )
-                ));
+                var action = cc.moveBy(
+                    5,
+                    cc.v2(
+                        this.node.x - this.viewNode.x,
+                        this.node.y - this.viewNode.y
+                    )
+                );
+                action.setTag(1);
+                //暂停同步用的那个动画
+                this.viewNode.stopAction(this.viewNode.getActionByTag(1));
+                this.viewNode.runAction(action);
             }
         }
     },

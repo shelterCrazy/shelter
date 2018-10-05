@@ -69,18 +69,8 @@ cc.Class({
         cc.log(customEventData);
         self.targets[0].position = this.target.position;
         self.target = self.targets[0];
-
-        this.callback = function() {
-            // 这里的 this 指向 component
-            this.target.x += (self.targets[customEventData].position.x - self.target.position.x) / 36;
-            this.target.y += (self.targets[customEventData].position.y - self.target.position.y) / 36;
-            //if((this.targets[customEventData].position - this.target.position) <= cc.v2(2,2) &&
-            //    cc.v2(2,2) <= (this.targets[customEventData].position - this.target.position)){
-            //    self.target = self.targets[customEventData];
-            //    this.unschedule(this.callback);
-            //}
-        };
-        this.schedule(this.callback, 0.01);
+        this.followFlag = true;
+        this.followTargetNum = customEventData;
     },
 
     mouseWheel:function(dat){
@@ -95,6 +85,8 @@ cc.Class({
         var self = this;
 
         this.camera = this.node.getComponent(cc.Camera);
+        this.followFlag = false;
+        this.followTargetNum = 0;
 
         if(this.mainScene === false) {
             //开启鼠标滚动监听
@@ -127,8 +119,14 @@ cc.Class({
             } else {
                 this.node.x = position.x;
             }
+            //如果允许跟随的话
+            if(this.followFlag){
+                this.target.x += (this.targets[this.followTargetNum].position.x - this.target.position.x) / 36;
+                this.target.y += (this.targets[this.followTargetNum].position.y - this.target.position.y) / 36;
+            }
 
             this.node.y = position.y + this.offsetY;
+            globalConstant.cameraPosition  = cc.v2(this.node.x, this.node.y);
             var ratio = targetPos.y / cc.winSize.height;
             if (!this.yFollow)// + (0.5 - ratio) * 0.5
                 globalConstant.cameraRatio = this.camera.zoomRatio = 1 - this._mouseWheel/this.mouseWheelMax/3;

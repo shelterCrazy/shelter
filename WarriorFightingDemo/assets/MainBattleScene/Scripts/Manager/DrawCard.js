@@ -156,7 +156,7 @@ cc.Class({
             //初始化卡组的卡片构成
             Global.totalDeckData[Global.deckUsage].deck = [0,3,0,0,3,0,0,3];
             Global.totalDeckData[Global.deckUsage].deck[203] = 3;
-            Global.totalDeckData[Global.deckUsage].deck[4] = 3;//六芒星召唤阵太变态
+            Global.totalDeckData[Global.deckUsage].deck[111] = 30;//六芒星召唤阵太变态
             Global.totalDeckData[Global.deckUsage].deck[201] = 2;
             Global.totalDeckData[Global.deckUsage].deck[110] = 3;
             Global.totalDeckData[Global.deckUsage].deck[109] = 0;

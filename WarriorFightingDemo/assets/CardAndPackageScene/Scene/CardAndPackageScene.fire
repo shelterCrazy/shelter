@@ -5945,7 +5945,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "New EditBox",
+    "_name": "EditBox",
     "_objFlags": 0,
     "_parent": {
       "__id__": 126

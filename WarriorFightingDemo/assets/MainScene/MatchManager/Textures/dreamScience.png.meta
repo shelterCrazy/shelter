@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "a94f0655-e1e5-4a1e-af52-70dbd3e508f2",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "dreamScience": {
+      "ver": "1.0.3",
+      "uuid": "c1d6f834-3581-4bdd-ae37-0ed406497208",
+      "rawTextureUuid": "a94f0655-e1e5-4a1e-af52-70dbd3e508f2",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -0.5,
+      "offsetY": 0,
+      "trimX": 2,
+      "trimY": 2,
+      "width": 55,
+      "height": 56,
+      "rawWidth": 60,
+      "rawHeight": 60,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

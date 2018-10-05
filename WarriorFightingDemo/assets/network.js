@@ -84,13 +84,16 @@ var NetworkModule = {
                     }
                 }.bind(this));
                 this.socket.on('roomChat', function (data) {
-                    cc.log(data.msg);
+                    //cc.log(data.msg.detail);
+
                     switch (data.msg.name) {
                         case "creatureCreate":
-                            this.manager.creatureCreateNetwork(data.msg.detail);
+                            data.msg.detail["network"] = false;
+                            this.manager.creatureCreate(data.msg);
                             break;
                         case "magicCreate":
-                            this.manager.magicCreateNetwork(data.msg.detail);
+                            data.msg.detail["network"] = false;
+                            this.manager.magicCreate(data.msg);
                             break;
                         case "chantCreate":
                             this.manager.chantCreateNetwork(data.msg.detail);
@@ -151,9 +154,22 @@ var NetworkModule = {
 
     match:function(){
         cc.log("matching");
-        setTimeout(function(){
+        //获取房间号
+        //this.Global.room = "roomChat";
+        //cc.log(this.Global.room);
+        ////生成一个随机数，用于大小比较，以判别英雄的左右
+        //this.randNum = Math.random();
+        ////发送消息
+        //setTimeout(function () {
+        //    this.roomMsg(this.Global.room, 'roomChat', "init");
+        //}.bind(this), 1000);
+        ////发送随机数过去
+        //setTimeout(function () {
+        //    this.roomMsg(this.Global.room, 'roomChat', {"name": "rand", num: this.randNum});
+        //}.bind(this), 5000);
+        //setTimeout(function(){
             this.socket.emit('match', {'token':this.Global.token});
-        }.bind(this),2000);
+        //}.bind(this),2000);
     },
     joinRoom:function(){
         this.joinMsg('roomChat', this.Global.room);

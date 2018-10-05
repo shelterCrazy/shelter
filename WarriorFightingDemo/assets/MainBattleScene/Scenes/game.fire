@@ -478,7 +478,7 @@
     "_components": [],
     "_prefab": null,
     "_id": "18bIRdvVpJMY2BrIKPdMhQ",
-    "_opacity": 255,
+    "_opacity": 0,
     "_color": {
       "__type__": "cc.Color",
       "r": 255,
@@ -2953,8 +2953,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 657,
-      "y": 363.9
+      "x": 926,
+      "y": 514
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -4648,7 +4648,10 @@
       null,
       null
     ],
-    "viewHero": null,
+    "viewHero": [
+      null,
+      null
+    ],
     "heroPrefab": [
       {
         "__uuid__": "dbe8ce10-632a-48ea-983c-6b34752113b2"

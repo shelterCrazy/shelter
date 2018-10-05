@@ -1,3 +1,10 @@
+/**
+ * @主要功能 用于卡组创建删除的脚本
+ * @author C14
+ * @parameters
+ * @returns
+ */
+
 var Global = require('Global');
 var globalConstant = require("Constant");
 
@@ -58,7 +65,6 @@ cc.Class({
         }
     },
     initListenEvent: function(){
-
         //this.node.on("mouseDownTheShowCard",removeCard,this);
         this.node.on("mouseDownTheDeck",this.getInDeck,this);
         //this.node.on("nameTheDeck",changeDeckName,this);

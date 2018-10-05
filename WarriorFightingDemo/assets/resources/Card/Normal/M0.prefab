@@ -47,10 +47,13 @@
       },
       {
         "__id__": 32
+      },
+      {
+        "__id__": 33
       }
     ],
     "_prefab": {
-      "__id__": 33
+      "__id__": 34
     },
     "_id": "",
     "_opacity": 255,
@@ -980,7 +983,7 @@
       "__uuid__": "6a04f9d3-0c56-4780-9b06-9572573eb673"
     },
     "useCardEffect": {
-      "__uuid__": "7c874d9a-d510-4053-8208-b24ce24b5e00"
+      "__uuid__": "546e0c93-3ce2-428a-9a10-f814906f66a9"
     },
     "cameraMoveFlag": 0,
     "usableType": 0,
@@ -999,6 +1002,20 @@
     "isChantMagic": false,
     "chantRound": 3,
     "usableNode": null
+  },
+  {
+    "__type__": "cc.AudioSource",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "_volume": 1,
+    "_mute": false,
+    "_loop": false,
+    "playOnLoad": false,
+    "preload": false
   },
   {
     "__type__": "cc.PrefabInfo",

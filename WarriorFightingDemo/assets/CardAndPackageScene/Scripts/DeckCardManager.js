@@ -1,3 +1,9 @@
+/**
+ * @主要功能 卡组卡牌搭建的管理器
+ * @author C14
+ * @parameters
+ * @returns
+ */
 var Global = require('Global');
 var globalConstant = require("Constant");
 var globalCardData = require("CardData");
@@ -87,7 +93,6 @@ cc.Class({
                 this.editDeckCardData = Global.userDeckCardData[i];
             }
         }
-        cc.log(this.editDeckCardData);
         this.initUserDeckCard();
     },
 
@@ -178,6 +183,7 @@ cc.Class({
     },
     getOutDeck:function(event) {
         var self = this;
+        var deckNum = 0;
         if(this.interactable) {
             //this.node.stopAllActions();
             Global.userDeckCardData = [];
@@ -191,6 +197,10 @@ cc.Class({
                         if (rs.status === "200") {
                             cc.log("用户卡组卡牌数据获取成功");
                             Global.userDeckCardData.push(rs.userDeckCardList);
+                            deckNum ++;
+                            if(deckNum === Global.userDeckData.length){
+
+                            }
                         } else {
                             cc.log("用户卡组卡牌数据获取失败");
                         }

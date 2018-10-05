@@ -30,6 +30,8 @@ cc.Class({
         //    default: 0
         //},
 
+        //召唤用的Y坐标同步标记位
+        summonYFlag:false,
         //召唤法术的ID
         id:0,
         //在召唤位置上偏移，偏移的像素为(可正可负),（我方，敌方坐标是对称的，以我方基地为后方，以敌方基地为前方）
@@ -60,7 +62,8 @@ cc.Class({
     releaseFunction:function(){
         var script = this.node.parent.parent.getComponent("Skill");
         var creatureScript = null;
-        var selfObjectScript = script.selfObjectScript;
+        var selfObjectScript = this.selfObjectScript = script.selfObjectScript;
+        this.selfObject = this.selfObjectScript.node;
         var i = 0,x;
         var self = this;
         var enumDat = cc.Enum({
@@ -109,17 +112,19 @@ cc.Class({
     summonMagic:function(x,team){
         var eventsend;
         eventsend = new cc.Event.EventCustom('magicCreate',true);
-        cc.log("send a magic init");
         eventsend.setUserData({
+            //召唤层的类型，logic，或者view
+            summonLayer:(this.selfObjectScript.logicNode === this.selfObject) ? "Logic" : "View",
             position: x - this.offset * team / Math.abs(team),
-            y: this.y,
+            y: (this.summonYFlag === true) ? this.selfObject.y : this.y,
             angel: 90 * (1 + team/Math.abs(team)) -
                     this.angel * team / Math.abs(team),
             area: this.area,
             team: team,
             network:this.network,
             prefab:this.magicPrefab,
-            id: this.id
+            id: this.id,
+            delay:this.delay
         });
         this.node.dispatchEvent(eventsend);
     }
