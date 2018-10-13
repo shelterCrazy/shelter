@@ -2,11 +2,11 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        //晃动的范围X
+        //鏅冨姩鐨勮寖鍥碭
         rangeX:0,
-        //晃动的范围Y
+        //鏅冨姩鐨勮寖鍥碮
         rangeY:0,
-        //耗时
+        //鑰楁椂
         time:0
     },
 

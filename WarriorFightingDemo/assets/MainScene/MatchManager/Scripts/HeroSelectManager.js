@@ -27,38 +27,18 @@ cc.Class({
         },
 
         selectManager:cc.Node,
-        _select:true,
+        _select:false,
     },
 
     onLoad :function(){
-        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
+         //this.selectEnable(true);
     },
 
     onKeyDown: function (event) {
+        cc.log(event.keyCode);
         if(this._select) {
-            switch (event.keyCode) {
-                case cc.KEY.a:
-                case cc.KEY.left:
-                    if (Global.heroNum > 0) {
-                        this.changeHeroSelect(null, Global.heroNum - 1);
-                    }
-                    break;
-                case cc.KEY.d:
-                case cc.KEY.right:
-                    if (Global.heroNum < Global.maxHeroNum - 1) {
-                        this.changeHeroSelect(null, Global.heroNum + 1);
-                    }
-                    break;
-                case cc.KEY.z:
-                case cc.KEY.enter:
-                    if(Global.heroNum === -1){
-                        this.node.getComponent("PlayEffect").playReleaseEffect();
-                    }else{
-                        this.node.getComponent("PlayEffect").playPressEffect();
-                    }
-                    this.selectManager.getComponent("SelectManager").changePosition(null,1);
-                    break;
-            }
+
+
         }
     },
     /**
@@ -69,6 +49,7 @@ cc.Class({
      * @returns
      */
     selectEnable:function(enable){
+        cc.log("enable"+enable);
         this._select = enable;
     },
     /**

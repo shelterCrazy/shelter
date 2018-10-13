@@ -5,7 +5,10 @@ cc.Class({
 
     properties: {
         _time:0,
-        timeLabel:cc.Label
+        timeLabel:cc.Label,
+        mainSceneManager:cc.Node,
+        selectNode:cc.Node,
+        deckViewNode:cc.Node
     },
     onLoad:function(){
         this.schedule(function(){
@@ -18,7 +21,9 @@ cc.Class({
             this._time = 0;
             this.timeLabel.string = this._time;
             this.node.active = true;
+            this.selectNode.getComponent("SelectManager")._route = 2;
             this.node.runAction(cc.fadeIn(1).easing(cc.easeCubicActionOut()));
+            this.mainSceneManager.getComponent("MainSceneManager").match();
         }else{
             this.node.runAction(cc.sequence(
                 cc.fadeOut(1).easing(cc.easeCubicActionOut()),
@@ -26,6 +31,8 @@ cc.Class({
                     this.node.active = false;
                 }.bind(this))
             ));
+            this.selectNode.getComponent("SelectManager")._route = 1;
+            this.deckViewNode.getComponent("DeckSelectManager").selectEnable(true);
         }
     }
 

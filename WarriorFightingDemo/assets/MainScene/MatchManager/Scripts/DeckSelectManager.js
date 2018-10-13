@@ -13,8 +13,9 @@ cc.Class({
     properties: {
         deckPrefab:cc.Prefab,
         deckLayer:cc.Node,
-        _select:true,
-        deckButtonNode:[cc.Node]
+        _select:false,
+        deckButtonNode:[cc.Node],
+        matchManager:cc.Node,
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -22,7 +23,7 @@ cc.Class({
     onLoad: function()
     {
         this.selectSort = 0;
-        this.node.on('mouseDownTheDeck',this.selectDeck, this);
+        this.node.on("mouseDownTheDeck",this.selectDeck,this);
     },
     /**
      * @主要功能 关闭开启卡组选择功能
@@ -33,6 +34,24 @@ cc.Class({
      */
     selectEnable:function(enable){
         this._select = enable;
+        //if(enable){
+        //    //对于按键进行监听
+        //    cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
+        //}else{
+        //    //对于按键取消监听
+        //    cc.systemEvent.off(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
+        //}
+    },
+    openMatchManager:function(){
+        if(Global.nowDeckNum === -1){
+            this.node.getComponent("PlayEffect").playReleaseEffect();
+            return false;
+        }else{
+            this.node.getComponent("PlayEffect").playPressEffect();
+            this.selectEnable(false);
+            this.matchManager.getComponent("MatchManager").changeActive();
+            return true;
+        }
     },
     /**
      * @主要功能 初始化用户的卡组
@@ -43,13 +62,13 @@ cc.Class({
      */
     deckInit:function(){
         var viewDeck,script;
-        //this.deckLayer.removeAllChildren();
-
+        this.deckLayer.removeAllChildren();
+        cc.log(Global.userDeckData);
         for(var i = 0;i < Global.userDeckData.length;i++){
             viewDeck = cc.instantiate(this.deckPrefab);
             script = viewDeck.getComponent("ViewDeck");
             script.changeName(Global.userDeckData[i].deck_name);
-            script.changeType(0);
+            script.changeType(Global.userDeckData[i].deck_type);
             script.deckSort = Global.userDeckData[i].deck_sort;
             script.deckId = Global.userDeckData[i].id;
             script.deckNum = i;
@@ -62,10 +81,14 @@ cc.Class({
     },
 
 
-    selectDeck:function(e){
-        var num = e.detail.object.deckNum;
-        if(e.detail.object.usable) {
-
+    selectDeck:function(e ,deckNum){
+        var num;
+        if(deckNum !== undefined && deckNum !== null){
+            num = deckNum;
+        }else{
+            num = e.detail.object.deckNum;
+        }
+        if(this.deckButtonNode[num].getComponent("ViewDeck").usable) {
             //是否能够调整选择
             if(this._select) {
                 //如果英雄已经选择过了的话,并且两者不是同一个的话
@@ -77,7 +100,7 @@ cc.Class({
                 }
                 this.deckButtonNode[num].getComponent("BorderButton").selected();
                 this.deckButtonNode[num].getComponent("PlayEffect").playPressEffect();
-                e.detail.object.changeSelectedState(true);
+                this.deckButtonNode[num].getComponent("ViewDeck").changeSelectedState(true);
                 if (Global.nowDeckNum !== num) {
                     //一套移动操作
                     //this.heroNode[num].x -= 80;
@@ -90,6 +113,7 @@ cc.Class({
                     //this.heroLabelNode[num].runAction(cc.moveBy(0.5, 10, 40).easing(cc.easeCubicActionOut()));
                 }
                 Global.nowDeckNum = num;
+                Global.deckUsage = this.deckButtonNode[num].getComponent("ViewDeck").deckId;
             }
         }
     },

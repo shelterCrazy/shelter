@@ -23,6 +23,8 @@ cc.Class({
         },
         //用来显示颜色的节点bodyNode
         bodyNode:cc.Node,
+        //用于标明卡组类型的图片节点
+        typePicNode:[cc.Node],
         //是否可以使用，初始为否
         usable:true,
 
@@ -70,8 +72,10 @@ cc.Class({
     changeSelectedState:function(selected){
         this.selected = selected;
         if(selected){
-
+            this.nameLabel.node.runAction(cc.moveBy(1, - 60, 0).easing(cc.easeCubicActionOut()));
         }else{
+            this.nameLabel.node.stopAllActions();
+            this.nameLabel.node.runAction(cc.moveTo(1, cc.v2(-95, 0)).easing(cc.easeCubicActionOut()));
             this.bodyNode.stopAllActions();
             this.bodyNode.runAction(cc.scaleTo(
                 this.time2,
@@ -124,6 +128,7 @@ cc.Class({
     },
     changeType:function(type){
         this.type = type;
+        this.typePicNode[type].active = true;
     },
     changeName:function(name){
         this.nameLabel.string = name;

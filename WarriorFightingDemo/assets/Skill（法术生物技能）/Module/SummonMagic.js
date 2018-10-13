@@ -114,7 +114,7 @@ cc.Class({
         eventsend = new cc.Event.EventCustom('magicCreate',true);
         eventsend.setUserData({
             //召唤层的类型，logic，或者view
-            summonLayer:(this.selfObjectScript.logicNode === this.selfObject) ? "Logic" : "View",
+            summonLayer:((this.selfObjectScript.logicNode === this.selfObject) ? "Logic" : "View"),
             position: x - this.offset * team / Math.abs(team),
             y: (this.summonYFlag === true) ? this.selfObject.y : this.y,
             angel: 90 * (1 + team/Math.abs(team)) -

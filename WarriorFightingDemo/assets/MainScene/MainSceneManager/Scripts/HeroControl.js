@@ -62,7 +62,9 @@ cc.Class({
         
         
     },
-    
+    lockHero:function(lock){
+        this._controlLock = lock;
+    },
     initMouseEvent:function(){
         this.node.on(cc.Node.EventType.MOUSE_DOWN,openPanel, this);
 
@@ -71,6 +73,7 @@ cc.Class({
         }    
     },
     onKeyPressed: function (keyCode, event) {
+
         switch(keyCode) {
             case cc.KEY.a:
             case cc.KEY.left:

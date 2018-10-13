@@ -17,17 +17,11 @@ cc.Class({
         //是否使用场景转换
         changeSceneSwitch:false,
         //场景
-        sceneName:""
-        // foo: {
-        //    default: null,      // The default value will be used only when the component attaching
-        //                           to a node for the first time
-        //    url: cc.Texture2D,  // optional, default is typeof default
-        //    serializable: true, // optional, default is true
-        //    visible: true,      // optional, default is true
-        //    displayName: 'Foo', // optional
-        //    readonly: false,    // optional, default is false
-        // },
-        // ...
+        sceneName:"",
+        //按键确认互动是否有效
+        interactionEnter:true,
+        //按键返回互动是否有效
+        interactionCancel:true,
     },
 
     // use this for initialization
@@ -51,19 +45,19 @@ cc.Class({
             switch (keyCode) {
                 case cc.KEY.e:
                 case cc.KEY.space:
-                    if(this.changeSceneSwitch === true){
-                        cc.director.loadScene(this.sceneName);
-                    }else {
-                        if (this.controlNode.active === false && this.controlNode.opacity <= 170) {
-                            var script = this.controlNode.getComponents(cc.Component);
-                            script[0].changeActive(true);
+                    if(this.interactionEnter) {
+                        if (this.changeSceneSwitch === true) {
+                            cc.director.loadScene(this.sceneName);
+                        } else {
+                            if (this.controlNode.active === false) {
+                                var script = this.controlNode.getComponents(cc.Component);
+                                script[0].changeActive(true);
+                            }
                         }
                     }
                     break;
                 case cc.KEY.q:
-                    if(this.changeSceneSwitch === true){
-                        cc.director.loadScene(this.sceneName);
-                    }else {
+                    if(this.interactionCancel) {
                         if (this.controlNode.active === true && this.controlNode.opacity >= 85) {
                             script = this.controlNode.getComponents(cc.Component);
                             script[0].changeActive(false);
@@ -100,11 +94,49 @@ cc.Class({
             this.tipNode.runAction(this.fadeOut);
             this.inDoor = false;
 
-                if (this.controlNode !== null && this.controlNode.active === true
-                    && this.controlNode.opacity >= 70) {
-                    var script = this.controlNode.getComponents(cc.Component);
-                    script[0].changeActive(false);
-                }
+                //if (this.controlNode !== null && this.controlNode.active === true
+                //    && this.controlNode.opacity >= 70) {
+                //    var script = this.controlNode.getComponents(cc.Component);
+                //    script[0].changeActive(false);
+                //}
+        }
+    },
+    // 只在两个碰撞体开始接触时被调用一次
+    onBeginContact: function (contact, selfCollider, otherCollider) {
+        cc.log("onBeginContact");
+        //于玩家的接触判断
+        if (otherCollider.node.group === "Hero") {
+
+            this.effectNode.stopAllActions();
+            this.tipNode.stopActionByTag(1);
+            this.tipNode.stopActionByTag(2);
+            //效果节点变亮
+            this.effectNode.runAction(cc.fadeIn(0.2).easing(cc.easeSineOut()));
+            //效果节点变亮
+            this.tipNode.runAction(this.fadeIn);
+            this.inDoor = true;
+        }
+    },
+
+    // 只在两个碰撞体结束接触时被调用一次
+    onEndContact: function (contact, selfCollider, otherCollider) {
+        //于玩家的接触判断
+        if (otherCollider.node.group === "Hero") {
+
+            this.effectNode.stopAllActions();
+            this.tipNode.stopActionByTag(1);
+            this.tipNode.stopActionByTag(2);
+            //效果节点变暗
+            this.effectNode.runAction(cc.fadeOut(1.2).easing(cc.easeSineIn()));
+            //提示节点变暗
+            this.tipNode.runAction(this.fadeOut);
+            this.inDoor = false;
+
+            //if (this.controlNode !== null && this.controlNode.active === true
+            //    && this.controlNode.opacity >= 70) {
+            //    var script = this.controlNode.getComponents(cc.Component);
+            //    script[0].changeActive(false);
+            //}
         }
     },
     // called every frame, uncomment this function to activate update callback

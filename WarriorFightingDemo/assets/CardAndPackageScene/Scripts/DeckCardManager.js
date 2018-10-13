@@ -28,13 +28,15 @@ cc.Class({
     // use this for initialization
     onLoad: function () {
         this.editDeckId = 0;
+        this.viewCardGroup = [];
         this.editDeckCardData = [];
         this.userDeckEditComponent = this.userDeckEditComponent.getComponent("DeckManager");
         this.initListenEvent();
     },
     initUserDeckCard:function(){
         var self = this;
-        var userDeckCardData = [];
+        //var userDeckCardData = [];
+        this.viewCardGroup = [];
         this.userDeckCardNode.removeAllChildren();
 
         //按照mana排序
@@ -50,6 +52,7 @@ cc.Class({
             }
         };
         globalCardData.cardData.sort(compareMana);
+        var viewCardNum = 0;
         for(var i in globalCardData.cardData) {
             var num = 0;
             //遍历现在编辑的卡组，如果有的话，那么加1
@@ -59,16 +62,56 @@ cc.Class({
                 }
             }
             if(num === 0)continue;
-
             var viewCard = cc.instantiate(this.userDeckCardPrefab);
             var script = viewCard.getComponent("ViewCard");
-            cc.log(num);
+
             script.cName = globalCardData.cardData[i].card_name;
             script.num = num;
             script.cardId = globalCardData.cardData[i].id;
             script.cardType = globalCardData.cardData[i].card_type;
             script.manaConsume = globalCardData.cardData[i].mana;
+            viewCard.y = - viewCardNum * 60;
+            viewCard.scaleY = 0;
+            this.viewCardGroup.push(viewCard);
             this.userDeckCardNode.addChild(viewCard);
+            viewCard.runAction(cc.sequence(
+                cc.delayTime(viewCardNum * 0.15),
+                cc.scaleTo(0.3, 1, 1).easing(cc.easeCubicActionOut())
+            ));
+            viewCardNum ++;
+        }
+    },
+
+    addOneDeckCard:function(id){
+        var viewCardNum = 0;
+        for (var j in globalCardData.cardData) {
+            if(globalCardData.cardData[j].id === id){
+                var mana = globalCardData.cardData[j].mana;
+                break;
+            }
+        }
+        for(var i = 0; i <  this.viewCardGroup.length; i++) {
+            var script = this.viewCardGroup[i].getComponent("ViewCard");
+            if(mana < script.manaConsume){
+                break;
+            }
+        }
+        var viewCard = cc.instantiate(this.userDeckCardPrefab);
+        var newScript = viewCard.getComponent("ViewCard");
+        newScript.cName = globalCardData.cardData[j].card_name;
+        newScript.num = 1;
+        newScript.cardId = globalCardData.cardData[j].id;
+        newScript.cardType = globalCardData.cardData[j].card_type;
+        newScript.manaConsume = globalCardData.cardData[j].mana;
+        viewCard.scaleY = 0;
+        this.viewCardGroup.splice(i,0,viewCard);
+        viewCard.y = - i * 60;
+        this.userDeckCardNode.addChild(viewCard);
+        viewCard.runAction(cc.scaleTo(0.3, 1, 1).easing(cc.easeCubicActionOut()));
+    },
+    sortDeckCard:function(){
+        for(var i in this.viewCardGroup) {
+            this.viewCardGroup[i].runAction(cc.moveTo(0.7, 0, - i * 60).easing(cc.easeCubicActionOut()));
         }
     },
 
@@ -144,7 +187,8 @@ cc.Class({
         }
         //如果没有符合的情况的话
         if(i === this.userDeckCardNode.children.length){
-            this.initUserDeckCard();
+            this.addOneDeckCard(data.card_id);
+            this.sortDeckCard();
         }
     },
     endDeckCardEdit:function(){
@@ -198,11 +242,12 @@ cc.Class({
                             cc.log("用户卡组卡牌数据获取成功");
                             Global.userDeckCardData.push(rs.userDeckCardList);
                             deckNum ++;
-                            if(deckNum === Global.userDeckData.length){
-
-                            }
                         } else {
+                            deckNum ++;
                             cc.log("用户卡组卡牌数据获取失败");
+                        }
+                        if(deckNum === Global.userDeckData.length){
+
                         }
                     },
                     error: function () {
@@ -238,7 +283,24 @@ cc.Class({
                 this.editDeckCardData.splice(i,1);
             }
             //数量减一
-            event.detail.object.addNumBy(-1);
+            if(event.detail.object.addNumBy(-1) === 0){
+                for(var i in this.viewCardGroup) {
+                    var script = this.viewCardGroup[i].getComponent("ViewCard");
+                    if(script.cardId === event.detail.object.cardId){
+                        this.viewCardGroup.splice(i,1);
+                        break;
+                    }
+                }
+                event.detail.object.node.runAction(
+                    cc.sequence(
+                        cc.scaleTo(0.3, 1, 0).easing(cc.easeCubicActionOut()),
+                        cc.callFunc(function(){
+                            event.detail.object.node.removeFromParent();
+                        }.bind(this))
+                    )
+                );
+                this.sortDeckCard();
+            }
         }
 
         function changeDeckName(event){

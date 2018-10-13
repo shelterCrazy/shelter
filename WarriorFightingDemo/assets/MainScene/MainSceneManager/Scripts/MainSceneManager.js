@@ -8,17 +8,6 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        
-        //玩家的金币数量
-        coin: 0,
-        
-        //玩家的灵魂(类似粉尘)数量
-        soul: 0,
-
-        //玩家可以打开的卡牌包数量
-        bags: 0,
-        
-
         deckBuildPrefab: cc.Prefab,
 
         //迷你卡牌的生物预制
@@ -40,6 +29,8 @@ cc.Class({
 
         deckSelectManager:cc.Node,
 
+        hero:cc.Node,
+
         //筛选类型，三种，分别是 正营，稀有度，法力消耗
         filterType:{
             default: [],
@@ -59,7 +50,7 @@ cc.Class({
         Global.mainStart = true;
 
         this.node.on("logSuccess",function(){
-            Global.userDeckCardData = [];
+
             NetworkModule.getGlobal(Global);
             NetworkModule.init();
             cc.loader.loadResDir("CardTextures/",cc.SpriteFrame, function (err,spriteFrames) {
@@ -76,6 +67,7 @@ cc.Class({
                     Global.showCardNode[i] = null;
                 }
                 self.initPrefab();
+                Global.userDeckCardData = [];
                 this.getUserCardData(function(flag){
                     cc.log(flag);
                     if(flag === true) {
@@ -91,15 +83,20 @@ cc.Class({
             }.bind(this));
         }.bind(this));
 
-        //if(Global.login === true) {
-        //    this.cameraComponent.moveTarget(0, 1, 0);
-        //}
+        if(Global.login === true) {
+            this.hero.position = Global.playerPosition;
+            this.deckSelectManager.getComponent("DeckSelectManager").deckInit();
+        }
 
     },
     match:function(){
         NetworkModule.match();
     },
 
+    lockHero:function(lock){
+        var component = this.hero.getComponent("hero-control");
+        component.lockHero(lock);
+    },
     /**
      * @主要功能 初始化用户卡组数据；持有牌信息
      * @author C14

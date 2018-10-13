@@ -125,7 +125,7 @@ cc.Class({
             this.node.runAction(cc.moveBy(0.3,-400,0).easing(cc.easeSineInOut()));
             this.userDeckCardEditComponent.node.active = true;
             //播放丝滑移动的动画，移出现
-            this.userDeckCardEditComponent.node.runAction(cc.moveBy(0.7,400,0).easing(cc.easeSineOut()));
+            this.userDeckCardEditComponent.node.runAction(cc.moveBy(0,400,0).easing(cc.easeSineOut()));
             //如果有deckId的话，那么用deckId
             if(deckId !== undefined){
                 this.userDeckCardEditComponent.editDeckCard(deckId);
@@ -156,7 +156,7 @@ cc.Class({
                         url: "/areadly/addDeck",
                         type: "GET",
                         dataType: "json",
-                        data: {"token": Global.token, "deckName": str, "deckSort": max + 1},
+                        data: {"token": Global.token, "deckName": str, "deckSort": max + 1, "deckType": 2},
                         success: function (rs) {
                             if (rs.status === "200") {
                                 cc.log("用户卡组创建成功");

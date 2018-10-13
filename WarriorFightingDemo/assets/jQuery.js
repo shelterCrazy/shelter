@@ -18,7 +18,7 @@ var $ = {
                 xhr.send();
             }else{
                 xhr.open("GET",this.url + options.url + "?" + params, true);
-                xhr.send(params);
+                xhr.send();//send(params)
             }
         } else if (options.type == "POST") {
             //xhr.open("POST","http://39.106.67.112:3000" + options.url + "?" + params, true);

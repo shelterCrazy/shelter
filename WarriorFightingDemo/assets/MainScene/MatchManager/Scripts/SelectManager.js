@@ -22,22 +22,165 @@ cc.Class({
         heroViewNode:cc.Node,
 
         deckViewNode:cc.Node,
+
+        matchManager:cc.Node,
+
+        mainSceneManager:cc.Node,
+
+        _route:-1
     },
 
     onLoad :function(){
-        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
+
+        //cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
+        //this.node.active = false;
+    },
+
+    reloadHero:function(){
+        var script = this.heroViewNode.getComponent("HeroSelectManager");
+        var temp = script._select;
+        if(Global.heroNum !== -1){
+            script._select = true;
+            script.changeHeroSelect(null, Global.heroNum);
+            script._select = temp;
+        }
+    },
+    reloadDeck:function(){
+        var script = this.deckViewNode.getComponent("DeckSelectManager");
+        var temp = script._select;
+        if(Global.nowDeckNum !== -1){
+            script._select = true;
+            script.selectDeck(null, Global.nowDeckNum);
+            script._select = temp;
+        }
     },
 
     onKeyDown: function (event) {
-        switch (event.keyCode) {
-            case cc.KEY.escape:
-                cc.log("escape");
-                if(this.nowLayer === 0){
-                    this.node.parent.active = false;
-                    this.heroViewNode.getComponent("HeroSelectManager").selectEnable(false);
-                }else if(this.nowLayer === 1){
+        cc.log(this._route);
+        if(this._route === 0){
+            switch (event.keyCode) {
+                case cc.KEY.a:
+                case cc.KEY.left:
+                    if (Global.heroNum > 0) {
+                        this.heroViewNode.getComponent("HeroSelectManager").changeHeroSelect(null, Global.heroNum - 1);
+                    }
+                    break;
+                case cc.KEY.d:
+                case cc.KEY.right:
+                    if (Global.heroNum < Global.maxHeroNum - 1) {
+                        this.heroViewNode.getComponent("HeroSelectManager").changeHeroSelect(null, Global.heroNum + 1);
+                    }
+                    break;
+                case cc.KEY.z:
+                case cc.KEY.e:
+                case cc.KEY.enter:
+                    if(Global.heroNum === -1){
+                        this.heroViewNode.getComponent("PlayEffect").playReleaseEffect();
+                    }else{
+                        this._route = 1;
+                        this.heroViewNode.getComponent("PlayEffect").playPressEffect();
+                        this.changePosition(null, 1);
+                    }
+                    break;
+                case cc.KEY.escape:
+                    this._route = -1;
+                    this.changeActive(false);
+                    break;
+            }
+        }else if(this._route === 1){
+            switch (event.keyCode) {
+                case cc.KEY.w:
+                case cc.KEY.up:
+                    for(var i = Global.nowDeckNum - 1;i >= 0; i--){
+                        if(this.deckViewNode.getComponent("DeckSelectManager").
+                                deckButtonNode[i].getComponent("ViewDeck").usable)break;
+                    }
+                    if (i >= 0) {
+                        this.deckViewNode.getComponent("DeckSelectManager").selectDeck(null, i);
+                    }
+                    break;
+                case cc.KEY.s:
+                case cc.KEY.down:
+                    for(i = Global.nowDeckNum + 1;i < this.deckViewNode.getComponent("DeckSelectManager").
+                        deckButtonNode.length; i++){
+                        if(this.deckViewNode.getComponent("DeckSelectManager").
+                                deckButtonNode[i].getComponent("ViewDeck").usable)break;
+                    }
+                    if (i < this.deckViewNode.getComponent("DeckSelectManager").deckButtonNode.length) {
+                        this.deckViewNode.getComponent("DeckSelectManager").selectDeck(null, i);
+                    }
+                    break;
+                case cc.KEY.z:
+                case cc.KEY.e:
+                case cc.KEY.enter:
+                    if(this.deckViewNode.getComponent("DeckSelectManager").openMatchManager()){
+                        this._route = 2;
+                    }
+                    break;
+                case cc.KEY.escape:
+                    this._route = 0;
                     this.changePosition(null, 0);
-                }break
+                    break;
+            }
+        }else if(this._route === 2){
+            switch (event.keyCode) {
+                case cc.KEY.escape:
+                    this.matchManager.getComponent("MatchManager").changeActive();
+                    break;
+            }
+        }
+    },
+    changeActive:function(active){
+        this.heroViewNode.getComponent("HeroSelectManager").selectEnable(active);
+        this.mainSceneManager.getComponent("MainSceneManager").lockHero(active);
+        this.node.stopAllActions();
+        if(active){
+            this.node.active = true;
+            this.node.runAction(
+                cc.sequence(
+                    cc.fadeIn(0.7).easing(cc.easeCubicActionOut()),
+                    cc.callFunc(function(){
+                        this._route = 0;
+                    }.bind(this))
+                )
+            );
+        }else{
+            this.node.runAction(
+                cc.sequence(
+                    cc.fadeOut(0.7).easing(cc.easeCubicActionOut()),
+                    cc.callFunc(function(){
+                        this._route = -1;
+                        this.node.active = false;
+                    }.bind(this))
+                )
+            );
+        }
+    },
+
+    antiActive:function(){
+        this.heroViewNode.getComponent("HeroSelectManager").selectEnable(!this.node.active);
+        this.mainSceneManager.getComponent("MainSceneManager").lockHero(!this.node.active);
+        this.node.stopAllActions();
+        if(!this.node.active){
+            this.node.active = !this.node.active;
+            this.node.runAction(
+                cc.sequence(
+                    cc.fadeIn(0.7).easing(cc.easeCubicActionOut()),
+                    cc.callFunc(function(){
+                        this._route = 0;
+                    }.bind(this))
+                )
+            );
+        }else{
+            this.node.runAction(
+                cc.sequence(
+                    cc.fadeOut(0.7).easing(cc.easeCubicActionOut()),
+                    cc.callFunc(function(){
+                        this._route = -1;
+                        this.node.active = !this.node.active;
+                    }.bind(this))
+                )
+            );
         }
     },
 
@@ -52,8 +195,10 @@ cc.Class({
             }
             this.node.getComponent("PlayEffect").playPressEffect();
             //使得英雄选择层的文字消失，此外无法点选，失去交互能力
-            this.heroViewNode.getComponent("HeroSelectManager").selectEnable((num === 0));
-            this.heroViewNode.getComponent("HeroSelectManager").changeTextVisible((num === 0));
+            this.heroViewNode.getComponent("HeroSelectManager").selectEnable(num === 0);
+            this.heroViewNode.getComponent("HeroSelectManager").changeTextVisible(num === 0);
+            this.deckViewNode.getComponent("DeckSelectManager").selectEnable(num === 1);
+            this._route = num;
             //移动到新的位置
             this.node.stopAllActions();
             this.node.runAction(cc.moveTo(0.6,- num * 950,0).easing(cc.easeCubicActionOut()));

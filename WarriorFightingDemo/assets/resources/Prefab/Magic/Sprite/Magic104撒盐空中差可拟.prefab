@@ -1451,7 +1451,7 @@
     "_interval": [],
     "network": true,
     "createByNetwork": false,
-    "startSpeed": 20,
+    "startSpeed": 15,
     "speed": {
       "__type__": "cc.Vec2",
       "x": 0,

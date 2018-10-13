@@ -931,7 +931,7 @@
     "asset": {
       "__uuid__": "ed61fef7-0769-4ba6-8a06-3f89eab543b9"
     },
-    "fileId": "55xqGZHS1FVJvAg4YTdHB4",
+    "fileId": "f0FLMPtThLl5FlFl/xtI+1",
     "sync": false
   },
   {
@@ -1465,12 +1465,12 @@
     },
     "gravity": 0.1,
     "heroBounce": false,
-    "skyBounce": false,
+    "skyBounce": true,
     "groundBounce": true,
     "leftRightBounce": true,
-    "elasticCoefficient": 1,
+    "elasticCoefficient": 1.01,
     "collisionMaxTime": 3,
-    "vanishCondition": 9,
+    "vanishCondition": 10,
     "_stopLock": false
   },
   {
@@ -1550,9 +1550,9 @@
     "_enabled": true,
     "_fadeTime": 1,
     "_minSeg": 1,
-    "_stroke": 64,
+    "_stroke": 35,
     "_texture": {
-      "__uuid__": "8f88e038-48ea-45e7-8d75-52fcb73b6acd"
+      "__uuid__": "8f91f227-09d5-45c9-b561-1a185e2d63a6"
     },
     "_color": {
       "__type__": "cc.Color",
@@ -1561,7 +1561,7 @@
       "b": 255,
       "a": 255
     },
-    "_fastMode": true,
+    "_fastMode": false,
     "_N$preview": true
   },
   {

@@ -6,7 +6,6 @@
 cc.Class({
     extends: cc.Component,
     properties: {
-        nowPosition:cc.Vec2,
         moveX:0,
         moveY:0,
         time1:0,
@@ -15,20 +14,15 @@ cc.Class({
 
     onLoad:function(){
         var self = this;
-        this._lock = false;
         this.node.on(cc.Node.EventType.MOUSE_ENTER,function(){
-            //if(this._lock === false) {
-            //this.nowPosition = this.node.position;
-            //    this._lock = true;
-            //}
             this.node.stopAllActions();
-            this.node.runAction(cc.moveTo(
+            this.node.runAction(cc.moveBy(
                 this.time1,
                 cc.v2(
-                    this.nowPosition.x + this.moveX,
-                    this.nowPosition.y + this.moveY
+                    this.moveX,
+                    this.moveY
                 )
-            ).easing(cc.easeCubicActionOut()));
+            ).easing(cc.easeSineInOut()));
         }.bind(this), this);
         this.node.on(cc.Node.EventType.MOUSE_LEAVE,function(){
             this.node.stopAllActions();
@@ -38,7 +32,7 @@ cc.Class({
                     this.nowPosition.x,
                     this.nowPosition.y
                 )
-            ).easing(cc.easeCubicActionOut()));
+            ).easing(cc.easeSineInOut()));
         }.bind(this), this);
     },
 

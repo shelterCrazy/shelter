@@ -136,7 +136,7 @@ cc.Class({
             }.bind(this));
         }else{
             this.userCardInit();
-            this.renewShowCardGroup();
+            this.renewShowCardGroup(1);
             this.userDeckComponent.initUserDeck();
         }
         self.infoBoardScript = null;
@@ -239,10 +239,11 @@ cc.Class({
 
     changeAllCardEnable:function(){
         this.allCardEnable = !this.allCardEnable;
-        this.nextPageButton.interactable = true;
-        this.lastPageButton.interactable = false;
+        //this.nextPageButton.interactable = true;
+        //this.lastPageButton.interactable = false;
         this.nowPage = 0;
-        this.renewShowCardGroup();
+        this.changePageButtonState();
+        this.renewShowCardGroup(-1);
     },
     modeChange:function(event, customEventData){
 
@@ -295,7 +296,7 @@ cc.Class({
     filterTypeSelect:function(event, customEventData) {
         this.filterType[customEventData[0] - '0'] = customEventData[1] - '0';
         this.nowPage = 0;
-        this.renewShowCardGroup();
+        this.renewShowCardGroup(- 1);
         this.changePageButtonState();
     },
 
@@ -313,7 +314,7 @@ cc.Class({
                 if(this.allCardEnable === true){
                     selectCardScript.node.opacity = 100;
                 }else{
-                    this.renewShowCardGroup();
+                    this.renewShowCardGroup(1);
                 }
                 this.buttons.active = false;
             }
@@ -334,10 +335,36 @@ cc.Class({
             cc.log("不要啊，太多了");
         }
     },
-
-    renewShowCardGroup: function(){
+    /**
+     * @主要功能 更新卡牌展示组的卡牌
+     * @author C14
+     * @Date 2018/10/12
+     * @parameters positions 如果为正则从右向左，为负则从左向右
+     * @returns
+     */
+    renewShowCardGroup: function(position){
         var flag = 0;
-        this.userCardNode.removeAllChildren();
+        //this.userCardNode.removeAllChildren();
+        //为卡组的节点中的子节点也就是卡牌添加动作
+        for(var i in this.userCardNode.children){
+            this.userCardNode.children[i].runAction(
+                cc.sequence(
+                    //先等待，如果方向为正，则为靠近的后运行，远离离开位置的先运行
+                    cc.delayTime(((1.5 * (1 + position)) - (position) * Math.floor(this.userCardNode.children[i].x / 160)) * 0.1),
+                    //消失，向左移动，放大
+                    //cc.spawn(
+                        //cc.fadeOut(0.7).easing(cc.easeCircleActionOut()),
+                        //cc.moveBy(0.7,- 250 * position,0).easing(cc.easeCircleActionOut()),
+                        //cc.scaleTo(0.5,0.3,0.3).easing(cc.easeCircleActionOut())
+                        cc.scaleTo(0.2,0,1).easing(cc.easeCircleActionOut()),
+                    //),
+                    //移出父节点
+                    cc.callFunc(function(object){
+                        object.removeFromParent();
+                    }.bind(this),this,this.userCardNode.children[i])
+                )
+            )
+        }
         for(var i in this.userCardData){
             if(this.allCardEnable === false && this.userCardData[i].num === 0){
                 continue;
@@ -349,12 +376,27 @@ cc.Class({
                 (this.userCardData[i].mana === this.filterType[2] || this.filterType[2] === 9))
             {
                 //到达了这一页，那么可以开始显示了
-                if(flag >= this.nowPage * 9){
-                    if(flag < (this.nowPage + 1) * 9){
-                        var card = cc.instantiate(Global.miniCardNode[this.userCardData[i].card_id]);
-                        (card.getComponent("MiniCard")).num = this.userCardData[i].num;
-                        this.userCardNode.addChild(card);
-                    }
+                if(flag >= this.nowPage * 9 && flag < (this.nowPage + 1) * 9){
+                    var card = cc.instantiate(Global.miniCardNode[this.userCardData[i].card_id]);
+                    (card.getComponent("MiniCard")).num = this.userCardData[i].num;
+                    card.x = 160 * ((flag - this.nowPage * 9) % 3);
+                    card.y = - 200 * Math.floor((flag - this.nowPage * 9) / 3);
+                    //card.x += 250 * position;
+                    card.runAction(
+                        cc.sequence(
+                            cc.delayTime(((1.5 * (1 + position)) - (position) * ((flag - this.nowPage * 9) % 3)) * 0.1 + 0.3),
+                            cc.callFunc(function(card){
+                                this.userCardNode.addChild(card);
+                                //card.opacity = 0;
+                            },this,card),
+                            cc.scaleTo(0, 0, 1),
+                            cc.spawn(
+                                cc.fadeTo(0,this.userCardData[i].num !== 0 ? 255:100).easing(cc.easeCubicActionOut()),
+                                //cc.moveBy(0.7,- 250 * position,0).easing(cc.easeCubicActionOut()),
+                                cc.scaleTo(0.2, 1, 1).easing(cc.easeCircleActionOut())
+                            )
+                        )
+                    )
                 }
                 flag ++;
             }
@@ -429,7 +471,7 @@ cc.Class({
                 if(this.nowPage < this.maxPage - 1)
                 {
                     this.nowPage++;
-                    this.renewShowCardGroup();
+                    this.renewShowCardGroup(1);
                     this.changePageButtonState();
                 }
                 break;
@@ -437,7 +479,7 @@ cc.Class({
                 if(this.nowPage > 0)
                 {
                     this.nowPage --;
-                    this.renewShowCardGroup();
+                    this.renewShowCardGroup(-1);
                     this.changePageButtonState();
                 }
                 break;
@@ -555,7 +597,7 @@ cc.Class({
         this.getUserCardData(function(flag){
             if(flag === true) {
                 this.userCardInit();
-                this.renewShowCardGroup();
+                this.renewShowCardGroup(1);
             }
         }.bind(this));
     },

@@ -124,7 +124,7 @@ cc.Class({
 
     // use this for initialization
     onLoad: function () {
-        
+
 
     },
 
@@ -136,6 +136,7 @@ cc.Class({
         this.team = 0;
         this.death = false;
         this._stopLock = false;
+        this.timer = 0;
         //播放音效
         if(this.loadEffect !== null)
             this.sendEvent(this.loadEffect);
@@ -375,6 +376,7 @@ cc.Class({
                     this.magicSkill.releaseFunction(1);
                     //self.node.removeFromParent();
                     //self.node.destroy();
+                    self.GameManager.removeMagic(this.viewNode);
                     self.GameManager.removeMagic(self.node);
                     break;
                 case typeMagic.areaMagic:
@@ -466,9 +468,9 @@ cc.Class({
         }
         //如果自己是逻辑节点，那么进行一些同步的处理
         if(this.logicNode === this.node) {
-            if ((++ this.timer) % 6 === 0) {
+            if ((++ this.timer) % 6 === 7) {
                 var action = cc.moveBy(
-                    5,
+                    1,
                     cc.v2(
                         this.node.x - this.viewNode.x,
                         this.node.y - this.viewNode.y
@@ -478,6 +480,8 @@ cc.Class({
                 //暂停同步用的那个动画
                 this.viewNode.stopAction(this.viewNode.getActionByTag(1));
                 this.viewNode.runAction(action);
+                //this.viewNode.position = cc.v2(this.node.x,this.node.y);
+                this.viewNode.getComponent("Magic").speed = this.speed;
             }
         }
     },

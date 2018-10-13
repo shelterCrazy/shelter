@@ -99,8 +99,8 @@ cc.Class({
         //if(globalConstant.collisionDebugDraw)
         //cc.director.getCollisionManager().enabledDebugDraw = true;
         //
-        //cc.director.getPhysicsManager().attachDebugDrawToCamera(this.camera);
-        //cc.director.getCollisionManager().attachDebugDrawToCamera(this.camera);
+        cc.director.getPhysicsManager().attachDebugDrawToCamera(this.camera);
+        cc.director.getCollisionManager().attachDebugDrawToCamera(this.camera);
 
         if(this.mainScene === false){
             this.areaRight = globalConstant.sceneWidth;

@@ -356,7 +356,7 @@ var MainGameManager = cc.Class({
      */
     magicCreate: function(event){  //event为父类事件  实际这里是Event.EventCustom子类
         //如果召唤的层为view层的话，那么返回而不进行召唤
-        if(!(event.detail.summonLayer === undefined || event.detail.summonLayer === "View")){
+        if(event.detail.summonLayer !== undefined && event.detail.summonLayer === "View"){
             return;
         }
         //如果没有说明，或者允许通过网络创建为真，那么发送数据
@@ -406,6 +406,11 @@ var MainGameManager = cc.Class({
             viewScript.viewNode = viewMagic;
             logicScript.logicNode = logicMagic;
             logicScript.viewNode = viewMagic;
+
+            var motionStreak = logicMagic.getComponent(cc.MotionStreak);
+            if(motionStreak !== null){
+                motionStreak.enabled = false;
+            }
 
             viewScript.init();
             logicScript.init();

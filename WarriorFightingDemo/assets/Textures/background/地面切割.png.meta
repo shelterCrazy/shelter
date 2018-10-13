@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "ae07dce4-e7f3-4697-a81c-b03ba1fe031a",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "地面切割": {
+      "ver": "1.0.3",
+      "uuid": "1381f999-57f4-42c1-95d7-bac2b16c2ab0",
+      "rawTextureUuid": "ae07dce4-e7f3-4697-a81c-b03ba1fe031a",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 3072,
+      "height": 328,
+      "rawWidth": 3072,
+      "rawHeight": 328,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

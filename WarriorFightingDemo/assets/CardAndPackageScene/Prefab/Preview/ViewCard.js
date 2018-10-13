@@ -67,9 +67,9 @@ cc.Class({
         var self = this;    
         self.num += num;
         self.numLabel.string = 'x' + self.num;
-        if(this.num === 0){
-            this.node.removeFromParent();
-        }
+        //if(this.num === 0){
+        //    this.node.removeFromParent();
+        //}
         return self.num;
     },
     
