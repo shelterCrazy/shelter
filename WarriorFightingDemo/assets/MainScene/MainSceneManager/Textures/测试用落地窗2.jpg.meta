@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "8feb7160-eb56-46e7-9a51-463ecb67e703",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "测试用落地窗2": {
+      "ver": "1.0.3",
+      "uuid": "378bc95c-8307-4902-bd7b-cc6393e17b25",
+      "rawTextureUuid": "8feb7160-eb56-46e7-9a51-463ecb67e703",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 2000,
+      "height": 1125,
+      "rawWidth": 2000,
+      "rawHeight": 1125,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

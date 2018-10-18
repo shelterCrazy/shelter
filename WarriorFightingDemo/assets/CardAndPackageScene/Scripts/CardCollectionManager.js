@@ -345,19 +345,24 @@ cc.Class({
     renewShowCardGroup: function(position){
         var flag = 0;
         //this.userCardNode.removeAllChildren();
+        //position = - position;
         //为卡组的节点中的子节点也就是卡牌添加动作
         for(var i in this.userCardNode.children){
             this.userCardNode.children[i].runAction(
                 cc.sequence(
                     //先等待，如果方向为正，则为靠近的后运行，远离离开位置的先运行
-                    cc.delayTime(((1.5 * (1 + position)) - (position) * Math.floor(this.userCardNode.children[i].x / 160)) * 0.1),
+
                     //消失，向左移动，放大
-                    //cc.spawn(
-                        //cc.fadeOut(0.7).easing(cc.easeCircleActionOut()),
-                        //cc.moveBy(0.7,- 250 * position,0).easing(cc.easeCircleActionOut()),
-                        //cc.scaleTo(0.5,0.3,0.3).easing(cc.easeCircleActionOut())
-                        cc.scaleTo(0.2,0,1).easing(cc.easeCircleActionOut()),
-                    //),
+                    cc.spawn(
+                        cc.sequence(
+                            cc.delayTime(((1.5 * (1 - position)) + (position) * Math.floor(this.userCardNode.children[i].x / 160)) * 0.1),
+                            cc.fadeOut(0.4).easing(cc.easeCubicActionOut())
+                        ),
+                        cc.moveBy(1.7,- 480 * position,0).easing(cc.easeCubicActionOut())
+
+            //cc.scaleTo(0.5,0.3,0.3).easing(cc.easeCircleActionOut())
+                        //cc.scaleTo(0.2,0,1).easing(cc.easeCircleActionOut()),
+                    ),
                     //移出父节点
                     cc.callFunc(function(object){
                         object.removeFromParent();
@@ -381,19 +386,24 @@ cc.Class({
                     (card.getComponent("MiniCard")).num = this.userCardData[i].num;
                     card.x = 160 * ((flag - this.nowPage * 9) % 3);
                     card.y = - 200 * Math.floor((flag - this.nowPage * 9) / 3);
-                    //card.x += 250 * position;
+                    card.x += 400 * position;
                     card.runAction(
                         cc.sequence(
-                            cc.delayTime(((1.5 * (1 + position)) - (position) * ((flag - this.nowPage * 9) % 3)) * 0.1 + 0.3),
+                            //cc.delayTime(((1.5 * (1 + position)) - (position) * ((flag - this.nowPage * 9) % 3)) * 0.1 + 0.3),
+                            cc.delayTime(0.2),
                             cc.callFunc(function(card){
                                 this.userCardNode.addChild(card);
-                                //card.opacity = 0;
+                                card.opacity = 0;
                             },this,card),
-                            cc.scaleTo(0, 0, 1),
+                            cc.fadeOut(0),
                             cc.spawn(
-                                cc.fadeTo(0,this.userCardData[i].num !== 0 ? 255:100).easing(cc.easeCubicActionOut()),
+                                cc.sequence(
+                                    cc.delayTime(((1.5 * (1 - position)) + (position) * ((flag - this.nowPage * 9) % 3)) * 0.1),
+                                    cc.fadeTo(0.4,this.userCardData[i].num !== 0 ? 255:100).easing(cc.easeCubicActionOut())
+                                ),
+                                cc.moveBy(1.4,- 400 * position,0).easing(cc.easeCubicActionOut())
                                 //cc.moveBy(0.7,- 250 * position,0).easing(cc.easeCubicActionOut()),
-                                cc.scaleTo(0.2, 1, 1).easing(cc.easeCircleActionOut())
+                                //cc.scaleTo(0.2, 1, 1).easing(cc.easeCircleActionOut())
                             )
                         )
                     )

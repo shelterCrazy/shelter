@@ -21,11 +21,11 @@ module.exports = {
     unitLength:200,
     unitspeed:1,
 
-    heroY:-76,
+    heroY:0,//-76,
     //生物召唤的默认Y坐标
-    summonY:-130,
+    summonY:0,//-130,
     //法术的默认Y坐标
-    magicY:-130,
+    magicY:0,//-130,
 
     //小地图的长度（像素）
     smallMapLength:440,

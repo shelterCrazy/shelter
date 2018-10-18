@@ -165,7 +165,7 @@ cc.Class({
             this.node.active = !this.node.active;
             this.node.runAction(
                 cc.sequence(
-                    cc.fadeIn(0.7).easing(cc.easeCubicActionOut()),
+                    cc.fadeIn(1).easing(cc.easeCubicActionOut()),
                     cc.callFunc(function(){
                         this._route = 0;
                     }.bind(this))

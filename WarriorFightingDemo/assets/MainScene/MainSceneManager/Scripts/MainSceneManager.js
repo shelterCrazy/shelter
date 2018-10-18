@@ -8,6 +8,10 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
+        titlePic:cc.Node,
+
+        effectButton:cc.Node,
+
         deckBuildPrefab: cc.Prefab,
 
         //迷你卡牌的生物预制
@@ -53,6 +57,18 @@ cc.Class({
 
             NetworkModule.getGlobal(Global);
             NetworkModule.init();
+            this.titlePic.runAction(cc.sequence(
+                cc.delayTime(1),
+                    cc.spawn(
+                        cc.moveBy(3,0,400).easing(cc.easeQuadraticActionInOut()),
+                        cc.fadeOut(2.5).easing(cc.easeSineIn())
+                    )
+                )
+            );
+            setTimeout(function(){
+                this.effectButton.getComponent("EffectButton").come();
+            }.bind(this),4000);
+
             cc.loader.loadResDir("CardTextures/",cc.SpriteFrame, function (err,spriteFrames) {
                 if(err){
                     return;
@@ -324,8 +340,11 @@ cc.Class({
     },
     changeMyTeamB:function(){
         Global.nowTeam = 1;
-    }
+    },
 
+    exitGame:function(){
+        cc.director.end();
+    }
     // called every frame, uncomment this function to activate update callback
     // update: function (dt) {
 

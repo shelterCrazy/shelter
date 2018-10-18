@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "1478cab6-fe61-4dae-87ba-ca01b6d4d4a5",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "测试用落地窗3 木刻": {
+      "ver": "1.0.3",
+      "uuid": "7c4ca273-b1ec-4a45-8eff-ad7919919ecc",
+      "rawTextureUuid": "1478cab6-fe61-4dae-87ba-ca01b6d4d4a5",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 3944,
+      "height": 1467,
+      "rawWidth": 3944,
+      "rawHeight": 1467,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

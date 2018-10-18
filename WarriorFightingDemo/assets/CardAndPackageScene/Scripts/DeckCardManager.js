@@ -75,7 +75,7 @@ cc.Class({
             this.viewCardGroup.push(viewCard);
             this.userDeckCardNode.addChild(viewCard);
             viewCard.runAction(cc.sequence(
-                cc.delayTime(viewCardNum * 0.15),
+                cc.delayTime(viewCardNum * 0.1),
                 cc.scaleTo(0.3, 1, 1).easing(cc.easeCubicActionOut())
             ));
             viewCardNum ++;

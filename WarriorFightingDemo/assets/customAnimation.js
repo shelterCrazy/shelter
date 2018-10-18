@@ -96,11 +96,11 @@ cc.Class({
             this._curFramesNum = this.animations[this._curAnimIdx].startNumber;
             //获取动画的总帧数
             this._frameAmount = this.animations[this._curAnimIdx].endNumber - this.animations[this._curAnimIdx].startNumber + 1;
-            cc.log("defaultName !== null");
+            //cc.log("defaultName !== null");
         }else {
             //获取当前动画的起始帧，赋给当前播放帧编号
             this._curFramesNum = this.animations[this._curAnimIdx].startNumber;
-            cc.log("defaultName === null");
+            //cc.log("defaultName === null");
         }
         //保存起始帧
         this._originFrame = this.node.getComponent(cc.Sprite).spriteFrame;
@@ -109,7 +109,7 @@ cc.Class({
     },
     //播放
     play: function(name){
-        cc.log("name = " + name);
+        //cc.log("name = " + name);
         //如果没有动画正在播放
         if(!this._isPlaying){
 
@@ -153,10 +153,10 @@ cc.Class({
                 }
                 //cc.log("_curLoops = ?" +  (loops * this._frameAmount - 1));
             }
-            cc.log("play if");
+            //cc.log("play if");
             //如果有动画正在播放
         }else {
-            cc.log("play else");
+            //cc.log("play else");
             //停止播放当前动画
             this.stop();
             //开始播放
@@ -177,7 +177,7 @@ cc.Class({
         this._isPlaying = false;
         //重置已重复的次数
         this._curLoops = 0;
-        cc.log("stop");
+        //cc.log("stop");
     },
     //暂停播放
     pause: function(){
@@ -185,13 +185,13 @@ cc.Class({
         this.unschedule(this.updateFrame);
         //没有正在播放的动画
         this._isPlaying = false;
-        cc.log("pause");
+        //cc.log("pause");
     },
     //恢复播放
     resume: function(){
         //播放动画，因为暂停播放时没有重置当前播放帧和已重复次数，所以能继续播放
         this.play();
-        cc.log("resume");
+        //cc.log("resume");
     },
     //更新帧，模拟动画效果
     updateFrame: function(dt){

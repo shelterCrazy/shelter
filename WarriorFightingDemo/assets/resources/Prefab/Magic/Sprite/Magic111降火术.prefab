@@ -1457,14 +1457,14 @@
     "_interval": [],
     "network": true,
     "createByNetwork": false,
-    "startSpeed": 20,
+    "startSpeed": 13,
     "speed": {
       "__type__": "cc.Vec2",
       "x": 0,
       "y": 0
     },
     "gravity": 0.1,
-    "heroBounce": false,
+    "heroBounce": true,
     "skyBounce": true,
     "groundBounce": true,
     "leftRightBounce": true,

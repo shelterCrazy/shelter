@@ -62,9 +62,8 @@ cc.Class({
         //
         //飞行速度
         startSpeed:0,
-        speed:{
-            default: new cc.Vec2(0,0)
-        },
+        speed:cc.Vec2,
+
         //受到重力的值
         gravity:{
             default: 0,
@@ -124,8 +123,7 @@ cc.Class({
 
     // use this for initialization
     onLoad: function () {
-
-
+        //this.speed = cc.v2(0,0);
     },
 
     init: function () {
@@ -260,8 +258,13 @@ cc.Class({
                     if (this.judgeCondition(vanishType.ground)) {
                         this.release();
                     }
-                    if (this.groundBounce === true)
-                        this.speed.y = -this.speed.y * this.elasticCoefficient;
+                    //如果允许地面反弹的话
+                    if (this.groundBounce === true) {
+                        //y方向速度调整为反向
+                        this.speed.y = - this.speed.y * this.elasticCoefficient;
+                        //y坐标上提
+                        this.node.y = this.node.getComponent(cc.BoxCollider).size.height / 2;
+                    }
                     //this.node.removeFromParent();
                 }
                 if (other.node.group === "Sky") {
@@ -270,8 +273,11 @@ cc.Class({
                     if (this.judgeCondition(vanishType.sky)) {
                         this.release();
                     }
-                    if (this.skyBounce === true)
-                        this.speed.y = -this.speed.y * this.elasticCoefficient;
+                    if (this.skyBounce === true) {
+                        this.speed.y = - this.speed.y * this.elasticCoefficient;
+                        this.node.y = other.node.y - other.node.getComponent(cc.BoxCollider).size.height / 2
+                        - this.node.getComponent(cc.BoxCollider).size.height / 2;
+                    }
                 }
                 if (other.node.group === "LBound") {
                     this.collisionTime++;
@@ -284,7 +290,7 @@ cc.Class({
                         this.release();
                     }
                     if (this.leftRightBounce === true)
-                        this.speed.x = -this.speed.x * this.elasticCoefficient;
+                        this.speed.x = - this.speed.x * this.elasticCoefficient;
                 }
                 if (other.node.group === "RBound") {
                     this.collisionTime++;
@@ -297,19 +303,19 @@ cc.Class({
                         this.release();
                     }
                     if (this.leftRightBounce === true)
-                        this.speed.x = -this.speed.x * this.elasticCoefficient;
+                        this.speed.x = - this.speed.x * this.elasticCoefficient;
                 }
-                cc.log(this.collisionTime);
+                //cc.log(this.collisionTime);
                 if (this.judgeCondition(vanishType.time) && this.collisionTime > this.collisionMaxTime) {
                     this.release();
                 }
 
                 if (other.node.group === "Unit" || other.node.group === "ViewUnit") {
-                    cc.log(other.node.group);
+                    //cc.log(other.node.group);
                     var script1 = other.node.getComponent('Unit');
 
                     if (this.heroBounce === true && script1.unitType === 1) {
-                        this.speed.x = -this.speed.x * this.elasticCoefficient;
+                        this.speed.x = - this.speed.x * this.elasticCoefficient;
                         if (this.judgeCondition(vanishType.myHero) || this.judgeCondition(vanishType.enemyHero)) {
                             this.release();
                         }
@@ -352,10 +358,14 @@ cc.Class({
             switch (this.magicType)
             {
                 case typeMagic.normalMagic:
-                    self.GameManager.removeMagic(self.node);
+                    this.node.removeFromParent();
+                    this.node.destroy();
+                    //self.GameManager.removeMagic(self.node);
                     break;
                 case typeMagic.areaMagic:
-                    self.GameManager.removeMagic(self.node);
+                    this.node.removeFromParent();
+                    this.node.destroy();
+                    //self.GameManager.removeMagic(self.node);
                     break;
                 case typeMagic.directionMagic:
                     if(this.hitEffect !== null)
@@ -366,7 +376,9 @@ cc.Class({
 
                     this._stopLock = true;
                     setTimeout(function () {
-                        self.GameManager.removeMagic(self.node);
+                        self.node.removeFromParent();
+                        self.node.destroy();
+                        //self.GameManager.removeMagic(self.node);
                     },this._interval[2]);
                     break;
             }
@@ -376,15 +388,17 @@ cc.Class({
                     this.magicSkill.releaseFunction(1);
                     //self.node.removeFromParent();
                     //self.node.destroy();
-                    self.GameManager.removeMagic(this.viewNode);
-                    self.GameManager.removeMagic(self.node);
+                    self.node.removeFromParent();
+                    self.node.destroy();
+                    //self.GameManager.removeMagic(this.viewNode);
+                    //self.GameManager.removeMagic(self.node);
                     break;
                 case typeMagic.areaMagic:
                     this.magicSkill.releaseFunction(1);
 
-                    //this.node.removeFromParent();
-                    //self.node.destroy();
-                    self.GameManager.removeMagic(self.node);
+                    self.node.removeFromParent();
+                    self.node.destroy();
+                    //self.GameManager.removeMagic(self.node);
                     break;
                 case typeMagic.directionMagic:
                     //if (this.hitEffect !== null)
@@ -399,7 +413,10 @@ cc.Class({
                         self.magicSkill.releaseFunction(1);
                         //self.node.removeFromParent();
                         //self.node.destroy();
-                        self.GameManager.removeMagic(self.node);
+                        //self.GameManager.removeMagic(self.viewNode);
+                        self.node.removeFromParent();
+                        self.node.destroy();
+                        //self.GameManager.removeMagic(self.node);
                     }, this._interval[2]);
                     break;
             }
@@ -447,15 +464,13 @@ cc.Class({
                 break;
             case typeMagic.directionMagic:
                 if(this.speed.x === 0)
-                this.speed.x = Math.sin((detail.angel + 90)*Math.PI/180) * this.startSpeed;
+                this.speed.x = Math.sin((detail.angel + 90) * Math.PI / 180) * this.startSpeed;
                 if(this.speed.y === 0)
-                this.speed.y = Math.cos((detail.angel + 90)*Math.PI/180) * this.startSpeed;
+                this.speed.y = Math.cos((detail.angel + 90) * Math.PI / 180) * this.startSpeed;
                 break;
         }
         this.magicSkill = this.skillNode.getComponent("Skill");
-
     },
-
     updateByNet: function (fps) {
         //获得当前帧率下应当推进的速率
         var frameSpeed = globalConstant.frameRate / fps;
@@ -466,22 +481,24 @@ cc.Class({
                 this.node.y += this.speed.y * frameSpeed;
             }
         }
-        //如果自己是逻辑节点，那么进行一些同步的处理
-        if(this.logicNode === this.node) {
-            if ((++ this.timer) % 6 === 7) {
+        //如果自己是逻辑节点，此外另一个节点还未被销毁，那么进行一些同步的处理
+        if(this.logicNode === this.node && cc.isValid(this.viewNode)) {
+            if ((++ this.timer) % 6 === 5) {
                 var action = cc.moveBy(
-                    1,
-                    cc.v2(
-                        this.node.x - this.viewNode.x,
-                        this.node.y - this.viewNode.y
-                    )
+                    0.5,
+                    this.node.x - this.viewNode.x,
+                    this.node.y - this.viewNode.y
                 );
                 action.setTag(1);
                 //暂停同步用的那个动画
-                this.viewNode.stopAction(this.viewNode.getActionByTag(1));
+                var animation = this.viewNode.getActionByTag(1);
+                if(animation !== null) {
+                    this.viewNode.stopAction(animation);
+                }
                 this.viewNode.runAction(action);
                 //this.viewNode.position = cc.v2(this.node.x,this.node.y);
-                this.viewNode.getComponent("Magic").speed = this.speed;
+                //(this.viewNode.getComponent("Magic")).speed = this.speed;
+                this.timer = 0;
             }
         }
     },

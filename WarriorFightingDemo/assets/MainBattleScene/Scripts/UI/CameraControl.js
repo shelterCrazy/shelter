@@ -127,9 +127,9 @@ cc.Class({
 
             this.node.y = position.y + this.offsetY;
             globalConstant.cameraPosition  = cc.v2(this.node.x, this.node.y);
-            var ratio = targetPos.y / cc.winSize.height;
+            var ratio = 1;//targetPos.y / cc.winSize.height;
             if (!this.yFollow)// + (0.5 - ratio) * 0.5
-                globalConstant.cameraRatio = this.camera.zoomRatio = 1 - this._mouseWheel/this.mouseWheelMax/3;
+                globalConstant.cameraRatio = this.camera.zoomRatio = 1 - this._mouseWheel/this.mouseWheelMax/2;
             else {
                 globalConstant.cameraRatio = this.camera.zoomRatio = 1 + (0.5 - ratio) * 0.1 -
                     this._mouseWheel / this.mouseWheelMax / 2;
