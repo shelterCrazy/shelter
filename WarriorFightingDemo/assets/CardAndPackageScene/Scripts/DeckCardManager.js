@@ -138,6 +138,25 @@ cc.Class({
         }
         this.initUserDeckCard();
     },
+    endEditDeckCard:function(){
+        for (var i in Global.userDeckCardData) {
+            if (Global.userDeckCardData[i].length === 0) {
+                continue;
+            }
+            if (Global.userDeckCardData[i][0].deck_id === this.editDeckId) {
+                //现在编辑的卡组数据
+                Global.userDeckCardData[i] = this.editDeckCardData;
+                return;
+            }
+        }
+        for (var i in Global.userDeckCardData) {
+            if (Global.userDeckCardData[i].length === 0) {
+                //现在编辑的卡组数据
+                Global.userDeckCardData[i] = this.editDeckCardData;
+                return;
+            }
+        }
+    },
 
     /**
      * @主要功能 更新现有的卡组
@@ -196,6 +215,10 @@ cc.Class({
         if(this.editDeckCardData.length === 0){
             self.getOutDeck();
         }else{
+            //把当前编辑的数据重新覆盖到全局数据中
+            this.endEditDeckCard();
+            self.getOutDeck();
+
             var data = {"data":[]};
             //用现有的数据创建一个新的数据
             for(var i in this.editDeckCardData){
@@ -213,7 +236,7 @@ cc.Class({
                 success: function (rs) {
                     if (rs.status === "200") {
                         cc.log("用户卡组更新成功");
-                        self.getOutDeck();
+
                     } else {
                         cc.log("用户卡组更新失败");
                         cc.log(rs);
@@ -230,39 +253,39 @@ cc.Class({
         var deckNum = 0;
         if(this.interactable) {
             //this.node.stopAllActions();
-            Global.userDeckCardData = [];
-            for(var j = 0;j < Global.userDeckData.length; j++) {
-                $.ajax({
-                    url: "/areadly/getUserDeckCard",
-                    type: "GET",
-                    dataType: "json",
-                    data: {"token": Global.token, "deckId":Global.userDeckData[j].id},
-                    success: function (rs) {
-                        if (rs.status === "200") {
-                            cc.log("用户卡组卡牌数据获取成功");
-                            Global.userDeckCardData.push(rs.userDeckCardList);
-                            deckNum ++;
-                        } else {
-                            deckNum ++;
-                            cc.log("用户卡组卡牌数据获取失败");
-                        }
-                        if(deckNum === Global.userDeckData.length){
-
-                        }
-                    },
-                    error: function () {
-                        cc.log("用户卡组卡牌数据获取错误");
-                    }
-                });
-            }
-            setTimeout(function(){
+            //Global.userDeckCardData = [];
+            //for(var j = 0;j < Global.userDeckData.length; j++) {
+            //    $.ajax({
+            //        url: "/areadly/getUserDeckCard",
+            //        type: "GET",
+            //        dataType: "json",
+            //        data: {"token": Global.token, "deckId":Global.userDeckData[j].id},
+            //        success: function (rs) {
+            //            if (rs.status === "200") {
+            //                cc.log("用户卡组卡牌数据获取成功");
+            //                Global.userDeckCardData.push(rs.userDeckCardList);
+            //                deckNum ++;
+            //            } else {
+            //                deckNum ++;
+            //                cc.log("用户卡组卡牌数据获取失败");
+            //            }
+            //            if(deckNum === Global.userDeckData.length){
+            //
+            //            }
+            //        },
+            //        error: function () {
+            //            cc.log("用户卡组卡牌数据获取错误");
+            //        }
+            //    });
+            //}
+            //setTimeout(function(){
                 self.node.runAction(cc.moveBy(0.3, -400, 0).easing(cc.easeSineInOut()));
                 self.userDeckEditComponent.node.active = true;
                 self.userDeckEditComponent.node.runAction(cc.moveBy(0.7, 400, 0).easing(cc.easeSineOut()));
                 self.userDeckEditComponent.initUserDeck();
                 self.userDeckEditComponent.interactable = true;
                 self.interactable = false;
-            },500);
+            //},500);
         }
     },
 

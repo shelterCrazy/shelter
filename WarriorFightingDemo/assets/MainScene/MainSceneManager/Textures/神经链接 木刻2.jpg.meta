@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "f4cb3647-15de-4874-b693-2b5f603f9766",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "神经链接 木刻2": {
+      "ver": "1.0.3",
+      "uuid": "346a4df3-a89e-478b-be43-a0ca7a4857ef",
+      "rawTextureUuid": "f4cb3647-15de-4874-b693-2b5f603f9766",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 1623,
+      "height": 1080,
+      "rawWidth": 1623,
+      "rawHeight": 1080,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

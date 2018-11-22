@@ -62,6 +62,30 @@ cc.Class({
             }.bind(this),this)
         ));
     },
+    /**
+     * @主要功能 将目前的target缓慢移动到另外一个target上，最后切换target
+     * @author C14
+     * @Date 2018/2/11
+     * @parameters targetNum time
+     * @returns
+     */
+    moveTargetWithTime:function(targetNum,customEventData){
+        var self = this;
+
+        Number(customEventData);
+        this.followFlag = false;
+        self.targets[0].position = this.target.position;
+        self.target = self.targets[0];
+
+        var time = customEventData / 100;
+        self.target.runAction(cc.sequence(
+            cc.moveTo(time,self.targets[customEventData % 100].position).easing(cc.easeQuadraticActionOut()),
+            cc.callFunc(function(){
+                self.followTarget(null,customEventData % 100);
+            }.bind(this),this)
+        ));
+    },
+
     followTarget:function(targetNum,customEventData){
         var self = this;
 
@@ -71,6 +95,14 @@ cc.Class({
         self.target = self.targets[0];
         this.followFlag = true;
         this.followTargetNum = customEventData;
+    },
+
+    followTargetThenScale:function(targetNum,customEventData){
+        var self = this;
+
+        setTimeout(function(){
+            this.cameraRatioTo = 2;
+        }.bind(this),0);
     },
 
     mouseWheel:function(dat){
@@ -87,6 +119,8 @@ cc.Class({
         this.camera = this.node.getComponent(cc.Camera);
         this.followFlag = false;
         this.followTargetNum = 0;
+        //放大的目标系数
+        this.cameraRatioTo = 1;
 
         if(this.mainScene === false) {
             //开启鼠标滚动监听
@@ -102,9 +136,9 @@ cc.Class({
         cc.director.getPhysicsManager().attachDebugDrawToCamera(this.camera);
         cc.director.getCollisionManager().attachDebugDrawToCamera(this.camera);
 
-        if(this.mainScene === false){
-            this.areaRight = globalConstant.sceneWidth;
-        }
+        //if(this.mainScene === false){
+        //    this.areaRight = globalConstant.sceneWidth;
+        //}
     },
 
     // called every frame, uncomment this function to activate update callback
@@ -112,6 +146,7 @@ cc.Class({
         var targetPos = this.target.convertToWorldSpaceAR(cc.Vec2.ZERO);
         var position = this.node.parent.convertToNodeSpaceAR(targetPos);
         if (this.camera !== undefined) {
+            //cc.log(position.x+"  "+this.areaRight);
             if (position.x > cc.director.getWinSize().width * (this.areaRight - globalConstant.sceneEdge)) {
                 this.node.x = cc.director.getWinSize().width * (this.areaRight - globalConstant.sceneEdge);
             } else if (position.x < cc.director.getWinSize().width * globalConstant.sceneEdge) {
@@ -121,17 +156,30 @@ cc.Class({
             }
             //如果允许跟随的话
             if(this.followFlag){
-                this.target.x += (this.targets[this.followTargetNum].position.x - this.target.position.x) / 36;
-                this.target.y += (this.targets[this.followTargetNum].position.y - this.target.position.y) / 36;
+                var deltaX = (this.targets[this.followTargetNum].position.x - this.target.position.x);
+                var deltaY = (this.targets[this.followTargetNum].position.y - this.target.position.y);
+                var r = Math.sqrt(Math.pow(deltaX,2) +　Math.pow(deltaY,2));
+                var speed = cc.v2(
+                    deltaX / (Math.sqrt(r)) * 1.1,
+                    deltaY / (Math.sqrt(r)) * 1.1
+                );
+                if(Math.abs(deltaX) >= 0.03)
+                this.target.x += speed.x;
+                if(Math.abs(deltaY) >= 0.03)
+                this.target.y += speed.y;
+            }
+            if(Math.abs(this.cameraRatioTo - this.camera.zoomRatio) >= 0.01){
+                globalConstant.cameraRatio = this.camera.zoomRatio = this.camera.zoomRatio +
+                    (this.cameraRatioTo - this.camera.zoomRatio) / 30;
             }
 
             this.node.y = position.y + this.offsetY;
             globalConstant.cameraPosition  = cc.v2(this.node.x, this.node.y);
-            var ratio = 1;//targetPos.y / cc.winSize.height;
+            //var ratio = 1;//targetPos.y / cc.winSize.height;
             if (!this.yFollow)// + (0.5 - ratio) * 0.5
                 globalConstant.cameraRatio = this.camera.zoomRatio = 1 - this._mouseWheel/this.mouseWheelMax/2;
             else {
-                globalConstant.cameraRatio = this.camera.zoomRatio = 1 + (0.5 - ratio) * 0.1 -
+                globalConstant.cameraRatio = this.camera.zoomRatio = 1  -
                     this._mouseWheel / this.mouseWheelMax / 2;
             }
         }

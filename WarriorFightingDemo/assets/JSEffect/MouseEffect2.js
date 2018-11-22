@@ -9,24 +9,26 @@ cc.Class({
         nowScale:1,
         scale:1,
         time1:0,
-        time2:0,
+        time2:0
     },
 
     onLoad:function(){
         var self = this;
         this.node.on(cc.Node.EventType.MOUSE_ENTER,function(){
-            this.node.stopAllActions();
-            this.node.runAction(cc.scaleTo(
+            var action = cc.scaleTo(
                 this.time1,
                 this.nowScale + this.scale
-            ).easing(cc.easeSineInOut()));
+            ).easing(cc.easeSineInOut());
+            this.node.stopAction(action);
+            this.node.runAction(action);
         }.bind(this), this);
         this.node.on(cc.Node.EventType.MOUSE_LEAVE,function(){
-            this.node.stopAllActions();
-            this.node.runAction(cc.scaleTo(
+            var action = cc.scaleTo(
                 this.time2,
                 this.nowScale
-            ).easing(cc.easeSineInOut()));
+            ).easing(cc.easeSineInOut());
+            this.node.stopAction(action);
+            this.node.runAction(action);
         }.bind(this), this);
     },
 

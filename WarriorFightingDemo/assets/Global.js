@@ -5,7 +5,10 @@ module.exports = {
     userName:"kenan",
     password:"123456",
     token:18,
+    //登录游戏成功的标志
     loginFlag:false,
+    //离线游戏的标志
+    offlinePlayFlag:false,
     room:"",
     //第一次进入游戏
     firstEnterGame:false,
@@ -13,7 +16,9 @@ module.exports = {
     //角色选择界面//
     heroNum: -1,
     maxHeroNum: 3,
-
+    //当前的游戏模式选择
+    nowGameMode:-1,
+    //当前选择的卡组序号
     nowDeckNum:-1,
 
     //玩家在主界面的坐标

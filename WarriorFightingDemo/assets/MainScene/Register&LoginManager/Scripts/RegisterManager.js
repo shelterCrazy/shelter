@@ -257,7 +257,7 @@ cc.Class({
                     cc.log("登录成功");
                     Global.userName = self.userNameBox.string;
                     Global.password = self.password1.string;
-                    Global.login = true;
+                    Global.loginFlag = true;
                     self.wrong2.string = "";
                     self.logSuccess();
                 }else{

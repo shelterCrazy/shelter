@@ -43,7 +43,7 @@ cc.Class({
         this.isClimbing = false;//是否正在攀爬
         this.touchedLadder = null;
 
-        if(Global.login === true){
+        if(Global.loginFlag === true){
             this.node.position = Global.playerPosition;
         }
 

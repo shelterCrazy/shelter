@@ -104,17 +104,19 @@ cc.Class({
         var total = 0;
         //遍历全卡组如果此卡组的ID一样的话，那么确认可以使用
         for(var i = 0;i < Global.userDeckCardData.length;i++){
-            //如果卡组内部没有牌的话
             if(Global.userDeckCardData[i].length === 0){
-                this.usable = false;
-                this.bodyNode.opacity = 30;
-                this.nameLabel.node.opacity = 30;
-                return false;
+                continue;
             }
             if(Global.userDeckCardData[i][0].deck_id === this.deckId)break;
         }
-        if(Global.userDeckCardData[i] !== undefined &&
-            Global.userDeckCardData[i].length === globalConstant.maxDeckCardNum){
+        //遍历了全卡组却没有能够对应的不为空的卡组
+        if(i === Global.userDeckCardData.length){
+            this.usable = false;
+            this.bodyNode.opacity = 30;
+            this.nameLabel.node.opacity = 30;
+            return false;
+        }
+        if(Global.userDeckCardData[i].length === globalConstant.maxDeckCardNum){
             this.usable = true;
             this.bodyNode.opacity = 255;
             this.nameLabel.node.opacity = 255;

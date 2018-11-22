@@ -23,7 +23,7 @@ cc.Class({
     // use this for initialization
     onLoad: function () {
         //this.cameraComponent = this.cameraComponent.getComponent("CameraControl");
-        if(Global.login === true){
+        if(Global.loginFlag === true){
             this.cameraComponent.moveTarget(0, 1, 0);
             this.cameraComponent.followTarget(0, 1);
             this.node.active = false;

@@ -63,7 +63,7 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 386
+        "__id__": 389
       }
     ],
     "_prefab": null,
@@ -120,7 +120,11 @@
     ],
     "_tag": -1,
     "_active": true,
-    "_components": [],
+    "_components": [
+      {
+        "__id__": 388
+      }
+    ],
     "_prefab": null,
     "_id": "b0g+nf5Y9CrqVH0HV8D2hx",
     "_opacity": 255,
@@ -2450,8 +2454,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 429,
-      "height": 450
+      "width": 480,
+      "height": 722
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -2459,8 +2463,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 0
+      "x": 57,
+      "y": 171
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -2511,8 +2515,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -109,
-      "y": 54
+      "x": -138,
+      "y": -154
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -2559,7 +2563,7 @@
     "node": {
       "__id__": 56
     },
-    "_enabled": false,
+    "_enabled": true,
     "_type": 0,
     "_segements": 64,
     "_N$spriteFrame": null,
@@ -6548,7 +6552,7 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -105.05000000000001,
+      "x": 0,
       "y": 0
     },
     "_skewX": 0,
@@ -6996,7 +7000,7 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 145,
+      "x": 0,
       "y": 0
     },
     "_skewX": 0,
@@ -9235,7 +9239,7 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 14.949999999999989,
+      "x": 125,
       "y": 0
     },
     "_skewX": 0,
@@ -9671,7 +9675,7 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 145,
+      "x": 0,
       "y": 0
     },
     "_skewX": 0,
@@ -10918,7 +10922,7 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 134.95,
+      "x": 250,
       "y": 0
     },
     "_skewX": 0,
@@ -11354,7 +11358,7 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 145,
+      "x": 0,
       "y": 0
     },
     "_skewX": 0,
@@ -13689,6 +13693,9 @@
     "_children": [
       {
         "__id__": 379
+      },
+      {
+        "__id__": 386
       }
     ],
     "_tag": -1,
@@ -13981,6 +13988,104 @@
     "panelNode": {
       "__id__": 34
     }
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "BlackNode",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 378
+    },
+    "_children": [],
+    "_tag": -1,
+    "_active": true,
+    "_components": [
+      {
+        "__id__": 387
+      }
+    ],
+    "_prefab": null,
+    "_id": "47RbbVvklFnZa597OVM4VY",
+    "_opacity": 0,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 0,
+      "g": 0,
+      "b": 0,
+      "a": 255
+    },
+    "_cascadeOpacityEnabled": true,
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 2000,
+      "height": 1200
+    },
+    "_rotationX": 0,
+    "_rotationY": 0,
+    "_scaleX": 1,
+    "_scaleY": 1,
+    "_position": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "_localZOrder": 0,
+    "_globalZOrder": 0,
+    "_opacityModifyRGB": false,
+    "groupIndex": 0
+  },
+  {
+    "__type__": "cc.Sprite",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 386
+    },
+    "_enabled": true,
+    "_spriteFrame": {
+      "__uuid__": "a23235d1-15db-4b95-8439-a2e005bfff91"
+    },
+    "_type": 0,
+    "_sizeMode": 0,
+    "_fillType": 0,
+    "_fillCenter": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_fillStart": 0,
+    "_fillRange": 0,
+    "_isTrimmedMode": true,
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
+    "_atlas": null
+  },
+  {
+    "__type__": "86f9eRwsW1Jypx1UgOPs4BJ",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 3
+    },
+    "_enabled": true,
+    "controlNode": {
+      "__id__": 386
+    },
+    "inOpacity": 255,
+    "outOpacity": 0,
+    "time1": 1,
+    "time2": 1,
+    "onLoadFadeOut": true,
+    "onLoadFadeIn": false,
+    "onLoadFadeOutTime": 0,
+    "onLoadFadeInTime": 0
   },
   {
     "__type__": "cc.Canvas",

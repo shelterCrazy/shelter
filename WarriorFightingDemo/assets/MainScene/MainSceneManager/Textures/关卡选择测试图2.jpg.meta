@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "70bb0c42-131f-46da-beef-7f826b79e425",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "关卡选择测试图2": {
+      "ver": "1.0.3",
+      "uuid": "f7501dae-8133-4452-98b8-3c74845536f5",
+      "rawTextureUuid": "70bb0c42-131f-46da-beef-7f826b79e425",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 1920,
+      "height": 1080,
+      "rawWidth": 1920,
+      "rawHeight": 1080,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

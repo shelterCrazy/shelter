@@ -353,16 +353,18 @@ cc.Class({
                     //先等待，如果方向为正，则为靠近的后运行，远离离开位置的先运行
 
                     //消失，向左移动，放大
-                    cc.spawn(
-                        cc.sequence(
-                            cc.delayTime(((1.5 * (1 - position)) + (position) * Math.floor(this.userCardNode.children[i].x / 160)) * 0.1),
-                            cc.fadeOut(0.4).easing(cc.easeCubicActionOut())
-                        ),
-                        cc.moveBy(1.7,- 480 * position,0).easing(cc.easeCubicActionOut())
+                    //cc.spawn(
+                    //cc.sequence(
+                        //cc.delayTime(((1.5 * (1 - position)) + (position) * (i % 3)) * 0.1),
+                        //cc.fadeTo(1,0).easing(cc.easeCubicActionOut()),
+                    //),
 
-            //cc.scaleTo(0.5,0.3,0.3).easing(cc.easeCircleActionOut())
+
+                    cc.scaleTo(0.5,0,0).easing(cc.easeCircleActionOut()),
                         //cc.scaleTo(0.2,0,1).easing(cc.easeCircleActionOut()),
-                    ),
+                    //),
+                    //cc.moveBy(1.4,- 480 * position,0).easing(cc.easeQuarticActionOut()),
+                    //),
                     //移出父节点
                     cc.callFunc(function(object){
                         object.removeFromParent();
@@ -381,35 +383,48 @@ cc.Class({
                 (this.userCardData[i].mana === this.filterType[2] || this.filterType[2] === 9))
             {
                 //到达了这一页，那么可以开始显示了
+                //显示与动画效果一起在这里
                 if(flag >= this.nowPage * 9 && flag < (this.nowPage + 1) * 9){
                     var card = cc.instantiate(Global.miniCardNode[this.userCardData[i].card_id]);
                     (card.getComponent("MiniCard")).num = this.userCardData[i].num;
                     card.x = 160 * ((flag - this.nowPage * 9) % 3);
                     card.y = - 200 * Math.floor((flag - this.nowPage * 9) / 3);
-                    card.x += 400 * position;
-                    card.runAction(
-                        cc.sequence(
-                            //cc.delayTime(((1.5 * (1 + position)) - (position) * ((flag - this.nowPage * 9) % 3)) * 0.1 + 0.3),
-                            cc.delayTime(0.2),
-                            cc.callFunc(function(card){
-                                this.userCardNode.addChild(card);
-                                card.opacity = 0;
-                            },this,card),
-                            cc.fadeOut(0),
-                            cc.spawn(
-                                cc.sequence(
-                                    cc.delayTime(((1.5 * (1 - position)) + (position) * ((flag - this.nowPage * 9) % 3)) * 0.1),
-                                    cc.fadeTo(0.4,this.userCardData[i].num !== 0 ? 255:100).easing(cc.easeCubicActionOut())
-                                ),
-                                cc.moveBy(1.4,- 400 * position,0).easing(cc.easeCubicActionOut())
-                                //cc.moveBy(0.7,- 250 * position,0).easing(cc.easeCubicActionOut()),
-                                //cc.scaleTo(0.2, 1, 1).easing(cc.easeCircleActionOut())
-                            )
-                        )
-                    )
+                    card.scale = 0;
+                    this.userCardNode.addChild(card);
+                    //card.x += 480 * position;
+                    //card.runAction(
+                    //    cc.sequence(
+                    //
+                    //        //cc.delayTime(0.2),
+                    //        cc.callFunc(function(card){
+                    //            this.userCardNode.addChild(card);
+                    //            card.scale = 0;
+                    //        },this,card)
+                    //        //cc.fadeOut(0),
+                    //        //cc.spawn(
+                    //            //cc.sequence(
+                    //                //cc.delayTime(((1.5 * (1 - position)) + (position) * ((flag - this.nowPage * 9) % 3)) * 0.2),
+                    //
+                    //                //cc.fadeTo(0,this.userCardData[i].num !== 0 ? 255:100).easing(cc.easeCubicActionIn()),
+                    //            //)
+                    //            //cc.moveBy(1.4,- 480 * position,0).easing(cc.easeQuarticActionOut())
+                    //            //cc.moveBy(0.7,- 250 * position,0).easing(cc.easeCubicActionOut()),
+                    //            //cc.scaleTo(0.2, 1, 1).easing(cc.easeCircleActionOut())
+                    //        //)
+                    //    )
+                    //)
                 }
                 flag ++;
             }
+        }
+        for(var i in this.userCardNode.children){
+            this.userCardNode.children[i].runAction(
+                cc.sequence(
+                    cc.delayTime(((1.5 * (1 + position)) - (position) * (i % 3)) * 0.2 + 0.3),
+                    cc.scaleTo(0.6, 1, 1).easing(cc.easeQuarticActionOut()),
+                    cc.scaleTo(0.6, 1, 1).easing(cc.easeQuarticActionOut())
+                )
+            )
         }
         this.maxPage = Math.ceil(flag / 9);
     },

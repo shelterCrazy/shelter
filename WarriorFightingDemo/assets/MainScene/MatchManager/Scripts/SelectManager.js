@@ -27,6 +27,10 @@ cc.Class({
 
         mainSceneManager:cc.Node,
 
+        heroSelectButtonLayer:cc.Node,
+
+        background:cc.Node,
+
         _route:-1
     },
 
@@ -135,6 +139,7 @@ cc.Class({
         this.mainSceneManager.getComponent("MainSceneManager").lockHero(active);
         this.node.stopAllActions();
         if(active){
+
             this.node.active = true;
             this.node.runAction(
                 cc.sequence(
@@ -161,9 +166,35 @@ cc.Class({
         this.heroViewNode.getComponent("HeroSelectManager").selectEnable(!this.node.active);
         this.mainSceneManager.getComponent("MainSceneManager").lockHero(!this.node.active);
         this.node.stopAllActions();
+
         if(!this.node.active){
+            //循环并且播放按钮的动画效果
+            for(var i in this.heroSelectButtonLayer.children){
+                this.heroSelectButtonLayer.children[i].opacity = 0;
+                this.heroSelectButtonLayer.children[i].x += 70;
+                this.heroSelectButtonLayer.children[i].runAction(
+                    cc.sequence(
+                        cc.delayTime(i * 0.06),
+                        cc.fadeIn(0.1),
+                        cc.moveTo(
+                            0.5,
+                            this.heroSelectButtonLayer.children[i].x - 70,
+                            this.heroSelectButtonLayer.children[i].y).easing(cc.easeQuadraticActionOut())
+                    )
+                );
+            }
+            //如果是未显示的状态的话，那么使其显示出来
             this.node.active = !this.node.active;
-            this.node.runAction(
+            this.node.opacity = 255;
+
+            if(Global.heroNum === - 1) {
+                //如果是完全未选择的状态下，那么帮忙选为第一个角色
+                this.heroViewNode.getComponent("HeroSelectManager").changeHeroSelect(null, 0);
+            }else{
+                //重新的更新一次英雄的显示
+                this.heroViewNode.getComponent("HeroSelectManager").renewHeroView();
+            }
+            this.background.runAction(
                 cc.sequence(
                     cc.fadeIn(1).easing(cc.easeCubicActionOut()),
                     cc.callFunc(function(){
@@ -202,12 +233,10 @@ cc.Class({
             //移动到新的位置
             this.node.stopAllActions();
             this.node.runAction(cc.moveTo(0.6,- num * 950,0).easing(cc.easeCubicActionOut()));
-
             this.nowLayer = num;
         }else{
             this.node.getComponent("PlayEffect").playReleaseEffect();
         }
-
     }
 
     // update (dt) {},

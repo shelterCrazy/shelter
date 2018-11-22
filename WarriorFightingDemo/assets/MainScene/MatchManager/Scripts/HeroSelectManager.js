@@ -109,6 +109,20 @@ cc.Class({
             }
             Global.heroNum = num;
         }
+    },
+
+    renewHeroView:function(){
+        var num = Global.heroNum;
+        //一套移动操作
+        this.heroNode[num].x -= 80;
+        this.heroLabelNode[num].x -= 10;
+        this.heroLabelNode[num].y -= 40;
+        this.heroNode[num].active = true;
+        this.heroNode[num].opacity = 255;
+        this.heroLabelNode[num].opacity = 255;
+        this.heroNode[num].runAction(cc.moveBy(0.5, 80, 0).easing(cc.easeCubicActionOut()));
+        this.heroLabelNode[num].runAction(cc.moveBy(0.5, 10, 40).easing(cc.easeCubicActionOut()));
+        this.heroSelectButtonNode[num].getComponent("BorderButton").selected();
     }
     // onLoad () {},
 

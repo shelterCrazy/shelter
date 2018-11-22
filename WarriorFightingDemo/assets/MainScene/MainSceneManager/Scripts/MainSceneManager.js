@@ -10,6 +10,8 @@ cc.Class({
     properties: {
         titlePic:cc.Node,
 
+        blackNode:cc.Node,
+
         effectButton:cc.Node,
 
         deckBuildPrefab: cc.Prefab,
@@ -99,9 +101,13 @@ cc.Class({
             }.bind(this));
         }.bind(this));
 
-        if(Global.login === true) {
-            this.hero.position = Global.playerPosition;
-            this.deckSelectManager.getComponent("DeckSelectManager").deckInit();
+        if(Global.loginFlag === true) {
+            if (true) {
+                this.titlePic.active = false;
+                //this.hero.position = Global.playerPosition;
+                this.effectButton.getComponent("EffectButton").come();
+                this.deckSelectManager.getComponent("DeckSelectManager").deckInit();
+            }
         }
 
     },

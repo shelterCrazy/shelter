@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "c83f649e-bfe5-4e12-9296-5c8941da29c3",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "小游戏选择测试图2": {
+      "ver": "1.0.3",
+      "uuid": "5f04ff58-be75-4232-b617-a2398e992302",
+      "rawTextureUuid": "c83f649e-bfe5-4e12-9296-5c8941da29c3",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 1920,
+      "height": 1080,
+      "rawWidth": 1920,
+      "rawHeight": 1080,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

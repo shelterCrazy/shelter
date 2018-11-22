@@ -72,8 +72,8 @@ cc.Class({
             script.deckSort = Global.userDeckData[i].deck_sort;
             script.deckId = Global.userDeckData[i].id;
             script.deckNum = i;
-            viewDeck.x = (Global.userDeckData.length - i + 1) % 2 * 65;
-            viewDeck.y = (Global.userDeckData.length - i - 1) * 65;
+            viewDeck.x = (Global.userDeckData.length - i) % 2 * 75;
+            viewDeck.y = (Global.userDeckData.length - i - 1) * 75;
             script.judgeUsable();
             this.deckButtonNode.push(viewDeck);
             this.deckLayer.addChild(viewDeck);

@@ -628,7 +628,7 @@ module.exports = {
         "usableType": 0,
         "version": 1,
         "branch": 1,
-        "branch_num": 10,
+        "branch_num": 5,
         "attack": 0,
         "health": 0,
         "speed": 0,

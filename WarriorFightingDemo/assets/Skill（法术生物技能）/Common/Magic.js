@@ -26,6 +26,12 @@ cc.Class({
         //游戏管理器
         GameManager:cc.Component,
 
+        //跟踪
+        positionFollow:false,
+        followAcc:0,
+        followAccVec:cc.Vec2,
+        particleNode:cc.Node,
+
         //显示层
         viewNode:cc.Node,
         //逻辑层
@@ -119,6 +125,8 @@ cc.Class({
 
         },
         _stopLock:false,
+        //结束的时候锁定坐标
+        endLock:true
     },
 
     // use this for initialization
@@ -139,6 +147,7 @@ cc.Class({
         if(this.loadEffect !== null)
             this.sendEvent(this.loadEffect);
         this.collisionTime = 0;
+
         //实现单位时间释放性质的法术
         this.schedule(function(){
             //if(self.network === true) self.createByNetwork !== true
@@ -252,79 +261,81 @@ cc.Class({
                     ground: 9,
                     leftOrRight: 10
                 });
-                if (other.node.group === "Ground") {
+                if (other.node.group === "Ground" || other.node.group === "Sky" ||
+                    other.node.group === "LBound" || other.node.group === "RBound") {
                     this.collisionTime++;
-                        this.magicSkill.releaseFunction(3);
-                    if (this.judgeCondition(vanishType.ground)) {
-                        this.release();
-                    }
-                    //如果允许地面反弹的话
-                    if (this.groundBounce === true) {
-                        //y方向速度调整为反向
-                        this.speed.y = - this.speed.y * this.elasticCoefficient;
-                        //y坐标上提
-                        this.node.y = this.node.getComponent(cc.BoxCollider).size.height / 2;
-                    }
-                    //this.node.removeFromParent();
                 }
-                if (other.node.group === "Sky") {
-                    this.collisionTime++;
-                        this.magicSkill.releaseFunction(4);
-                    if (this.judgeCondition(vanishType.sky)) {
-                        this.release();
-                    }
-                    if (this.skyBounce === true) {
-                        this.speed.y = - this.speed.y * this.elasticCoefficient;
-                        this.node.y = other.node.y - other.node.getComponent(cc.BoxCollider).size.height / 2
-                        - this.node.getComponent(cc.BoxCollider).size.height / 2;
-                    }
-                }
-                if (other.node.group === "LBound") {
-                    this.collisionTime++;
-                    if (this.team < 0) {
-                            this.magicSkill.releaseFunction(5);
-                    } else if (this.team > 0) {
-                            this.magicSkill.releaseFunction(6);
-                    }
-                    if (this.judgeCondition(vanishType.leftOrRight)) {
-                        this.release();
-                    }
-                    if (this.leftRightBounce === true)
-                        this.speed.x = - this.speed.x * this.elasticCoefficient;
-                }
-                if (other.node.group === "RBound") {
-                    this.collisionTime++;
-                    if (this.team < 0) {
-                            this.magicSkill.releaseFunction(6);
-                    } else if (this.team > 0) {
-                            this.magicSkill.releaseFunction(5);
-                    }
-                    if (this.judgeCondition(vanishType.leftOrRight)) {
-                        this.release();
-                    }
-                    if (this.leftRightBounce === true)
-                        this.speed.x = - this.speed.x * this.elasticCoefficient;
-                }
-                //cc.log(this.collisionTime);
                 if (this.judgeCondition(vanishType.time) && this.collisionTime > this.collisionMaxTime) {
                     this.release();
                 }
-
-                if (other.node.group === "Unit" || other.node.group === "ViewUnit") {
-                    //cc.log(other.node.group);
-                    var script1 = other.node.getComponent('Unit');
-
-                    if (this.heroBounce === true && script1.unitType === 1) {
-                        this.speed.x = - this.speed.x * this.elasticCoefficient;
-                        if (this.judgeCondition(vanishType.myHero) || this.judgeCondition(vanishType.enemyHero)) {
+                if(this.death === false) {
+                    if (other.node.group === "Ground") {
+                        this.magicSkill.releaseFunction(3);
+                        if (this.judgeCondition(vanishType.ground)) {
                             this.release();
                         }
+                        //如果允许地面反弹的话
+                        if (this.groundBounce === true) {
+                            //y方向速度调整为反向
+                            this.speed.y = -this.speed.y * this.elasticCoefficient;
+                            //y坐标上提
+                            this.node.y = this.node.getComponent(cc.BoxCollider).size.height / 2;
+                        }
+                        //this.node.removeFromParent();
                     }
+                    if (other.node.group === "Sky") {
+                        this.magicSkill.releaseFunction(4);
+                        if (this.judgeCondition(vanishType.sky)) {
+                            this.release();
+                        }
+                        if (this.skyBounce === true) {
+                            this.speed.y = -this.speed.y * this.elasticCoefficient;
+                            this.node.y = other.node.y - other.node.getComponent(cc.BoxCollider).size.height / 2
+                                - this.node.getComponent(cc.BoxCollider).size.height / 2;
+                        }
+                    }
+                    if (other.node.group === "LBound") {
+                        if (this.team < 0) {
+                            this.magicSkill.releaseFunction(5);
+                        } else if (this.team > 0) {
+                            this.magicSkill.releaseFunction(6);
+                        }
+                        if (this.judgeCondition(vanishType.leftOrRight)) {
+                            this.release();
+                        }
+                        if (this.leftRightBounce === true)
+                            this.speed.x = -this.speed.x * this.elasticCoefficient;
+                    }
+                    if (other.node.group === "RBound") {
+                        if (this.team < 0) {
+                            this.magicSkill.releaseFunction(6);
+                        } else if (this.team > 0) {
+                            this.magicSkill.releaseFunction(5);
+                        }
+                        if (this.judgeCondition(vanishType.leftOrRight)) {
+                            this.release();
+                        }
+                        if (this.leftRightBounce === true)
+                            this.speed.x = -this.speed.x * this.elasticCoefficient;
+                    }
+                    //cc.log(this.collisionTime);
+
+                    if (other.node.group === "Unit" || other.node.group === "ViewUnit") {
+                        //cc.log(other.node.group);
+                        var script1 = other.node.getComponent('Unit');
+
+                        if (this.heroBounce === true && script1.unitType === 1) {
+                            this.speed.x = -this.speed.x * this.elasticCoefficient;
+                            if (this.judgeCondition(vanishType.myHero) || this.judgeCondition(vanishType.enemyHero)) {
+                                this.release();
+                            }
+                        }
 
                         this.magicSkill.releaseFunction(2, other.node);
-                    if (script1.unitType === 0) {
-                        if (this.judgeCondition(vanishType.myCreature) || this.judgeCondition(vanishType.enemyCreature)) {
-                            this.release();
+                        if (script1.unitType === 0) {
+                            if (this.judgeCondition(vanishType.myCreature) || this.judgeCondition(vanishType.enemyCreature)) {
+                                this.release();
+                            }
                         }
                     }
                 }
@@ -354,6 +365,7 @@ cc.Class({
         //}
         //如果是显示层那么不触发相应的效果
         //但是如果是控制过去让其播放死亡动画的话，那么release
+        this.death = true;
         if(this.viewNode === this.node){
             switch (this.magicType)
             {
@@ -467,18 +479,73 @@ cc.Class({
                 this.speed.x = Math.sin((detail.angel + 90) * Math.PI / 180) * this.startSpeed;
                 if(this.speed.y === 0)
                 this.speed.y = Math.cos((detail.angel + 90) * Math.PI / 180) * this.startSpeed;
+                this.adjustParticleAngle();
                 break;
         }
         this.magicSkill = this.skillNode.getComponent("Skill");
     },
+
+
+    adjustParticleAngle:function(){
+        if(this.particleNode !== null) {
+            this.particleNode.getComponent(cc.ParticleSystem).angle = 270 - Math.atan2(this.speed.x, this.speed.y) * 180 / Math.PI;
+        }
+    },
+    heroPositionFollow:function(){
+        if(this.positionFollow)
+        {
+            var position = cc.v2(
+                this.GameManager.heros[this.team > 0 ? 0:1].x - this.node.x,
+                this.GameManager.heros[this.team > 0 ? 0:1].y - this.node.y + 40
+            );
+            //cc.log(position);
+            position.normalizeSelf();
+            var speed = cc.v2(this.speed.x, this.speed.y);
+            //cc.log(speed);
+            position.mulSelf(speed.mag());
+            //var delta = position.subSelf(cc.v2(speed.x,speed.y));
+            //delta.normalizeSelf();
+            cc.log(position.cross(speed) / Math.PI * 180);
+            if(position.cross(speed) > 0){
+                var delt = speed.rotateSelf( Math.PI/2);
+            }else{
+                delt = speed.rotateSelf(- Math.PI/2);
+            }
+            delt.normalizeSelf();
+            delt.mulSelf(this.followAcc);
+            this.followAccVec = delt;
+        }
+    },
     updateByNet: function (fps) {
         //获得当前帧率下应当推进的速率
         var frameSpeed = globalConstant.frameRate / fps;
+        this.adjustParticleAngle();
+        this.heroPositionFollow();
+
+        var mag = this.speed.mag();
+        this.speed.x += this.followAccVec.x * frameSpeed;
+        this.speed.y += this.followAccVec.y * frameSpeed;
+        if(this.speed.mag() !== 0) {
+            this.speed.normalizeSelf();
+            this.speed.mulSelf(mag);
+        }
+
         if(this.magicType === 2) {
-            if (this._stopLock === false) {
+            if (this._stopLock === false || !this.endLock) {
                 this.speed.y -= this.gravity * frameSpeed;
-                this.node.x += this.speed.x * frameSpeed;
-                this.node.y += this.speed.y * frameSpeed;
+                if(this.node === this.viewNode){
+
+                    this.node.runAction(cc.moveTo(
+                        0,
+                        this.node.x + this.speed.x * frameSpeed,
+                        this.node.y + this.speed.y * frameSpeed)
+                    );
+                    //this.node.x += this.speed.x * frameSpeed;
+                    //this.node.y += this.speed.y * frameSpeed;
+                }else{
+                    this.node.x += this.speed.x * frameSpeed;
+                    this.node.y += this.speed.y * frameSpeed;
+                }
             }
         }
         //如果自己是逻辑节点，此外另一个节点还未被销毁，那么进行一些同步的处理

@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "8b248151-92b6-4fd5-a42a-5e58733c4437",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "stars 木刻": {
+      "ver": "1.0.3",
+      "uuid": "fa1d0be8-2d94-4307-ad5b-b17413467b18",
+      "rawTextureUuid": "8b248151-92b6-4fd5-a42a-5e58733c4437",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 1920,
+      "height": 1091,
+      "rawWidth": 1920,
+      "rawHeight": 1091,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

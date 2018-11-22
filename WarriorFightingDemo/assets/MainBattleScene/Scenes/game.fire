@@ -1127,7 +1127,7 @@
       }
     ],
     "areaLeft": 0,
-    "areaRight": 0,
+    "areaRight": 4,
     "mainScene": false,
     "yFollow": false,
     "offsetY": 250,

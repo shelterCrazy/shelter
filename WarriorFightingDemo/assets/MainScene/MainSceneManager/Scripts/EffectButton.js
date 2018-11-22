@@ -26,10 +26,12 @@ cc.Class({
     },
 
     exit:function(){
+        this.node.stopAllActions();
         this.node.runAction(cc.moveTo(1,-1386,-96).easing(cc.easeCubicActionOut()));
     },
 
     come:function(){
+        this.node.stopAllActions();
         this.node.runAction(cc.moveTo(1,-785,-96).easing(cc.easeCubicActionOut()));
     }
 

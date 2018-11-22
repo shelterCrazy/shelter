@@ -399,14 +399,16 @@ var MainGameManager = cc.Class({
 
             viewMagic.group = "ViewMagic";
 
-            this.magicLayer.addChild(logicMagic);
-            this.viewMagicLayer.addChild(viewMagic);
 
-            viewScript.logicNode = logicMagic;
-            viewScript.viewNode = viewMagic;
-            logicScript.logicNode = logicMagic;
-            logicScript.viewNode = viewMagic;
 
+        viewScript.logicNode = logicMagic;
+        viewScript.viewNode = viewMagic;
+        logicScript.logicNode = logicMagic;
+        logicScript.viewNode = viewMagic;
+
+        if(logicScript.particleNode !== null){
+            logicScript.particleNode.removeFromParent();
+        }
             var motionStreak = logicMagic.getComponent(cc.MotionStreak);
             if(motionStreak !== null){
                 motionStreak.enabled = false;
@@ -417,6 +419,8 @@ var MainGameManager = cc.Class({
             viewScript.initMagic(event.detail);
             logicScript.initMagic(event.detail);
             //if(data.detail.battleCry !== undefined && data.detail.battleCry === true){
+        this.magicLayer.addChild(logicMagic);
+        this.viewMagicLayer.addChild(viewMagic);
             logicScript.magicSkill.releaseFunction(0);
             viewScript.magicSkill.releaseFunction(0);
         //}.bind(this),(event.detail.delay === undefined) ? event.detail.delay : 0);
@@ -477,6 +481,7 @@ var MainGameManager = cc.Class({
             logicUnitScript.logicNode = logicUnit;
             viewUnitScript.viewNode = viewUnit;
             viewUnitScript.logicNode = logicUnit;
+
 
             if (logicUnitScript.team * this.heros[0].getComponent("Unit").team > 0) {
                 logicUnitScript.focusTarget = this.heros[1];

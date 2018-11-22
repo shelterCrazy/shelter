@@ -978,7 +978,7 @@
     },
     "isBranch": true,
     "branchNum": 5,
-    "branchAngle": 12,
+    "branchAngle": 4,
     "prepareCardEffect": {
       "__uuid__": "6a04f9d3-0c56-4780-9b06-9572573eb673"
     },

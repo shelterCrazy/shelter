@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "08708d78-1fe5-41d1-9999-a7cc9e0628d3",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "工作间 木刻": {
+      "ver": "1.0.3",
+      "uuid": "12d5ab6c-e28e-475f-95ed-038f9bb061d8",
+      "rawTextureUuid": "08708d78-1fe5-41d1-9999-a7cc9e0628d3",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 1200,
+      "height": 1794,
+      "rawWidth": 1200,
+      "rawHeight": 1794,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

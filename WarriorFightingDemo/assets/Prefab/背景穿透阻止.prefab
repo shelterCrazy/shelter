@@ -28,7 +28,7 @@
       "__id__": 4
     },
     "_id": "",
-    "_opacity": 215.98499999999999,
+    "_opacity": 132.6,
     "_color": {
       "__type__": "cc.Color",
       "r": 0,
@@ -70,7 +70,7 @@
     "node": {
       "__id__": 1
     },
-    "_enabled": true,
+    "_enabled": false,
     "_spriteFrame": {
       "__uuid__": "a23235d1-15db-4b95-8439-a2e005bfff91"
     },
