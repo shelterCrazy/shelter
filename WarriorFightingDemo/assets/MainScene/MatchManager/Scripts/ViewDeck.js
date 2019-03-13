@@ -104,7 +104,7 @@ cc.Class({
         var total = 0;
         //遍历全卡组如果此卡组的ID一样的话，那么确认可以使用
         for(var i = 0;i < Global.userDeckCardData.length;i++){
-            if(Global.userDeckCardData[i].length === 0){
+            if(Global.userDeckCardData[i] === undefined ||  Global.userDeckCardData[i].length === 0){
                 continue;
             }
             if(Global.userDeckCardData[i][0].deck_id === this.deckId)break;

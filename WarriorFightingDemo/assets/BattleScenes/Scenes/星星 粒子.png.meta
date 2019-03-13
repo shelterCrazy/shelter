@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "b2ba2841-4723-4978-b85d-c41c561eff65",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "星星 粒子": {
+      "ver": "1.0.3",
+      "uuid": "5826f4d6-2715-482c-a5b6-84f541c46777",
+      "rawTextureUuid": "b2ba2841-4723-4978-b85d-c41c561eff65",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 27.5,
+      "offsetY": -47,
+      "trimX": 161,
+      "trimY": 101,
+      "width": 333,
+      "height": 204,
+      "rawWidth": 600,
+      "rawHeight": 312,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

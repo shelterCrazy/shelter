@@ -1,5 +1,6 @@
 ﻿var globalConstant = require("Constant");
 var Global = require("Global");
+var BattleData = require("BattleData");
 
 cc.Class({
     extends: cc.Component,
@@ -136,43 +137,51 @@ cc.Class({
         this._controlList2 = [];
         //处理操作列表1中的全部操作
         for(i in this._controlList1){
-            if(this._controlList1[i].control === "press"){
-                switch (this._controlList1[i].key){
-                    case "left":
-                        this.sendMoveMessage({
-                            accLeft: true,
-                            //accRight: this.accRight
-                        });
-                        break;
-                    case "right":
-                        this.sendMoveMessage({
-                            //accLeft: this.accLeft,
-                            accRight: true
-                        });
-                        break;
-                    case "up":this.sendJumpMessage();break;
-                    case "space":
-                        if (this.unitScript.coolTimer === this.unitScript.coolTime &&
-                            this.unitScript.attackFreeze === false) {
-                            if(this.unitScript.ATKActionFlag === false){
-                                this.unitScript.ATKActionFlag = true;
+            if(BattleData.playerNum >= 2) {
+                if (this._controlList1[i].control === "press") {
+                    switch (this._controlList1[i].key) {
+                        case "left":
+                            this.sendMoveMessage({
+                                accLeft: true,
+                                //accRight: this.accRight
+                            });
+                            break;
+                        case "right":
+                            this.sendMoveMessage({
+                                //accLeft: this.accLeft,
+                                accRight: true
+                            });
+                            break;
+                        case "up":
+                            this.sendJumpMessage();
+                            break;
+                        case "space":
+                            if (this.unitScript.coolTimer === this.unitScript.coolTime &&
+                                this.unitScript.attackFreeze === false) {
+                                if (this.unitScript.ATKActionFlag === false) {
+                                    this.unitScript.ATKActionFlag = true;
+                                }
+                                this.sendAttackMessage();
+                                this._controlList2.push(this._controlList1[i]);
                             }
-                            this._controlList2.push(this._controlList1[i]);
-                            this.sendAttackMessage();
-                        }continue;
-                }
-            }else if(this._controlList1[i].control === "release"){
-                switch (this._controlList1[i].key){
-                    case "left":
-                        this.sendMoveMessage({
-                            accLeft: false,
-                            //accRight: this.accRight
-                        });break;
-                    case "right":
-                        this.sendMoveMessage({
-                            //accLeft: this.accLeft,
-                            accRight: false
-                        });break;
+                            continue;
+                    }
+                    //
+                } else if (this._controlList1[i].control === "release") {
+                    switch (this._controlList1[i].key) {
+                        case "left":
+                            this.sendMoveMessage({
+                                accLeft: false,
+                                //accRight: this.accRight
+                            });
+                            break;
+                        case "right":
+                            this.sendMoveMessage({
+                                //accLeft: this.accLeft,
+                                accRight: false
+                            });
+                            break;
+                    }
                 }
             }
             //把1中的操作转移给2号
@@ -200,7 +209,7 @@ cc.Class({
         }
         if(this.unitScript.death === false && this.xSpeed !== 0) {
             // 根据当前速度更新主角的位置
-            this.unitScript.moveAction(this.xSpeed);//  Math.abs(this.xSpeed)
+            this.unitScript.moveAction(this.xSpeed,fps);//  Math.abs(this.xSpeed)
         }
 
 
@@ -252,31 +261,44 @@ cc.Class({
     },
     sendMoveMessage:function(detail){
         var self = this;
+        cc.log(JSON.stringify(detail));
         if(this.unitScript.logicNode === this.node) {
-            NetworkModule.roomMsg(Global.room, 'roomChat', {
+            Global.networkSendData.data.push({
                 name: "enemyMove",
                 detail: detail
-            })
+            });
+            //NetworkModule.roomMsg(Global.room, 'roomChat', {
+            //    name: "enemyMove",
+            //    detail: detail
+            //})
         }
     },
     sendJumpMessage:function(){
         var self = this;
         if(this.unitScript.logicNode === this.node) {
             if (self.unitScript.isCanJump === true) {
-                NetworkModule.roomMsg(Global.room, 'roomChat', {
+                Global.networkSendData.data.push({
                     name: "enemyJump",
                     detail: {}
-                })
+                });
+                //NetworkModule.roomMsg(Global.room, 'roomChat', {
+                //    name: "enemyJump",
+                //    detail: {}
+                //})
             }
         }
     },
     sendAttackMessage:function(){
         var self = this;
         if(this.unitScript.logicNode === this.node) {
-            NetworkModule.roomMsg(Global.room, 'roomChat', {
+            Global.networkSendData.data.push({
                 name: "enemyAttack",
                 detail: {}
-            })
+            });
+            //NetworkModule.roomMsg(Global.room, 'roomChat', {
+            //    name: "enemyAttack",
+            //    detail: {}
+            //})
         }
     },
     setInputControl: function () {

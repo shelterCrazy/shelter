@@ -27,9 +27,9 @@ var buttonClass = cc.Class({
     onButtonTouchEvent: function (event,customEventData) {
         var eventsend = new cc.Event.EventCustom('creatureCreate',true);
         if(this.team === -1){
-            eventsend.setUserData({X:(512 + this.team*200),Y:-95,attack:2,health:20,team:this.team,speed:2,id:1});
+            eventsend.setUserData({X:(712 + this.team*350),Y:-95,attack:2,health:20,team:this.team,speed:2,id:1});
         }else{
-            eventsend.setUserData({X:(512 + this.team*200),Y:-95,attack:2,health:10,team:this.team,speed:3,id:1});
+            eventsend.setUserData({X:(712 + this.team*350),Y:-95,attack:2,health:10,team:this.team,speed:3,id:1});
         }
         //cc.eventManager.dispatchEvent(event);  
         this.node.dispatchEvent(eventsend);

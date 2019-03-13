@@ -35,7 +35,6 @@ cc.Class({
     },
 
     onLoad :function(){
-
         //cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
         //this.node.active = false;
     },

@@ -219,6 +219,7 @@ cc.Class({
             }
         });
     },
+
     match:function(){
         var self = this;
         $.ajax({
@@ -258,7 +259,7 @@ cc.Class({
             password: Global.password,
             usable: true
         };
-
+        cc.log("logsuccess");
         cc.sys.localStorage.setItem('userLoginData', JSON.stringify(userData));
     }
 });

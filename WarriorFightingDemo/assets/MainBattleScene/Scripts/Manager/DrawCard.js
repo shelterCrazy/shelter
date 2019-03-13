@@ -59,7 +59,7 @@ cc.Class({
     },
     
     // use this for initialization
-    onLoad: function () {
+    start: function () {
         var i = 0,j = 0;
         var self = this;
         var url = "Data/CardData2";
@@ -122,7 +122,6 @@ cc.Class({
                     loadScript.cardType = results.cardData[i].card_type;
                     Global.cardPrefab[results.cardData[i].id] = cc.instantiate(newNode);
                 }
-        cc.log(Global.cardPrefab);
             //});
         if(Global.mainStart === false) {
             //初始化一个卡组数据

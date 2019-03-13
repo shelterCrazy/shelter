@@ -478,12 +478,12 @@
     "_components": [],
     "_prefab": null,
     "_id": "18bIRdvVpJMY2BrIKPdMhQ",
-    "_opacity": 0,
+    "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
+      "r": 209,
+      "g": 67,
+      "b": 67,
       "a": 255
     },
     "_cascadeOpacityEnabled": true,
@@ -683,7 +683,7 @@
     "_components": [],
     "_prefab": null,
     "_id": "65wbY3W39L5ZfxS5nDdjJZ",
-    "_opacity": 255,
+    "_opacity": 0,
     "_color": {
       "__type__": "cc.Color",
       "r": 255,

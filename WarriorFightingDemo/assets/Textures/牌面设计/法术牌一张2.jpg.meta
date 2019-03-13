@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "7d2fe4b6-8e13-4649-b5ef-24bb83da4689",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "法术牌一张2": {
+      "ver": "1.0.3",
+      "uuid": "d0ba0c2e-8638-422f-9419-d3218fabace6",
+      "rawTextureUuid": "7d2fe4b6-8e13-4649-b5ef-24bb83da4689",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 144,
+      "height": 148,
+      "rawWidth": 144,
+      "rawHeight": 148,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

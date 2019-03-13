@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "d2cb9558-d6fa-4672-b4aa-07701412dd75",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "教堂窗户": {
+      "ver": "1.0.3",
+      "uuid": "4573d100-f4ba-4649-8f96-b591d1e3f1d9",
+      "rawTextureUuid": "d2cb9558-d6fa-4672-b4aa-07701412dd75",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": -40,
+      "trimX": 108,
+      "trimY": 202,
+      "width": 439,
+      "height": 998,
+      "rawWidth": 655,
+      "rawHeight": 1322,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

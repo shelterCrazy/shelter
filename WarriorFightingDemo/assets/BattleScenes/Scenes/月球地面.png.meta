@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "15a6b197-af2a-4695-a776-b083b2f6338b",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "point",
+  "subMetas": {
+    "月球地面": {
+      "ver": "1.0.3",
+      "uuid": "d628c522-f97a-4b4f-9eca-0909a6f615ae",
+      "rawTextureUuid": "15a6b197-af2a-4695-a776-b083b2f6338b",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": -161,
+      "trimX": 0,
+      "trimY": 322,
+      "width": 7680,
+      "height": 506,
+      "rawWidth": 7680,
+      "rawHeight": 828,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

@@ -1,0 +1,1 @@
+"use strict";module.exports={load(){},unload(){},messages:{open(){Editor.Panel.open("cocos-particle2d")},"open-new"(){Editor.Panel.open("cocos-particle2d.new")},"say-hello"(){Editor.log("Hello World!"),Editor.Ipc.sendToPanel("cocos-particle2d","cocos-particle2d:hello")},clicked(){Editor.log("Button clicked!")}}};

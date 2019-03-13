@@ -2,6 +2,7 @@
 var globalConstant = require("Constant");
 var Global = require("Global");
 var CardData = require("CardData");
+var BattleData = require("BattleData");
 /**
  * @主要功能:  游戏主流程控制器
  * @type {Function}
@@ -10,6 +11,10 @@ var MainGameManager = cc.Class({
     extends: cc.Component,
 
     properties: {
+
+        debug:false,
+
+        processManagerNode:cc.Node,
         //各种小兵预制
         creaturePrefab: [cc.Prefab],
         //全部法术预制
@@ -93,119 +98,120 @@ var MainGameManager = cc.Class({
         var script1 = baseNode.getComponent('Base');
         var baseNode2 = cc.instantiate(this.base);
         var script2 = baseNode2.getComponent('Base');
+        var processManagerScript = this.processManagerNode.getComponent("ProcessManager");
+        //如果是测试模式
+        if(this.debug)
+        {
+            cc.director.getCollisionManager().enabled = true;
+        }else{
+            //获取网络脚本
+            NetworkModule.loadManager(this);
+            NetworkModule.getGlobal(Global);
+            NetworkModule.init();
+        }
 
-        //获取网络脚本
-        NetworkModule.loadManager(this);
-        NetworkModule.getGlobal(Global);
-        NetworkModule.init();
+        processManagerScript.debug = this.debug;
+        processManagerScript.init();
 
-        //获取小地图脚本
-        var mapScript = this.mapLayer.getComponent("SmallMap");
-
-        this.heroCreate(0,-1);
-        this.heroCreate(0,1);
-
-        var cameraScript = this.cameraLayer.getComponent("CameraControl");
-
-        cameraScript.targets[0] = this.viewHero[0];
-        cameraScript.target = cameraScript.targets[0];
+        if(!this.debug) {
+            //战斗准备完成，反馈给服务器
+            NetworkModule.battleReady();
+        }
 
         //初始化两个基地坐标，以及注入一些关键数据
-        script1.init(this.baseData1,-this.baseOffset,-1);
+        //script1.init(this.baseData1,-this.baseOffset,-1);
 
         this.magicPool = [];
-        if(globalConstant.fogOpen) {
-            for (var i = globalConstant.fogStart; i < globalConstant.fogEnd; i += globalConstant.fogOffset) {
-                var fogNode = cc.instantiate(this.fogPrefab);
-                var fogNodeScript = fogNode.getComponent("Fog");
-
-                var mapFogNode = cc.instantiate(this.mapFogPrefab);
-                mapFogNode.y = 0;
-                fogNodeScript.mapFogNode = mapFogNode;
-                this.fogLayer.addChild(fogNode);
-                fogNode.x = (globalConstant.sceneWidth * cc.director.getWinSize().width) *
-                    (1 + script1.hero.team / Math.abs(script1.hero.team)) / 2 -
-                    script1.hero.team / Math.abs(script1.hero.team) * i;
-                cc.log(fogNode.x * globalConstant.smallMapLength / globalConstant.width /
-                    cc.director.getWinSize().width);
-                mapFogNode.x = fogNode.x * globalConstant.smallMapLength / globalConstant.sceneWidth /
-                    cc.director.getWinSize().width;
-                this.mapFogLayer.addChild(mapFogNode);
-            }
-        }
+        //if(globalConstant.fogOpen) {
+        //    for (var i = globalConstant.fogStart; i < globalConstant.fogEnd; i += globalConstant.fogOffset) {
+        //        var fogNode = cc.instantiate(this.fogPrefab);
+        //        var fogNodeScript = fogNode.getComponent("Fog");
+        //
+        //        var mapFogNode = cc.instantiate(this.mapFogPrefab);
+        //        mapFogNode.y = 0;
+        //        fogNodeScript.mapFogNode = mapFogNode;
+        //        this.fogLayer.addChild(fogNode);
+        //        fogNode.x = (globalConstant.sceneWidth * cc.director.getWinSize().width) *
+        //            (1 + script1.hero.team / Math.abs(script1.hero.team)) / 2 -
+        //            script1.hero.team / Math.abs(script1.hero.team) * i;
+        //        cc.log(fogNode.x * globalConstant.smallMapLength / globalConstant.width /
+        //            cc.director.getWinSize().width);
+        //        mapFogNode.x = fogNode.x * globalConstant.smallMapLength / globalConstant.sceneWidth /
+        //            cc.director.getWinSize().width;
+        //        this.mapFogLayer.addChild(mapFogNode);
+        //    }
+        //}
         //碰撞系统打开
-        //cc.director.getCollisionManager().enabled = true;
+
         cc.director.getCollisionManager().enabled = true;
         cc.director.getPhysicsManager().enabled = true;
 
-        //英雄标记中添加两个英雄节点（方便坐标获取）
-        this.heros[0].getComponent("Unit")._mapSign = mapScript.fnCreateHeroSign(this.heros[0]);
-        this.heros[1].getComponent("Unit")._mapSign = mapScript.fnCreateHeroSign(this.heros[1]);
 
-        //获取时间记录器脚本，此脚本负责自动推进时间轴
-        this.timerLayerScript = this.timerLayer.getComponent("GameTimer");
 
-        for(i = 0;i < 400; i++) {
-            self.magicPrefab[i] = null;
-        }
-        var url = "Prefab/Magic/Sprite";
-        cc.loader.loadResDir(url,cc.Prefab, function (err, results) {
-            if (err) {
-                cc.error("失败了!!%s",err);
-                cc.log(err);
-            }else{
-                for(var i = 0;i < results.length; i++) {
-                    var magicNode = cc.instantiate(results[i]);
 
-                    var scripts = magicNode.getComponent("Magic");
+        //for(var i = 0;i < 400; i++) {
+        //    self.magicPrefab[i] = null;
+        //}
+        //var url = "Prefab/Magic/Sprite";
+        //cc.loader.loadResDir(url,cc.Prefab, function (err, results) {
+        //    if (err) {
+        //        cc.error("失败了!!%s",err);
+        //        cc.log(err);
+        //    }else{
+        //        for(var i = 0;i < results.length; i++) {
+        //            var magicNode = cc.instantiate(results[i]);
+        //
+        //            var scripts = magicNode.getComponent("Magic");
+        //
+        //            self.magicPrefab[scripts.id] = results[i];
+        //        }
+        //    }
+        //});
+        //url = "Prefab/Magic/Chaos";
+        //cc.loader.loadResDir(url,cc.Prefab, function (err, results) {
+        //    if (err) {
+        //        cc.error("失败了!!%s",err);
+        //        cc.log(err);
+        //    }else{
+        //        for(var i = 0;i < results.length; i++) {
+        //            var magicNode = cc.instantiate(results[i]);
+        //
+        //            var scripts = magicNode.getComponent("Magic");
+        //
+        //            self.magicPrefab[scripts.id] = results[i];
+        //        }
+        //    }
+        //});
+        //url = "Prefab/Magic/Science";
+        //cc.loader.loadResDir(url,cc.Prefab, function (err, results) {
+        //    if (err) {
+        //        cc.error("失败了!!%s",err);
+        //        cc.log(err);
+        //    }else{
+        //        for(var i = 0;i < results.length; i++) {
+        //            var magicNode = cc.instantiate(results[i]);
+        //
+        //            var scripts = magicNode.getComponent("Magic");
+        //            self.magicPrefab[scripts.id] = results[i];
+        //        }
+        //    }
+        //});
 
-                    self.magicPrefab[scripts.id] = results[i];
-                }
-            }
-        });
-        url = "Prefab/Magic/Chaos";
-        cc.loader.loadResDir(url,cc.Prefab, function (err, results) {
-            if (err) {
-                cc.error("失败了!!%s",err);
-                cc.log(err);
-            }else{
-                for(var i = 0;i < results.length; i++) {
-                    var magicNode = cc.instantiate(results[i]);
 
-                    var scripts = magicNode.getComponent("Magic");
-
-                    self.magicPrefab[scripts.id] = results[i];
-                }
-            }
-        });
-        url = "Prefab/Magic/Science";
-        cc.loader.loadResDir(url,cc.Prefab, function (err, results) {
-            if (err) {
-                cc.error("失败了!!%s",err);
-                cc.log(err);
-            }else{
-                for(var i = 0;i < results.length; i++) {
-                    var magicNode = cc.instantiate(results[i]);
-
-                    var scripts = magicNode.getComponent("Magic");
-                    self.magicPrefab[scripts.id] = results[i];
-                }
-            }
-        });
-        setTimeout(function(){
-            self.magicPool = [];
-            for(i = 0;i < 400; i++) {
-                if(self.magicPrefab[i] !== null && self.magicPrefab[i] !== undefined){
-                    self.magicPool[i] = new cc.NodePool(); 
-                    var initCount = 10;
-                    for (var j = 0; j < initCount; j++) {
-                        //var magicObject = ;
-                        self.magicPool[i].put(cc.instantiate(self.magicPrefab[i])); // 通过 putInPool 接口放入对象池
-                    }
-                }
-            }
-
-        },1000);
+        //setTimeout(function(){
+        //    self.magicPool = [];
+        //    for(var i = 0;i < 400; i++) {
+        //        if(self.magicPrefab[i] !== null && self.magicPrefab[i] !== undefined){
+        //            self.magicPool[i] = new cc.NodePool();
+        //            var initCount = 10;
+        //            for (var j = 0; j < initCount; j++) {
+        //                //var magicObject = ;
+        //                self.magicPool[i].put(cc.instantiate(self.magicPrefab[i])); // 通过 putInPool 接口放入对象池
+        //            }
+        //        }
+        //    }
+        //    NetworkModule.battleReady();
+        //},1000);
 
         //var data = false;
         ////每隔一段时间召唤一个小怪
@@ -248,6 +254,7 @@ var MainGameManager = cc.Class({
         //cc.audioEngine.playMusic(this.backGroundMusic,true);
 
     },
+
 
     /**
      * @主要功能 判断胜利，胜利就返回到初始场景中
@@ -361,7 +368,9 @@ var MainGameManager = cc.Class({
         }
         //如果没有说明，或者允许通过网络创建为真，那么发送数据
         if(event.detail.network === undefined || event.detail.network === true) {
-            NetworkModule.roomMsg(Global.room, 'roomChat', {name: "magicCreate", detail: event.detail});
+            Global.networkSendData.data.push({name: "magicCreate", detail: event.detail});
+            return;
+            //NetworkModule.roomMsg(Global.room, 'roomChat', {name: "magicCreate", detail: event.detail});
         }
         //setTimeout(function() {
             //kenan 实验证明  事件是同步的  计时器是异步的
@@ -425,7 +434,7 @@ var MainGameManager = cc.Class({
             viewScript.magicSkill.releaseFunction(0);
         //}.bind(this),(event.detail.delay === undefined) ? event.detail.delay : 0);
         //停止事件冒泡(停止继续向上传递此事件)
-        event.stopPropagation();
+        //event.stopPropagation();
     },
 
     /**
@@ -441,7 +450,9 @@ var MainGameManager = cc.Class({
             return;
         }
         if(data.detail.network === undefined || data.detail.network === true) {
-            NetworkModule.roomMsg(Global.room, 'roomChat', {name: "creatureCreate", detail: data.detail});
+            Global.networkSendData.data.push({name: "creatureCreate", detail: data.detail});
+            return;
+            //NetworkModule.roomMsg(Global.room, 'roomChat', {name: "creatureCreate", detail: data.detail});
         }
         setTimeout(function() {
 
@@ -482,7 +493,6 @@ var MainGameManager = cc.Class({
             viewUnitScript.viewNode = viewUnit;
             viewUnitScript.logicNode = logicUnit;
 
-
             if (logicUnitScript.team * this.heros[0].getComponent("Unit").team > 0) {
                 logicUnitScript.focusTarget = this.heros[1];
                 viewUnitScript.focusTarget = this.heros[1];
@@ -500,7 +510,7 @@ var MainGameManager = cc.Class({
             }
         }.bind(this),(data.detail.delay === undefined) ? data.detail.delay : 0);
         //kenan 停止事件冒泡   (停止继续向上传递此事件)
-        data.stopPropagation();
+        //data.stopPropagation();
     },
     /**
      * @主要功能 创建英雄
@@ -549,6 +559,8 @@ var MainGameManager = cc.Class({
         viewHero.getComponent("Unit").logicNode = hero;
             this.heroLayer.addChild(hero);
             this.viewHeroLayer.addChild(viewHero);
+
+
         //基地层添加上述节点
         //this.baseLayer.addChild(baseNode);
         //script2.init(this.baseData2,this.baseOffset,1);
@@ -725,7 +737,9 @@ var MainGameManager = cc.Class({
     },
 
     updateSchedule:function(fps){
-        this.schedule(this.updateByNet.bind(this,fps),1 / fps);
+        if(this.debug) {
+            this.schedule(this.updateByNet.bind(this, fps), 1 / fps);
+        }
         this.schedule(this.updateViewByNet.bind(this,60),1 / 60);
     },
     updateByNet: function (fps) {
@@ -748,7 +762,52 @@ var MainGameManager = cc.Class({
         for(i = 0;i < this.viewHeroLayer.children.length;i ++)
             this.viewHeroLayer.children[i].getComponent("Unit").updateByNet(fps);
         //this.node.getComponent("AttackBehavior").attackCalculation();
-    }
+    },
+
+
+    /**
+     * @主要功能 传递对手的数据，之后注入双方的数据，加载场景，进入游戏
+     * 用于DEBUG
+     * @author C14
+     * @Date 2019/3/3
+     * @parameters
+     * @returns
+     */
+    debugBattleScene:function(){
+        //从主菜单开始
+        Global.mainStart = true;
+        //获取数据中的玩家人数
+        BattleData.playerNum = 2;
+        //玩家所在的队伍等于之前定义的全局中的队伍
+        BattleData.playerTeam = Global.nowTeam;
+        //房间也是先前获取了的
+        //BattleData.room = Global.room;
+        //场景名称计算，双方随机数之和乘以总场景个数，加1
+        BattleData.sceneName = "Scene_1";
+        //循环，判断玩家现在使用的卡组
+        //for(var i in Global.userDeckCardData){
+        //    if(Global.userDeckCardData[i][0].deck_id === Global.deckUsage){
+        //        //通过splice复制玩家的卡组
+        //        BattleData.playerDeck = Global.userDeckCardData[i].splice(0);
+        //        break;
+        //    }
+        //}
+        //注入双方的的数据
+        var playerData = {
+            "team":Global.nowTeam,
+            "name":Global.playerName,
+            "level":Global.playerLevel,
+            "heroId":Global.heroNum
+        };
+        BattleData.playerData.push(playerData);
+        var enemyData = {
+            "team":- Global.nowTeam,
+            "name":Global.playerName,
+            "level":Global.playerLevel,
+            "heroId":Global.heroNum
+        };
+        BattleData.playerData.push(enemyData);
+    },
     
 });
 

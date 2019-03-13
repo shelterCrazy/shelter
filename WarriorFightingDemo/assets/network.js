@@ -2,6 +2,7 @@ var NetworkModule = {
     token:1,
     //39.106.67.112
     url:"http://111.230.42.175:3000",
+    //url:"http://localhost:3000",
     socket:null,
     initFlag:false,
     loadManager: function (managerScript) {
@@ -11,6 +12,9 @@ var NetworkModule = {
         this.Global = global;
     },
     init: function () {
+        var fpsTimerFlag = false;
+        var fpsTimer = 0;
+
         if(this.initFlag === false) {
             this.initFlag = true;
             //this.Global = require("Global");
@@ -83,64 +87,61 @@ var NetworkModule = {
                             console.log("default  type:" + data.type);
                     }
                 }.bind(this));
-                this.socket.on('roomChat', function (data) {
-                    //cc.log(data.msg.detail);
 
-                    switch (data.msg.name) {
-                        case "creatureCreate":
-                            data.msg.detail["network"] = false;
-                            this.manager.creatureCreate(data.msg);
-                            break;
-                        case "magicCreate":
-                            data.msg.detail["network"] = false;
-                            this.manager.magicCreate(data.msg);
-                            break;
-                        case "chantCreate":
-                            this.manager.chantCreateNetwork(data.msg.detail);
-                            break;
-                        //case "heroDeath":this.manager.heroDeathDetail(data.msg.detail);break;
-                        case "enemyMove":
-                            this.manager.changeEnemyMove(data.msg.detail);
-                            break;
-                        case "enemyJump":
-                            this.manager.changeEnemyJump(data.msg.detail);
-                            break;
-                        case "message":
-                            this.messageLabel.string = data.msg.detail;
-                            break;
-                        case "enemyAttack":
-                            this.manager.changeEnemyAttack(data.msg.detail);
-                            break;
-                        case "rand":
-                            //比大小确定自己的队伍
-                            if (this.randNum > data.msg.num) {
-                                this.Global.nowTeam = -1;
-                            } else {
-                                this.Global.nowTeam = 1;
-                            }
-                            //进入战斗界面
-                            this.Global.mainStart = true;
-                            cc.director.loadScene('game');
-                            break;
+                //游戏开始监听
+                this.socket.on('frameStep', function(data){
+                    //if(data.frame === 0)
+                    //{
+                    //    fpsTimerFlag = true;
+                    //}
+                    if(data.frame !== 0)
+                    {
+                        for (var i in this.Global.networkSendData2.data)
+                        {
+                            this.judgeSelfData(this.Global.networkSendData2.data[i]);
+                        }
+                        this.Global.networkSendData2 = this.Global.networkSendData;
+                        for (var i in data.msg.msg.data)
+                        {
+                            this.judgeData(data.msg.msg.data[i]);
+                        }
+                        this.manager.updateByNet(20);//200 / (data.delay - 1)
+                        //fpsTimer = 0;
                     }
+                    this.frameOver(null,null,{'msg':this.Global.networkSendData});
+                    this.Global.networkSendData.data = [];
+                }.bind(this));
+
+                this.socket.on('roomChat', function (data) {
+                    cc.log(JSON.stringify(data.msg));
+                    this.judgeData(data);
+
                 }.bind(this));
 
                 //匹配产生结果
                 this.socket.on('matchMsg', function (data) {
-                    if (data.status == 200) {
+
+                    if (data.status == '200') {
                         //this.messageLabel.string = data.room;
                         //获取房间号
                         this.Global.room = data.room;
-                        cc.log(this.room);
+                        cc.log(data.room);
                         //生成一个随机数，用于大小比较，以判别英雄的左右
                         this.randNum = Math.random();
-                        //发送消息
+                        //发送消息，通过消息发送进入同一个房间
                         setTimeout(function () {
-                            this.roomMsg(data.room, 'roomChat', "init");
+                            this.joinMsg('roomChat' , data.room);
                         }.bind(this), 200);
-                        //发送随机数过去
+                        //发送相关数据，包括英雄的选择,以及一个随机数
                         setTimeout(function () {
-                            this.roomMsg(data.room, 'roomChat', {"name": "rand", num: this.randNum});
+                            this.roomMsg(data.room, 'roomChat', {
+                                    "name": "rand",
+                                    "num": this.randNum,
+                                    "heroNum":this.Global.heroNum,
+                                    "playerName":this.Global.playerName,
+                                    "playerLevel":this.Global.playerLevel,
+                                }
+                            );
                         }.bind(this), 500);
                     } else {
                         cc.log("match失败 msg:" + data.msg);
@@ -150,30 +151,84 @@ var NetworkModule = {
             this.start();
             this.login();
         }
+
+        setInterval(function(){
+            if(fpsTimerFlag)
+            {
+                fpsTimer ++;
+            }
+        },10);
     },
 
     match:function(){
         cc.log("matching");
-        //获取房间号
-        //this.Global.room = "roomChat";
-        //cc.log(this.Global.room);
-        ////生成一个随机数，用于大小比较，以判别英雄的左右
-        //this.randNum = Math.random();
-        ////发送消息
-        //setTimeout(function () {
-        //    this.roomMsg(this.Global.room, 'roomChat', "init");
-        //}.bind(this), 1000);
-        ////发送随机数过去
-        //setTimeout(function () {
-        //    this.roomMsg(this.Global.room, 'roomChat', {"name": "rand", num: this.randNum});
-        //}.bind(this), 5000);
-        //setTimeout(function(){
-            this.socket.emit('match', {'token':this.Global.token});
-        //}.bind(this),2000);
+        this.socket.emit('match', {'token':this.Global.token});
     },
     joinRoom:function(){
         this.joinMsg('roomChat', this.Global.room);
-        cc.log("this.joinMsg('roomChat', data.room);  " + this.Global.room);
+    },
+    judgeData:function(data){
+        var msg = data.msg;
+        //cc.log(JSON.stringify(data));
+        if(msg !== undefined && msg.name === "rand"){
+            //比大小确定自己的队伍
+            if (this.randNum > msg.num) {
+                this.Global.nowTeam = -1;
+            } else {
+                this.Global.nowTeam = 1;
+            }
+            msg.playerNum = 2;
+            //所有随机数相加，那么双方都得到了确定的的随机数之和
+            msg.rand = this.randNum + msg.num;
+            //利用初始数据让管理器进行初始化
+            this.manager.initBattleScene(msg);
+
+            return;
+        }
+
+        switch (data.name) {
+            case "creatureCreate":
+                data.detail["network"] = false;
+                this.manager.creatureCreate(data);
+                break;
+            case "magicCreate":
+                data.detail["network"] = false;
+                this.manager.magicCreate(data);
+                break;
+            case "chantCreate":
+                this.manager.chantCreateNetwork(data.detail);
+                break;
+            //case "heroDeath":this.manager.heroDeathDetail(data.msg.detail);break;
+            case "enemyMove":
+                this.manager.changeEnemyMove(data.detail);
+                break;
+            case "enemyJump":
+                this.manager.changeEnemyJump(data.detail);
+                break;
+            case "message":
+                this.messageLabel.string = data.detail;
+                break;
+            case "enemyAttack":
+                this.manager.changeEnemyAttack(data.detail);
+                break;
+        }
+    },
+    judgeSelfData:function(data)
+    {
+        switch (data.name) {
+            case "creatureCreate":
+                data.detail["network"] = false;
+                this.manager.creatureCreate(data);
+                break;
+            case "magicCreate":
+                data.detail["network"] = false;
+                this.manager.magicCreate(data);
+                break;
+        }
+    },
+    //开始推进
+    frameOver:function(room, type, msg){
+        this.socket.emit('frameOver', {'room':room, type:type, 'msg':msg, 'token':this.Global.token});
     },
     broadcastMsg:function(msg){
         this.socket.emit('broadcastMsg', {'msg': msg, 'token':this.Global.token});
@@ -193,6 +248,10 @@ var NetworkModule = {
     //申请room聊天室聊天  type: roomChat普通聊天 roomHit战斗房间/战斗申请
     joinMsg:function(type, room){
         this.socket.emit('join',{'type':type, 'room':room, 'token':this.Global.token});
+    },
+
+    battleReady:function(){
+        this.socket.emit('battleReady',{'token':this.Global.token});
     },
     //退出room
     endRoom:function(room){

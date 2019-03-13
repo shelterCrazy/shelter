@@ -1,5 +1,6 @@
 var $ = {
     url:"http://111.230.42.175:3000",
+    //url:"http://localhost:3000",
     ajax:function(options){
         var xhr = cc.loader.getXMLHttpRequest();
         //xhr.open(options.type,"http://39.106.67.112:3000" + options.url,true);

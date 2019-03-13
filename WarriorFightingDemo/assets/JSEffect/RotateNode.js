@@ -2,8 +2,8 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        //旋转方向
-        position:1,
+        //旋转的范围
+        rangeX:0,
         //耗时
         time:0
     },
@@ -13,8 +13,11 @@ cc.Class({
     onLoad:function(){
         this.node.runAction(
             cc.repeatForever(
-                cc.rotateBy(this.time, 360 * this.position)
-            )
+                cc.sequence(
+                    cc.rotateBy(this.time, this.rangeX).easing(cc.easeSineOut()),
+                    cc.rotateBy(this.time * 2, - this.rangeX * 2).easing(cc.easeSineInOut()),
+                    cc.rotateBy(this.time, this.rangeX).easing(cc.easeSineIn())
+                ))
         );
     },
 

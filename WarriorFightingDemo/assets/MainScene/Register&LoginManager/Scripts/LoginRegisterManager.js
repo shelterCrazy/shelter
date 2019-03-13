@@ -33,11 +33,45 @@ cc.Class({
         //登录成功
         this.node.on('logSuccess',this.logSuccess,this);
     },
+
+    logout:function(){
+        var self = this;
+        this.loginNode.getComponent("LoginManager").userNameBox.string = "";
+        this.loginNode.getComponent("LoginManager").password1.string = "";
+        Global.loginFlag = false;
+        this.loginNode.getComponent("LoginManager").logSuccessFlag = false;
+        //this.labelNode.removeAction();
+        self.node.opacity = 0;
+        this.body.active = true;
+        self.node.active = true;
+        self.labelNode.active = false;
+        this.node.runAction(
+            //cc.sequence(
+                cc.fadeIn(self.messageTime).easing(cc.easeCubicActionOut())
+            //)
+        )
+        //$.ajax({
+        //    url: "/logout",
+        //    type: "GET",
+        //    dataType: "json",
+        //    data: {"token":200},
+        //    success: function(rs){
+        //
+        //    }
+        //});
+    },
     logSuccess:function(){
         var self = this;
         this.labelNode.active = true;
         this.label.string = "登录成功";
-        self.body.active = false;
+        self.node.runAction(
+            cc.sequence(
+                cc.fadeOut(self.messageTime).easing(cc.easeCubicActionIn()),
+                cc.callFunc(function(){
+                    self.node.active = false;
+                },this)
+            )
+        )
         //this.labelNode.removeAction();
         this.labelNode.runAction(
             cc.sequence(

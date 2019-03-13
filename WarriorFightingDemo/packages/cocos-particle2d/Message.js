@@ -1,0 +1,1 @@
+module.exports={MessagePipe:"message-pipe",MessageUpdateAngleVar:"message-update-angle-var",MessageUpdateAngle:"message-update-angle",MessageUpdateGravitySpeed:"message-update-gravity-speed",MessageUpdateGravity:"message-update-gravity",MessageUpdateEmmitAreaSize:"message-update-emmit-area-size",MessageUpdateRadius:"message-update-radius"};

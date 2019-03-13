@@ -7,6 +7,11 @@ module.exports = {
     token:18,
     //登录游戏成功的标志
     loginFlag:false,
+
+    playerName:"",
+    playerLevel:0,
+
+    firstLogin:true,
     //离线游戏的标志
     offlinePlayFlag:false,
     room:"",
@@ -42,6 +47,8 @@ module.exports = {
     //本次作战的队伍是
     nowTeam: - 1,
 
+    online:false,
+
     //普通魔法卡生物牌的预制
     magicCardPrefab:[cc.Prefab],
     creatureCardPrefab:[cc.Prefab],
@@ -56,6 +63,9 @@ module.exports = {
     cardSpriteFrames:[],
     //是否联网获取用户卡牌数据
     initUserData:false,
+    //网络需要发送的数据集
+    //networkSendData:null,
+    networkSendData2:[],
     //卡组的类型
     type: {
         type: cc.Enum({
@@ -87,7 +97,7 @@ module.exports = {
     //主音量
     mainVolume:0.2,
     //以下是用户设置的主音量
-    mainEffectVolume:1,
+    mainEffectVolume:0,
     //以下是用户设置部分
     mainMusicVolume:1,
     cameraPosition:cc.Vec2,

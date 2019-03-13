@@ -40,7 +40,7 @@ cc.Class({
         //获得当前帧率下应当推进的速率
         var frameSpeed = globalConstant.frameRate / fps;
 
-        if (!this.unitScript.ATKActionFlag) {
+        if (this.unitScript.ATKActionFlag === false) {
             for(var i = 0;i < this.unitScript.enemyTarget.length; i++){
                 var script = this.unitScript.enemyTarget[i].getComponent("Unit");
                 if(script.death === false){
@@ -48,6 +48,10 @@ cc.Class({
                     break;
                 }
             }
+        }
+        if(this.unitScript.enemyTarget.length == 0)
+        {
+            this.unitScript.ATKActionFlag = false;
         }
         /**
          * @主要功能 按照队伍调整移动
@@ -61,11 +65,11 @@ cc.Class({
          * @主要功能 按照移动目标
          */
         //自身移动判定  存在目标+非攻击+可以移动标记+自己没死
-        if(!this.unitScript.ATKActionFlag){
+        if(this.unitScript.ATKActionFlag === false){
             if (this.unitScript.node.x > this.unitScript.focusTarget.x) {
-                this.unitScript.moveAction(- this.unitScript.speed * frameSpeed);
+                this.unitScript.moveAction(- this.unitScript.speed * frameSpeed,fps);
             } else {
-                this.unitScript.moveAction(this.unitScript.speed * frameSpeed);
+                this.unitScript.moveAction(this.unitScript.speed * frameSpeed,fps);
             }
         }
 
@@ -78,18 +82,22 @@ cc.Class({
             //} else {
             //    this.unitScript.ATKActionFlag = true;
             //}
-            if(this.unitScript.ATKActionFlag === false){
+            if(this.unitScript.ATKActionFlag === false)
+            {
                 return;
             }
 
             if (this.unitScript.coolTimer === this.unitScript.coolTime &&
-                this.unitScript.attackFreeze === false && this.unitScript.enemyTarget.length !== 0) {
+                this.unitScript.attackFreeze === false && this.unitScript.enemyTarget.length !== 0)
+            {
                 //目标为空 或者被销毁  不执行
                 script = this.unitScript.enemyTarget[0].getComponent("Unit");
                 //cc.log(this.enemyTarget.length);
-                while(script.death === true){
+                while(script.death === true)
+                {
                     this.unitScript.enemyTarget.splice(0,1);
-                    if (this.unitScript.enemyTarget.length === 0) {
+                    if (this.unitScript.enemyTarget.length === 0)
+                    {
                         this.unitScript.ATKActionFlag = false;
                         this.unitScript.bodyNode.scaleX = - this.unitScript.team;
                         return;

@@ -2,9 +2,15 @@
 
 module.exports = {
     //全场景宽度（单位个数 * 屏幕宽 为 场景宽度）
-    sceneWidth: 3,
+    sceneWidth: 4,
     //场景边界的单位个数
     sceneEdge:0.5,
+    //场景最大个数
+    sceneMaxNum:1,
+    //设计分辨率
+    designResolution:{"width":1920,"height":1080},
+
+    debug:false,
 
     //卡牌使用的Y坐标上界（到了此坐标后卡片虚化）
     cardUseLine:100,
@@ -81,5 +87,4 @@ module.exports = {
     //碰撞框绘制调试模式
     collisionDebugDraw:false,
 
-    jf:[],
 };

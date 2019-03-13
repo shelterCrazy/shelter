@@ -13,6 +13,7 @@ cc.Class({
         //现在所处的位置
         nowLayer:{
             type:cc.Enum({
+                None:99,
                 ModeSelect:0,
                 StageSelect:1,
                 GameSelect:2,
@@ -20,7 +21,7 @@ cc.Class({
                 DeckSelect:4,
                 PracticeMode:5
             }),
-            default:- 1
+            default:99
         },
         _nowMode:0,
         //英雄查看选择节点
@@ -64,6 +65,7 @@ cc.Class({
 
     onLoad :function(){
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
+        this.nowLayer = 99;
         this.smallGameNode.active = false;
         this.node.active = false;
         this.node.on("selectStage",function(data){
@@ -177,12 +179,13 @@ cc.Class({
     },
 
     back:function(){
+        cc.log(this.nowLayer);
         switch(this.nowLayer){
             case 0:
                 this.antiActive();
                 this.effectButtonNode.getComponent("EffectButton").come();
                 this.cameraNode.getComponent("CameraControl").followTarget(null,1);
-                this.nowLayer = -1;
+                this.nowLayer = 99;
                 break;
             case 1:
             case 2:

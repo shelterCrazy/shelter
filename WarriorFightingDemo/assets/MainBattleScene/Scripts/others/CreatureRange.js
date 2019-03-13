@@ -3,6 +3,8 @@ cc.Class({
 
     properties: {
         unitNode:cc.Node,
+        //攻击总范围，从左到右
+        attackRange:0
         // foo: {
         //    default: null,      // The default value will be used only when the component attaching
         //                           to a node for the first time
@@ -18,11 +20,42 @@ cc.Class({
     // use this for initialization
     onLoad: function () {
         this.unitScript = this.node.parent.getComponent("Unit");
+        this.GameManager = this.unitScript.GameManager;
     },
+    judgeCreature:function(){
+        this.unitScript.friendlyTarget = [];
+        this.unitScript.enemyTarget = [];
+        if(this.unitScript.death === false)
+        {
+            //判断全部的节点
+            for (var i in this.GameManager.creatureLayer.children) {
+                var otherNode = this.GameManager.creatureLayer.children[i];
+                //如果是自身的话，跳过
+                if (otherNode === this.node.parent) {
+                    continue;
+                }
+                //如果在范围以外的话，跳过
+                if (Math.abs(otherNode.x - this.node.parent.x) > (otherNode.width + this.attackRange) / 2) {
+                    continue;
+                }
+                if (otherNode.group === "Unit" && this.node.parent.group === "Unit") {
+                    var script = otherNode.getComponent("Unit");
+                    if (script.death === false) {
+                        if (script.team === this.unitScript.team) {
+                            this.unitScript.friendlyTarget.push(otherNode);
+                        } else {
+                            this.unitScript.enemyTarget.push(otherNode);
+                        }
+                    }
+                }
+            }
+        }
+    },
+
+
     onCollisionEnter: function (other, self) {
         var script = null;
         if(this.unitScript.death === false) {
-            //�ж�
             if (other.node.group === "Unit" || other.node.group === "ViewUnit") {
                 //cc.log("touch the Creature");
                 script = other.node.getComponent("Unit");

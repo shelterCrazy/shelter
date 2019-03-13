@@ -12,9 +12,13 @@ var unit = cc.Class({
         GameManager:cc.Component,
         //攻击行为组件
         AttackBehavior:cc.Component,
+        //攻击范围的组件
+        attackRangeComponent:cc.Component,
         //生物技能的组件
         skillComponent:cc.Component,
+
         skillRangeComponent:cc.Component,
+
         typeComponent:cc.Component,
         //锁定的目标
         focusTarget:cc.Node,
@@ -43,7 +47,7 @@ var unit = cc.Class({
         //显示层节点
         viewNode:cc.Node,
 
-
+        bodySkeletonNode:cc.Node,
         bodySkeleton:cc.Component,
 
         //跳跃高度
@@ -110,7 +114,10 @@ var unit = cc.Class({
         //生物攻击的音效
         attackEffect:cc.AudioClip,
         //死亡时的音效
-        dieEffect:cc.AudioClip
+        dieEffect:cc.AudioClip,
+
+
+        debugLabel:cc.Label,
     },
 
 
@@ -132,10 +139,19 @@ var unit = cc.Class({
         this.attackFreeze = false;
         this.weekness = false;
 
-        if(this.bodySkeleton !== null)
-        this.bodySkeleton = this.bodySkeleton.getComponent(sp.Skeleton);
+        if(this.bodySkeleton !== null && this.viewNode === this.node)
+        {
+            this.bodySkeleton = this.bodySkeleton.getComponent(sp.Skeleton);
+        }else{
+            this.bodySkeleton.node.removeFromParent();
+            this.bodySkeleton = null;
+        }
 
         this.initAction();
+
+        if(globalConstant.debug === false){
+            this.debugLabel.string = "";
+        }
     },
 
 
@@ -164,48 +180,61 @@ var unit = cc.Class({
     updateByNet: function (fps) {
         //获得当前帧率下应当推进的速率
         var frameSpeed = globalConstant.frameRate / fps;
-
-        if(this.coolTimer > this.coolTime){
-            this.coolTimer = this.coolTime;
-        }else if(this.coolTimer < this.coolTime){
-            this.coolTimer += frameSpeed;
+        if(globalConstant.debug === true){
+            this.debugLabel.string = "cool:" + this.coolTimer + "\ndelay:" + this.delayTimer
+                + "\nenemyNum:" + this.enemyTarget.length + "\natkFlag:" + this.ATKActionFlag;
         }
         //如果正在召唤的话，那就返回，不执行下面的内容
         if(this.summon === true){
             return;
         }
+        //this.attackRangeComponent.judgeCreature();
+        this.typeComponent.refresh(fps);
+
         if(this.isJump === true){
             this.ySpeed -= 0.6 * frameSpeed;
             this.node.y += this.ySpeed * frameSpeed;
         }
-        this.typeComponent.refresh(fps);
-
+        if(this.coolTimer > this.coolTime)
+        {
+            this.coolTimer = this.coolTime;
+        }else if(this.coolTimer < this.coolTime){
+            this.coolTimer += frameSpeed;
+        }
         //如果延迟用定时器不等于0
-        if(this.delayTimer !== 0){
+        if(this.delayTimer !== 0)
+        {
             //加加
-            this.delayTimer ++;
+            this.delayTimer += frameSpeed;
             //达到了延迟的数量以后
-            if (this.delayTimer * frameSpeed >= this.delay) {
+            if (this.delayTimer >= this.delay)
+            {
                 //达到了延迟的数量以后，清零
                 this.delayTimer = 0;
                 //攻击一次
                 this.attackOnce();
+                this.ATKActionFlag = false;
+                if (this.isJump === false)
+                    this.isCanJump = true;
             }
         }
 
         //为逻辑节点
-        if(this.logicNode === this.node) {
-            if ((++ this.timer) % 6 === 0) {
-                var action = cc.moveBy(5,cc.v2(this.node.x - this.viewNode.x,0));
-                action.setTag(1);
-                //暂停同步用的那个动画
-                this.viewNode.stopAction(this.viewNode.getActionByTag(1));
-                this.viewNode.runAction(action);
-                this.viewNode.getComponent("Unit").health = this.health;
-                this.viewNode.getComponent("Unit").attack = this.attack;
-            }
+        //if(this.logicNode === this.node && this.viewNode !== null) {
+            //if ((++ this.timer) % 6 === 0)
+            //{
+            //    this.timer = 0;
+            //    //cc.log(this.timer);
+            //    this.viewNode.getComponent("Unit").changeHealthTo(this.health);
+            //    this.viewNode.getComponent("Unit").changeAttackTo(this.attack);
+            //    var action = cc.moveBy(1,cc.v2(this.node.x - this.viewNode.x,0));
+            //    action.setTag(1);
+            //    //暂停同步用的那个动画
+            //    this.viewNode.stopAction(this.viewNode.getActionByTag(1));
+            //    this.viewNode.runAction(action);
+            //}
             //this.viewNode.getComponent("Unit").changeHealthTo(this.health);
-        }
+        //}
     },
 
     onCollisionEnter: function (other, self) {
@@ -238,8 +267,8 @@ var unit = cc.Class({
      * @parameters value
      * @returns
      */
-    moveAction:function(value){
-
+    moveAction:function(value,fps){
+        var frameSpeed = globalConstant.frameRate / fps;
         if (this.move === true && this.death === false &&//!this.ATKActionFlag && 
             this.moveFreeze === false && this.speed > 0) {
             if(value < 0 && this.bodyNode.scaleX === 1)this.bodyNode.scaleX = -1;
@@ -247,7 +276,8 @@ var unit = cc.Class({
             //this.rigidbody.linearVelocity = cc.v2(value * 70,this.rigidbody.linearVelocity.y);
             if(this._mapSign !== null)
             this._mapSign.getComponent("SignScript").fnRenewSignPosition();
-            this.node.x += value;
+            this.node.runAction(cc.moveBy(1 / fps,value,0));
+            //this.node.x += value;
 
             if(this.bodySkeleton !== null && this.bodySkeleton.animation === "idle")
                 this.bodySkeleton.animation = "walk";
@@ -367,15 +397,13 @@ var unit = cc.Class({
             this.bodySkeleton.animation = "attack";
             this.bodySkeleton.setCompleteListener(
                 function () {
-                    self.ATKActionFlag = false;
-                    if (this.isJump === false)
-                        self.isCanJump = true;
                     if (self.bodySkeleton !== null) {
                         self.bodySkeleton.animation = "idle";
                     }
                 }.bind(this)
             );
         }
+
         //延时后调用攻击行为
         if(this.delayTimer === 0)
         this.delayTimer ++;
@@ -453,14 +481,10 @@ var unit = cc.Class({
                 this.healthLabel.string = this.health.toFixed(0);
                 if(this.lifeBar !== null)this.lifeBar.progress = this.health / this.maxHealth;
 
-                if (this.death === true ) {
-                    if(this.logicNode === this.node) {
-                        this.release();
-                    }
-                    return true;
-                }else{
-                    return false;
+                if(this.logicNode === this.node) {
+                    this.release();
                 }
+                return true;
             }
         }
         return true;
@@ -505,14 +529,18 @@ var unit = cc.Class({
     release:function(){
         //this.animationClip.stop(this._animationId + " " + "walk");
         var self = this;
+        this.death = true;
         if(this.logicNode === this.node) {
             this.viewNode.getComponent("Unit").release();
             this.skillComponent.releaseFunction(4);
+            self.GameManager.removeCreature(self.node);
+            self.node.removeFromParent();
+            self.node.destroy();
         }else{
             this.sendEvent(this.dieEffect);
             this.changeHealthTo(0);
         }
-        this.death = true;
+
         //this.animationClip.play(this._animationId + " " + "death");
         if(this.bodySkeleton !== null) {
             this.bodySkeleton.animation = "death";
@@ -546,8 +574,6 @@ var unit = cc.Class({
         }else{
             this.focusTarget = this.GameManager.heros[0];
         }
-
-
         //for(i = 0;i < this.enemyTarget.length;i++){
         //    var team = this.enemyTarget[i - num].getComponent("Unit").team;
         //    cc.log("队伍" + team);
